@@ -8,10 +8,7 @@ type ProductCardProps = {
 
 export default function ProductCard({ product }: ProductCardProps) {
   return (
-    <Link
-      href={`/products/${product.slug}`}
-      className="group block overflow-hidden rounded-[1.1rem] border border-line bg-white shadow-soft transition duration-200 hover:-translate-y-1 hover:border-blue/35 hover:shadow-premium focus:outline-none focus:ring-4 focus:ring-blue/10"
-    >
+    <article className="group flex h-full flex-col overflow-hidden rounded-[1.1rem] border border-line bg-white shadow-soft transition duration-200 hover:-translate-y-1 hover:border-blue/35 hover:shadow-premium">
       <VisualAidImage
         src={product.visualAidImage}
         alt={product.brandName}
@@ -19,13 +16,13 @@ export default function ProductCard({ product }: ProductCardProps) {
         imageClassName="p-4"
         sizes="(min-width: 1280px) 25vw, (min-width: 768px) 33vw, 100vw"
       />
-      <div className="space-y-4 p-5">
+      <div className="flex flex-1 flex-col gap-4 p-5">
         <h2 className="text-xl font-semibold leading-tight text-ink">
           {product.brandName}
         </h2>
         <div className="space-y-1">
           <p className="field-label">Composition</p>
-          <p className="break-words text-sm leading-6 text-slate [overflow-wrap:anywhere]">
+          <p className="break-words text-[15px] leading-7 text-slate [overflow-wrap:anywhere]">
             {product.composition}
           </p>
         </div>
@@ -35,7 +32,13 @@ export default function ProductCard({ product }: ProductCardProps) {
             {product.dosageForm}
           </span>
         </div>
+        <Link
+          href={`/products/${product.slug}`}
+          className="mt-auto inline-flex min-h-11 items-center justify-center rounded-md bg-blue px-5 text-sm font-semibold text-white shadow-soft transition duration-200 hover:bg-teal focus:outline-none focus:ring-4 focus:ring-blue/15"
+        >
+          View Visual Aid
+        </Link>
       </div>
-    </Link>
+    </article>
   );
 }

@@ -8,7 +8,7 @@ export const company = {
   contactNumbers: ["+91-9414073960", "+91-9314073960"],
   addresses: [
     {
-      label: "Registered / Ahmedabad Address",
+      label: "Registered Office Ahmedabad",
       lines: [
         "S.P.O.: 2, Nanawati Society,",
         "1st Floor, Ambrai Bari,",
@@ -16,7 +16,7 @@ export const company = {
       ],
     },
     {
-      label: "Jaipur Address",
+      label: "Jaipur Depot / Operational Address",
       lines: [
         "78, Basement Floor, SBBJ Officer's Colony,",
         "New Sanganer Road, Near Mansarovar Metro Station,",

@@ -79,7 +79,7 @@ export default function ProductGrid({ products }: ProductGridProps) {
       ? `Showing ${filteredProducts.length} ${
           filteredProducts.length === 1 ? "product" : "products"
         }`
-      : `${selectedCategoryLabel} — ${filteredProducts.length} ${
+      : `${selectedCategoryLabel} - ${filteredProducts.length} ${
           filteredProducts.length === 1 ? "product" : "products"
         }`;
 

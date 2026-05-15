@@ -59,7 +59,7 @@ export const products: Product[] = [
   },
   {
     slug: "etr",
-    brandName: "ETR-90/120",
+    brandName: "ETR-90 / ETR-120",
     composition: "Etoricoxib 90 mg / 120 mg",
     dosageForm: "Tablets",
     visualAidImage: "/visual-aids/etr.png",

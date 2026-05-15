@@ -4,9 +4,9 @@ export const productCategories = [
   "Syrups",
   "Dry Syrups",
   "Drops",
-  "Topicals / External",
   "Injections",
   "Powders / Sachets",
+  "Topicals / External",
   "Others",
 ] as const;
 
@@ -17,7 +17,7 @@ export type ProductCategoryFilter = (typeof productCategoryFilters)[number];
 
 export function getProductCategoryLabel(category: ProductCategoryFilter) {
   if (category === "Topicals / External") {
-    return "External";
+    return "External/Pain Oil";
   }
 
   if (category === "Powders / Sachets") {
