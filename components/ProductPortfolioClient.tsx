@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useMemo, useState } from "react";
 import { productDownloads } from "@/data/downloads";
 import {
@@ -12,7 +11,6 @@ import {
   type ProductCategoryFilter,
 } from "@/data/productCategories";
 import type { Product } from "@/data/products";
-import { useBasket } from "@/components/useBasket";
 
 type ProductPortfolioClientProps = {
   products: Product[];
@@ -35,7 +33,6 @@ export default function ProductPortfolioClient({
   const [query, setQuery] = useState("");
   const [selectedCategory, setSelectedCategory] =
     useState<ProductCategoryFilter>("All");
-  const { addProduct, hasProduct } = useBasket();
   const downloads = [productDownloads.productCard, productDownloads.productList];
 
   const categorizedProducts = useMemo<CategorizedProduct[]>(
@@ -183,51 +180,25 @@ export default function ProductPortfolioClient({
               </div>
 
               <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-                {section.products.map((product) => {
-                  const isInBasket = hasProduct(product.slug);
+                {section.products.map((product) => (
+                  <article
+                    key={product.slug}
+                    className="flex min-h-[180px] flex-col rounded-[1.1rem] border border-line bg-white p-5 shadow-soft transition duration-200 hover:-translate-y-0.5 hover:border-blue/25 hover:shadow-premium"
+                  >
+                    <div className="mb-4 flex flex-wrap items-start justify-between gap-3">
+                      <h3 className="break-words text-2xl font-semibold leading-tight text-blue">
+                        {product.brandName}
+                      </h3>
+                      <span className="rounded-full border border-teal/20 bg-teal/10 px-3 py-1 text-xs font-semibold leading-5 text-blue">
+                        {product.dosageForm}
+                      </span>
+                    </div>
 
-                  return (
-                    <article
-                      key={product.slug}
-                      className="flex min-h-[245px] flex-col rounded-[1.1rem] border border-line bg-white p-5 shadow-soft transition duration-200 hover:-translate-y-0.5 hover:border-blue/25 hover:shadow-premium"
-                    >
-                      <div className="mb-4 flex flex-wrap items-start justify-between gap-3">
-                        <h3 className="break-words text-2xl font-semibold leading-tight text-blue">
-                          {product.brandName}
-                        </h3>
-                        <span className="rounded-full border border-teal/20 bg-teal/10 px-3 py-1 text-xs font-semibold leading-5 text-blue">
-                          {product.dosageForm}
-                        </span>
-                      </div>
-
-                      <p className="break-words text-base leading-7 text-slate [overflow-wrap:anywhere]">
-                        {product.composition}
-                      </p>
-
-                      <div className="mt-auto grid gap-2 pt-5 sm:grid-cols-2">
-                        <Link
-                          href={`/doctor-presentation/${product.slug}`}
-                          className="inline-flex min-h-11 items-center justify-center rounded-md bg-blue px-4 text-sm font-semibold text-white shadow-soft transition duration-200 hover:bg-teal focus:outline-none focus:ring-4 focus:ring-blue/15"
-                        >
-                          View Presentation
-                        </Link>
-                        <button
-                          type="button"
-                          onClick={() => addProduct(product.slug)}
-                          disabled={isInBasket}
-                          aria-pressed={isInBasket}
-                          className={`inline-flex min-h-11 items-center justify-center rounded-md border px-4 text-sm font-semibold shadow-soft transition duration-200 focus:outline-none focus:ring-4 focus:ring-blue/10 disabled:cursor-default ${
-                            isInBasket
-                              ? "border-green/20 bg-green/10 text-green"
-                              : "border-line bg-white text-ink hover:border-blue hover:text-blue"
-                          }`}
-                        >
-                          {isInBasket ? "Added \u2713" : "Add to Basket"}
-                        </button>
-                      </div>
-                    </article>
-                  );
-                })}
+                    <p className="break-words text-base leading-7 text-slate [overflow-wrap:anywhere]">
+                      {product.composition}
+                    </p>
+                  </article>
+                ))}
               </div>
             </section>
           ))}

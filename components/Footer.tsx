@@ -19,10 +19,16 @@ export default function Footer() {
               className="h-14 w-auto max-w-[210px] object-contain"
             />
           </Link>
-          <h2 className="text-xl font-semibold text-ink">Macron Health Care</h2>
-          <p className="max-w-xs leading-6 text-slate">
-            Committed to Quality and Services
-          </p>
+          <div className="space-y-2 leading-6">
+            <p>
+              <span className="font-semibold text-ink">At Your Service Since:</span>{" "}
+              {company.servingSince}
+            </p>
+            <p>
+              <span className="font-semibold text-ink">Company Director:</span>{" "}
+              {company.director}
+            </p>
+          </div>
         </div>
 
         <div>
@@ -88,12 +94,6 @@ export default function Footer() {
               </FooterBlock>
             ))}
           </div>
-        </div>
-      </div>
-
-      <div className="border-t border-line bg-paper/70">
-        <div className="page-shell py-4 text-sm font-semibold text-ink">
-          {company.displayName} - {company.brandLines[0]}
         </div>
       </div>
     </footer>
