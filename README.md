@@ -26,10 +26,10 @@ Only add manually confirmed product data. If composition is not manually provide
 
 ## Update downloadable PDFs
 
-Replace these files in `public/downloads/` when new PDFs are ready:
+Replace these files when new PDFs are ready:
 
-- `macron_product_list_download(1).pdf` for Product Card
-- `macron-product-list-2026 (1)(1).pdf` for Product List
+- `public/assets/pdfs/macron-product-card.pdf` for Product Card
+- `public/downloads/macron-product-list-2026 (1)(1).pdf` for Product List
 
 The Product List / Card page uses direct download links for both files.
 

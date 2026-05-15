@@ -114,7 +114,7 @@ export default function ProductListPage() {
                   <a
                     href={item.href}
                     target="_blank"
-                    rel="noreferrer"
+                    rel="noopener noreferrer"
                     className="inline-flex min-h-11 items-center justify-center rounded-md border border-blue/20 bg-white px-4 text-sm font-semibold text-blue transition duration-200 hover:border-blue hover:bg-porcelain focus:outline-none focus:ring-4 focus:ring-blue/10"
                   >
                     View {item.label}

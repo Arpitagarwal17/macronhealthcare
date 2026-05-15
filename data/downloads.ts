@@ -1,9 +1,11 @@
+export const PRODUCT_CARD_PDF = "/assets/pdfs/macron-product-card.pdf";
+
 export const productDownloads = {
   productCard: {
     label: "Product Card",
     buttonLabel: "Download Product Card",
-    href: "/downloads/macron_product_list_download(1).pdf",
-    fileName: "macron_product_list_download(1).pdf",
+    href: PRODUCT_CARD_PDF,
+    fileName: "Macron-Health-Care-Product-Card.pdf",
   },
   productList: {
     label: "Product List",
