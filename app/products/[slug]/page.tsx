@@ -71,14 +71,20 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
           </div>
         </aside>
 
-        <VisualAidImage
+        <FullScreenImageViewer
           src={product.visualAidImage}
           alt={product.brandName}
-          priority
-          className="aspect-[16/9] rounded-[1.35rem] border border-line shadow-premium sm:aspect-auto sm:min-h-[680px]"
-          imageClassName="p-4 sm:p-6"
-          sizes="(min-width: 1024px) 70vw, 100vw"
-        />
+          triggerClassName="block cursor-zoom-in rounded-[1.35rem] focus:outline-none focus:ring-4 focus:ring-blue/10"
+        >
+          <VisualAidImage
+            src={product.visualAidImage}
+            alt={product.brandName}
+            priority
+            className="aspect-[16/9] rounded-[1.35rem] border border-line shadow-premium sm:aspect-auto sm:min-h-[680px]"
+            imageClassName="p-4 sm:p-6"
+            sizes="(min-width: 1024px) 70vw, 100vw"
+          />
+        </FullScreenImageViewer>
       </div>
     </section>
   );

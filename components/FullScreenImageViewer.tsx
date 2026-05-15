@@ -1,16 +1,21 @@
 "use client";
 
 import Image from "next/image";
+import type { ReactNode } from "react";
 import { useEffect, useState } from "react";
 
 type FullScreenImageViewerProps = {
   src: string;
   alt: string;
+  children?: ReactNode;
+  triggerClassName?: string;
 };
 
 export default function FullScreenImageViewer({
   src,
   alt,
+  children,
+  triggerClassName = "",
 }: FullScreenImageViewerProps) {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -36,8 +41,13 @@ export default function FullScreenImageViewer({
 
   return (
     <>
-      <button type="button" className="primary-button" onClick={() => setIsOpen(true)}>
-        View Full Screen
+      <button
+        type="button"
+        aria-label={children ? `View ${alt} full screen` : undefined}
+        className={children ? triggerClassName : "primary-button"}
+        onClick={() => setIsOpen(true)}
+      >
+        {children ?? "View Full Screen"}
       </button>
 
       {isOpen ? (
