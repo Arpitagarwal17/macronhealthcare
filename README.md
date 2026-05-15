@@ -24,6 +24,10 @@ Add a matching entry in `data/products.ts`.
 
 Only add manually confirmed product data. If composition is not manually provided, use `Composition to be added`. If dosage form is not clear, use `Dosage form to be added`.
 
+## Update the downloadable product list
+
+Replace `public/downloads/macron-product-list-2026.pdf` with the latest product list PDF. Keep the same filename if you want the existing download button on the Brands page to continue working without code changes.
+
 ## Run locally
 
 ```bash
