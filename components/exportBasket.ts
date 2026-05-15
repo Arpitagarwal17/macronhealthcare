@@ -1,22 +1,17 @@
 import type { Product } from "@/data/products";
 import { company } from "@/data/company";
 
-const PDF_FILE_NAME = "macron-doctor-presentation.pdf";
-const PPT_FILE_NAME = "macron-doctor-presentation.pptx";
-const LOGO_PATH = "/logo.png";
+const PDF_FILE_NAME = "Macron-Health-Care-Visual-Aid.pdf";
+const PPT_FILE_NAME = "Macron-Health-Care-Visual-Aid.pptx";
+const COVER_IMAGE_PATH = "/visual-aids/visual-aid-cover.png";
+const PDF_WIDTH = 1920;
+const PDF_HEIGHT = 1080;
+const PPT_WIDTH = 13.333;
+const PPT_HEIGHT = 7.5;
 
-type RasterImage = {
+type ExportImage = {
   dataUrl: string;
   format: "JPEG" | "PNG";
-  width: number;
-  height: number;
-};
-
-type ContainRect = {
-  x: number;
-  y: number;
-  width: number;
-  height: number;
 };
 
 function resolveAssetUrl(src: string) {
@@ -84,172 +79,95 @@ function downloadBlob(
   window.setTimeout(revokeUrl, 120000);
 }
 
-function getContainedRect(
-  imageWidth: number,
-  imageHeight: number,
-  boxX: number,
-  boxY: number,
-  boxWidth: number,
-  boxHeight: number,
-): ContainRect {
-  const imageRatio = imageWidth / imageHeight;
-  const boxRatio = boxWidth / boxHeight;
-
-  if (imageRatio > boxRatio) {
-    const width = boxWidth;
-    const height = width / imageRatio;
-
-    return {
-      x: boxX,
-      y: boxY + (boxHeight - height) / 2,
-      width,
-      height,
-    };
-  }
-
-  const height = boxHeight;
-  const width = height * imageRatio;
-
-  return {
-    x: boxX + (boxWidth - width) / 2,
-    y: boxY,
-    width,
-    height,
-  };
+function getImageFormat(contentType: string): ExportImage["format"] {
+  return contentType.toLowerCase().includes("png") ? "PNG" : "JPEG";
 }
 
-async function loadImage(src: string) {
-  const assetUrl = resolveAssetUrl(src);
+function readBlobAsDataUrl(blob: Blob) {
+  return new Promise<string>((resolve, reject) => {
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      if (typeof reader.result === "string") {
+        resolve(reader.result);
+      } else {
+        reject(new Error("Image could not be converted for export."));
+      }
+    };
+    reader.onerror = () => reject(reader.error ?? new Error("Image load failed."));
+    reader.readAsDataURL(blob);
+  });
+}
+
+async function waitForImageDecode(dataUrl: string, src: string) {
   const image = new Image();
-
-  if (new URL(assetUrl).origin !== window.location.origin) {
-    image.crossOrigin = "anonymous";
-  }
-
-  image.decoding = "async";
-
-  const imageLoaded = new Promise<HTMLImageElement>((resolve, reject) => {
-    image.onload = () => resolve(image);
+  const imageLoaded = new Promise<void>((resolve, reject) => {
+    image.onload = () => resolve();
     image.onerror = () => reject(new Error(`Unable to load image: ${src}`));
   });
 
-  image.src = assetUrl;
+  image.src = dataUrl;
   await imageLoaded;
 
   if (image.decode) {
     await image.decode().catch(() => undefined);
   }
-
-  return image;
 }
 
-async function rasterizeImage(
-  src: string,
-  maxWidth = 1500,
-  maxHeight = 920,
-  quality = 0.82,
-  format: "JPEG" | "PNG" = "JPEG",
-): Promise<RasterImage> {
-  const image = await loadImage(src);
+export async function loadImageAsDataUrl(src: string): Promise<ExportImage> {
+  const response = await fetch(resolveAssetUrl(src));
 
-  if (!image.naturalWidth || !image.naturalHeight) {
-    throw new Error(`Image loaded without dimensions: ${src}`);
+  if (!response.ok) {
+    throw new Error(`Unable to load image: ${src}`);
   }
 
-  const scale = Math.min(
-    1,
-    maxWidth / image.naturalWidth,
-    maxHeight / image.naturalHeight,
-  );
-  const width = Math.max(1, Math.round(image.naturalWidth * scale));
-  const height = Math.max(1, Math.round(image.naturalHeight * scale));
-  const canvas = document.createElement("canvas");
-  const context = canvas.getContext("2d");
+  const blob = await response.blob();
+  const dataUrl = await readBlobAsDataUrl(blob);
 
-  if (!context) {
-    throw new Error("Canvas is not available for export.");
-  }
-
-  canvas.width = width;
-  canvas.height = height;
-  context.fillStyle = "#ffffff";
-  context.fillRect(0, 0, width, height);
-  context.drawImage(image, 0, 0, width, height);
+  await waitForImageDecode(dataUrl, src);
 
   return {
-    dataUrl:
-      format === "PNG"
-        ? canvas.toDataURL("image/png")
-        : canvas.toDataURL("image/jpeg", quality),
-    format,
-    width,
-    height,
+    dataUrl,
+    format: getImageFormat(blob.type),
   };
 }
 
-async function rasterizeVisualAids(products: Product[]) {
-  const visualAids: RasterImage[] = [];
-
-  for (const product of products) {
-    visualAids.push(await rasterizeImage(product.visualAidImage, 1500, 920, 0.8));
-  }
-
-  return visualAids;
+async function loadExportImages(products: Product[]) {
+  return Promise.all([
+    loadImageAsDataUrl(COVER_IMAGE_PATH),
+    ...products.map((product) => loadImageAsDataUrl(product.visualAidImage)),
+  ]);
 }
 
 export async function exportBasketAsPdf(
   products: Product[],
   fallbackWindow?: Window | null,
 ) {
-  const [{ jsPDF }, logo] = await Promise.all([
+  const [{ jsPDF }, images] = await Promise.all([
     import("jspdf"),
-    rasterizeImage(LOGO_PATH, 760, 310, 0.9, "PNG"),
+    loadExportImages(products),
   ]);
-  const visualAids = await rasterizeVisualAids(products);
   const pdf = new jsPDF({
     orientation: "landscape",
-    unit: "pt",
-    format: [960, 540],
+    unit: "px",
+    format: [PDF_WIDTH, PDF_HEIGHT],
     compress: true,
   });
 
-  products.forEach((product, index) => {
+  images.forEach((image, index) => {
     if (index > 0) {
-      pdf.addPage([960, 540], "landscape");
+      pdf.addPage([PDF_WIDTH, PDF_HEIGHT], "landscape");
     }
 
-    const visualAid = visualAids[index];
-    const logoRect = getContainedRect(logo.width, logo.height, 36, 18, 246, 62);
-    const visualRect = getContainedRect(
-      visualAid.width,
-      visualAid.height,
-      28,
-      92,
-      904,
-      420,
-    );
-
-    pdf.setFillColor("#ffffff");
-    pdf.rect(0, 0, 960, 540, "F");
     pdf.addImage(
-      logo.dataUrl,
-      logo.format,
-      logoRect.x,
-      logoRect.y,
-      logoRect.width,
-      logoRect.height,
+      image.dataUrl,
+      image.format,
+      0,
+      0,
+      PDF_WIDTH,
+      PDF_HEIGHT,
       undefined,
       "FAST",
-    );
-    pdf.addImage(
-      visualAid.dataUrl,
-      visualAid.format,
-      visualRect.x,
-      visualRect.y,
-      visualRect.width,
-      visualRect.height,
-      undefined,
-      "MEDIUM",
     );
   });
 
@@ -260,53 +178,29 @@ export async function exportBasketAsPpt(
   products: Product[],
   fallbackWindow?: Window | null,
 ) {
-  const [{ default: PptxGenJS }, logo] = await Promise.all([
+  const [{ default: PptxGenJS }, images] = await Promise.all([
     import("pptxgenjs"),
-    rasterizeImage(LOGO_PATH, 760, 310, 0.9, "PNG"),
+    loadExportImages(products),
   ]);
-  const visualAids: RasterImage[] = [];
-
-  for (const product of products) {
-    visualAids.push(await rasterizeImage(product.visualAidImage, 1500, 920, 0.82));
-  }
-
   const pptx = new PptxGenJS();
 
   pptx.layout = "LAYOUT_WIDE";
   pptx.author = company.displayName;
-  pptx.subject = "Macron Health Care doctor presentation";
-  pptx.title = "Macron Doctor Presentation";
+  pptx.subject = "Macron Health Care visual aid presentation";
+  pptx.title = "Macron Health Care Visual Aid";
   pptx.company = company.displayName;
 
-  products.forEach((product, index) => {
+  images.forEach((image, index) => {
     const slide = pptx.addSlide();
-    const visualAid = visualAids[index];
-    const logoRect = getContainedRect(logo.width, logo.height, 0.36, 0.16, 3.0, 0.72);
-    const visualRect = getContainedRect(
-      visualAid.width,
-      visualAid.height,
-      0.32,
-      1.06,
-      12.7,
-      6.08,
-    );
 
     slide.background = { color: "FFFFFF" };
     slide.addImage({
-      data: logo.dataUrl,
-      x: logoRect.x,
-      y: logoRect.y,
-      w: logoRect.width,
-      h: logoRect.height,
-      altText: "Macron Health Care",
-    });
-    slide.addImage({
-      data: visualAid.dataUrl,
-      x: visualRect.x,
-      y: visualRect.y,
-      w: visualRect.width,
-      h: visualRect.height,
-      altText: product.brandName,
+      data: image.dataUrl,
+      x: 0,
+      y: 0,
+      w: PPT_WIDTH,
+      h: PPT_HEIGHT,
+      altText: index === 0 ? "Visual Aid Cover" : products[index - 1]?.brandName,
     });
   });
 
