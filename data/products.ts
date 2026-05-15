@@ -59,7 +59,7 @@ export const products: Product[] = [
   },
   {
     slug: "etr",
-    brandName: "ETR-90 / ETR-120",
+    brandName: "ETR-90/120",
     composition: "Etoricoxib 90 mg / 120 mg",
     dosageForm: "Tablets",
     visualAidImage: "/visual-aids/etr.png",
@@ -250,7 +250,7 @@ export const products: Product[] = [
   },
   {
     slug: "metoron",
-    brandName: "Metoron-XL",
+    brandName: "Metoron-XL-25/50",
     composition: "Metoprolol Succinate 25 mg / 50 mg",
     dosageForm: "Extended Release Tablets",
     visualAidImage: "/visual-aids/metoron.png",
@@ -323,7 +323,7 @@ export const products: Product[] = [
   },
   {
     slug: "ppday",
-    brandName: "PP DAY",
+    brandName: "PP-DAY",
     composition:
       "Zinc Sulphate 10 mg + Magnesium Sulphate 25 mg + Manganese 50 mcg + Calcium 215 mg + Phosphorous 125 mg + Vitamin C 25 mg + Vitamin D3 12.5 mcg + Vitamin B1 0.5 mg + Vitamin B2 0.37 mg + Vitamin B6 0.5 mg + Cyanocobalamin 1.75 mcg + Creatine 100 mg + Potassium Citrate 25 mg + Calcium Citrate 125 mg per 25 g sachet",
     dosageForm: "Powder",
