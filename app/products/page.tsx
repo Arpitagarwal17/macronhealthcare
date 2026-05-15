@@ -16,20 +16,29 @@ export default function ProductsPage() {
           </h1>
         </div>
 
-        <div className="rounded-[1.1rem] border border-line bg-white p-4 shadow-soft sm:flex sm:items-center sm:gap-5">
-          <div className="mb-4 sm:mb-0">
-            <p className="field-label">Product List</p>
-            <p className="mt-2 text-sm font-semibold text-ink">
-              Macron Product List 2026
-            </p>
+        <div className="rounded-[1.1rem] border border-line bg-white p-5 shadow-soft">
+          <div className="mb-4">
+            <p className="text-base font-semibold text-ink">Macron Health Care</p>
+            <p className="mt-1 field-label">Product List</p>
           </div>
-          <a
-            href="/downloads/macron-product-list-2026.pdf"
-            download
-            className="primary-button w-full sm:w-auto"
-          >
-            Download PDF
-          </a>
+
+          <div className="grid gap-3 sm:grid-cols-2">
+            <a
+              href="/downloads/macron-product-list-2026.pdf"
+              target="_blank"
+              rel="noreferrer"
+              className="secondary-button w-full"
+            >
+              View PDF
+            </a>
+            <a
+              href="/downloads/macron-product-list-2026.pdf"
+              download
+              className="primary-button w-full"
+            >
+              Download PDF
+            </a>
+          </div>
         </div>
       </div>
       <ProductGrid products={products} />
