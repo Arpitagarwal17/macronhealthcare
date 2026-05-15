@@ -25,9 +25,9 @@ export const products: Product[] = [
   {
     slug: "curix-200",
     brandName: "Curix-200",
-    composition: "Cefixime 200 mg + Lactobacillus 60 Million Spores",
-    dosageForm: "Tablets",
-    visualAidImage: "/visual-aids/curix-200.png",
+    composition: "Cefixime 200 mg + Lactobacillus 60 Million Spores Tablet",
+    dosageForm: "Tablet",
+    visualAidImage: "/curix-200-visual-aid.png",
   },
   {
     slug: "curix-oc",
