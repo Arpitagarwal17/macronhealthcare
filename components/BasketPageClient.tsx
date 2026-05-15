@@ -138,8 +138,8 @@ export default function BasketPageClient({ products }: BasketPageClientProps) {
             </h1>
           </div>
 
-          <Link href="/products" className="secondary-button lg:min-w-36">
-            Back to Brands
+          <Link href="/visual-aids" className="secondary-button lg:min-w-36">
+            Back to Visual Aids
           </Link>
         </div>
 
@@ -214,8 +214,8 @@ export default function BasketPageClient({ products }: BasketPageClientProps) {
         ) : (
           <div className="rounded-[1.1rem] border border-line bg-white p-8 text-center shadow-soft">
             <p className="text-lg font-semibold text-ink">Basket is empty.</p>
-            <Link href="/products" className="primary-button mt-5">
-              Add Products
+            <Link href="/visual-aids" className="primary-button mt-5">
+              Add Visual Aids
             </Link>
           </div>
         )}

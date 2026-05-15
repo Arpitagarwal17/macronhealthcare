@@ -94,9 +94,9 @@ export default function PresentationViewer({
           </button>
         </div>
 
-        <div className="grid min-h-0 flex-1 lg:grid-cols-[minmax(0,1fr)_18rem]">
+        <div className="grid min-h-0 flex-1 grid-rows-[minmax(0,1fr)_auto] xl:grid-cols-[minmax(0,1fr)_12rem] xl:grid-rows-1">
           <section
-            className="min-h-0 p-3 sm:p-5 lg:p-6"
+            className="min-h-0 p-2 sm:p-3 lg:p-4"
             onTouchStart={(event) => {
               touchStartX.current = event.changedTouches[0]?.clientX ?? null;
             }}
@@ -119,36 +119,36 @@ export default function PresentationViewer({
               touchStartX.current = null;
             }}
           >
-            <article className="flex h-full min-h-0 flex-col rounded-[1.35rem] border border-line bg-white shadow-premium">
-              <div className="grid min-h-0 flex-1 gap-4 overflow-y-auto p-4 sm:p-6 lg:grid-cols-[minmax(280px,380px)_minmax(0,1fr)] lg:gap-6 lg:overflow-hidden">
-                <div className="flex min-w-0 flex-col justify-center gap-5 overflow-y-auto rounded-[1rem] border border-line bg-paper/70 p-5 sm:p-6">
-                  <h1 className="break-words text-3xl font-semibold leading-tight text-ink sm:text-4xl lg:text-5xl">
+            <article className="flex h-full min-h-0 flex-col overflow-hidden rounded-[1.1rem] border border-line bg-white shadow-premium">
+              <div className="grid min-h-0 flex-1 gap-3 overflow-y-auto p-2 sm:p-3 lg:grid-cols-[minmax(210px,24%)_minmax(0,1fr)] lg:overflow-hidden">
+                <div className="flex min-w-0 flex-col gap-4 overflow-y-auto rounded-[0.9rem] border border-line bg-paper/70 p-4">
+                  <h1 className="break-words text-2xl font-semibold leading-tight text-ink sm:text-3xl lg:text-4xl">
                     {currentProduct.brandName}
                   </h1>
 
-                  <div className="space-y-2 border-t border-line pt-5">
+                  <div className="space-y-2 border-t border-line pt-4">
                     <p className="field-label">Composition</p>
-                    <p className="break-words text-lg leading-8 text-ink [overflow-wrap:anywhere] sm:text-xl">
+                    <p className="break-words text-base leading-7 text-ink [overflow-wrap:anywhere] lg:text-lg">
                       {currentProduct.composition}
                     </p>
                   </div>
 
-                  <div className="space-y-2 border-t border-line pt-5">
+                  <div className="space-y-2 border-t border-line pt-4">
                     <p className="field-label">Dosage Form</p>
-                    <span className="inline-flex max-w-full rounded-full border border-teal/25 bg-teal/10 px-4 py-2 text-base font-semibold leading-6 text-blue">
+                    <span className="inline-flex max-w-full rounded-full border border-teal/25 bg-teal/10 px-3 py-1.5 text-sm font-semibold leading-5 text-blue lg:text-base">
                       {currentProduct.dosageForm}
                     </span>
                   </div>
                 </div>
 
-                <div className="relative min-h-[300px] min-w-0 overflow-hidden rounded-[1rem] border border-line bg-white sm:min-h-[420px] lg:min-h-0">
+                <div className="relative min-h-[330px] min-w-0 overflow-hidden rounded-[0.9rem] border border-line bg-white sm:min-h-[460px] lg:min-h-0">
                   <Image
                     src={currentProduct.visualAidImage}
                     alt={currentProduct.brandName}
                     fill
                     priority
                     sizes="(min-width: 1024px) 70vw, 100vw"
-                    className="object-contain p-3 sm:p-5"
+                    className="object-contain p-1 sm:p-2"
                   />
                 </div>
               </div>
@@ -177,9 +177,9 @@ export default function PresentationViewer({
             </article>
           </section>
 
-          <aside className="hidden min-h-0 border-l border-line bg-white p-4 lg:block">
-            <p className="field-label text-blue">Product List</p>
-            <div className="mt-4 flex max-h-[calc(100dvh-7rem)] flex-col gap-2 overflow-y-auto pr-1">
+          <aside className="min-h-0 border-t border-line bg-white p-3 xl:border-l xl:border-t-0">
+            <p className="field-label text-blue">Selected Visual Aids</p>
+            <div className="mt-3 flex gap-2 overflow-x-auto pb-1 xl:max-h-[calc(100dvh-7rem)] xl:flex-col xl:overflow-x-hidden xl:overflow-y-auto xl:pr-1">
               {products.map((product, index) => {
                 const isActive = index === currentIndex;
 
@@ -188,7 +188,7 @@ export default function PresentationViewer({
                     key={product.slug}
                     type="button"
                     onClick={() => goToProduct(index)}
-                    className={`rounded-md border px-3 py-2 text-left text-sm font-semibold leading-5 transition focus:outline-none focus:ring-4 focus:ring-blue/10 ${
+                    className={`min-w-[10rem] rounded-md border px-3 py-2 text-left text-xs font-semibold leading-5 transition focus:outline-none focus:ring-4 focus:ring-blue/10 xl:min-w-0 ${
                       isActive
                         ? "border-blue bg-blue text-white shadow-soft"
                         : "border-line bg-paper text-ink hover:border-blue hover:bg-white hover:text-blue"

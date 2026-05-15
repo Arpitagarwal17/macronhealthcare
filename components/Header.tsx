@@ -6,8 +6,8 @@ import { usePathname } from "next/navigation";
 
 const navItems = [
   { href: "/", label: "Home" },
-  { href: "/products", label: "Brands / Products" },
-  { href: "/product-list", label: "Product List" },
+  { href: "/product-list", label: "Product List / Card" },
+  { href: "/visual-aids", label: "Visual Aids" },
   { href: "/info", label: "Company Info" },
   { href: "/contact", label: "Contact" },
 ];
@@ -29,7 +29,7 @@ export default function Header() {
             className="h-16 w-auto max-w-[245px] object-contain sm:h-[4.5rem] sm:max-w-[285px]"
           />
         </Link>
-        <nav className="grid w-full min-w-0 grid-cols-2 gap-1 overflow-hidden rounded-lg border border-line bg-paper p-1 shadow-soft sm:grid-cols-3 lg:grid-cols-5 xl:w-auto xl:min-w-[660px]">
+        <nav className="grid w-full min-w-0 grid-cols-2 gap-1 overflow-hidden rounded-lg border border-line bg-paper p-1 shadow-soft sm:grid-cols-3 lg:grid-cols-5 xl:w-auto xl:min-w-[690px]">
           {navItems.map((item) => {
             const isActive =
               item.href === "/"

@@ -1,6 +1,6 @@
 # Macron Health Care Website
 
-A Next.js, TypeScript, Tailwind CSS website for Macron Health Care company information and product visual-aid display.
+A Next.js, TypeScript, Tailwind CSS website for Macron Health Care company information, Product List / Card downloads, and Visual Aids.
 
 ## Add a new product image
 
@@ -24,9 +24,14 @@ Add a matching entry in `data/products.ts`.
 
 Only add manually confirmed product data. If composition is not manually provided, use `Composition to be added`. If dosage form is not clear, use `Dosage form to be added`.
 
-## Update the downloadable product list
+## Update downloadable PDFs
 
-Replace `public/downloads/macron-product-list-2026.pdf` with the latest product list PDF. Keep the same filename if you want the existing download button on the Brands page to continue working without code changes.
+Replace these files in `public/downloads/` when new PDFs are ready:
+
+- `macron_product_list_download(1).pdf` for Product Card
+- `macron-product-list-2026 (1)(1).pdf` for Product List
+
+The Product List / Card page uses direct download links for both files.
 
 ## Run locally
 

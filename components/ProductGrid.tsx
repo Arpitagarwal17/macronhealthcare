@@ -182,7 +182,7 @@ export default function ProductGrid({ products }: ProductGridProps) {
         </div>
       ) : (
         <div className="rounded-[1.1rem] border border-line bg-white p-8 text-slate shadow-soft">
-          No brands found.
+          No visual aids found.
         </div>
       )}
 

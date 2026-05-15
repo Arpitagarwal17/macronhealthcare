@@ -25,11 +25,11 @@ export default function HomePage() {
               </div>
 
               <div className="flex flex-col gap-3 sm:flex-row">
-                <Link href="/products" className="primary-button">
-                  Explore Brands
+                <Link href="/product-list" className="primary-button">
+                  View Product List
                 </Link>
-                <Link href="/contact" className="secondary-button">
-                  Contact
+                <Link href="/visual-aids" className="secondary-button">
+                  Visual Aids
                 </Link>
               </div>
             </div>

@@ -42,7 +42,7 @@ export default function ProductCard({
         </div>
         <div className="mt-auto grid gap-2 sm:grid-cols-2">
           <Link
-            href={`/products/${product.slug}`}
+            href={`/visual-aids/${product.slug}`}
             className="inline-flex min-h-11 items-center justify-center rounded-md bg-blue px-4 text-sm font-semibold text-white shadow-soft transition duration-200 hover:bg-teal focus:outline-none focus:ring-4 focus:ring-blue/15"
           >
             View Visual Aid
