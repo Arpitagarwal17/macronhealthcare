@@ -23,7 +23,11 @@ import Link from "next/link";
 import { GripVertical } from "lucide-react";
 import type { CSSProperties } from "react";
 import { useEffect, useMemo, useState } from "react";
-import { exportBasketAsPdf, exportBasketAsPpt } from "@/components/exportBasket";
+import {
+  exportBasketAsPdf,
+  exportBasketAsPpt,
+  openMobileExportWindow,
+} from "@/components/exportBasket";
 import type { Product } from "@/data/products";
 import PresentationViewer from "@/components/PresentationViewer";
 import { useBasket } from "@/components/useBasket";
@@ -113,15 +117,21 @@ export default function BasketPageClient({ products }: BasketPageClientProps) {
 
     setExporting(type);
     setExportError("");
+    const fallbackWindow = openMobileExportWindow();
 
     try {
       if (type === "pdf") {
-        await exportBasketAsPdf(selectedProducts);
+        await exportBasketAsPdf(selectedProducts, fallbackWindow);
       } else {
-        await exportBasketAsPpt(selectedProducts);
+        await exportBasketAsPpt(selectedProducts, fallbackWindow);
       }
-    } catch {
-      setExportError("Export could not be created. Please try again.");
+    } catch (error) {
+      fallbackWindow?.close();
+      setExportError(
+        error instanceof Error
+          ? error.message
+          : "Export could not be created. Please try again.",
+      );
     } finally {
       setExporting(null);
     }
@@ -164,7 +174,7 @@ export default function BasketPageClient({ products }: BasketPageClientProps) {
                 disabled={isActionDisabled}
                 className="inline-flex min-h-12 items-center justify-center rounded-md border border-blue/20 bg-white px-5 text-sm font-semibold text-blue shadow-soft transition duration-200 hover:border-blue hover:bg-porcelain focus:outline-none focus:ring-4 focus:ring-blue/10 disabled:cursor-not-allowed disabled:opacity-45"
               >
-                {exporting === "pdf" ? "Exporting PDF..." : "Export as PDF"}
+                {exporting === "pdf" ? "Preparing export..." : "Export as PDF"}
               </button>
               <button
                 type="button"
@@ -172,7 +182,7 @@ export default function BasketPageClient({ products }: BasketPageClientProps) {
                 disabled={isActionDisabled}
                 className="inline-flex min-h-12 items-center justify-center rounded-md border border-blue/20 bg-white px-5 text-sm font-semibold text-blue shadow-soft transition duration-200 hover:border-blue hover:bg-porcelain focus:outline-none focus:ring-4 focus:ring-blue/10 disabled:cursor-not-allowed disabled:opacity-45"
               >
-                {exporting === "ppt" ? "Exporting PPT..." : "Export as PPT"}
+                {exporting === "ppt" ? "Preparing export..." : "Export as PPT"}
               </button>
               <button
                 type="button"

@@ -22,6 +22,67 @@ function resolveAssetUrl(src: string) {
   return new URL(src, window.location.origin).toString();
 }
 
+function isAppleTouchBrowser() {
+  const userAgent = window.navigator.userAgent;
+  const isAppleDevice = /iPad|iPhone|iPod/.test(userAgent);
+  const isIpadDesktopMode =
+    window.navigator.platform === "MacIntel" &&
+    window.navigator.maxTouchPoints > 1;
+
+  return isAppleDevice || isIpadDesktopMode;
+}
+
+export function openMobileExportWindow() {
+  if (!isAppleTouchBrowser()) {
+    return null;
+  }
+
+  const exportWindow = window.open("", "_blank");
+
+  if (exportWindow) {
+    exportWindow.document.write(
+      "<!doctype html><title>Preparing export</title><body style=\"margin:0;font-family:system-ui,sans-serif;color:#063B78;background:#F7FBFF;display:grid;min-height:100vh;place-items:center;\"><p style=\"font-size:18px;font-weight:700;\">Preparing export...</p></body>",
+    );
+    exportWindow.document.close();
+  }
+
+  return exportWindow;
+}
+
+function downloadBlob(
+  blob: Blob,
+  fileName: string,
+  fallbackWindow?: Window | null,
+) {
+  const objectUrl = window.URL.createObjectURL(blob);
+  const revokeUrl = () => window.URL.revokeObjectURL(objectUrl);
+
+  if (fallbackWindow && !fallbackWindow.closed) {
+    fallbackWindow.location.href = objectUrl;
+    window.setTimeout(revokeUrl, 120000);
+    return;
+  }
+
+  const link = document.createElement("a");
+  link.href = objectUrl;
+  link.download = fileName;
+  link.rel = "noopener";
+  link.style.display = "none";
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+
+  if (isAppleTouchBrowser()) {
+    const openedWindow = window.open(objectUrl, "_blank");
+
+    if (!openedWindow) {
+      window.location.href = objectUrl;
+    }
+  }
+
+  window.setTimeout(revokeUrl, 120000);
+}
+
 function getContainedRect(
   imageWidth: number,
   imageHeight: number,
@@ -57,8 +118,13 @@ function getContainedRect(
 }
 
 async function loadImage(src: string) {
+  const assetUrl = resolveAssetUrl(src);
   const image = new Image();
-  image.crossOrigin = "anonymous";
+
+  if (new URL(assetUrl).origin !== window.location.origin) {
+    image.crossOrigin = "anonymous";
+  }
+
   image.decoding = "async";
 
   const imageLoaded = new Promise<HTMLImageElement>((resolve, reject) => {
@@ -66,7 +132,7 @@ async function loadImage(src: string) {
     image.onerror = () => reject(new Error(`Unable to load image: ${src}`));
   });
 
-  image.src = resolveAssetUrl(src);
+  image.src = assetUrl;
   await imageLoaded;
 
   if (image.decode) {
@@ -83,6 +149,11 @@ async function rasterizeImage(
   quality = 0.82,
 ): Promise<RasterImage> {
   const image = await loadImage(src);
+
+  if (!image.naturalWidth || !image.naturalHeight) {
+    throw new Error(`Image loaded without dimensions: ${src}`);
+  }
+
   const scale = Math.min(
     1,
     maxWidth / image.naturalWidth,
@@ -110,14 +181,25 @@ async function rasterizeImage(
   };
 }
 
-export async function exportBasketAsPdf(products: Product[]) {
-  const [{ jsPDF }, logo, ...visualAids] = await Promise.all([
+async function rasterizeVisualAids(products: Product[]) {
+  const visualAids: RasterImage[] = [];
+
+  for (const product of products) {
+    visualAids.push(await rasterizeImage(product.visualAidImage, 1500, 920, 0.8));
+  }
+
+  return visualAids;
+}
+
+export async function exportBasketAsPdf(
+  products: Product[],
+  fallbackWindow?: Window | null,
+) {
+  const [{ jsPDF }, logo] = await Promise.all([
     import("jspdf"),
     rasterizeImage(LOGO_PATH, 760, 310, 0.9),
-    ...products.map((product) =>
-      rasterizeImage(product.visualAidImage, 1500, 920, 0.8),
-    ),
   ]);
+  const visualAids = await rasterizeVisualAids(products);
   const pdf = new jsPDF({
     orientation: "landscape",
     unit: "pt",
@@ -165,17 +247,23 @@ export async function exportBasketAsPdf(products: Product[]) {
     );
   });
 
-  pdf.save(PDF_FILE_NAME);
+  downloadBlob(pdf.output("blob"), PDF_FILE_NAME, fallbackWindow);
 }
 
-export async function exportBasketAsPpt(products: Product[]) {
-  const [{ default: PptxGenJS }, logo, ...visualAids] = await Promise.all([
+export async function exportBasketAsPpt(
+  products: Product[],
+  fallbackWindow?: Window | null,
+) {
+  const [{ default: PptxGenJS }, logo] = await Promise.all([
     import("pptxgenjs"),
     rasterizeImage(LOGO_PATH, 760, 310, 0.9),
-    ...products.map((product) =>
-      rasterizeImage(product.visualAidImage, 1500, 920, 0.82),
-    ),
   ]);
+  const visualAids: RasterImage[] = [];
+
+  for (const product of products) {
+    visualAids.push(await rasterizeImage(product.visualAidImage, 1500, 920, 0.82));
+  }
+
   const pptx = new PptxGenJS();
 
   pptx.layout = "LAYOUT_WIDE";
@@ -216,5 +304,10 @@ export async function exportBasketAsPpt(products: Product[]) {
     });
   });
 
-  await pptx.writeFile({ fileName: PPT_FILE_NAME, compression: true });
+  const pptBlob = await pptx.write({
+    outputType: "blob",
+    compression: true,
+  });
+
+  downloadBlob(pptBlob as Blob, PPT_FILE_NAME, fallbackWindow);
 }

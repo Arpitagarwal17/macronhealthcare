@@ -55,9 +55,20 @@ const productSections = productListCategories
   }))
   .filter((section) => section.products.length > 0);
 
+const sustainedReleaseDsrSlugs = new Set([
+  "myorab-dsr",
+  "ppzol-dsr",
+  "rabiday-dsr",
+  "rabron-dsr",
+]);
+
 function getOptionalBadge(product: Product, category: ProductListCategory) {
   const dosageForm = product.dosageForm.trim();
   const normalized = dosageForm.toLowerCase();
+
+  if (sustainedReleaseDsrSlugs.has(product.slug)) {
+    return "Sustained Release Capsules";
+  }
 
   if (!dosageForm || normalized.includes("to be added")) {
     return null;
@@ -92,16 +103,31 @@ export default function ProductListPage() {
             </h1>
           </div>
 
-          <div className="grid gap-3 sm:grid-cols-2 lg:min-w-[420px]">
+          <div className="grid gap-4 md:grid-cols-2 lg:min-w-[540px]">
             {downloads.map((item) => (
-              <a
+              <article
                 key={item.label}
-                href={item.href}
-                download={item.fileName}
-                className="inline-flex min-h-12 items-center justify-center rounded-md bg-blue px-5 text-sm font-semibold text-white shadow-soft transition duration-200 hover:bg-teal focus:outline-none focus:ring-4 focus:ring-blue/15"
+                className="rounded-[1rem] border border-line bg-white p-4 shadow-soft"
               >
-                {item.buttonLabel}
-              </a>
+                <p className="field-label text-blue">{item.label}</p>
+                <div className="mt-3 grid gap-2 sm:grid-cols-2">
+                  <a
+                    href={item.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex min-h-11 items-center justify-center rounded-md border border-blue/20 bg-white px-4 text-sm font-semibold text-blue transition duration-200 hover:border-blue hover:bg-porcelain focus:outline-none focus:ring-4 focus:ring-blue/10"
+                  >
+                    View {item.label}
+                  </a>
+                  <a
+                    href={item.href}
+                    download={item.fileName}
+                    className="inline-flex min-h-11 items-center justify-center rounded-md bg-blue px-4 text-sm font-semibold text-white shadow-soft transition duration-200 hover:bg-teal focus:outline-none focus:ring-4 focus:ring-blue/15"
+                  >
+                    {item.buttonLabel}
+                  </a>
+                </div>
+              </article>
             ))}
           </div>
         </div>
