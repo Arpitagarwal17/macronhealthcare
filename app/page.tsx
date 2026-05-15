@@ -4,7 +4,7 @@ import { company } from "@/data/company";
 const homeFacts = [
   { label: "Serving Since", value: company.servingSince },
   { label: "Company Director", value: company.director },
-  { label: "Commitment", value: "Quality & Services" },
+  { label: "Commitment", value: "Quality and Services" },
 ];
 
 export default function HomePage() {
@@ -20,7 +20,7 @@ export default function HomePage() {
                   Macron Health Care
                 </h1>
                 <p className="max-w-2xl text-xl font-semibold leading-8 text-blue">
-                  Committed to Quality & Services.
+                  Committed to Quality and Services
                 </p>
               </div>
 

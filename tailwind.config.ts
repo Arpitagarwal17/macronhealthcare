@@ -9,12 +9,12 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        paper: "#f5f8fb",
+        paper: "#F7FBFF",
         porcelain: "#edf6f8",
         ink: "#0e2b4c",
         slate: "#52677b",
-        teal: "#079b94",
-        blue: "#064b8d",
+        teal: "#009688",
+        blue: "#063B78",
         green: "#2f8a69",
         line: "#d8e6ee",
       },

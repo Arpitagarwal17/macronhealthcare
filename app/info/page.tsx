@@ -14,7 +14,7 @@ export default function InfoPage() {
               <p className="field-label text-blue">Company Information</p>
               <h1 className="text-4xl font-semibold text-ink">{company.name}</h1>
               <p className="text-lg font-semibold leading-7 text-blue">
-                {company.brandLines[0]}.
+                {company.brandLines[0]}
               </p>
             </div>
           </div>
@@ -22,7 +22,7 @@ export default function InfoPage() {
           <div className="grid gap-5 md:grid-cols-2">
             <InfoBlock label="Company Director" value={company.director} />
             <InfoBlock label="Serving Since" value={company.servingSince} />
-            <InfoBlock label="Commitment" value="Quality & Services" />
+            <InfoBlock label="Commitment" value="Quality and Services" />
             <InfoBlock label="Website / Domain" value={company.website} />
             <InfoBlock label="Contact Number" value={company.contactNumbers.join(", ")} />
             {company.registrations.map((item) => (

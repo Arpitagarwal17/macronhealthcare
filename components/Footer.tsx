@@ -9,25 +9,18 @@ export default function Footer() {
     <footer className="border-t border-line bg-white">
       <div className="page-shell grid gap-8 py-10 text-sm text-slate sm:grid-cols-2 lg:grid-cols-4">
         <div className="space-y-4">
-          <Link href="/" className="flex items-center gap-3">
+          <Link href="/" className="inline-flex w-fit items-center">
             <Image
-              src="/logo-mark.png"
+              src="/logo.png"
               alt="Macron Health Care"
-              width={56}
-              height={65}
+              width={220}
+              height={89}
               unoptimized
-              className="h-12 w-auto"
+              className="h-16 w-auto max-w-[220px] object-contain"
             />
-            <span>
-              <span className="block text-lg font-semibold text-ink">
-                {company.displayName}
-              </span>
-              <span className="mt-1 block text-xs font-semibold text-blue">
-                {company.brandLines[0]}.
-              </span>
-            </span>
           </Link>
           <div className="space-y-2 leading-6">
+            <p className="font-semibold text-blue">{company.brandLines[0]}</p>
             <p>{company.brandLines[1]}</p>
             <p>
               <span className="font-semibold text-ink">Company Director:</span>{" "}
@@ -87,7 +80,7 @@ export default function Footer() {
 
       <div className="border-t border-line bg-paper/70">
         <div className="page-shell py-4 text-sm font-semibold text-ink">
-          {company.displayName} - {company.brandLines[0]}.
+          {company.displayName} - {company.brandLines[0]}
         </div>
       </div>
     </footer>

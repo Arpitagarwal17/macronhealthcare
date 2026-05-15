@@ -3,11 +3,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { company } from "@/data/company";
 
 const navItems = [
   { href: "/", label: "Home" },
-  { href: "/products", label: "Brands" },
+  { href: "/products", label: "Brands / Products" },
+  { href: "/product-list", label: "Product List" },
   { href: "/info", label: "Company Info" },
   { href: "/contact", label: "Contact" },
 ];
@@ -17,27 +17,19 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-line bg-white/95 backdrop-blur">
-      <div className="page-shell flex flex-col gap-4 py-4 lg:min-h-24 lg:flex-row lg:items-center lg:justify-between lg:py-0">
-        <Link href="/" className="flex items-center gap-3">
+      <div className="page-shell flex flex-col gap-4 py-4 xl:min-h-24 xl:flex-row xl:items-center xl:justify-between xl:py-0">
+        <Link href="/" className="inline-flex w-fit items-center">
           <Image
-            src="/logo-mark.png"
+            src="/logo.png"
             alt="Macron Health Care"
-            width={64}
-            height={75}
+            width={246}
+            height={100}
             priority
             unoptimized
-            className="h-14 w-auto sm:h-16"
+            className="h-16 w-auto max-w-[245px] object-contain sm:h-[4.5rem] sm:max-w-[285px]"
           />
-          <span className="min-w-0">
-            <span className="block text-xl font-semibold leading-tight text-ink sm:text-2xl">
-              {company.displayName}
-            </span>
-            <span className="mt-1 block text-xs font-semibold leading-tight text-blue sm:text-sm">
-              {company.brandLines[0]}.
-            </span>
-          </span>
         </Link>
-        <nav className="grid w-full min-w-0 grid-cols-2 gap-1 overflow-hidden rounded-lg border border-line bg-paper p-1 shadow-soft sm:grid-cols-4 lg:w-auto lg:min-w-[500px]">
+        <nav className="grid w-full min-w-0 grid-cols-2 gap-1 overflow-hidden rounded-lg border border-line bg-paper p-1 shadow-soft sm:grid-cols-3 lg:grid-cols-5 xl:w-auto xl:min-w-[660px]">
           {navItems.map((item) => {
             const isActive =
               item.href === "/"
@@ -49,7 +41,7 @@ export default function Header() {
                 key={item.href}
                 href={item.href}
                 aria-current={isActive ? "page" : undefined}
-                className={`min-w-0 rounded-md px-2 py-2.5 text-center text-xs font-semibold transition sm:text-[13px] lg:px-4 lg:text-sm ${
+                className={`min-w-0 rounded-md px-2 py-2.5 text-center text-xs font-semibold transition sm:text-[13px] lg:px-3 xl:text-sm ${
                   isActive
                     ? "bg-blue text-white shadow-soft"
                     : "text-slate hover:bg-white hover:text-blue"

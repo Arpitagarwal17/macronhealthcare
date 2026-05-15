@@ -30,7 +30,7 @@ export const company = {
     { label: "GSTIN", value: "08AJTPG1414G1ZB" },
   ],
   brandLines: [
-    "Committed to Quality & Services",
+    "Committed to Quality and Services",
     "At Your Service Since 1999",
   ],
 };
