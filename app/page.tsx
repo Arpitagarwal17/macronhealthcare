@@ -19,9 +19,6 @@ export default function HomePage() {
                 <h1 className="text-4xl font-semibold leading-tight text-ink sm:text-5xl lg:text-6xl">
                   Macron Health Care
                 </h1>
-                <p className="max-w-2xl text-xl font-semibold leading-8 text-blue sm:text-2xl">
-                  Pharmaceutical Product Portfolio & Doctor Presentation Support
-                </p>
                 <p className="max-w-xl text-lg font-semibold leading-7 text-teal">
                   Committed to Quality and Services
                 </p>
