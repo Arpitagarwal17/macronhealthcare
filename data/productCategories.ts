@@ -15,6 +15,18 @@ export const productCategoryFilters = ["All", ...productCategories] as const;
 export type ProductCategory = (typeof productCategories)[number];
 export type ProductCategoryFilter = (typeof productCategoryFilters)[number];
 
+export function getProductCategoryLabel(category: ProductCategoryFilter) {
+  if (category === "Topicals / External") {
+    return "External";
+  }
+
+  if (category === "Powders / Sachets") {
+    return "Powders";
+  }
+
+  return category;
+}
+
 const hasDoseToken = (dosageForm: string, token: string) =>
   new RegExp(`(^|[^a-z0-9])${token}([^a-z0-9]|$)`, "i").test(dosageForm);
 

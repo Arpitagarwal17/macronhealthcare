@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import type { Product } from "@/data/products";
 import {
   getProductCategory,
+  getProductCategoryLabel,
   productCategories,
   productCategoryFilters,
   type ProductCategory,
@@ -61,6 +62,7 @@ export default function ProductGrid({ products }: ProductGridProps) {
           product.composition,
           product.dosageForm,
           product.broadCategory,
+          getProductCategoryLabel(product.broadCategory),
         ]
           .join(" ")
           .toLowerCase()
@@ -70,6 +72,16 @@ export default function ProductGrid({ products }: ProductGridProps) {
 
     return categoryFilteredProducts;
   }, [categorizedProducts, query, selectedCategory]);
+
+  const selectedCategoryLabel = getProductCategoryLabel(selectedCategory);
+  const productCountLabel =
+    selectedCategory === "All"
+      ? `Showing ${filteredProducts.length} ${
+          filteredProducts.length === 1 ? "product" : "products"
+        }`
+      : `${selectedCategoryLabel} — ${filteredProducts.length} ${
+          filteredProducts.length === 1 ? "product" : "products"
+        }`;
 
   const productSections = useMemo<ProductSection[]>(() => {
     if (selectedCategory !== "All") {
@@ -99,35 +111,43 @@ export default function ProductGrid({ products }: ProductGridProps) {
 
   return (
     <div className="space-y-8">
-      <div className="grid gap-4 lg:grid-cols-[minmax(0,34rem)_1fr] lg:items-start">
+      <div className="rounded-[1.1rem] border border-line bg-white p-4 shadow-soft sm:p-5">
         <input
           type="search"
           value={query}
           onChange={(event) => setQuery(event.target.value)}
-          placeholder="Search brand, composition, dosage form, or category"
+          placeholder="Search brand, composition, dosage form..."
           aria-label="Search by brand, composition, dosage form, or category"
-          className="h-14 w-full rounded-md border border-line bg-white px-5 text-base text-ink shadow-soft outline-none transition placeholder:text-slate/65 focus:border-blue focus:ring-4 focus:ring-blue/10"
+          className="h-[52px] w-full rounded-md border border-line bg-paper px-5 text-base text-ink outline-none transition placeholder:text-slate/65 focus:border-blue focus:bg-white focus:ring-4 focus:ring-blue/10"
         />
 
-        <div className="flex flex-wrap gap-2">
-          {productCategoryFilters.map((category) => {
-            const isSelected = selectedCategory === category;
+        <div className="mt-4 space-y-3 border-t border-line pt-4">
+          <p className="text-sm font-semibold text-slate">Filter by dosage form</p>
 
-            return (
-              <button
-                key={category}
-                type="button"
-                onClick={() => setSelectedCategory(category)}
-                className={`min-h-10 rounded-full border px-4 text-sm font-semibold transition focus:outline-none focus:ring-4 focus:ring-blue/10 ${
-                  isSelected
-                    ? "border-blue bg-blue text-white shadow-soft"
-                    : "border-line bg-white text-slate hover:border-blue hover:text-blue"
-                }`}
-              >
-                {category}
-              </button>
-            );
-          })}
+          <div className="-mx-1 overflow-x-auto px-1 pb-1">
+            <div className="flex min-w-max gap-2 sm:flex-wrap">
+              {productCategoryFilters.map((category) => {
+                const isSelected = selectedCategory === category;
+
+                return (
+                  <button
+                    key={category}
+                    type="button"
+                    onClick={() => setSelectedCategory(category)}
+                    className={`h-[38px] shrink-0 rounded-full border px-4 text-sm font-semibold transition focus:outline-none focus:ring-4 focus:ring-blue/10 ${
+                      isSelected
+                        ? "border-blue bg-blue text-white shadow-soft"
+                        : "border-blue/15 bg-white text-slate hover:border-blue/45 hover:text-blue"
+                    }`}
+                  >
+                    {getProductCategoryLabel(category)}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          <p className="text-sm font-semibold text-blue">{productCountLabel}</p>
         </div>
       </div>
 
@@ -137,7 +157,7 @@ export default function ProductGrid({ products }: ProductGridProps) {
             <section key={section.category} className="space-y-4">
               <div className="flex items-center justify-between gap-4 border-b border-line pb-3">
                 <h2 className="text-xl font-semibold text-ink">
-                  {section.category}
+                  {getProductCategoryLabel(section.category)}
                 </h2>
                 <span className="rounded-full border border-line bg-white px-3 py-1 text-xs font-semibold text-slate">
                   {section.products.length}
