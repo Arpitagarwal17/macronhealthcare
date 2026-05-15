@@ -3,11 +3,8 @@ export const productCategories = [
   "Capsules",
   "Syrups",
   "Dry Syrups",
-  "Drops",
   "Injections",
-  "Powders / Sachets",
-  "Topicals / External",
-  "Others",
+  "Miscellaneous",
 ] as const;
 
 export const productCategoryFilters = ["All", ...productCategories] as const;
@@ -16,14 +13,6 @@ export type ProductCategory = (typeof productCategories)[number];
 export type ProductCategoryFilter = (typeof productCategoryFilters)[number];
 
 export function getProductCategoryLabel(category: ProductCategoryFilter) {
-  if (category === "Topicals / External") {
-    return "External/Pain Oil";
-  }
-
-  if (category === "Powders / Sachets") {
-    return "Powders";
-  }
-
   return category;
 }
 
@@ -45,6 +34,8 @@ export function getProductCategory(dosageForm: string): ProductCategory {
     normalized.includes("tablet") ||
     normalized.includes("dispersible") ||
     normalized.includes("chewable") ||
+    normalized.includes("sustained release tablet") ||
+    normalized.includes("extended release tablet") ||
     hasDoseToken(dosageForm, "er") ||
     hasDoseToken(dosageForm, "sr") ||
     hasDoseToken(dosageForm, "xr") ||
@@ -70,41 +61,9 @@ export function getProductCategory(dosageForm: string): ProductCategory {
     return "Syrups";
   }
 
-  if (
-    normalized.includes("drops") ||
-    normalized.includes("oral drops") ||
-    normalized.includes("pediatric drops") ||
-    normalized.includes("eye drops") ||
-    normalized.includes("ear drops") ||
-    normalized.includes("nasal drops")
-  ) {
-    return "Drops";
-  }
-
-  if (
-    normalized.includes("pain oil") ||
-    normalized.includes("oil") ||
-    normalized.includes("liniment") ||
-    normalized.includes("gel") ||
-    normalized.includes("cream") ||
-    normalized.includes("ointment") ||
-    normalized.includes("lotion") ||
-    normalized.includes("balm")
-  ) {
-    return "Topicals / External";
-  }
-
   if (normalized.includes("injection")) {
     return "Injections";
   }
 
-  if (
-    normalized.includes("powder") ||
-    normalized.includes("sachet") ||
-    normalized.includes("granules")
-  ) {
-    return "Powders / Sachets";
-  }
-
-  return "Others";
+  return "Miscellaneous";
 }

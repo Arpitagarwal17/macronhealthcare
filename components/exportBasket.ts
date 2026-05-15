@@ -1,12 +1,13 @@
 import type { Product } from "@/data/products";
 import { company } from "@/data/company";
 
-const PDF_FILE_NAME = "Macron-Health-Care-Basket.pdf";
-const PPT_FILE_NAME = "Macron-Health-Care-Basket.pptx";
+const PDF_FILE_NAME = "macron-doctor-presentation.pdf";
+const PPT_FILE_NAME = "macron-doctor-presentation.pptx";
 const LOGO_PATH = "/logo.png";
 
 type RasterImage = {
   dataUrl: string;
+  format: "JPEG" | "PNG";
   width: number;
   height: number;
 };
@@ -147,6 +148,7 @@ async function rasterizeImage(
   maxWidth = 1500,
   maxHeight = 920,
   quality = 0.82,
+  format: "JPEG" | "PNG" = "JPEG",
 ): Promise<RasterImage> {
   const image = await loadImage(src);
 
@@ -175,7 +177,11 @@ async function rasterizeImage(
   context.drawImage(image, 0, 0, width, height);
 
   return {
-    dataUrl: canvas.toDataURL("image/jpeg", quality),
+    dataUrl:
+      format === "PNG"
+        ? canvas.toDataURL("image/png")
+        : canvas.toDataURL("image/jpeg", quality),
+    format,
     width,
     height,
   };
@@ -197,7 +203,7 @@ export async function exportBasketAsPdf(
 ) {
   const [{ jsPDF }, logo] = await Promise.all([
     import("jspdf"),
-    rasterizeImage(LOGO_PATH, 760, 310, 0.9),
+    rasterizeImage(LOGO_PATH, 760, 310, 0.9, "PNG"),
   ]);
   const visualAids = await rasterizeVisualAids(products);
   const pdf = new jsPDF({
@@ -227,7 +233,7 @@ export async function exportBasketAsPdf(
     pdf.rect(0, 0, 960, 540, "F");
     pdf.addImage(
       logo.dataUrl,
-      "JPEG",
+      logo.format,
       logoRect.x,
       logoRect.y,
       logoRect.width,
@@ -237,7 +243,7 @@ export async function exportBasketAsPdf(
     );
     pdf.addImage(
       visualAid.dataUrl,
-      "JPEG",
+      visualAid.format,
       visualRect.x,
       visualRect.y,
       visualRect.width,
@@ -256,7 +262,7 @@ export async function exportBasketAsPpt(
 ) {
   const [{ default: PptxGenJS }, logo] = await Promise.all([
     import("pptxgenjs"),
-    rasterizeImage(LOGO_PATH, 760, 310, 0.9),
+    rasterizeImage(LOGO_PATH, 760, 310, 0.9, "PNG"),
   ]);
   const visualAids: RasterImage[] = [];
 
@@ -268,8 +274,8 @@ export async function exportBasketAsPpt(
 
   pptx.layout = "LAYOUT_WIDE";
   pptx.author = company.displayName;
-  pptx.subject = "Macron Health Care selected product visual aids";
-  pptx.title = "Macron Health Care Basket";
+  pptx.subject = "Macron Health Care doctor presentation";
+  pptx.title = "Macron Doctor Presentation";
   pptx.company = company.displayName;
 
   products.forEach((product, index) => {

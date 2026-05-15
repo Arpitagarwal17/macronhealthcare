@@ -148,84 +148,93 @@ export default function BasketPageClient({ products }: BasketPageClientProps) {
             </h1>
           </div>
 
-          <Link href="/visual-aids" className="secondary-button lg:min-w-36">
-            Back to Visual Aids
+          <Link href="/doctor-presentation" className="secondary-button lg:min-w-36">
+            Back to Doctor Presentation
           </Link>
         </div>
 
-        <div className="mb-6 rounded-[1.1rem] border border-line bg-white p-4 shadow-soft sm:p-5">
-          <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
-            <p className="text-sm font-semibold text-slate">
-              Export selected products to share with doctor.
-            </p>
-
-            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-              <button
-                type="button"
-                onClick={() => setIsPresentationOpen(true)}
-                disabled={isActionDisabled}
-                className="primary-button disabled:cursor-not-allowed disabled:opacity-45"
-              >
-                Start PPT View
-              </button>
-              <button
-                type="button"
-                onClick={() => handleExport("pdf")}
-                disabled={isActionDisabled}
-                className="inline-flex min-h-12 items-center justify-center rounded-md border border-blue/20 bg-white px-5 text-sm font-semibold text-blue shadow-soft transition duration-200 hover:border-blue hover:bg-porcelain focus:outline-none focus:ring-4 focus:ring-blue/10 disabled:cursor-not-allowed disabled:opacity-45"
-              >
-                {exporting === "pdf" ? "Preparing export..." : "Export as PDF"}
-              </button>
-              <button
-                type="button"
-                onClick={() => handleExport("ppt")}
-                disabled={isActionDisabled}
-                className="inline-flex min-h-12 items-center justify-center rounded-md border border-blue/20 bg-white px-5 text-sm font-semibold text-blue shadow-soft transition duration-200 hover:border-blue hover:bg-porcelain focus:outline-none focus:ring-4 focus:ring-blue/10 disabled:cursor-not-allowed disabled:opacity-45"
-              >
-                {exporting === "ppt" ? "Preparing export..." : "Export as PPT"}
-              </button>
-              <button
-                type="button"
-                onClick={clearBasket}
-                disabled={count === 0 || exporting !== null}
-                className="inline-flex min-h-12 items-center justify-center rounded-md border border-line bg-white px-5 text-sm font-semibold text-ink shadow-soft transition duration-200 hover:border-blue hover:text-blue focus:outline-none focus:ring-4 focus:ring-blue/10 disabled:cursor-not-allowed disabled:opacity-45"
-              >
-                Clear Basket
-              </button>
-            </div>
-          </div>
-
-          {exportError ? (
-            <p className="mt-3 text-sm font-semibold text-red-700">{exportError}</p>
-          ) : null}
-        </div>
-
         {selectedProducts.length > 0 ? (
-          <DndContext
-            sensors={sensors}
-            collisionDetection={closestCenter}
-            onDragEnd={handleDragEnd}
-          >
-            <SortableContext
-              items={orderedProductSlugs}
-              strategy={verticalListSortingStrategy}
-            >
-              <div className="space-y-3">
-                {selectedProducts.map((product) => (
-                  <SortableBasketCard
-                    key={product.slug}
-                    product={product}
-                    onRemove={removeProduct}
-                  />
-                ))}
+          <>
+            <div className="mb-6 rounded-[1.1rem] border border-line bg-white p-4 shadow-soft sm:p-5">
+              <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+                <p className="text-sm font-semibold text-slate">
+                  Export selected products to share with doctor.
+                </p>
+
+                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+                  <button
+                    type="button"
+                    onClick={() => setIsPresentationOpen(true)}
+                    disabled={isActionDisabled}
+                    className="primary-button disabled:cursor-not-allowed disabled:opacity-45"
+                  >
+                    Start PPT View
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => handleExport("pdf")}
+                    disabled={isActionDisabled}
+                    className="inline-flex min-h-12 items-center justify-center rounded-md border border-blue/20 bg-white px-5 text-sm font-semibold text-blue shadow-soft transition duration-200 hover:border-blue hover:bg-porcelain focus:outline-none focus:ring-4 focus:ring-blue/10 disabled:cursor-not-allowed disabled:opacity-45"
+                  >
+                    {exporting === "pdf" ? "Preparing export..." : "Export PDF"}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => handleExport("ppt")}
+                    disabled={isActionDisabled}
+                    className="inline-flex min-h-12 items-center justify-center rounded-md border border-blue/20 bg-white px-5 text-sm font-semibold text-blue shadow-soft transition duration-200 hover:border-blue hover:bg-porcelain focus:outline-none focus:ring-4 focus:ring-blue/10 disabled:cursor-not-allowed disabled:opacity-45"
+                  >
+                    {exporting === "ppt" ? "Preparing export..." : "Export PPT"}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={clearBasket}
+                    disabled={count === 0 || exporting !== null}
+                    className="inline-flex min-h-12 items-center justify-center rounded-md border border-line bg-white px-5 text-sm font-semibold text-ink shadow-soft transition duration-200 hover:border-blue hover:text-blue focus:outline-none focus:ring-4 focus:ring-blue/10 disabled:cursor-not-allowed disabled:opacity-45"
+                  >
+                    Clear Basket
+                  </button>
+                </div>
               </div>
-            </SortableContext>
-          </DndContext>
+
+              {exportError ? (
+                <p className="mt-3 text-sm font-semibold text-red-700">
+                  {exportError}
+                </p>
+              ) : null}
+            </div>
+
+            <DndContext
+              sensors={sensors}
+              collisionDetection={closestCenter}
+              onDragEnd={handleDragEnd}
+            >
+              <SortableContext
+                items={orderedProductSlugs}
+                strategy={verticalListSortingStrategy}
+              >
+                <div className="space-y-3">
+                  {selectedProducts.map((product) => (
+                    <SortableBasketCard
+                      key={product.slug}
+                      product={product}
+                      onRemove={removeProduct}
+                    />
+                  ))}
+                </div>
+              </SortableContext>
+            </DndContext>
+          </>
         ) : (
           <div className="rounded-[1.1rem] border border-line bg-white p-8 text-center shadow-soft">
-            <p className="text-lg font-semibold text-ink">Basket is empty.</p>
-            <Link href="/visual-aids" className="primary-button mt-5">
-              Add Visual Aids
+            <p className="text-xl font-semibold text-ink">
+              Your presentation basket is empty.
+            </p>
+            <p className="mx-auto mt-3 max-w-xl text-base leading-7 text-slate">
+              Add products from Doctor Presentation to create a quick presentation.
+            </p>
+            <Link href="/doctor-presentation" className="primary-button mt-5">
+              Go to Doctor Presentation
             </Link>
           </div>
         )}

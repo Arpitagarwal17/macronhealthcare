@@ -1,13 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { ReactElement, ReactNode } from "react";
-import { Globe2, Mail, MapPin, Phone } from "lucide-react";
+import { FileText, Globe2, Mail, MapPin, Phone } from "lucide-react";
 import { company } from "@/data/company";
 
 export default function Footer() {
   return (
     <footer className="border-t border-line bg-white">
-      <div className="page-shell grid gap-8 py-10 text-sm text-slate sm:grid-cols-2 lg:grid-cols-4">
+      <div className="page-shell grid gap-8 py-10 text-sm text-slate sm:grid-cols-2 lg:grid-cols-4 lg:gap-10">
         <div className="space-y-4">
           <Link href="/" className="inline-flex w-fit items-center">
             <Image
@@ -16,33 +16,47 @@ export default function Footer() {
               width={220}
               height={89}
               unoptimized
-              className="h-16 w-auto max-w-[220px] object-contain"
+              className="h-14 w-auto max-w-[210px] object-contain"
             />
           </Link>
-          <div className="space-y-2 leading-6">
-            <p className="font-semibold text-blue">{company.brandLines[0]}</p>
-            <p>{company.brandLines[1]}</p>
-            <p>
-              <span className="font-semibold text-ink">Company Director:</span>{" "}
-              {company.director}
-            </p>
-          </div>
+          <h2 className="text-xl font-semibold text-ink">Macron Health Care</h2>
+          <p className="max-w-xs leading-6 text-slate">
+            Committed to Quality and Services
+          </p>
         </div>
 
         <div>
           <h2 className="field-label text-blue">Contact</h2>
-          <div className="mt-4 space-y-3">
-            {company.contactNumbers.map((number) => (
-              <FooterLink key={number} href={`tel:${number}`} icon={<Phone />}>
-                {number}
-              </FooterLink>
-            ))}
-            <FooterLink href={`mailto:${company.email}`} icon={<Mail />}>
-              {company.email}
-            </FooterLink>
-            <FooterLink href={`https://${company.website}`} icon={<Globe2 />}>
-              {company.website}
-            </FooterLink>
+          <div className="mt-4 space-y-5">
+            <FooterBlock icon={<Phone />} label="Phone">
+              <div className="space-y-1.5">
+                {company.contactNumbers.map((number) => (
+                  <a
+                    key={number}
+                    href={`tel:${number}`}
+                    className="block break-words font-semibold text-ink transition hover:text-blue"
+                  >
+                    {number}
+                  </a>
+                ))}
+              </div>
+            </FooterBlock>
+            <FooterBlock icon={<Mail />} label="Email">
+              <a
+                href={`mailto:${company.email}`}
+                className="block break-words font-semibold text-ink transition hover:text-blue"
+              >
+                {company.email}
+              </a>
+            </FooterBlock>
+            <FooterBlock icon={<Globe2 />} label="Website">
+              <a
+                href={`https://${company.website}`}
+                className="block break-words font-semibold text-ink transition hover:text-blue"
+              >
+                {company.website}
+              </a>
+            </FooterBlock>
           </div>
         </div>
 
@@ -50,10 +64,11 @@ export default function Footer() {
           <h2 className="field-label text-blue">Registrations</h2>
           <div className="mt-4 space-y-3">
             {company.registrations.map((item) => (
-              <p key={item.label} className="leading-6">
-                <span className="block font-semibold text-ink">{item.label}</span>
-                <span>{item.value}</span>
-              </p>
+              <FooterBlock key={item.label} icon={<FileText />} label={item.label}>
+                <p className="break-words font-semibold leading-6 text-ink">
+                  {item.value}
+                </p>
+              </FooterBlock>
             ))}
           </div>
         </div>
@@ -62,17 +77,15 @@ export default function Footer() {
           <h2 className="field-label text-blue">Addresses</h2>
           <div className="mt-4 space-y-4">
             {company.addresses.map((address) => (
-              <div key={address.label} className="flex gap-3">
-                <MapPin className="mt-1 h-4 w-4 shrink-0 text-blue" aria-hidden="true" />
-                <address className="not-italic leading-6">
-                  <span className="block font-semibold text-ink">{address.label}</span>
+              <FooterBlock key={address.label} icon={<MapPin />} label={address.label}>
+                <address className="not-italic leading-6 text-slate">
                   {address.lines.map((line) => (
                     <span key={line} className="block">
                       {line}
                     </span>
                   ))}
                 </address>
-              </div>
+              </FooterBlock>
             ))}
           </div>
         </div>
@@ -87,24 +100,24 @@ export default function Footer() {
   );
 }
 
-function FooterLink({
-  href,
+function FooterBlock({
   icon,
+  label,
   children,
 }: {
-  href: string;
   icon: ReactElement;
+  label: string;
   children: ReactNode;
 }) {
   return (
-    <a
-      href={href}
-      className="flex items-center gap-3 break-words font-semibold text-ink transition hover:text-blue"
-    >
+    <div className="flex gap-3">
       <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-line bg-paper text-blue [&_svg]:h-4 [&_svg]:w-4">
         {icon}
       </span>
-      <span>{children}</span>
-    </a>
+      <div className="min-w-0">
+        <p className="mb-1 font-semibold text-ink">{label}</p>
+        {children}
+      </div>
+    </div>
   );
 }

@@ -119,8 +119,8 @@ export default function ProductGrid({ products }: ProductGridProps) {
           type="search"
           value={query}
           onChange={(event) => setQuery(event.target.value)}
-          placeholder="Search brand, composition, dosage form..."
-          aria-label="Search by brand, composition, dosage form, or category"
+          placeholder="Search brand or composition..."
+          aria-label="Search by brand or composition"
           className="h-[52px] w-full rounded-md border border-line bg-paper px-5 text-base text-ink outline-none transition placeholder:text-slate/65 focus:border-blue focus:bg-white focus:ring-4 focus:ring-blue/10"
         />
 
@@ -182,7 +182,7 @@ export default function ProductGrid({ products }: ProductGridProps) {
         </div>
       ) : (
         <div className="rounded-[1.1rem] border border-line bg-white p-8 text-slate shadow-soft">
-          No visual aids found.
+          No products found.
         </div>
       )}
 

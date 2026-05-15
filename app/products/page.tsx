@@ -1,9 +1,9 @@
 import { redirect } from "next/navigation";
 
 export const metadata = {
-  title: "Visual Aids | Macron Health Care",
+  title: "Doctor Presentation | Macron Health Care",
 };
 
 export default function ProductsPage() {
-  redirect("/visual-aids");
+  redirect("/doctor-presentation");
 }

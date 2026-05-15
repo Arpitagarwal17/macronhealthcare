@@ -1,6 +1,6 @@
 # Macron Health Care Website
 
-A Next.js, TypeScript, Tailwind CSS website for Macron Health Care company information, Product List / Card downloads, and Visual Aids.
+A Next.js, TypeScript, Tailwind CSS website for Macron Health Care company information, Product Portfolio downloads, and Doctor Presentation visual aids.
 
 ## Add a new product image
 
@@ -31,7 +31,7 @@ Replace these files when new PDFs are ready:
 - `public/assets/pdfs/macron-product-card.pdf` for Product Card
 - `public/downloads/macron-product-list-2026 (1)(1).pdf` for Product List
 
-The Product List / Card page uses direct download links for both files.
+The Product Portfolio page uses direct download links for both files.
 
 ## Run locally
 

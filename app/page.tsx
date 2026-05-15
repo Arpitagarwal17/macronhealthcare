@@ -12,38 +12,41 @@ export default function HomePage() {
     <div>
       <section className="page-shell py-10 sm:py-14 lg:py-16">
         <div className="home-hero premium-panel overflow-hidden">
-          <div className="relative z-10 grid items-center gap-10 px-6 py-10 sm:px-10 lg:grid-cols-[0.88fr_1.12fr] lg:px-14 lg:py-16">
-            <div className="max-w-2xl space-y-8">
-              <div className="space-y-5">
-                <p className="field-label text-blue">At Your Service Since 1999</p>
-                <h1 className="max-w-[12ch] text-4xl font-semibold leading-tight text-ink sm:max-w-3xl sm:text-5xl lg:text-6xl">
+          <div className="relative z-10 grid gap-8 px-6 py-10 sm:px-10 lg:grid-cols-[1fr_0.72fr] lg:px-14 lg:py-16">
+            <div className="max-w-3xl space-y-7">
+              <p className="field-label text-blue">At Your Service Since 1999</p>
+              <div className="space-y-4">
+                <h1 className="text-4xl font-semibold leading-tight text-ink sm:text-5xl lg:text-6xl">
                   Macron Health Care
                 </h1>
-                <p className="max-w-2xl text-xl font-semibold leading-8 text-blue">
+                <p className="max-w-2xl text-xl font-semibold leading-8 text-blue sm:text-2xl">
+                  Pharmaceutical Product Portfolio & Doctor Presentation Support
+                </p>
+                <p className="max-w-xl text-lg font-semibold leading-7 text-teal">
                   Committed to Quality and Services
                 </p>
               </div>
 
               <div className="flex flex-col gap-3 sm:flex-row">
                 <Link href="/product-list" className="primary-button">
-                  View Product List
+                  View Product Portfolio
                 </Link>
-                <Link href="/visual-aids" className="secondary-button">
-                  Visual Aids
+                <Link href="/doctor-presentation" className="secondary-button">
+                  Create Doctor Presentation
                 </Link>
               </div>
             </div>
 
-            <div className="home-pharma-visual" aria-hidden="true" />
+            <div className="grid content-center gap-4">
+              {homeFacts.map((item) => (
+                <CompanyCard
+                  key={item.label}
+                  label={item.label}
+                  value={item.value}
+                />
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
-
-      <section className="page-shell pb-12 sm:pb-16">
-        <div className="grid gap-5 md:grid-cols-3">
-          {homeFacts.map((item) => (
-            <CompanyCard key={item.label} label={item.label} value={item.value} />
-          ))}
         </div>
       </section>
     </div>

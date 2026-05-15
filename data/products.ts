@@ -333,7 +333,7 @@ export const products: Product[] = [
     slug: "ppzol-dsr",
     brandName: "PPZOL-DSR",
     composition: "Pantoprazole 40 mg + Domperidone SR 30 mg",
-    dosageForm: "Capsules",
+    dosageForm: "Sustained Release Capsules",
     visualAidImage: "/visual-aids/ppzol-dsr.png",
   },
   {
@@ -390,7 +390,7 @@ export const products: Product[] = [
     brandName: "Vitabank",
     composition:
       "Grape Seed Extract 25 mg + Lycopene 6% USP 2 mg + Lutein 8% USP 3 mg + Vitamin A Concentrate Oil 5000 IU + Vitamin B1 IP 5 mg + Vitamin B2 IP 5 mg + Vitamin B6 IP 1.50 mg + Vitamin B12 IP 15 mcg + Folic Acid IP 1.50 mg + Zinc Sulphate Monohydrate IP 23 mg + Selenium Dioxide Monohydrate USP 75 mcg",
-    dosageForm: "Softgel Capsules",
+    dosageForm: "Soft Gelatin Capsules",
     visualAidImage: "/visual-aids/vitabank.png",
   },
   {
