@@ -31,7 +31,9 @@ export default function ProductCard({ product }: ProductCardProps) {
         </div>
         <div className="space-y-1">
           <p className="field-label">Dosage Form</p>
-          <p className="text-sm font-semibold leading-6 text-blue">{product.dosageForm}</p>
+          <span className="inline-flex max-w-full rounded-full border border-teal/25 bg-teal/10 px-3 py-1 text-sm font-semibold leading-5 text-blue">
+            {product.dosageForm}
+          </span>
         </div>
       </div>
     </Link>
