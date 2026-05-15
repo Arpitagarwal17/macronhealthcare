@@ -10,7 +10,9 @@ import {
   type ProductCategory,
   type ProductCategoryFilter,
 } from "@/data/productCategories";
+import BasketFloatingButton from "@/components/BasketFloatingButton";
 import ProductCard from "@/components/ProductCard";
+import { useBasket } from "@/components/useBasket";
 
 type ProductGridProps = {
   products: Product[];
@@ -36,6 +38,7 @@ export default function ProductGrid({ products }: ProductGridProps) {
   const [query, setQuery] = useState("");
   const [selectedCategory, setSelectedCategory] =
     useState<ProductCategoryFilter>("All");
+  const { addProduct, count, hasProduct } = useBasket();
 
   const categorizedProducts = useMemo<CategorizedProduct[]>(
     () =>
@@ -166,7 +169,12 @@ export default function ProductGrid({ products }: ProductGridProps) {
 
               <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
                 {section.products.map((product) => (
-                  <ProductCard key={product.slug} product={product} />
+                  <ProductCard
+                    key={product.slug}
+                    product={product}
+                    isInBasket={hasProduct(product.slug)}
+                    onAddToBasket={addProduct}
+                  />
                 ))}
               </div>
             </section>
@@ -177,6 +185,8 @@ export default function ProductGrid({ products }: ProductGridProps) {
           No brands found.
         </div>
       )}
+
+      <BasketFloatingButton count={count} />
     </div>
   );
 }
