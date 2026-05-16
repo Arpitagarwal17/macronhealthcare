@@ -19,7 +19,11 @@ export default function HomePage() {
                   <p className="max-w-xl text-lg font-semibold leading-7 text-teal sm:text-xl">
                     {company.tagline}
                   </p>
-                  <span className="inline-flex w-fit rounded-full border border-teal/20 bg-teal/10 px-3.5 py-2 text-sm font-semibold leading-none text-blue">
+                  <span className="inline-flex w-fit items-center gap-2 rounded-full border border-[#bfe8e8] bg-[linear-gradient(135deg,#ffffff_0%,#eaf8f8_100%)] px-[18px] py-2.5 text-sm font-bold leading-none tracking-[0.3px] text-[#0f2d4f] shadow-[0_8px_22px_rgba(15,45,79,0.10)]">
+                    <span
+                      aria-hidden="true"
+                      className="h-2 w-2 rounded-full bg-[#009c9c] shadow-[0_0_0_4px_rgba(0,156,156,0.12)]"
+                    />
                     Since {company.servingSince}
                   </span>
                 </div>
