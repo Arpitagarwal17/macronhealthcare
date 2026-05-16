@@ -13,10 +13,10 @@ export default function ContactPage() {
         <div className="mb-8 max-w-3xl space-y-3">
           <p className="field-label text-blue">Contact</p>
           <h1 className="text-4xl font-semibold leading-tight text-ink">
-            Macron Health Care
+            {company.displayName}
           </h1>
           <p className="text-lg font-semibold leading-7 text-blue">
-            {company.brandLines[0]}.
+            {company.tagline}.
           </p>
         </div>
 

@@ -3,6 +3,8 @@ export const company = {
   displayName: "Macron Health Care",
   director: "Mr. RB Gupta",
   servingSince: "1999",
+  tagline: "Committed to Quality and Services",
+  websiteUrl: "https://www.macronhealthcare.com",
   website: "www.macronhealthcare.com",
   email: "rb.macron@gmail.com",
   contactNumbers: ["+91-9414073960", "+91-9314073960"],

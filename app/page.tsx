@@ -17,10 +17,10 @@ export default function HomePage() {
               <p className="field-label text-blue">At Your Service Since 1999</p>
               <div className="space-y-4">
                 <h1 className="text-4xl font-semibold leading-tight text-ink sm:text-5xl lg:text-6xl">
-                  Macron Health Care
+                  {company.displayName}
                 </h1>
                 <p className="max-w-xl text-lg font-semibold leading-7 text-teal">
-                  Committed to Quality and Services
+                  {company.tagline}
                 </p>
               </div>
 

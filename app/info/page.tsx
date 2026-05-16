@@ -12,9 +12,11 @@ export default function InfoPage() {
           <div className="space-y-7">
             <div className="space-y-4">
               <p className="field-label text-blue">Company Information</p>
-              <h1 className="text-4xl font-semibold text-ink">{company.name}</h1>
+              <h1 className="text-4xl font-semibold text-ink">
+                {company.displayName}
+              </h1>
               <p className="text-lg font-semibold leading-7 text-blue">
-                {company.brandLines[0]}
+                {company.tagline}
               </p>
             </div>
           </div>
@@ -24,7 +26,11 @@ export default function InfoPage() {
             <InfoBlock label="Serving Since" value={company.servingSince} />
             <InfoBlock label="Commitment" value="Quality and Services" />
             <InfoBlock label="Website / Domain" value={company.website} />
-            <InfoBlock label="Contact Number" value={company.contactNumbers.join(", ")} />
+            <InfoBlock label="Email" value={company.email} />
+            <InfoBlock
+              label="Contact Numbers"
+              value={company.contactNumbers.join("\n")}
+            />
             {company.registrations.map((item) => (
               <InfoBlock key={item.label} label={item.label} value={item.value} />
             ))}
@@ -54,7 +60,7 @@ function InfoBlock({ label, value }: { label: string; value: string }) {
   return (
     <div className="rounded-[1.1rem] border border-line bg-paper p-5">
       <p className="field-label">{label}</p>
-      <p className="mt-3 break-words text-base font-semibold leading-7 text-ink">
+      <p className="mt-3 whitespace-pre-line break-words text-base font-semibold leading-7 text-ink">
         {value}
       </p>
     </div>
