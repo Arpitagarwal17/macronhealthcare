@@ -1,4 +1,4 @@
-import { Globe2, Mail, MapPin, Phone } from "lucide-react";
+import { Globe2, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import type { ReactElement, ReactNode } from "react";
 import { company } from "@/data/company";
 
@@ -20,37 +20,44 @@ export default function ContactPage() {
           </p>
         </div>
 
-        <div className="grid gap-5 lg:grid-cols-3">
-          <ContactCard icon={<Phone />} label="Contact Numbers">
-            <div className="space-y-2">
-              {company.contactNumbers.map((mobile) => (
-                <a
-                  key={mobile}
-                  href={`tel:${mobile}`}
-                  className="block text-lg font-semibold text-ink hover:text-blue"
-                >
-                  {mobile}
-                </a>
-              ))}
+        <div className="grid gap-5">
+          <ContactCard icon={<Phone />} label="Contact Details">
+            <div className="space-y-3">
+              <ContactLink
+                icon={<MessageCircle />}
+                label="WhatsApp"
+                href={company.contactLinks.whatsapp.href}
+                ariaLabel={company.contactLinks.whatsapp.ariaLabel}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {company.contactLinks.whatsapp.display}
+              </ContactLink>
+              <ContactLink
+                icon={<Phone />}
+                label="Phone"
+                href={company.contactLinks.phone.href}
+                ariaLabel={company.contactLinks.phone.ariaLabel}
+              >
+                {company.contactLinks.phone.display}
+              </ContactLink>
+              <ContactLink
+                icon={<Mail />}
+                label="Email"
+                href={company.contactLinks.email.href}
+                ariaLabel={company.contactLinks.email.ariaLabel}
+              >
+                {company.contactLinks.email.display}
+              </ContactLink>
+              <ContactLink
+                icon={<Globe2 />}
+                label="Website"
+                href={company.contactLinks.website.href}
+                ariaLabel={company.contactLinks.website.ariaLabel}
+              >
+                {company.contactLinks.website.display}
+              </ContactLink>
             </div>
-          </ContactCard>
-
-          <ContactCard icon={<Mail />} label="Email">
-            <a
-              href={`mailto:${company.email}`}
-              className="break-words text-lg font-semibold text-ink hover:text-blue"
-            >
-              {company.email}
-            </a>
-          </ContactCard>
-
-          <ContactCard icon={<Globe2 />} label="Website">
-            <a
-              href={`https://${company.website}`}
-              className="break-words text-lg font-semibold text-ink hover:text-blue"
-            >
-              {company.website}
-            </a>
           </ContactCard>
         </div>
 
@@ -69,6 +76,41 @@ export default function ContactPage() {
         </div>
       </div>
     </section>
+  );
+}
+
+function ContactLink({
+  icon,
+  label,
+  href,
+  ariaLabel,
+  target,
+  rel,
+  children,
+}: {
+  icon: ReactElement;
+  label: string;
+  href: string;
+  ariaLabel: string;
+  target?: string;
+  rel?: string;
+  children: ReactNode;
+}) {
+  return (
+    <a
+      href={href}
+      aria-label={ariaLabel}
+      target={target}
+      rel={rel}
+      className="flex gap-3 rounded-lg py-1 text-lg text-ink transition hover:text-blue focus:outline-none focus:ring-4 focus:ring-blue/10"
+    >
+      <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-line bg-paper text-blue [&_svg]:h-4 [&_svg]:w-4">
+        {icon}
+      </span>
+      <span className="min-w-0 break-words leading-7">
+        <span className="font-semibold">{label}:</span> {children}
+      </span>
+    </a>
   );
 }
 

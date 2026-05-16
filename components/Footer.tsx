@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { ReactElement, ReactNode } from "react";
-import { FileText, Globe2, Mail, MapPin, Phone } from "lucide-react";
+import { FileText, Globe2, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import { company } from "@/data/company";
 
 export default function Footer() {
@@ -33,36 +33,41 @@ export default function Footer() {
 
         <div>
           <h2 className="field-label text-blue">Contact</h2>
-          <div className="mt-4 space-y-5">
-            <FooterBlock icon={<Phone />} label="Phone">
-              <div className="space-y-1.5">
-                {company.contactNumbers.map((number) => (
-                  <a
-                    key={number}
-                    href={`tel:${number}`}
-                    className="block break-words font-semibold text-ink transition hover:text-blue"
-                  >
-                    {number}
-                  </a>
-                ))}
-              </div>
-            </FooterBlock>
-            <FooterBlock icon={<Mail />} label="Email">
-              <a
-                href={`mailto:${company.email}`}
-                className="block break-words font-semibold text-ink transition hover:text-blue"
-              >
-                {company.email}
-              </a>
-            </FooterBlock>
-            <FooterBlock icon={<Globe2 />} label="Website">
-              <a
-                href={`https://${company.website}`}
-                className="block break-words font-semibold text-ink transition hover:text-blue"
-              >
-                {company.website}
-              </a>
-            </FooterBlock>
+          <div className="mt-4 space-y-3">
+            <FooterContactLink
+              icon={<MessageCircle />}
+              label="WhatsApp"
+              href={company.contactLinks.whatsapp.href}
+              ariaLabel={company.contactLinks.whatsapp.ariaLabel}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {company.contactLinks.whatsapp.display}
+            </FooterContactLink>
+            <FooterContactLink
+              icon={<Phone />}
+              label="Phone"
+              href={company.contactLinks.phone.href}
+              ariaLabel={company.contactLinks.phone.ariaLabel}
+            >
+              {company.contactLinks.phone.display}
+            </FooterContactLink>
+            <FooterContactLink
+              icon={<Mail />}
+              label="Email"
+              href={company.contactLinks.email.href}
+              ariaLabel={company.contactLinks.email.ariaLabel}
+            >
+              {company.contactLinks.email.display}
+            </FooterContactLink>
+            <FooterContactLink
+              icon={<Globe2 />}
+              label="Website"
+              href={company.contactLinks.website.href}
+              ariaLabel={company.contactLinks.website.ariaLabel}
+            >
+              {company.contactLinks.website.display}
+            </FooterContactLink>
           </div>
         </div>
 
@@ -97,6 +102,41 @@ export default function Footer() {
         </div>
       </div>
     </footer>
+  );
+}
+
+function FooterContactLink({
+  icon,
+  label,
+  href,
+  ariaLabel,
+  target,
+  rel,
+  children,
+}: {
+  icon: ReactElement;
+  label: string;
+  href: string;
+  ariaLabel: string;
+  target?: string;
+  rel?: string;
+  children: ReactNode;
+}) {
+  return (
+    <a
+      href={href}
+      aria-label={ariaLabel}
+      target={target}
+      rel={rel}
+      className="flex gap-3 rounded-lg py-1 text-ink transition hover:text-blue focus:outline-none focus:ring-4 focus:ring-blue/10"
+    >
+      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-line bg-paper text-blue [&_svg]:h-4 [&_svg]:w-4">
+        {icon}
+      </span>
+      <span className="min-w-0 break-words leading-6">
+        <span className="font-semibold">{label}:</span> {children}
+      </span>
+    </a>
   );
 }
 
