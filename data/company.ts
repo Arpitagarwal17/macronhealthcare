@@ -7,7 +7,7 @@ export const company = {
   websiteUrl: "https://www.macronhealthcare.com",
   website: "www.macronhealthcare.com",
   email: "rb.macron@gmail.com",
-  contactNumbers: ["+91 94140 73960", "+91 93140 73960"],
+  contactNumbers: ["+91 94140 73960"],
   contactLinks: {
     whatsapp: {
       display: "+91 94140 73960",
@@ -15,8 +15,8 @@ export const company = {
       ariaLabel: "Chat with Macron Health Care on WhatsApp",
     },
     phone: {
-      display: "+91 93140 73960",
-      href: "tel:+919314073960",
+      display: "+91 94140 73960",
+      href: "tel:+919414073960",
       ariaLabel: "Call Macron Health Care",
     },
     email: {
