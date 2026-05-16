@@ -107,7 +107,7 @@ const structuredData = {
       ],
     },
     {
-      "@type": ["LocalBusiness", "MedicalBusiness"],
+      "@type": "LocalBusiness",
       "@id": `${company.websiteUrl}/#localbusiness`,
       name: company.displayName,
       alternateName: "Macron Healthcare",
@@ -121,17 +121,6 @@ const structuredData = {
       parentOrganization: {
         "@id": `${company.websiteUrl}/#organization`,
       },
-    },
-    {
-      "@type": "WebSite",
-      "@id": `${company.websiteUrl}/#website`,
-      url: company.websiteUrl,
-      name: company.displayName,
-      alternateName: "Macron Healthcare",
-      publisher: {
-        "@id": `${company.websiteUrl}/#organization`,
-      },
-      inLanguage: "en",
     },
   ],
 };
