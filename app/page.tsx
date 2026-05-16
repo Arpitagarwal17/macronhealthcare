@@ -1,18 +1,15 @@
+import Image from "next/image";
 import Link from "next/link";
 import { company } from "@/data/company";
 
-const homeFacts = [
-  { label: "Serving Since", value: company.servingSince },
-  { label: "Company Director", value: company.director },
-  { label: "Commitment", value: "Quality and Services" },
-];
+const HOME_HERO_IMAGE = "/homepage-hero-pharma.png";
 
 export default function HomePage() {
   return (
     <div>
       <section className="page-shell py-10 sm:py-14 lg:py-16">
         <div className="home-hero premium-panel overflow-hidden">
-          <div className="relative z-10 grid gap-8 px-6 py-10 sm:px-10 lg:grid-cols-[1fr_0.72fr] lg:px-14 lg:py-16">
+          <div className="relative z-10 grid items-center gap-8 px-6 py-10 sm:px-10 lg:grid-cols-2 lg:px-14 lg:py-16">
             <div className="max-w-3xl space-y-7">
               <p className="field-label text-blue">At Your Service Since 1999</p>
               <div className="space-y-4">
@@ -34,27 +31,19 @@ export default function HomePage() {
               </div>
             </div>
 
-            <div className="grid content-center gap-4">
-              {homeFacts.map((item) => (
-                <CompanyCard
-                  key={item.label}
-                  label={item.label}
-                  value={item.value}
-                />
-              ))}
+            <div className="relative min-h-[260px] overflow-hidden rounded-[1.5rem] border border-white/80 bg-white/40 shadow-soft sm:min-h-[340px] lg:min-h-[430px]">
+              <Image
+                src={HOME_HERO_IMAGE}
+                alt="Macron Health Care pharmaceutical products"
+                fill
+                priority
+                sizes="(min-width: 1024px) 50vw, 100vw"
+                className="object-cover object-center"
+              />
             </div>
           </div>
         </div>
       </section>
-    </div>
-  );
-}
-
-function CompanyCard({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="rounded-[1.1rem] border border-line bg-white p-6 shadow-soft">
-      <p className="field-label">{label}</p>
-      <p className="mt-3 break-words text-lg font-semibold text-ink">{value}</p>
     </div>
   );
 }
