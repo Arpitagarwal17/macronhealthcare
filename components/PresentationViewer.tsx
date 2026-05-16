@@ -77,7 +77,7 @@ export default function PresentationViewer({
         <header className="flex min-h-16 items-center justify-between gap-3 border-b border-line bg-white px-4 py-2 sm:px-6">
           <Image
             src="/logo.png"
-            alt="Macron Health Care"
+            alt="Macron Health Care logo"
             width={210}
             height={85}
             unoptimized
@@ -124,7 +124,7 @@ export default function PresentationViewer({
           <div className="relative min-h-0 flex-1 overflow-hidden rounded-[1rem] border border-line bg-white">
             <Image
               src={currentProduct.visualAidImage}
-              alt={currentProduct.brandName}
+              alt={`${currentProduct.brandName} Macron Health Care product visual aid`}
               fill
               priority
               sizes="100vw"

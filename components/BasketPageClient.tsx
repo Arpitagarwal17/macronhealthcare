@@ -294,7 +294,7 @@ function SortableBasketCard({
       <div className="relative aspect-[4/3] min-w-0 overflow-hidden rounded-[0.85rem] border border-line bg-white">
         <Image
           src={product.visualAidImage}
-          alt={product.brandName}
+          alt={`${product.brandName} Macron Health Care product visual aid`}
           fill
           sizes="140px"
           className="object-contain p-2"

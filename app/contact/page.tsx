@@ -1,10 +1,14 @@
 import { Globe2, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import type { ReactElement, ReactNode } from "react";
 import { company } from "@/data/company";
+import { pageMetadata } from "@/data/seo";
 
-export const metadata = {
-  title: "Contact | Macron Health Care",
-};
+export const metadata = pageMetadata({
+  title: "Contact Macron Health Care | Pharmaceutical Distributor Jaipur",
+  description:
+    "Contact Macron Health Care in Jaipur for pharmaceutical product portfolio, business enquiries, and healthcare product distribution support.",
+  path: "/contact",
+});
 
 export default function ContactPage() {
   return (

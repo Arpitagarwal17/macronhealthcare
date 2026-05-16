@@ -8,6 +8,6 @@ export const metadata = pageMetadata({
   path: "/company-info",
 });
 
-export default function InfoPage() {
+export default function CompanyInfoPage() {
   return <CompanyInfoContent />;
 }

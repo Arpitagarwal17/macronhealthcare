@@ -12,7 +12,7 @@ export default function Footer() {
           <Link href="/" className="inline-flex w-fit items-center">
             <Image
               src="/logo.png"
-              alt="Macron Health Care"
+              alt="Macron Health Care logo"
               width={220}
               height={89}
               unoptimized

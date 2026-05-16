@@ -8,9 +8,9 @@ import { useEffect, useState } from "react";
 
 const navItems = [
   { href: "/", label: "Home" },
-  { href: "/product-list", label: "Product Portfolio" },
+  { href: "/product-portfolio", label: "Product Portfolio" },
   { href: "/doctor-presentation", label: "Doctor Presentation" },
-  { href: "/info", label: "Company Info" },
+  { href: "/company-info", label: "Company Info" },
   { href: "/contact", label: "Contact" },
 ];
 
@@ -29,7 +29,7 @@ export default function Header() {
           <Link href="/" className="inline-flex w-fit items-center">
             <Image
               src="/logo.png"
-              alt="Macron Health Care"
+              alt="Macron Health Care logo"
               width={246}
               height={100}
               priority

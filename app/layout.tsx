@@ -3,19 +3,75 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { company } from "@/data/company";
+import {
+  absoluteUrl,
+  HOME_TITLE,
+  OG_DESCRIPTION,
+  OG_IMAGE,
+  OG_TITLE,
+  SEO_KEYWORDS,
+  SITE_URL,
+} from "@/data/seo";
 
 export const metadata: Metadata = {
-  title: "Macron Health Care",
-  description: "Macron Health Care official product and company website.",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: HOME_TITLE,
+    template: "%s",
+  },
+  description:
+    "Macron Health Care is a trusted pharmaceutical distributor and supplier in Jaipur, Rajasthan, committed to quality and services since 1999. View product portfolio, company details, GST information, and contact details.",
+  keywords: SEO_KEYWORDS,
+  alternates: {
+    canonical: absoluteUrl("/"),
+  },
+  openGraph: {
+    title: OG_TITLE,
+    description: OG_DESCRIPTION,
+    url: absoluteUrl("/"),
+    siteName: company.displayName,
+    type: "website",
+    images: [
+      {
+        url: absoluteUrl(OG_IMAGE),
+        alt: "Macron Health Care logo",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary",
+    title: OG_TITLE,
+    description: OG_DESCRIPTION,
+    images: [absoluteUrl(OG_IMAGE)],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
+  },
+};
+
+const jaipurAddress = {
+  "@type": "PostalAddress",
+  streetAddress:
+    "78, Basement Floor, SBBJ Officer's Colony, New Sanganer Road, Near Mansarovar Metro Station",
+  addressLocality: "Jaipur",
+  addressRegion: "Rajasthan",
+  postalCode: "302020",
+  addressCountry: "IN",
 };
 
 const structuredData = {
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": ["Organization", "LocalBusiness", "MedicalBusiness"],
+      "@type": "Organization",
       "@id": `${company.websiteUrl}/#organization`,
       name: company.displayName,
+      alternateName: "Macron Healthcare",
       legalName: company.displayName,
       url: company.websiteUrl,
       logo: `${company.websiteUrl}/logo.png`,
@@ -23,33 +79,15 @@ const structuredData = {
       slogan: company.tagline,
       foundingDate: company.servingSince,
       email: company.email,
-      telephone: company.contactNumbers,
+      telephone: company.contactNumbers[0],
+      identifier: "08AJTPG1414G1ZB",
       areaServed: "India",
       employee: {
         "@type": "Person",
         name: company.director,
         jobTitle: "Company Director",
       },
-      address: [
-        {
-          "@type": "PostalAddress",
-          name: "Registered Office",
-          streetAddress:
-            "S.P.O.: 2, Nanawati Society, 1st Floor, Ambrai Bari",
-          addressLocality: "Ahmedabad",
-          addressRegion: "Gujarat",
-          addressCountry: "IN",
-        },
-        {
-          "@type": "PostalAddress",
-          name: "Jaipur Depot / Operational Address",
-          streetAddress:
-            "78, Basement Floor, SBBJ Officer's Colony, New Sanganer Road, Near Mansarovar Metro Station",
-          addressLocality: "Jaipur",
-          postalCode: "302020",
-          addressCountry: "IN",
-        },
-      ],
+      address: jaipurAddress,
       additionalProperty: [
         {
           "@type": "PropertyValue",
@@ -69,10 +107,27 @@ const structuredData = {
       ],
     },
     {
+      "@type": ["LocalBusiness", "MedicalBusiness"],
+      "@id": `${company.websiteUrl}/#localbusiness`,
+      name: company.displayName,
+      alternateName: "Macron Healthcare",
+      url: company.websiteUrl,
+      logo: `${company.websiteUrl}/logo.png`,
+      image: `${company.websiteUrl}/logo.png`,
+      telephone: company.contactNumbers[0],
+      email: company.email,
+      priceRange: "$$",
+      address: jaipurAddress,
+      parentOrganization: {
+        "@id": `${company.websiteUrl}/#organization`,
+      },
+    },
+    {
       "@type": "WebSite",
       "@id": `${company.websiteUrl}/#website`,
       url: company.websiteUrl,
       name: company.displayName,
+      alternateName: "Macron Healthcare",
       publisher: {
         "@id": `${company.websiteUrl}/#organization`,
       },

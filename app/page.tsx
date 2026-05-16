@@ -1,8 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
 import { company } from "@/data/company";
+import { HOME_DESCRIPTION, HOME_TITLE, pageMetadata } from "@/data/seo";
 
 const HOME_HERO_IMAGE = "/homepage-hero-pharma.png";
+
+export const metadata = pageMetadata({
+  title: HOME_TITLE,
+  description: HOME_DESCRIPTION,
+  path: "/",
+});
 
 export default function HomePage() {
   return (
@@ -30,7 +37,7 @@ export default function HomePage() {
               </div>
 
               <div className="flex flex-col gap-3 sm:flex-row">
-                <Link href="/product-list" className="primary-button">
+                <Link href="/product-portfolio" className="primary-button">
                   View Product Portfolio
                 </Link>
                 <Link href="/doctor-presentation" className="secondary-button">
@@ -42,7 +49,7 @@ export default function HomePage() {
             <div className="relative min-h-[300px] overflow-hidden rounded-[1.75rem] border border-white/80 bg-white/40 shadow-soft sm:min-h-[380px] lg:min-h-[450px]">
               <Image
                 src={HOME_HERO_IMAGE}
-                alt="Macron Health Care pharmaceutical products"
+                alt="Macron Health Care pharmaceutical distributor in Jaipur"
                 fill
                 priority
                 sizes="(min-width: 1024px) 50vw, 100vw"

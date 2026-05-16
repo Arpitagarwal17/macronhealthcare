@@ -40,7 +40,7 @@ export const company = {
     {
       label: "Jaipur Depot / Operational Address",
       lines: [
-        "78, Basement Floor, SBBJ Officer's Colony, New Sanganer Road, Near Mansarovar Metro Station, Jaipur - 302020",
+        "78, Basement Floor, SBBJ Officer's Colony, New Sanganer Road, Near Mansarovar Metro Station, Jaipur - 302020, Rajasthan, India",
       ],
     },
   ],

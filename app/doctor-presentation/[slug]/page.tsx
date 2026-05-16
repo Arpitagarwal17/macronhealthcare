@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import FullScreenImageViewer from "@/components/FullScreenImageViewer";
 import VisualAidImage from "@/components/VisualAidImage";
 import { products } from "@/data/products";
+import { absoluteUrl, OG_IMAGE } from "@/data/seo";
 
 type ProductPageProps = {
   params: Promise<{
@@ -27,6 +28,35 @@ export async function generateMetadata({
     title: product
       ? `${product.brandName} | Macron Health Care`
       : "Doctor Presentation | Macron Health Care",
+    description: product
+      ? `${product.brandName} product visual aid from Macron Health Care. View brand name, composition, dosage form, and visual aid image.`
+      : "Create and view professional product presentations from Macron Health Care for healthcare professionals and doctors.",
+    alternates: {
+      canonical: product
+        ? absoluteUrl(`/doctor-presentation/${product.slug}`)
+        : absoluteUrl("/doctor-presentation"),
+    },
+    openGraph: {
+      title: product
+        ? `${product.brandName} | Macron Health Care`
+        : "Doctor Presentation | Macron Health Care",
+      description: product
+        ? `${product.brandName} product visual aid from Macron Health Care.`
+        : "Professional product presentations from Macron Health Care.",
+      url: product
+        ? absoluteUrl(`/doctor-presentation/${product.slug}`)
+        : absoluteUrl("/doctor-presentation"),
+      siteName: "Macron Health Care",
+      type: "website",
+      images: [
+        {
+          url: absoluteUrl(product?.visualAidImage ?? OG_IMAGE),
+          alt: product
+            ? `${product.brandName} Macron Health Care product visual aid`
+            : "Macron Health Care logo",
+        },
+      ],
+    },
   };
 }
 
@@ -66,7 +96,7 @@ export default async function DoctorPresentationDetailPage({
             <div className="flex flex-col gap-3 border-t border-line pt-5 sm:flex-row lg:flex-col">
               <FullScreenImageViewer
                 src={product.visualAidImage}
-                alt={product.brandName}
+                alt={`${product.brandName} Macron Health Care product visual aid`}
               />
               <Link href="/doctor-presentation" className="secondary-button">
                 Back to Doctor Presentation
@@ -77,7 +107,7 @@ export default async function DoctorPresentationDetailPage({
 
         <VisualAidImage
           src={product.visualAidImage}
-          alt={product.brandName}
+          alt={`${product.brandName} Macron Health Care product visual aid`}
           priority
           className="aspect-[16/9] rounded-[1.35rem] border border-line shadow-premium sm:aspect-auto sm:min-h-[720px]"
           imageClassName="p-3 sm:p-5"

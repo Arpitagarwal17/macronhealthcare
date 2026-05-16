@@ -9,7 +9,7 @@ export const metadata = pageMetadata({
   path: "/product-portfolio",
 });
 
-export default function ProductListPage() {
+export default function ProductPortfolioPage() {
   return (
     <section className="page-shell py-10 sm:py-12">
       <div className="mx-auto max-w-[1200px]">

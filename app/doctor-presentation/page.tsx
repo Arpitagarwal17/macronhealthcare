@@ -1,9 +1,13 @@
 import ProductGrid from "@/components/ProductGrid";
 import { products } from "@/data/products";
+import { pageMetadata } from "@/data/seo";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Doctor Presentation | Macron Health Care",
-};
+  description:
+    "Create and view professional product presentations from Macron Health Care for healthcare professionals and doctors.",
+  path: "/doctor-presentation",
+});
 
 export default function DoctorPresentationPage() {
   return (

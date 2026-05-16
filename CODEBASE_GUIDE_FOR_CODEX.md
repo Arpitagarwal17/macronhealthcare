@@ -236,7 +236,7 @@ https://github.com/Arpitagarwal17/macronhealthcare.git
 Production website:
 
 ```text
-https://macronhealthcare.vercel.app/
+https://www.macronhealthcare.com/
 ```
 
 After changes:

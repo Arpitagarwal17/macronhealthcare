@@ -19,7 +19,7 @@ export default function ProductCard({
     <article className="group flex h-full flex-col overflow-hidden rounded-[1.1rem] border border-line bg-white shadow-soft transition duration-200 hover:-translate-y-1 hover:border-blue/35 hover:shadow-premium">
       <VisualAidImage
         src={product.visualAidImage}
-        alt={product.brandName}
+        alt={`${product.brandName} Macron Health Care product visual aid`}
         className="aspect-[4/3] border-b border-line"
         imageClassName="p-4"
         sizes="(min-width: 1280px) 25vw, (min-width: 768px) 33vw, 100vw"
