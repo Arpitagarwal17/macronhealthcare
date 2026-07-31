@@ -1,12 +1,12 @@
 "use client";
 
-import { Check, Download, MessageCircle, ShoppingBasket } from "lucide-react";
+import { Download, MessageCircle, ShoppingBasket, Trash2 } from "lucide-react";
 import { useBasket } from "@/components/useBasket";
 import { createWhatsAppLink } from "@/data/company";
 import type { Product } from "@/data/products";
 
 export default function ProductDetailActions({ product }: { product: Product }) {
-  const { addProduct, hasProduct } = useBasket();
+  const { addProduct, hasProduct, removeProduct } = useBasket();
   const isInBasket = hasProduct(product.slug);
   const enquiryLink = createWhatsAppLink(
     `Hello Macron Health Care, I would like to enquire about ${product.brandName}.`,
@@ -16,16 +16,22 @@ export default function ProductDetailActions({ product }: { product: Product }) 
     <div className="grid gap-3">
       <button
         type="button"
-        onClick={() => addProduct(product.slug)}
-        disabled={isInBasket}
-        className="primary-button"
+        onClick={() =>
+          isInBasket ? removeProduct(product.slug) : addProduct(product.slug)
+        }
+        aria-pressed={isInBasket}
+        className={
+          isInBasket
+            ? "inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-red-200 bg-red-50 px-5 text-sm font-bold text-red-700 shadow-soft transition hover:border-red-300 hover:bg-red-100 focus:outline-none focus:ring-4 focus:ring-red-100"
+            : "primary-button"
+        }
       >
         {isInBasket ? (
-          <Check className="h-4 w-4" aria-hidden="true" />
+          <Trash2 className="h-4 w-4" aria-hidden="true" />
         ) : (
           <ShoppingBasket className="h-4 w-4" aria-hidden="true" />
         )}
-        {isInBasket ? "Added to Basket" : "Add to Basket"}
+        {isInBasket ? "Remove from Basket" : "Add to Basket"}
       </button>
       <a
         href={enquiryLink}

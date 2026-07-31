@@ -19,7 +19,7 @@ function readBasketSlugs() {
   }
 
   try {
-    const storedBasket = window.localStorage.getItem(BASKET_KEY);
+    const storedBasket = window.sessionStorage.getItem(BASKET_KEY);
 
     if (!storedBasket) {
       return [];
@@ -42,7 +42,7 @@ function writeBasketSlugs(slugs: string[]) {
     return;
   }
 
-  window.localStorage.setItem(BASKET_KEY, JSON.stringify(slugs));
+  window.sessionStorage.setItem(BASKET_KEY, JSON.stringify(slugs));
   window.dispatchEvent(new Event(BASKET_EVENT));
 }
 
@@ -55,6 +55,7 @@ export function useBasket() {
   }, []);
 
   useEffect(() => {
+    window.localStorage.removeItem(BASKET_KEY);
     syncBasket();
     setIsReady(true);
 

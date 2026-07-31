@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Check, Eye, ShoppingBasket } from "lucide-react";
+import { Eye, ShoppingBasket, Trash2 } from "lucide-react";
 import type { Product } from "@/data/products";
 import VisualAidImage from "@/components/VisualAidImage";
 
@@ -9,6 +9,7 @@ type ProductCardProps = {
   product: Product;
   isInBasket: boolean;
   onAddToBasket: (slug: string) => void;
+  onRemoveFromBasket: (slug: string) => void;
   priority?: boolean;
 };
 
@@ -16,6 +17,7 @@ export default function ProductCard({
   product,
   isInBasket,
   onAddToBasket,
+  onRemoveFromBasket,
   priority = false,
 }: ProductCardProps) {
   return (
@@ -58,21 +60,24 @@ export default function ProductCard({
           </Link>
           <button
             type="button"
-            onClick={() => onAddToBasket(product.slug)}
-            disabled={isInBasket}
-            aria-pressed={isInBasket}
-            className={`inline-flex min-h-11 items-center justify-center gap-2 rounded-lg px-3 text-sm font-bold shadow-soft transition focus:outline-none focus:ring-4 focus:ring-blue/10 disabled:cursor-default ${
+            onClick={() =>
               isInBasket
-                ? "border border-green/20 bg-green/10 text-green"
-                : "bg-blue text-white hover:bg-teal"
+                ? onRemoveFromBasket(product.slug)
+                : onAddToBasket(product.slug)
+            }
+            aria-pressed={isInBasket}
+            className={`inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border px-3 text-sm font-bold shadow-soft transition focus:outline-none focus:ring-4 focus:ring-blue/10 ${
+              isInBasket
+                ? "border-red-200 bg-red-50 text-red-700 hover:border-red-300 hover:bg-red-100"
+                : "border-blue bg-blue text-white hover:border-teal hover:bg-teal"
             }`}
           >
             {isInBasket ? (
-              <Check className="h-4 w-4" aria-hidden="true" />
+              <Trash2 className="h-4 w-4" aria-hidden="true" />
             ) : (
               <ShoppingBasket className="h-4 w-4" aria-hidden="true" />
             )}
-            {isInBasket ? "Added" : "Add"}
+            {isInBasket ? "Remove" : "Add"}
           </button>
         </div>
       </div>

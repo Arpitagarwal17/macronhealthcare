@@ -39,7 +39,7 @@ export default function ProductGrid({ products }: ProductGridProps) {
   const [query, setQuery] = useState("");
   const [selectedCategory, setSelectedCategory] =
     useState<ProductCategoryFilter>("All");
-  const { addProduct, addProducts, count, hasProduct } = useBasket();
+  const { addProduct, addProducts, count, hasProduct, removeProduct } = useBasket();
 
   const categorizedProducts = useMemo<CategorizedProduct[]>(
     () =>
@@ -169,7 +169,7 @@ export default function ProductGrid({ products }: ProductGridProps) {
             </div>
           </div>
 
-          {selectedCategory !== "All" && filteredProducts.length > 0 ? (
+          {filteredProducts.length > 0 ? (
             <button
               type="button"
               onClick={() => addProducts(filteredProducts.map((product) => product.slug))}
@@ -182,7 +182,9 @@ export default function ProductGrid({ products }: ProductGridProps) {
                 <Plus className="h-4 w-4" aria-hidden="true" />
               )}
               {allVisibleSelected
-                ? "Category selected"
+                ? selectedCategory === "All"
+                  ? "All products selected"
+                  : "Category selected"
                 : "Select all"}
             </button>
           ) : null}
@@ -206,6 +208,7 @@ export default function ProductGrid({ products }: ProductGridProps) {
                     product={product}
                     isInBasket={hasProduct(product.slug)}
                     onAddToBasket={addProduct}
+                    onRemoveFromBasket={removeProduct}
                     priority={sectionIndex === 0 && productIndex === 0}
                   />
                 ))}
