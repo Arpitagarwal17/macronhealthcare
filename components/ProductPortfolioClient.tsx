@@ -1,7 +1,8 @@
 "use client";
 
-import { ChevronDown, Download, Eye, FileText, Search } from "lucide-react";
+import { Download, Eye, FileText, Search } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
+import MobileFilterMenu from "@/components/MobileFilterMenu";
 import PortfolioProductCard from "@/components/PortfolioProductCard";
 import { productDownloads } from "@/data/downloads";
 import {
@@ -190,7 +191,7 @@ export default function ProductPortfolioClient({
           />
         </label>
 
-        <MobileFilterSelect
+        <MobileFilterMenu
           id="portfolio-dosage-filter"
           label="Filter by dosage form"
           value={selectedCategory}
@@ -201,7 +202,7 @@ export default function ProductPortfolioClient({
           onChange={(value) => setSelectedCategory(value as ProductCategoryFilter)}
         />
 
-        <MobileFilterSelect
+        <MobileFilterMenu
           id="portfolio-therapeutic-filter"
           label="Filter by therapeutic area"
           value={selectedTherapeuticArea}
@@ -271,46 +272,6 @@ function FilterRow({ label, children }: { label: string; children: React.ReactNo
       <p className="pt-2 text-sm font-bold text-slate">{label}</p>
       <div className="flex flex-wrap gap-2">{children}</div>
     </div>
-  );
-}
-
-function MobileFilterSelect({
-  id,
-  label,
-  value,
-  options,
-  onChange,
-}: {
-  id: string;
-  label: string;
-  value: string;
-  options: Array<{ value: string; label: string }>;
-  onChange: (value: string) => void;
-}) {
-  return (
-    <label className="mt-4 block sm:hidden" htmlFor={id}>
-      <span className="mb-2 block text-xs font-bold uppercase tracking-wide text-slate">
-        {label}
-      </span>
-      <span className="relative block">
-        <select
-          id={id}
-          value={value}
-          onChange={(event) => onChange(event.target.value)}
-          className="h-12 w-full appearance-none rounded-lg border border-blue/20 bg-white px-4 pr-11 text-sm font-bold text-blue outline-none transition focus:border-blue focus:ring-4 focus:ring-blue/10"
-        >
-          {options.map((option) => (
-            <option key={option.value} value={option.value}>
-              {option.label}
-            </option>
-          ))}
-        </select>
-        <ChevronDown
-          className="pointer-events-none absolute right-4 top-1/2 h-5 w-5 -translate-y-1/2 text-teal"
-          aria-hidden="true"
-        />
-      </span>
-    </label>
   );
 }
 

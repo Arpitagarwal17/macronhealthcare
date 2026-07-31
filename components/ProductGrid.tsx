@@ -1,7 +1,8 @@
 "use client";
 
-import { Check, ChevronDown, Plus, Search } from "lucide-react";
+import { Check, Plus, Search } from "lucide-react";
 import { useMemo, useState } from "react";
+import MobileFilterMenu from "@/components/MobileFilterMenu";
 import type { Product } from "@/data/products";
 import {
   getProductCategory,
@@ -11,6 +12,11 @@ import {
   type ProductCategory,
   type ProductCategoryFilter,
 } from "@/data/productCategories";
+import {
+  getTherapeuticArea,
+  therapeuticAreas,
+  type TherapeuticArea,
+} from "@/data/productMeta";
 import BasketFloatingButton from "@/components/BasketFloatingButton";
 import ProductCard from "@/components/ProductCard";
 import { useBasket } from "@/components/useBasket";
@@ -19,8 +25,11 @@ type ProductGridProps = {
   products: Product[];
 };
 
+type TherapeuticFilter = "All" | TherapeuticArea;
+
 type CategorizedProduct = Product & {
   broadCategory: ProductCategory;
+  therapeuticArea: TherapeuticArea;
 };
 
 type ProductSection = {
@@ -39,6 +48,8 @@ export default function ProductGrid({ products }: ProductGridProps) {
   const [query, setQuery] = useState("");
   const [selectedCategory, setSelectedCategory] =
     useState<ProductCategoryFilter>("All");
+  const [selectedTherapeuticArea, setSelectedTherapeuticArea] =
+    useState<TherapeuticFilter>("All");
   const { addProduct, addProducts, count, hasProduct, removeProduct } = useBasket();
 
   const categorizedProducts = useMemo<CategorizedProduct[]>(
@@ -46,35 +57,41 @@ export default function ProductGrid({ products }: ProductGridProps) {
       products.map((product) => ({
         ...product,
         broadCategory: getProductCategory(product.dosageForm),
+        therapeuticArea: getTherapeuticArea(product),
       })),
     [products],
   );
 
   const filteredProducts = useMemo<CategorizedProduct[]>(() => {
     const search = query.trim().toLowerCase();
-    const categoryFilteredProducts =
-      selectedCategory === "All"
-        ? categorizedProducts
-        : categorizedProducts.filter(
-            (product) => product.broadCategory === selectedCategory,
-          );
+    return categorizedProducts.filter((product) => {
+      const matchesCategory =
+        selectedCategory === "All" ||
+        product.broadCategory === selectedCategory;
+      const matchesTherapeuticArea =
+        selectedTherapeuticArea === "All" ||
+        product.therapeuticArea === selectedTherapeuticArea;
+      const matchesSearch =
+        !search ||
+        [
+          product.brandName,
+          product.composition,
+          product.dosageForm,
+          product.broadCategory,
+          product.therapeuticArea,
+        ]
+          .join(" ")
+          .toLowerCase()
+          .includes(search);
 
-    if (!search) {
-      return categoryFilteredProducts;
-    }
-
-    return categoryFilteredProducts.filter((product) =>
-      [
-        product.brandName,
-        product.composition,
-        product.dosageForm,
-        product.broadCategory,
-      ]
-        .join(" ")
-        .toLowerCase()
-        .includes(search),
-    );
-  }, [categorizedProducts, query, selectedCategory]);
+      return matchesCategory && matchesTherapeuticArea && matchesSearch;
+    });
+  }, [
+    categorizedProducts,
+    query,
+    selectedCategory,
+    selectedTherapeuticArea,
+  ]);
 
   const productSections = useMemo<ProductSection[]>(() => {
     if (selectedCategory !== "All") {
@@ -119,74 +136,104 @@ export default function ProductGrid({ products }: ProductGridProps) {
           />
         </label>
 
-        <div className="mt-4 flex flex-col gap-3 border-t border-line pt-4 lg:flex-row lg:items-center lg:justify-between">
-          <label className="block sm:hidden" htmlFor="doctor-presentation-category">
-            <span className="mb-2 block text-xs font-bold uppercase tracking-wide text-slate">
-              Filter by dosage form
-            </span>
-            <span className="relative block">
-              <select
-                id="doctor-presentation-category"
-                value={selectedCategory}
-                onChange={(event) =>
-                  setSelectedCategory(event.target.value as ProductCategoryFilter)
-                }
-                className="h-12 w-full appearance-none rounded-lg border border-blue/20 bg-white px-4 pr-11 text-sm font-bold text-blue outline-none transition focus:border-blue focus:ring-4 focus:ring-blue/10"
-              >
-                {productCategoryFilters.map((category) => (
-                  <option key={category} value={category}>
-                    {getProductCategoryLabel(category)}
-                  </option>
-                ))}
-              </select>
-              <ChevronDown
-                className="pointer-events-none absolute right-4 top-1/2 h-5 w-5 -translate-y-1/2 text-teal"
-                aria-hidden="true"
-              />
-            </span>
-          </label>
+        <div className="mt-4 border-t border-line pt-4">
+          <MobileFilterMenu
+            id="doctor-presentation-category"
+            label="Filter by dosage form"
+            value={selectedCategory}
+            options={productCategoryFilters.map((category) => ({
+              value: category,
+              label: getProductCategoryLabel(category),
+            }))}
+            onChange={(value) =>
+              setSelectedCategory(value as ProductCategoryFilter)
+            }
+          />
 
-          <div className="hidden sm:block">
-            <div className="flex flex-wrap gap-2">
-              {productCategoryFilters.map((category) => {
-                const isSelected = selectedCategory === category;
+          <MobileFilterMenu
+            id="doctor-presentation-therapeutic"
+            label="Filter by therapeutic area"
+            value={selectedTherapeuticArea}
+            options={(["All", ...therapeuticAreas] as TherapeuticFilter[]).map(
+              (area) => ({ value: area, label: area }),
+            )}
+            onChange={(value) =>
+              setSelectedTherapeuticArea(value as TherapeuticFilter)
+            }
+          />
 
-                return (
-                  <button
-                    key={category}
-                    type="button"
-                    onClick={() => setSelectedCategory(category)}
-                    className={`h-[38px] shrink-0 rounded-full border px-4 text-sm font-bold transition focus:outline-none focus:ring-4 focus:ring-blue/10 ${
-                      isSelected
-                        ? "border-blue bg-blue text-white shadow-soft"
-                        : "border-blue/15 bg-white text-slate hover:border-blue/45 hover:text-blue"
-                    }`}
-                  >
-                    {getProductCategoryLabel(category)}
-                  </button>
-                );
-              })}
+          <div className="hidden space-y-4 sm:block">
+            <div className="grid gap-3 md:grid-cols-[150px_1fr] md:items-start">
+              <p className="pt-2 text-sm font-bold text-slate">Dosage form</p>
+              <div className="flex flex-wrap gap-2">
+                {productCategoryFilters.map((category) => {
+                  const isSelected = selectedCategory === category;
+
+                  return (
+                    <button
+                      key={category}
+                      type="button"
+                      onClick={() => setSelectedCategory(category)}
+                      className={`h-[38px] rounded-full border px-4 text-sm font-bold transition focus:outline-none focus:ring-4 focus:ring-blue/10 ${
+                        isSelected
+                          ? "border-blue bg-blue text-white shadow-soft"
+                          : "border-blue/15 bg-white text-slate hover:border-blue/45 hover:text-blue"
+                      }`}
+                    >
+                      {getProductCategoryLabel(category)}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            <div className="grid gap-3 md:grid-cols-[150px_1fr] md:items-start">
+              <p className="pt-2 text-sm font-bold text-slate">
+                Therapeutic area
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {(["All", ...therapeuticAreas] as TherapeuticFilter[]).map(
+                  (area) => {
+                    const isSelected = selectedTherapeuticArea === area;
+
+                    return (
+                      <button
+                        key={area}
+                        type="button"
+                        onClick={() => setSelectedTherapeuticArea(area)}
+                        className={`h-[38px] rounded-full border px-4 text-sm font-bold transition focus:outline-none focus:ring-4 focus:ring-blue/10 ${
+                          isSelected
+                            ? "border-blue bg-blue text-white shadow-soft"
+                            : "border-blue/15 bg-white text-slate hover:border-blue/45 hover:text-blue"
+                        }`}
+                      >
+                        {area}
+                      </button>
+                    );
+                  },
+                )}
+              </div>
             </div>
           </div>
 
           {filteredProducts.length > 0 ? (
-            <button
-              type="button"
-              onClick={() => addProducts(filteredProducts.map((product) => product.slug))}
-              disabled={allVisibleSelected}
-              className="secondary-button min-h-10 shrink-0 px-4"
-            >
-              {allVisibleSelected ? (
-                <Check className="h-4 w-4" aria-hidden="true" />
-              ) : (
-                <Plus className="h-4 w-4" aria-hidden="true" />
-              )}
-              {allVisibleSelected
-                ? selectedCategory === "All"
-                  ? "All products selected"
-                  : "Category selected"
-                : "Select all"}
-            </button>
+            <div className="mt-4 flex justify-end">
+              <button
+                type="button"
+                onClick={() =>
+                  addProducts(filteredProducts.map((product) => product.slug))
+                }
+                disabled={allVisibleSelected}
+                className="secondary-button min-h-11 w-full px-4 sm:w-auto"
+              >
+                {allVisibleSelected ? (
+                  <Check className="h-4 w-4" aria-hidden="true" />
+                ) : (
+                  <Plus className="h-4 w-4" aria-hidden="true" />
+                )}
+                {allVisibleSelected ? "All selected" : "Select all"}
+              </button>
+            </div>
           ) : null}
         </div>
       </div>
