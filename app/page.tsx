@@ -33,17 +33,45 @@ const categoryRepresentativeSlugs: Record<ProductCategory, string> = {
 const findProduct = (slug: string) =>
   products.find((product) => product.slug === slug);
 
-const websiteSchema = {
+const HOME_HERO_IMAGE = "/macron-health-care-pharma-hero-2026.png";
+const homeHeroImageUrl = `${company.websiteUrl}${HOME_HERO_IMAGE}`;
+
+const homepageStructuredData = {
   "@context": "https://schema.org",
-  "@type": "WebSite",
-  "@id": `${company.websiteUrl}/#website`,
-  url: `${company.websiteUrl}/`,
-  name: company.displayName,
-  alternateName: "Macron Healthcare",
-  inLanguage: "en-IN",
-  publisher: {
-    "@id": `${company.websiteUrl}/#organization`,
-  },
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": `${company.websiteUrl}/#website`,
+      url: `${company.websiteUrl}/`,
+      name: company.displayName,
+      alternateName: "Macron Healthcare",
+      inLanguage: "en-IN",
+      publisher: {
+        "@id": `${company.websiteUrl}/#organization`,
+      },
+    },
+    {
+      "@type": "WebPage",
+      "@id": `${company.websiteUrl}/#webpage`,
+      url: `${company.websiteUrl}/`,
+      name: HOME_TITLE,
+      description: HOME_DESCRIPTION,
+      inLanguage: "en-IN",
+      isPartOf: {
+        "@id": `${company.websiteUrl}/#website`,
+      },
+      about: {
+        "@id": `${company.websiteUrl}/#organization`,
+      },
+      primaryImageOfPage: {
+        "@type": "ImageObject",
+        "@id": `${company.websiteUrl}/#primaryimage`,
+        url: homeHeroImageUrl,
+        contentUrl: homeHeroImageUrl,
+        caption: "Macron Health Care pharmaceutical product portfolio",
+      },
+    },
+  ],
 };
 
 export default function HomePage() {
@@ -61,13 +89,13 @@ export default function HomePage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(websiteSchema).replace(/</g, "\\u003c"),
+          __html: JSON.stringify(homepageStructuredData).replace(/</g, "\\u003c"),
         }}
       />
       <section className="relative isolate min-h-[560px] overflow-hidden bg-blue sm:min-h-[600px] lg:min-h-[620px]">
         <Image
-          src="/pharma-hero.png"
-          alt="Macron Health Care pharmaceutical product presentation"
+          src={HOME_HERO_IMAGE}
+          alt="Macron Health Care pharmaceutical product portfolio"
           fill
           priority
           sizes="100vw"
