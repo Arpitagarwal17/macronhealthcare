@@ -10,7 +10,7 @@ export const productDownloads = {
   productList: {
     label: "Product List",
     buttonLabel: "Download Product List",
-    href: "/downloads/macron-product-list-2026 (1)(1).pdf",
-    fileName: "macron-product-list-2026 (1)(1).pdf",
+    href: "/downloads/macron-healthcare-updated-mrp-list-2026.pdf",
+    fileName: "Macron-Healthcare-Updated-MRP-List-2026.pdf",
   },
 } as const;

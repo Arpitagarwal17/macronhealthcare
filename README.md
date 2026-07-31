@@ -29,7 +29,7 @@ Only add manually confirmed product data. If composition is not manually provide
 Replace these files when new PDFs are ready:
 
 - `public/assets/pdfs/macron-product-card.pdf` for Product Card
-- `public/downloads/macron-product-list-2026 (1)(1).pdf` for Product List
+- `public/downloads/macron-healthcare-updated-mrp-list-2026.pdf` for Product List
 
 The Product Portfolio page uses direct download links for both files.
 
