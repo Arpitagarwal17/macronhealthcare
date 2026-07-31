@@ -96,6 +96,13 @@ export function useBasket() {
     [commitBasket],
   );
 
+  const addProducts = useCallback(
+    (slugs: string[]) => {
+      commitBasket((currentSlugs) => [...currentSlugs, ...slugs]);
+    },
+    [commitBasket],
+  );
+
   const removeProduct = useCallback(
     (slug: string) => {
       commitBasket((currentSlugs) =>
@@ -152,6 +159,7 @@ export function useBasket() {
     count: basketSlugs.length,
     isReady,
     addProduct,
+    addProducts,
     removeProduct,
     clearBasket,
     replaceBasket,

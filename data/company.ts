@@ -1,3 +1,7 @@
+export function createWhatsAppLink(message: string) {
+  return `https://wa.me/919414073960?text=${encodeURIComponent(message)}`;
+}
+
 export const company = {
   name: "MACRON HEALTH CARE",
   displayName: "Macron Health Care",
@@ -11,7 +15,9 @@ export const company = {
   contactLinks: {
     whatsapp: {
       display: "+91 94140 73960",
-      href: "https://wa.me/919414073960?text=Hello%20Macron%20Health%20Care%2C%20I%20would%20like%20to%20know%20more%20about%20your%20products.",
+      href: createWhatsAppLink(
+        "Hello Macron Health Care, I would like to know more about your products.",
+      ),
       ariaLabel: "Chat with Macron Health Care on WhatsApp",
     },
     phone: {
@@ -45,8 +51,6 @@ export const company = {
     },
   ],
   registrations: [
-    { label: "D.L. No.", value: "DRUG/2019-20/31520-21" },
-    { label: "Food Lic. No.", value: "12219026001541" },
     { label: "GSTIN", value: "08AJTPG1414G1ZB" },
   ],
   brandLines: [

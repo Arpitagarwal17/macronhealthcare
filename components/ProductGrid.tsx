@@ -1,5 +1,6 @@
 "use client";
 
+import { Check, ChevronDown, Plus, Search } from "lucide-react";
 import { useMemo, useState } from "react";
 import type { Product } from "@/data/products";
 import {
@@ -38,7 +39,7 @@ export default function ProductGrid({ products }: ProductGridProps) {
   const [query, setQuery] = useState("");
   const [selectedCategory, setSelectedCategory] =
     useState<ProductCategoryFilter>("All");
-  const { addProduct, count, hasProduct } = useBasket();
+  const { addProduct, addProducts, count, hasProduct } = useBasket();
 
   const categorizedProducts = useMemo<CategorizedProduct[]>(
     () =>
@@ -58,45 +59,29 @@ export default function ProductGrid({ products }: ProductGridProps) {
             (product) => product.broadCategory === selectedCategory,
           );
 
-    if (search) {
-      return categoryFilteredProducts.filter((product) =>
-        [
-          product.brandName,
-          product.composition,
-          product.dosageForm,
-          product.broadCategory,
-          getProductCategoryLabel(product.broadCategory),
-        ]
-          .join(" ")
-          .toLowerCase()
-          .includes(search),
-      );
+    if (!search) {
+      return categoryFilteredProducts;
     }
 
-    return categoryFilteredProducts;
+    return categoryFilteredProducts.filter((product) =>
+      [
+        product.brandName,
+        product.composition,
+        product.dosageForm,
+        product.broadCategory,
+      ]
+        .join(" ")
+        .toLowerCase()
+        .includes(search),
+    );
   }, [categorizedProducts, query, selectedCategory]);
-
-  const selectedCategoryLabel = getProductCategoryLabel(selectedCategory);
-  const productCountLabel =
-    selectedCategory === "All"
-      ? `Showing ${filteredProducts.length} ${
-          filteredProducts.length === 1 ? "product" : "products"
-        }`
-      : `${selectedCategoryLabel} - ${filteredProducts.length} ${
-          filteredProducts.length === 1 ? "product" : "products"
-        }`;
 
   const productSections = useMemo<ProductSection[]>(() => {
     if (selectedCategory !== "All") {
       const sortedProducts = sortByBrandName(filteredProducts);
 
-      return sortedProducts.length > 0
-        ? [
-            {
-              category: selectedCategory,
-              products: sortedProducts,
-            },
-          ]
+      return sortedProducts.length
+        ? [{ category: selectedCategory, products: sortedProducts }]
         : [];
     }
 
@@ -112,23 +97,57 @@ export default function ProductGrid({ products }: ProductGridProps) {
       .filter((section) => section.products.length > 0);
   }, [filteredProducts, selectedCategory]);
 
+  const allVisibleSelected = filteredProducts.every((product) =>
+    hasProduct(product.slug),
+  );
+
   return (
     <div className="space-y-8">
-      <div className="rounded-[1.1rem] border border-line bg-white p-4 shadow-soft sm:p-5">
-        <input
-          type="search"
-          value={query}
-          onChange={(event) => setQuery(event.target.value)}
-          placeholder="Search brand or composition..."
-          aria-label="Search by brand or composition"
-          className="h-[52px] w-full rounded-md border border-line bg-paper px-5 text-base text-ink outline-none transition placeholder:text-slate/65 focus:border-blue focus:bg-white focus:ring-4 focus:ring-blue/10"
-        />
+      <div className="rounded-xl border border-line bg-white p-4 shadow-premium sm:p-5">
+        <label className="relative block">
+          <Search
+            className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-slate"
+            aria-hidden="true"
+          />
+          <input
+            type="search"
+            value={query}
+            onChange={(event) => setQuery(event.target.value)}
+            placeholder="Search brand or composition..."
+            aria-label="Search by brand or composition"
+            className="h-[52px] w-full rounded-lg border border-line bg-paper pl-12 pr-5 text-base text-ink outline-none transition placeholder:text-slate/65 focus:border-blue focus:bg-white focus:ring-4 focus:ring-blue/10"
+          />
+        </label>
 
-        <div className="mt-4 space-y-3 border-t border-line pt-4">
-          <p className="text-sm font-semibold text-slate">Filter by dosage form</p>
+        <div className="mt-4 flex flex-col gap-3 border-t border-line pt-4 lg:flex-row lg:items-center lg:justify-between">
+          <label className="block sm:hidden" htmlFor="doctor-presentation-category">
+            <span className="mb-2 block text-xs font-bold uppercase tracking-wide text-slate">
+              Filter by dosage form
+            </span>
+            <span className="relative block">
+              <select
+                id="doctor-presentation-category"
+                value={selectedCategory}
+                onChange={(event) =>
+                  setSelectedCategory(event.target.value as ProductCategoryFilter)
+                }
+                className="h-12 w-full appearance-none rounded-lg border border-blue/20 bg-white px-4 pr-11 text-sm font-bold text-blue outline-none transition focus:border-blue focus:ring-4 focus:ring-blue/10"
+              >
+                {productCategoryFilters.map((category) => (
+                  <option key={category} value={category}>
+                    {getProductCategoryLabel(category)}
+                  </option>
+                ))}
+              </select>
+              <ChevronDown
+                className="pointer-events-none absolute right-4 top-1/2 h-5 w-5 -translate-y-1/2 text-teal"
+                aria-hidden="true"
+              />
+            </span>
+          </label>
 
-          <div className="-mx-1 overflow-x-auto px-1 pb-1">
-            <div className="flex min-w-max gap-2 sm:flex-wrap">
+          <div className="hidden sm:block">
+            <div className="flex flex-wrap gap-2">
               {productCategoryFilters.map((category) => {
                 const isSelected = selectedCategory === category;
 
@@ -137,7 +156,7 @@ export default function ProductGrid({ products }: ProductGridProps) {
                     key={category}
                     type="button"
                     onClick={() => setSelectedCategory(category)}
-                    className={`h-[38px] shrink-0 rounded-full border px-4 text-sm font-semibold transition focus:outline-none focus:ring-4 focus:ring-blue/10 ${
+                    className={`h-[38px] shrink-0 rounded-full border px-4 text-sm font-bold transition focus:outline-none focus:ring-4 focus:ring-blue/10 ${
                       isSelected
                         ? "border-blue bg-blue text-white shadow-soft"
                         : "border-blue/15 bg-white text-slate hover:border-blue/45 hover:text-blue"
@@ -150,30 +169,44 @@ export default function ProductGrid({ products }: ProductGridProps) {
             </div>
           </div>
 
-          <p className="text-sm font-semibold text-blue">{productCountLabel}</p>
+          {selectedCategory !== "All" && filteredProducts.length > 0 ? (
+            <button
+              type="button"
+              onClick={() => addProducts(filteredProducts.map((product) => product.slug))}
+              disabled={allVisibleSelected}
+              className="secondary-button min-h-10 shrink-0 px-4"
+            >
+              {allVisibleSelected ? (
+                <Check className="h-4 w-4" aria-hidden="true" />
+              ) : (
+                <Plus className="h-4 w-4" aria-hidden="true" />
+              )}
+              {allVisibleSelected
+                ? "Category selected"
+                : "Select all"}
+            </button>
+          ) : null}
         </div>
       </div>
 
-      {productSections.length > 0 ? (
-        <div className="space-y-10">
-          {productSections.map((section) => (
-            <section key={section.category} className="space-y-4">
-              <div className="flex items-center justify-between gap-4 border-b border-line pb-3">
-                <h2 className="text-xl font-semibold text-ink">
+      {productSections.length ? (
+        <div className="space-y-12">
+          {productSections.map((section, sectionIndex) => (
+            <section key={section.category} className="space-y-5">
+              <div className="border-b border-line pb-3">
+                <h2 className="text-2xl font-extrabold text-ink">
                   {getProductCategoryLabel(section.category)}
                 </h2>
-                <span className="rounded-full border border-line bg-white px-3 py-1 text-xs font-semibold text-slate">
-                  {section.products.length}
-                </span>
               </div>
 
               <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
-                {section.products.map((product) => (
+                {section.products.map((product, productIndex) => (
                   <ProductCard
                     key={product.slug}
                     product={product}
                     isInBasket={hasProduct(product.slug)}
                     onAddToBasket={addProduct}
+                    priority={sectionIndex === 0 && productIndex === 0}
                   />
                 ))}
               </div>
@@ -181,9 +214,7 @@ export default function ProductGrid({ products }: ProductGridProps) {
           ))}
         </div>
       ) : (
-        <div className="rounded-[1.1rem] border border-line bg-white p-8 text-slate shadow-soft">
-          No products found.
-        </div>
+        <div className="surface-card p-8 text-slate">No products found.</div>
       )}
 
       <BasketFloatingButton count={count} />

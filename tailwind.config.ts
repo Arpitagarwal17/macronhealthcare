@@ -8,19 +8,23 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        heading: ["var(--font-heading)", "sans-serif"],
+        body: ["var(--font-body)", "sans-serif"],
+      },
       colors: {
         paper: "#F7FBFF",
-        porcelain: "#edf6f8",
-        ink: "#0e2b4c",
-        slate: "#52677b",
+        porcelain: "#EEF6F8",
+        ink: "#102B46",
+        slate: "#526579",
         teal: "#009688",
         blue: "#063B78",
-        green: "#2f8a69",
-        line: "#d8e6ee",
+        green: "#1F8A5B",
+        line: "#D8E5EC",
       },
       boxShadow: {
-        premium: "0 22px 58px rgba(10, 48, 82, 0.12)",
-        soft: "0 12px 28px rgba(10, 48, 82, 0.08)",
+        premium: "0 24px 64px rgba(6, 59, 120, 0.12)",
+        soft: "0 10px 28px rgba(16, 43, 70, 0.08)",
       },
     },
   },

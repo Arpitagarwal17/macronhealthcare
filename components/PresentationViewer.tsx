@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { ArrowLeft, ArrowRight, X } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { Product } from "@/data/products";
 
@@ -84,14 +85,15 @@ export default function PresentationViewer({
             className="h-11 w-auto max-w-[170px] object-contain sm:h-14 sm:max-w-[220px]"
           />
           <div className="flex items-center gap-2">
-            <span className="rounded-full border border-blue/15 bg-porcelain px-3 py-1.5 text-sm font-semibold text-blue">
-              {counterText}
+            <span className="rounded-full border border-blue/15 bg-porcelain px-3 py-1.5 text-sm font-bold text-blue">
+              Product {currentIndex + 1} of {products.length}
             </span>
             <button
               type="button"
               onClick={onClose}
-              className="inline-flex min-h-10 items-center justify-center rounded-md border border-line bg-white px-4 text-sm font-semibold text-ink transition hover:border-blue hover:text-blue focus:outline-none focus:ring-4 focus:ring-blue/10"
+              className="inline-flex min-h-10 items-center justify-center gap-2 rounded-lg border border-line bg-white px-4 text-sm font-bold text-ink transition hover:border-blue hover:text-blue focus:outline-none focus:ring-4 focus:ring-blue/10"
             >
+              <X className="h-4 w-4" aria-hidden="true" />
               Exit
             </button>
           </div>
@@ -137,8 +139,9 @@ export default function PresentationViewer({
               type="button"
               onClick={goPrevious}
               disabled={currentIndex === 0}
-              className="inline-flex min-h-11 items-center justify-center rounded-md border border-line bg-white px-5 text-sm font-semibold text-ink transition hover:border-blue hover:text-blue focus:outline-none focus:ring-4 focus:ring-blue/10 disabled:cursor-not-allowed disabled:opacity-45"
+              className="secondary-button min-h-11"
             >
+              <ArrowLeft className="h-4 w-4" aria-hidden="true" />
               Previous
             </button>
             <span className="text-center text-sm font-semibold text-blue">
@@ -148,9 +151,10 @@ export default function PresentationViewer({
               type="button"
               onClick={goNext}
               disabled={currentIndex === products.length - 1}
-              className="inline-flex min-h-11 items-center justify-center rounded-md bg-blue px-5 text-sm font-semibold text-white shadow-soft transition hover:bg-teal focus:outline-none focus:ring-4 focus:ring-blue/15 disabled:cursor-not-allowed disabled:opacity-45"
+              className="primary-button min-h-11"
             >
               Next
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </button>
           </div>
         </main>

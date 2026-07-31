@@ -8,9 +8,8 @@ import { useEffect, useState } from "react";
 
 const navItems = [
   { href: "/", label: "Home" },
-  { href: "/product-portfolio", label: "Product Portfolio" },
+  { href: "/product-portfolio", label: "Products" },
   { href: "/doctor-presentation", label: "Doctor Presentation" },
-  { href: "/company-info", label: "Company Info" },
   { href: "/contact", label: "Contact" },
 ];
 
@@ -23,8 +22,8 @@ export default function Header() {
   }, [pathname]);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-line bg-white/95 backdrop-blur">
-      <div className="page-shell py-3 lg:flex lg:min-h-24 lg:items-center lg:justify-between lg:gap-6 lg:py-0">
+    <header className="sticky top-0 z-40 border-b border-line bg-white/95 shadow-[0_6px_24px_rgba(16,43,70,0.05)] backdrop-blur-xl">
+      <div className="page-shell py-3 lg:flex lg:min-h-20 lg:items-center lg:justify-between lg:gap-5 lg:py-0">
         <div className="flex items-center justify-between gap-4">
           <Link href="/" className="inline-flex w-fit items-center">
             <Image
@@ -34,7 +33,7 @@ export default function Header() {
               height={100}
               priority
               unoptimized
-              className="h-12 w-auto max-w-[190px] object-contain sm:h-14 sm:max-w-[230px] lg:h-[4.5rem] lg:max-w-[285px]"
+              className="h-11 w-auto max-w-[180px] object-contain sm:h-12 sm:max-w-[210px] lg:h-14 lg:max-w-[240px]"
             />
           </Link>
 
@@ -43,7 +42,7 @@ export default function Header() {
             onClick={() => setIsMenuOpen((value) => !value)}
             aria-label={isMenuOpen ? "Close menu" : "Open menu"}
             aria-expanded={isMenuOpen}
-            className="inline-flex h-11 w-11 items-center justify-center rounded-md border border-line bg-paper text-blue shadow-soft transition hover:border-blue focus:outline-none focus:ring-4 focus:ring-blue/10 lg:hidden"
+            className="icon-button lg:hidden"
           >
             {isMenuOpen ? (
               <X className="h-5 w-5" aria-hidden="true" />
@@ -53,33 +52,35 @@ export default function Header() {
           </button>
         </div>
 
-        <nav
-          className={`mt-3 grid w-full min-w-0 gap-1 overflow-hidden rounded-lg border border-line bg-paper p-1 shadow-soft lg:mt-0 lg:w-auto lg:min-w-[760px] lg:grid-cols-5 ${
-            isMenuOpen ? "grid" : "hidden lg:grid"
+        <div
+          className={`mt-3 w-full rounded-xl border border-line bg-white p-2 shadow-premium lg:mt-0 lg:flex lg:w-auto lg:items-center lg:gap-2 lg:border-0 lg:bg-transparent lg:p-0 lg:shadow-none ${
+            isMenuOpen ? "block" : "hidden lg:flex"
           }`}
         >
-          {navItems.map((item) => {
-            const isActive =
-              item.href === "/"
-                ? pathname === item.href
-                : pathname === item.href || pathname.startsWith(`${item.href}/`);
+          <nav className="grid gap-1 lg:flex lg:items-center" aria-label="Primary navigation">
+            {navItems.map((item) => {
+              const isActive =
+                item.href === "/"
+                  ? pathname === item.href
+                  : pathname === item.href || pathname.startsWith(`${item.href}/`);
 
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                aria-current={isActive ? "page" : undefined}
-                className={`min-w-0 rounded-md px-3 py-3 text-center text-sm font-semibold transition lg:px-3 lg:py-2.5 ${
-                  isActive
-                    ? "bg-blue text-white shadow-soft"
-                    : "text-slate hover:bg-white hover:text-blue"
-                }`}
-              >
-                {item.label}
-              </Link>
-            );
-          })}
-        </nav>
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  aria-current={isActive ? "page" : undefined}
+                  className={`rounded-lg px-4 py-3 text-sm font-bold transition lg:py-2.5 ${
+                    isActive
+                      ? "bg-porcelain text-blue"
+                      : "text-slate hover:bg-paper hover:text-blue"
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
+          </nav>
+        </div>
       </div>
     </header>
   );

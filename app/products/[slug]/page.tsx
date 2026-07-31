@@ -1,4 +1,4 @@
-import { redirect } from "next/navigation";
+import { permanentRedirect } from "next/navigation";
 
 type ProductPageProps = {
   params: Promise<{
@@ -8,5 +8,5 @@ type ProductPageProps = {
 
 export default async function ProductDetailPage({ params }: ProductPageProps) {
   const { slug } = await params;
-  redirect(`/doctor-presentation/${slug}`);
+  permanentRedirect(`/doctor-presentation/${slug}`);
 }

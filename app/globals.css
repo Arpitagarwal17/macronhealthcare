@@ -5,7 +5,10 @@
 :root {
   color-scheme: light;
   --background: #f7fbff;
-  --foreground: #0e2b4c;
+  --foreground: #102b46;
+  --macron-blue: #063b78;
+  --macron-teal: #009688;
+  --line: #d8e5ec;
 }
 
 * {
@@ -20,13 +23,24 @@ body {
   min-height: 100vh;
   margin: 0;
   overflow-x: hidden;
-  background:
-    linear-gradient(180deg, rgba(226, 241, 246, 0.72), rgba(245, 248, 251, 0) 430px),
-    var(--background);
+  background: linear-gradient(180deg, #f4fafc 0, var(--background) 420px);
   color: var(--foreground);
-  font-family: "Aptos", "Segoe UI", "Helvetica Neue", sans-serif;
+  font-family: var(--font-body), "Segoe UI", sans-serif;
   letter-spacing: 0;
   text-rendering: geometricPrecision;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-heading), "Segoe UI", sans-serif;
+  letter-spacing: 0;
+}
+
+::selection {
+  background: rgba(0, 150, 136, 0.18);
+  color: var(--foreground);
 }
 
 button,
@@ -43,40 +57,35 @@ img {
 
 @layer components {
   .page-shell {
-    @apply mx-auto w-full max-w-7xl min-w-0 px-5 sm:px-6 lg:px-8;
+    @apply mx-auto w-full max-w-[1280px] min-w-0 px-5 sm:px-6 lg:px-8;
   }
 
   .premium-panel {
-    @apply rounded-[1.35rem] border border-line bg-white shadow-premium;
+    @apply rounded-2xl border border-line bg-white shadow-premium;
+  }
+
+  .surface-card {
+    @apply rounded-xl border border-line bg-white shadow-soft;
   }
 
   .primary-button {
-    @apply inline-flex min-h-12 items-center justify-center rounded-md bg-blue px-6 text-sm font-semibold text-white shadow-soft transition duration-200 hover:bg-teal focus:outline-none focus:ring-4 focus:ring-blue/15;
+    @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-blue px-5 text-sm font-bold text-white shadow-soft transition duration-200 hover:-translate-y-0.5 hover:bg-teal focus:outline-none focus:ring-4 focus:ring-blue/15 disabled:pointer-events-none disabled:opacity-45;
   }
 
   .secondary-button {
-    @apply inline-flex min-h-12 items-center justify-center rounded-md border border-line bg-white px-6 text-sm font-semibold text-ink shadow-soft transition duration-200 hover:border-blue hover:text-blue focus:outline-none focus:ring-4 focus:ring-blue/10;
+    @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-lg border border-blue/20 bg-white px-5 text-sm font-bold text-blue shadow-soft transition duration-200 hover:-translate-y-0.5 hover:border-blue hover:bg-porcelain focus:outline-none focus:ring-4 focus:ring-blue/10 disabled:pointer-events-none disabled:opacity-45;
   }
 
-  .field-label {
-    @apply text-[11px] font-semibold uppercase tracking-[0.12em] text-slate;
+  .whatsapp-button {
+    @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-[#1f9d63] px-5 text-sm font-bold text-white shadow-soft transition duration-200 hover:-translate-y-0.5 hover:bg-[#168452] focus:outline-none focus:ring-4 focus:ring-[#1f9d63]/20;
   }
 
-  .home-hero {
-    position: relative;
-    background:
-      radial-gradient(circle at 18% 18%, rgba(45, 176, 166, 0.14), transparent 28rem),
-      linear-gradient(135deg, #ffffff 0%, #f8fbfd 47%, #eef7fa 100%);
+  .icon-button {
+    @apply inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-line bg-white text-blue shadow-soft transition hover:border-blue hover:bg-porcelain focus:outline-none focus:ring-4 focus:ring-blue/10;
   }
 
-  .home-hero::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    background:
-      linear-gradient(90deg, rgba(255, 255, 255, 0.96) 0%, rgba(255, 255, 255, 0.74) 42%, rgba(255, 255, 255, 0.2) 100%),
-      radial-gradient(circle at 86% 18%, rgba(0, 139, 145, 0.12), transparent 20rem);
+.field-label {
+    @apply text-xs font-bold uppercase tracking-[0.12em] text-slate;
   }
 
 }

@@ -6,33 +6,39 @@ import { company } from "@/data/company";
 
 export default function Footer() {
   return (
-    <footer className="border-t border-line bg-white">
-      <div className="page-shell grid gap-8 py-10 text-sm text-slate sm:grid-cols-2 lg:grid-cols-4 lg:gap-10">
+    <footer className="mt-16 bg-[#062f5d] text-white">
+      <div className="page-shell grid gap-9 py-12 text-sm text-white/75 sm:grid-cols-2 lg:grid-cols-[0.8fr_0.9fr_0.9fr_1.35fr] lg:gap-10">
         <div className="space-y-4">
-          <Link href="/" className="inline-flex w-fit items-center">
+          <Link href="/" className="inline-flex w-fit items-center rounded-lg bg-white p-2">
             <Image
               src="/logo.png"
               alt="Macron Health Care logo"
               width={220}
               height={89}
               unoptimized
-              className="h-14 w-auto max-w-[210px] object-contain"
+              className="h-12 w-auto max-w-[190px] object-contain"
             />
           </Link>
           <div className="space-y-2 leading-6">
             <p>
-              <span className="font-semibold text-ink">At Your Service Since:</span>{" "}
+              <span className="font-bold text-white">At Your Service Since:</span>{" "}
               {company.servingSince}
             </p>
             <p>
-              <span className="font-semibold text-ink">Company Director:</span>{" "}
+              <span className="font-bold text-white">Company Director:</span>{" "}
               {company.director}
             </p>
           </div>
+          <Link
+            href="/company-info"
+            className="inline-flex font-bold text-[#79d7cf] transition hover:text-white"
+          >
+            Company Information
+          </Link>
         </div>
 
         <div>
-          <h2 className="field-label text-blue">Contact</h2>
+          <h2 className="font-heading text-base font-bold text-white">Contact</h2>
           <div className="mt-4 space-y-3">
             <FooterContactLink
               icon={<MessageCircle />}
@@ -72,11 +78,11 @@ export default function Footer() {
         </div>
 
         <div>
-          <h2 className="field-label text-blue">Registrations</h2>
+          <h2 className="font-heading text-base font-bold text-white">Registrations</h2>
           <div className="mt-4 space-y-3">
             {company.registrations.map((item) => (
               <FooterBlock key={item.label} icon={<FileText />} label={item.label}>
-                <p className="break-words font-semibold leading-6 text-ink">
+                <p className="break-words font-semibold leading-6 text-white/85">
                   {item.value}
                 </p>
               </FooterBlock>
@@ -85,11 +91,11 @@ export default function Footer() {
         </div>
 
         <div>
-          <h2 className="field-label text-blue">Addresses</h2>
+          <h2 className="font-heading text-base font-bold text-white">Addresses</h2>
           <div className="mt-4 space-y-4">
             {company.addresses.map((address) => (
               <FooterBlock key={address.label} icon={<MapPin />} label={address.label}>
-                <address className="not-italic leading-6 text-slate">
+                <address className="not-italic leading-6 text-white/70">
                   {address.lines.map((line) => (
                     <span key={line} className="block">
                       {line}
@@ -99,6 +105,12 @@ export default function Footer() {
               </FooterBlock>
             ))}
           </div>
+        </div>
+      </div>
+      <div className="border-t border-white/10">
+        <div className="page-shell flex flex-col gap-2 py-5 text-xs text-white/55 sm:flex-row sm:items-center sm:justify-between">
+          <p>© {new Date().getFullYear()} Macron Health Care. All rights reserved.</p>
+          <p>Products intended for trade and healthcare professionals.</p>
         </div>
       </div>
     </footer>
@@ -128,13 +140,13 @@ function FooterContactLink({
       aria-label={ariaLabel}
       target={target}
       rel={rel}
-      className="flex gap-3 rounded-lg py-1 text-ink transition hover:text-blue focus:outline-none focus:ring-4 focus:ring-blue/10"
+      className="flex gap-3 rounded-lg py-1 text-white/80 transition hover:text-white focus:outline-none focus:ring-4 focus:ring-white/15"
     >
-      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-line bg-paper text-blue [&_svg]:h-4 [&_svg]:w-4">
+      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-white/15 bg-white/10 text-[#79d7cf] [&_svg]:h-4 [&_svg]:w-4">
         {icon}
       </span>
       <span className="min-w-0 break-words leading-6">
-        <span className="font-semibold">{label}:</span> {children}
+        <span className="font-bold text-white">{label}:</span> {children}
       </span>
     </a>
   );
@@ -151,11 +163,11 @@ function FooterBlock({
 }) {
   return (
     <div className="flex gap-3">
-      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-line bg-paper text-blue [&_svg]:h-4 [&_svg]:w-4">
+      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-white/15 bg-white/10 text-[#79d7cf] [&_svg]:h-4 [&_svg]:w-4">
         {icon}
       </span>
       <div className="min-w-0">
-        <p className="mb-1 font-semibold text-ink">{label}</p>
+        <p className="mb-1 font-bold text-white">{label}</p>
         {children}
       </div>
     </div>

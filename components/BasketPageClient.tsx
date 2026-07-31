@@ -20,7 +20,14 @@ import {
 import { CSS } from "@dnd-kit/utilities";
 import Image from "next/image";
 import Link from "next/link";
-import { GripVertical } from "lucide-react";
+import {
+  Download,
+  FileText,
+  GripVertical,
+  MessageCircle,
+  Play,
+  Trash2,
+} from "lucide-react";
 import type { CSSProperties } from "react";
 import { useEffect, useMemo, useState } from "react";
 import {
@@ -31,6 +38,7 @@ import {
 import type { Product } from "@/data/products";
 import PresentationViewer from "@/components/PresentationViewer";
 import { useBasket } from "@/components/useBasket";
+import { createWhatsAppLink } from "@/data/company";
 
 type BasketPageClientProps = {
   products: Product[];
@@ -92,6 +100,11 @@ export default function BasketPageClient({ products }: BasketPageClientProps) {
 
   const orderedProductSlugs = selectedProducts.map((product) => product.slug);
   const isActionDisabled = selectedProducts.length === 0 || exporting !== null;
+  const shareBasketLink = createWhatsAppLink(
+    `Hello Macron Health Care, I would like to enquire about this presentation basket: ${selectedProducts
+      .map((product) => product.brandName)
+      .join(", ")}.`,
+  );
 
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
@@ -155,43 +168,56 @@ export default function BasketPageClient({ products }: BasketPageClientProps) {
 
         {selectedProducts.length > 0 ? (
           <>
-            <div className="mb-6 rounded-[1.1rem] border border-line bg-white p-4 shadow-soft sm:p-5">
+            <div className="mb-6 rounded-xl border border-line bg-white p-4 shadow-premium sm:p-5">
               <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
                 <p className="text-sm font-semibold text-slate">
                   Export selected products to share with doctor.
                 </p>
 
-                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+                <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-5">
                   <button
                     type="button"
                     onClick={() => setIsPresentationOpen(true)}
                     disabled={isActionDisabled}
                     className="primary-button disabled:cursor-not-allowed disabled:opacity-45"
                   >
-                    Start PPT View
+                    <Play className="h-4 w-4" aria-hidden="true" />
+                    Start Presentation
                   </button>
                   <button
                     type="button"
                     onClick={() => handleExport("pdf")}
                     disabled={isActionDisabled}
-                    className="inline-flex min-h-12 items-center justify-center rounded-md border border-blue/20 bg-white px-5 text-sm font-semibold text-blue shadow-soft transition duration-200 hover:border-blue hover:bg-porcelain focus:outline-none focus:ring-4 focus:ring-blue/10 disabled:cursor-not-allowed disabled:opacity-45"
+                    className="secondary-button"
                   >
+                    <FileText className="h-4 w-4" aria-hidden="true" />
                     {exporting === "pdf" ? "Preparing export..." : "Export PDF"}
                   </button>
                   <button
                     type="button"
                     onClick={() => handleExport("ppt")}
                     disabled={isActionDisabled}
-                    className="inline-flex min-h-12 items-center justify-center rounded-md border border-blue/20 bg-white px-5 text-sm font-semibold text-blue shadow-soft transition duration-200 hover:border-blue hover:bg-porcelain focus:outline-none focus:ring-4 focus:ring-blue/10 disabled:cursor-not-allowed disabled:opacity-45"
+                    className="secondary-button"
                   >
+                    <Download className="h-4 w-4" aria-hidden="true" />
                     {exporting === "ppt" ? "Preparing export..." : "Export PPT"}
                   </button>
+                  <a
+                    href={shareBasketLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="whatsapp-button"
+                  >
+                    <MessageCircle className="h-4 w-4" aria-hidden="true" />
+                    Share Basket
+                  </a>
                   <button
                     type="button"
                     onClick={clearBasket}
                     disabled={count === 0 || exporting !== null}
-                    className="inline-flex min-h-12 items-center justify-center rounded-md border border-line bg-white px-5 text-sm font-semibold text-ink shadow-soft transition duration-200 hover:border-blue hover:text-blue focus:outline-none focus:ring-4 focus:ring-blue/10 disabled:cursor-not-allowed disabled:opacity-45"
+                    className="secondary-button text-slate"
                   >
+                    <Trash2 className="h-4 w-4" aria-hidden="true" />
                     Clear Basket
                   </button>
                 </div>
@@ -226,7 +252,7 @@ export default function BasketPageClient({ products }: BasketPageClientProps) {
             </DndContext>
           </>
         ) : (
-          <div className="rounded-[1.1rem] border border-line bg-white p-8 text-center shadow-soft">
+          <div className="surface-card p-8 text-center">
             <p className="text-xl font-semibold text-ink">
               Your presentation basket is empty.
             </p>
@@ -275,7 +301,7 @@ function SortableBasketCard({
     <article
       ref={setNodeRef}
       style={style}
-      className={`grid gap-4 rounded-[1.1rem] border bg-white p-4 shadow-soft transition-shadow sm:grid-cols-[44px_140px_minmax(0,1fr)_120px] sm:items-center ${
+      className={`grid gap-4 rounded-xl border bg-white p-4 shadow-soft transition-shadow sm:grid-cols-[44px_140px_minmax(0,1fr)_120px] sm:items-center ${
         isDragging
           ? "border-blue/50 shadow-premium"
           : "border-line"
@@ -284,14 +310,14 @@ function SortableBasketCard({
       <button
         type="button"
         aria-label={`Drag ${product.brandName} to reorder`}
-        className="flex h-11 w-11 touch-none items-center justify-center rounded-md border border-line bg-paper text-blue transition hover:border-blue hover:bg-white focus:outline-none focus:ring-4 focus:ring-blue/10 sm:self-center"
+        className="flex h-11 w-11 touch-none items-center justify-center rounded-lg border border-line bg-paper text-blue transition hover:border-blue hover:bg-white focus:outline-none focus:ring-4 focus:ring-blue/10 sm:self-center"
         {...attributes}
         {...listeners}
       >
         <GripVertical className="h-5 w-5" aria-hidden="true" />
       </button>
 
-      <div className="relative aspect-[4/3] min-w-0 overflow-hidden rounded-[0.85rem] border border-line bg-white">
+      <div className="relative aspect-[16/9] min-w-0 overflow-hidden rounded-lg border border-line bg-white">
         <Image
           src={product.visualAidImage}
           alt={`${product.brandName} Macron Health Care product visual aid`}
@@ -322,8 +348,9 @@ function SortableBasketCard({
       <button
         type="button"
         onClick={() => onRemove(product.slug)}
-        className="inline-flex min-h-10 items-center justify-center rounded-md border border-line bg-paper px-4 text-sm font-semibold text-slate transition hover:border-blue hover:bg-white hover:text-blue focus:outline-none focus:ring-4 focus:ring-blue/10"
+        className="inline-flex min-h-10 items-center justify-center gap-2 rounded-lg border border-line bg-paper px-4 text-sm font-bold text-slate transition hover:border-blue hover:bg-white hover:text-blue focus:outline-none focus:ring-4 focus:ring-blue/10"
       >
+        <Trash2 className="h-4 w-4" aria-hidden="true" />
         Remove
       </button>
     </article>

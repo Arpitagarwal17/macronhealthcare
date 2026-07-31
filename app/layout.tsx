@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
+import { Manrope, Source_Sans_3 } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import { company } from "@/data/company";
 import {
   absoluteUrl,
+  HOME_DESCRIPTION,
   HOME_TITLE,
   OG_DESCRIPTION,
   OG_IMAGE,
@@ -13,14 +16,30 @@ import {
   SITE_URL,
 } from "@/data/seo";
 
+const manrope = Manrope({
+  subsets: ["latin"],
+  variable: "--font-heading",
+  display: "swap",
+});
+
+const sourceSans = Source_Sans_3({
+  subsets: ["latin"],
+  variable: "--font-body",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
+  applicationName: company.displayName,
   title: {
     default: HOME_TITLE,
     template: "%s",
   },
-  description:
-    "Macron Health Care is a trusted pharmaceutical distributor and supplier in Jaipur, Rajasthan, committed to quality and services since 1999. View product portfolio, company details, GST information, and contact details.",
+  description: HOME_DESCRIPTION,
+  authors: [{ name: company.displayName, url: company.websiteUrl }],
+  creator: company.displayName,
+  publisher: company.displayName,
+  category: "Pharmaceutical distribution",
   keywords: SEO_KEYWORDS,
   alternates: {
     canonical: absoluteUrl("/"),
@@ -31,15 +50,16 @@ export const metadata: Metadata = {
     url: absoluteUrl("/"),
     siteName: company.displayName,
     type: "website",
+    locale: "en_IN",
     images: [
       {
         url: absoluteUrl(OG_IMAGE),
-        alt: "Macron Health Care logo",
+        alt: "Macron Health Care pharmaceutical distribution and product portfolio",
       },
     ],
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: OG_TITLE,
     description: OG_DESCRIPTION,
     images: [absoluteUrl(OG_IMAGE)],
@@ -50,6 +70,9 @@ export const metadata: Metadata = {
     googleBot: {
       index: true,
       follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
     },
   },
   icons: {
@@ -63,6 +86,15 @@ export const metadata: Metadata = {
     ],
   },
   manifest: "/site.webmanifest",
+};
+
+const registeredAddress = {
+  "@type": "PostalAddress",
+  streetAddress:
+    "S.P.O.: 2, Nanawati Society, 1st Floor, Ambrai Bari",
+  addressLocality: "Ahmedabad",
+  addressRegion: "Gujarat",
+  addressCountry: "IN",
 };
 
 const jaipurAddress = {
@@ -87,33 +119,31 @@ const structuredData = {
       url: company.websiteUrl,
       logo: `${company.websiteUrl}/logo.png`,
       image: `${company.websiteUrl}/logo.png`,
+      description: HOME_DESCRIPTION,
       slogan: company.tagline,
       foundingDate: company.servingSince,
       email: company.email,
       telephone: company.contactNumbers[0],
       identifier: "08AJTPG1414G1ZB",
+      taxID: "08AJTPG1414G1ZB",
       areaServed: "India",
+      contactPoint: {
+        "@type": "ContactPoint",
+        telephone: company.contactNumbers[0],
+        email: company.email,
+        contactType: "business enquiries",
+      },
       employee: {
         "@type": "Person",
         name: company.director,
         jobTitle: "Company Director",
       },
-      address: jaipurAddress,
+      address: [registeredAddress, jaipurAddress],
       additionalProperty: [
         {
           "@type": "PropertyValue",
           name: "GSTIN",
           value: "08AJTPG1414G1ZB",
-        },
-        {
-          "@type": "PropertyValue",
-          name: "D.L. No.",
-          value: "DRUG/2019-20/31520-21",
-        },
-        {
-          "@type": "PropertyValue",
-          name: "Food Lic. No.",
-          value: "12219026001541",
         },
       ],
     },
@@ -125,8 +155,12 @@ const structuredData = {
       url: company.websiteUrl,
       logo: `${company.websiteUrl}/logo.png`,
       image: `${company.websiteUrl}/logo.png`,
+      description: HOME_DESCRIPTION,
+      slogan: company.tagline,
+      foundingDate: company.servingSince,
       telephone: company.contactNumbers[0],
       email: company.email,
+      taxID: "08AJTPG1414G1ZB",
       priceRange: "$$",
       address: jaipurAddress,
       parentOrganization: {
@@ -151,11 +185,12 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body>
+      <body className={`${manrope.variable} ${sourceSans.variable}`}>
         <div className="flex min-h-screen flex-col">
           <Header />
           <main className="flex-1">{children}</main>
           <Footer />
+          <FloatingWhatsApp />
         </div>
       </body>
     </html>

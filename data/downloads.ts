@@ -8,8 +8,8 @@ export const productDownloads = {
     fileName: "Macron-Health-Care-Product-Card.pdf",
   },
   productList: {
-    label: "Product List",
-    buttonLabel: "Download Product List",
+    label: "MRP List 2026",
+    buttonLabel: "Download MRP List",
     href: "/downloads/macron-healthcare-updated-mrp-list-2026.pdf",
     fileName: "Macron-Healthcare-Updated-MRP-List-2026.pdf",
   },
