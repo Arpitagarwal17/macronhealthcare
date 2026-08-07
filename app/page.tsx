@@ -266,8 +266,7 @@ export default function HomePage() {
       <section className="bg-blue py-12 text-white sm:py-14">
         <div className="page-shell flex flex-col items-center justify-between gap-7 text-center lg:flex-row lg:text-left">
           <div className="max-w-2xl">
-            <p className="field-label text-[#79d7cf]">Business enquiries</p>
-            <h2 className="mt-3 text-3xl font-extrabold leading-tight text-white sm:text-4xl">
+            <h2 className="text-3xl font-extrabold leading-tight text-white sm:text-4xl">
               Connect with Macron Health Care
             </h2>
           </div>
