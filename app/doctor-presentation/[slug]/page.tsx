@@ -3,7 +3,6 @@ import { notFound } from "next/navigation";
 import ProductDetailView from "@/components/ProductDetailView";
 import { getTherapeuticArea } from "@/data/productMeta";
 import { products } from "@/data/products";
-import { absoluteUrl, OG_IMAGE } from "@/data/seo";
 
 type ProductPageProps = {
   params: Promise<{
@@ -21,59 +20,39 @@ export async function generateMetadata({
   const { slug } = await params;
   const product = products.find((item) => item.slug === slug);
 
+  if (!product) {
+    return { title: "Product Not Found" };
+  }
+
+  const description =
+    `${product.brandName} visual aid for healthcare professionals from ` +
+    "Macron Health Care.";
+  const path = `/doctor-presentation/${product.slug}`;
+
   return {
-    title: product
-      ? `${product.brandName} | Macron Health Care`
-      : "Doctor Presentation | Macron Health Care",
-    description: product
-      ? `${product.brandName} product visual aid from Macron Health Care. View brand name, composition, dosage form, and visual aid image.`
-      : "Create and view professional product presentations from Macron Health Care for healthcare professionals and doctors.",
+    title: `${product.brandName} | Doctor Presentation`,
+    description,
     alternates: {
-      canonical: product
-        ? absoluteUrl(`/doctor-presentation/${product.slug}`)
-        : absoluteUrl("/doctor-presentation"),
+      canonical: `/product-portfolio/${product.slug}`,
     },
     openGraph: {
-      title: product
-        ? `${product.brandName} | Macron Health Care`
-        : "Doctor Presentation | Macron Health Care",
-      description: product
-        ? `${product.brandName} product visual aid from Macron Health Care.`
-        : "Professional product presentations from Macron Health Care.",
-      url: product
-        ? absoluteUrl(`/doctor-presentation/${product.slug}`)
-        : absoluteUrl("/doctor-presentation"),
+      title: `${product.brandName} | Macron Health Care`,
+      description,
+      url: path,
       siteName: "Macron Health Care",
       type: "website",
       images: [
         {
-          url: absoluteUrl(product?.visualAidImage ?? OG_IMAGE),
-          alt: product
-            ? `${product.brandName} Macron Health Care product visual aid`
-            : "Macron Health Care",
+          url: product.visualAidImage,
+          alt: `${product.brandName} Macron Health Care product visual aid`,
         },
       ],
     },
     twitter: {
       card: "summary_large_image",
-      title: product
-        ? `${product.brandName} | Macron Health Care`
-        : "Doctor Presentation | Macron Health Care",
-      description: product
-        ? `${product.brandName} product visual aid from Macron Health Care.`
-        : "Professional product presentations from Macron Health Care.",
-      images: [absoluteUrl(product?.visualAidImage ?? OG_IMAGE)],
-    },
-    robots: {
-      index: true,
-      follow: true,
-      googleBot: {
-        index: true,
-        follow: true,
-        "max-image-preview": "large",
-        "max-snippet": -1,
-        "max-video-preview": -1,
-      },
+      title: `${product.brandName} | Macron Health Care`,
+      description,
+      images: [product.visualAidImage],
     },
   };
 }

@@ -1,13 +1,20 @@
+import type { Metadata } from "next";
 import ProductGrid from "@/components/ProductGrid";
 import { products } from "@/data/products";
-import { pageMetadata } from "@/data/seo";
 
-export const metadata = pageMetadata({
-  title: "Doctor Presentation | Macron Health Care",
-  description:
-    "Create and view professional product presentations from Macron Health Care for healthcare professionals and doctors.",
-  path: "/doctor-presentation",
-});
+const DESCRIPTION =
+  "Browse Macron Health Care product visual aids and build a presentation for healthcare professionals - view, share, or export as PDF or PPT.";
+
+export const metadata: Metadata = {
+  title: "Doctor Presentation",
+  description: DESCRIPTION,
+  alternates: { canonical: "/doctor-presentation" },
+  openGraph: {
+    url: "/doctor-presentation",
+    title: "Doctor Presentation | Macron Health Care",
+    description: DESCRIPTION,
+  },
+};
 
 export default function DoctorPresentationPage() {
   return (

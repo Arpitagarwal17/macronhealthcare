@@ -1,6 +1,3 @@
-import type { Metadata } from "next";
-import { company } from "@/data/company";
-
 export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.macronhealthcare.com";
 
@@ -9,79 +6,23 @@ export const SITE_LAST_UPDATED = new Date("2026-08-08T00:00:00+05:30");
 export const SEO_KEYWORDS = [
   "Macron Health Care",
   "Macron Healthcare",
-  "pharmaceutical distributor in Jaipur",
-  "pharma supplier in Jaipur",
-  "medicine distributor Jaipur",
-  "healthcare products Jaipur",
-  "pharmaceutical supplier Rajasthan",
+  "pharmaceutical company in India",
+  "Indian pharmaceutical company",
+  "branded pharmaceutical formulations",
+  "pharmaceutical products India",
+  "healthcare products India",
 ];
 
 export const HOME_TITLE =
-  "Macron Health Care | Pharmaceutical Distributor in Jaipur | Since 1999";
+  "Macron Health Care | Pharmaceutical Company in India";
 
 export const HOME_DESCRIPTION =
-  "Macron Health Care is a pharmaceutical distributor and healthcare product supplier serving Jaipur and Rajasthan since 1999, committed to quality and services.";
+  "Macron Health Care is an Indian pharmaceutical company offering branded formulations across multiple therapeutic areas, trusted since 1999.";
 
-export const OG_TITLE =
-  "Macron Health Care | Pharmaceutical Distributor in Jaipur";
+export const OG_TITLE = HOME_TITLE;
 
-export const OG_DESCRIPTION =
-  "Pharmaceutical distributor and healthcare product supplier serving Jaipur and Rajasthan since 1999, committed to quality and services.";
-
-export const OG_IMAGE = "/opengraph-image";
+export const OG_DESCRIPTION = HOME_DESCRIPTION;
 
 export function absoluteUrl(path = "/") {
   return new URL(path, SITE_URL).toString();
-}
-
-export function pageMetadata({
-  title,
-  description,
-  path,
-  image = OG_IMAGE,
-}: {
-  title: string;
-  description: string;
-  path: string;
-  image?: string;
-}): Metadata {
-  return {
-    title,
-    description,
-    keywords: SEO_KEYWORDS,
-    alternates: {
-      canonical: absoluteUrl(path),
-    },
-    openGraph: {
-      title,
-      description,
-      url: absoluteUrl(path),
-      siteName: company.displayName,
-      type: "website",
-      locale: "en_IN",
-      images: [
-        {
-          url: absoluteUrl(image),
-          alt: "Macron Health Care pharmaceutical distribution and product portfolio",
-        },
-      ],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title,
-      description,
-      images: [absoluteUrl(image)],
-    },
-    robots: {
-      index: true,
-      follow: true,
-      googleBot: {
-        index: true,
-        follow: true,
-        "max-image-preview": "large",
-        "max-snippet": -1,
-        "max-video-preview": -1,
-      },
-    },
-  };
 }

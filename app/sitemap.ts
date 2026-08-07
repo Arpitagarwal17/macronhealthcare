@@ -16,14 +16,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: SITE_LAST_UPDATED,
   }));
 
-  const presentationProductPages: MetadataRoute.Sitemap = products.map((product) => ({
-    url: absoluteUrl(`/doctor-presentation/${product.slug}`),
-    lastModified: SITE_LAST_UPDATED,
-  }));
-
-  return [
-    ...mainPages,
-    ...portfolioProductPages,
-    ...presentationProductPages,
-  ];
+  return [...mainPages, ...portfolioProductPages];
 }

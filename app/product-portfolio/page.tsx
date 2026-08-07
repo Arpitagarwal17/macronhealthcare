@@ -1,14 +1,22 @@
+import type { Metadata } from "next";
 import ProductPortfolioClient from "@/components/ProductPortfolioClient";
 import { getProductCategory } from "@/data/productCategories";
 import { products } from "@/data/products";
-import { absoluteUrl, pageMetadata } from "@/data/seo";
+import { absoluteUrl } from "@/data/seo";
 
-export const metadata = pageMetadata({
-  title: "Product Portfolio | Macron Health Care Jaipur",
-  description:
-    "View the product portfolio of Macron Health Care, a Jaipur-based pharmaceutical distributor and healthcare product supplier.",
-  path: "/product-portfolio",
-});
+const DESCRIPTION =
+  "Browse branded pharmaceutical formulations from Macron Health Care - tablets, capsules, syrups, dry syrups and injections, with compositions.";
+
+export const metadata: Metadata = {
+  title: "Product Portfolio",
+  description: DESCRIPTION,
+  alternates: { canonical: "/product-portfolio" },
+  openGraph: {
+    url: "/product-portfolio",
+    title: "Product Portfolio | Macron Health Care",
+    description: DESCRIPTION,
+  },
+};
 
 export default function ProductPortfolioPage() {
   const itemListSchema = {

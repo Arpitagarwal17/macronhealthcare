@@ -1,14 +1,21 @@
+import type { Metadata } from "next";
 import { Globe2, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import type { ReactElement } from "react";
 import { company } from "@/data/company";
-import { pageMetadata } from "@/data/seo";
 
-export const metadata = pageMetadata({
-  title: "Contact Macron Health Care | Pharmaceutical Distributor Jaipur",
-  description:
-    "Contact Macron Health Care in Jaipur for pharmaceutical product portfolio, business enquiries, and healthcare product distribution support.",
-  path: "/contact",
-});
+const DESCRIPTION =
+  "Contact Macron Health Care for product enquiries and trade partnerships across India. Call or WhatsApp +91 94140 73960.";
+
+export const metadata: Metadata = {
+  title: "Contact Us",
+  description: DESCRIPTION,
+  alternates: { canonical: "/contact" },
+  openGraph: {
+    url: "/contact",
+    title: "Contact Macron Health Care",
+    description: DESCRIPTION,
+  },
+};
 
 export default function ContactPage() {
   const contactChannels = [

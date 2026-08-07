@@ -20,9 +20,8 @@ export default function Footer() {
             />
           </Link>
           <div className="space-y-2 leading-6">
-            <p>
-              <span className="font-bold text-white">At Your Service Since:</span>{" "}
-              {company.servingSince}
+            <p className="font-bold text-white">
+              Serving the healthcare trade since {company.servingSince}
             </p>
             <p>
               <span className="font-bold text-white">Company Director:</span>{" "}

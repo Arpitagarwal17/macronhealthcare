@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 import { company } from "@/data/company";
 
-export const alt = "Macron Health Care pharmaceutical distribution and product portfolio";
+export const alt = "Macron Health Care pharmaceutical company in India";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -41,7 +41,7 @@ export default function OpenGraphImage() {
               lineHeight: 1.08,
             }}
           >
-            Pharmaceutical Distribution in Rajasthan
+            Pharmaceutical Company in India
           </div>
           <div style={{ display: "flex", marginTop: 24, fontSize: 28, color: "#526579" }}>
             {company.tagline}

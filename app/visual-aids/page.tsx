@@ -1,7 +1,7 @@
 import { permanentRedirect } from "next/navigation";
 
 export const metadata = {
-  title: "Doctor Presentation | Macron Health Care",
+  title: "Doctor Presentation",
 };
 
 export default function VisualAidsRedirectPage() {

@@ -6,11 +6,9 @@ import Footer from "@/components/Footer";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import { company } from "@/data/company";
 import {
-  absoluteUrl,
   HOME_DESCRIPTION,
   HOME_TITLE,
   OG_DESCRIPTION,
-  OG_IMAGE,
   OG_TITLE,
   SEO_KEYWORDS,
   SITE_URL,
@@ -33,36 +31,25 @@ export const metadata: Metadata = {
   applicationName: company.displayName,
   title: {
     default: HOME_TITLE,
-    template: "%s",
+    template: "%s | Macron Health Care",
   },
   description: HOME_DESCRIPTION,
   authors: [{ name: company.displayName, url: company.websiteUrl }],
   creator: company.displayName,
   publisher: company.displayName,
-  category: "Pharmaceutical distribution",
+  category: "Pharmaceutical company",
   keywords: SEO_KEYWORDS,
-  alternates: {
-    canonical: absoluteUrl("/"),
-  },
   openGraph: {
     title: OG_TITLE,
     description: OG_DESCRIPTION,
-    url: absoluteUrl("/"),
     siteName: company.displayName,
     type: "website",
     locale: "en_IN",
-    images: [
-      {
-        url: absoluteUrl(OG_IMAGE),
-        alt: "Macron Health Care pharmaceutical distribution and product portfolio",
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
     title: OG_TITLE,
     description: OG_DESCRIPTION,
-    images: [absoluteUrl(OG_IMAGE)],
   },
   robots: {
     index: true,
@@ -77,13 +64,11 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: "/favicon.ico?v=2", sizes: "any" },
       { url: "/favicon-48x48.png?v=2", sizes: "48x48", type: "image/png" },
       { url: "/favicon-96x96.png?v=2", sizes: "96x96", type: "image/png" },
     ],
-    apple: [
-      { url: "/apple-touch-icon.png?v=2", sizes: "180x180", type: "image/png" },
-    ],
+    shortcut: "/favicon.ico?v=2",
+    apple: "/apple-touch-icon.png?v=2",
   },
   manifest: "/site.webmanifest",
 };
@@ -126,12 +111,15 @@ const structuredData = {
       telephone: company.contactNumbers[0],
       identifier: "08AJTPG1414G1ZB",
       taxID: "08AJTPG1414G1ZB",
-      areaServed: "India",
+      areaServed: {
+        "@type": "Country",
+        name: "India",
+      },
       contactPoint: {
         "@type": "ContactPoint",
         telephone: company.contactNumbers[0],
         email: company.email,
-        contactType: "business enquiries",
+        contactType: "customer service",
       },
       employee: {
         "@type": "Person",
@@ -162,6 +150,10 @@ const structuredData = {
       email: company.email,
       taxID: "08AJTPG1414G1ZB",
       priceRange: "$$",
+      areaServed: {
+        "@type": "Country",
+        name: "India",
+      },
       address: jaipurAddress,
       parentOrganization: {
         "@id": `${company.websiteUrl}/#organization`,

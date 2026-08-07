@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -13,13 +14,16 @@ import {
   type ProductCategory,
 } from "@/data/productCategories";
 import { products } from "@/data/products";
-import { HOME_DESCRIPTION, HOME_TITLE, pageMetadata } from "@/data/seo";
+import { HOME_DESCRIPTION, HOME_TITLE } from "@/data/seo";
 
-export const metadata = pageMetadata({
-  title: HOME_TITLE,
-  description: HOME_DESCRIPTION,
-  path: "/",
-});
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+  openGraph: {
+    url: "/",
+    title: HOME_TITLE,
+    description: HOME_DESCRIPTION,
+  },
+};
 
 const categoryRepresentativeSlugs: Record<ProductCategory, string> = {
   Tablets: "curix-200",
@@ -176,7 +180,7 @@ export default function HomePage() {
           <SectionHeading
             eyebrow="Product portfolio"
             title="Our Products"
-            description="Browse the current Macron Health Care portfolio by dosage-form category."
+            description="Browse our portfolio by dosage form or therapeutic area."
           />
 
           <div className="mt-9 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
