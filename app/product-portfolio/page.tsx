@@ -19,7 +19,7 @@ export default function ProductPortfolioPage() {
     itemListElement: products.map((product, index) => ({
       "@type": "ListItem",
       position: index + 1,
-      url: absoluteUrl(`/doctor-presentation/${product.slug}`),
+      url: absoluteUrl(`/product-portfolio/${product.slug}`),
       item: {
         "@type": "Product",
         name: product.brandName,

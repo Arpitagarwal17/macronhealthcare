@@ -17,9 +17,9 @@ export default function PortfolioProductCard({ product }: { product: Product }) 
   return (
     <article className="group surface-card flex h-full flex-col overflow-hidden transition duration-200 hover:-translate-y-1 hover:border-blue/30 hover:shadow-premium">
       <Link
-        href={`/doctor-presentation/${product.slug}`}
+        href={`/product-portfolio/${product.slug}`}
         className="relative aspect-[16/9] overflow-hidden border-b border-line bg-white"
-        aria-label={`View ${product.brandName} presentation`}
+        aria-label={`View ${product.brandName} product details`}
       >
         <Image
           src={product.visualAidImage}
@@ -63,7 +63,7 @@ export default function PortfolioProductCard({ product }: { product: Product }) 
 
         <div className="mt-auto grid gap-2 pt-5 sm:grid-cols-2">
           <Link
-            href={`/doctor-presentation/${product.slug}`}
+            href={`/product-portfolio/${product.slug}`}
             className="secondary-button min-h-11 px-3"
           >
             View

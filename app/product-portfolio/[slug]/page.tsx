@@ -20,29 +20,26 @@ export async function generateMetadata({
 }: ProductPageProps): Promise<Metadata> {
   const { slug } = await params;
   const product = products.find((item) => item.slug === slug);
+  const title = product
+    ? `${product.brandName} | Product Portfolio | Macron Health Care`
+    : "Product Portfolio | Macron Health Care";
+  const description = product
+    ? `View ${product.brandName}, its composition, dosage form, and product visual aid in the Macron Health Care product portfolio.`
+    : "View the Macron Health Care pharmaceutical product portfolio.";
+  const path = product
+    ? `/product-portfolio/${product.slug}`
+    : "/product-portfolio";
 
   return {
-    title: product
-      ? `${product.brandName} | Macron Health Care`
-      : "Doctor Presentation | Macron Health Care",
-    description: product
-      ? `${product.brandName} product visual aid from Macron Health Care. View brand name, composition, dosage form, and visual aid image.`
-      : "Create and view professional product presentations from Macron Health Care for healthcare professionals and doctors.",
+    title,
+    description,
     alternates: {
-      canonical: product
-        ? absoluteUrl(`/doctor-presentation/${product.slug}`)
-        : absoluteUrl("/doctor-presentation"),
+      canonical: absoluteUrl(path),
     },
     openGraph: {
-      title: product
-        ? `${product.brandName} | Macron Health Care`
-        : "Doctor Presentation | Macron Health Care",
-      description: product
-        ? `${product.brandName} product visual aid from Macron Health Care.`
-        : "Professional product presentations from Macron Health Care.",
-      url: product
-        ? absoluteUrl(`/doctor-presentation/${product.slug}`)
-        : absoluteUrl("/doctor-presentation"),
+      title,
+      description,
+      url: absoluteUrl(path),
       siteName: "Macron Health Care",
       type: "website",
       images: [
@@ -50,18 +47,14 @@ export async function generateMetadata({
           url: absoluteUrl(product?.visualAidImage ?? OG_IMAGE),
           alt: product
             ? `${product.brandName} Macron Health Care product visual aid`
-            : "Macron Health Care",
+            : "Macron Health Care product portfolio",
         },
       ],
     },
     twitter: {
       card: "summary_large_image",
-      title: product
-        ? `${product.brandName} | Macron Health Care`
-        : "Doctor Presentation | Macron Health Care",
-      description: product
-        ? `${product.brandName} product visual aid from Macron Health Care.`
-        : "Professional product presentations from Macron Health Care.",
+      title,
+      description,
       images: [absoluteUrl(product?.visualAidImage ?? OG_IMAGE)],
     },
     robots: {
@@ -78,7 +71,7 @@ export async function generateMetadata({
   };
 }
 
-export default async function DoctorPresentationDetailPage({
+export default async function ProductPortfolioDetailPage({
   params,
 }: ProductPageProps) {
   const { slug } = await params;
@@ -107,9 +100,9 @@ export default async function DoctorPresentationDetailPage({
         productIndex < products.length - 1 ? products[productIndex + 1] : null
       }
       relatedProducts={relatedProducts}
-      routeBase="/doctor-presentation"
-      backLabel="All Visual Aids"
-      showBasketAction
+      routeBase="/product-portfolio"
+      backLabel="Product Portfolio"
+      showBasketAction={false}
     />
   );
 }

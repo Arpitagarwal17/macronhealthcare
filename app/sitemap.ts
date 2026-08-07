@@ -11,10 +11,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: absoluteUrl("/contact"), lastModified: SITE_LAST_UPDATED },
   ];
 
-  const productPages: MetadataRoute.Sitemap = products.map((product) => ({
+  const portfolioProductPages: MetadataRoute.Sitemap = products.map((product) => ({
+    url: absoluteUrl(`/product-portfolio/${product.slug}`),
+    lastModified: SITE_LAST_UPDATED,
+  }));
+
+  const presentationProductPages: MetadataRoute.Sitemap = products.map((product) => ({
     url: absoluteUrl(`/doctor-presentation/${product.slug}`),
     lastModified: SITE_LAST_UPDATED,
   }));
 
-  return [...mainPages, ...productPages];
+  return [
+    ...mainPages,
+    ...portfolioProductPages,
+    ...presentationProductPages,
+  ];
 }

@@ -8,5 +8,5 @@ type ProductPageProps = {
 
 export default async function ProductDetailPage({ params }: ProductPageProps) {
   const { slug } = await params;
-  permanentRedirect(`/doctor-presentation/${slug}`);
+  permanentRedirect(`/product-portfolio/${slug}`);
 }

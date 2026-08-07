@@ -1,9 +1,9 @@
 import { permanentRedirect } from "next/navigation";
 
 export const metadata = {
-  title: "Doctor Presentation | Macron Health Care",
+  title: "Product Portfolio | Macron Health Care",
 };
 
 export default function ProductsPage() {
-  permanentRedirect("/doctor-presentation");
+  permanentRedirect("/product-portfolio");
 }

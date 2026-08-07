@@ -4,7 +4,7 @@ import { company } from "@/data/company";
 export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.macronhealthcare.com";
 
-export const SITE_LAST_UPDATED = new Date("2026-08-01T00:00:00+05:30");
+export const SITE_LAST_UPDATED = new Date("2026-08-08T00:00:00+05:30");
 
 export const SEO_KEYWORDS = [
   "Macron Health Care",
