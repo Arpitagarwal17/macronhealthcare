@@ -51,6 +51,11 @@ export async function generateMetadata({
       images: [
         {
           url: product.visualAidImage,
+          width: product.visualAidWidth,
+          height: product.visualAidHeight,
+          type: product.visualAidImage.endsWith(".jpg")
+            ? "image/jpeg"
+            : "image/png",
           alt: `${product.brandName} Macron Health Care product visual aid`,
         },
       ],

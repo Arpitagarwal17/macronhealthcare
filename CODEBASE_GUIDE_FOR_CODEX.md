@@ -79,7 +79,7 @@ When adding or updating a product:
 
 Current special corrections:
 
-- `Curix-200` uses `/curix-200-visual-aid.png`.
+- `Curix-200` uses `/visual-aids/curix-200.jpg`.
 - `PPZOL-DSR` dosage form is `Sustained Release Capsules`.
 - Softgel products should display as `Soft Gelatin Capsules`.
 
@@ -175,7 +175,7 @@ Current export filenames:
 - Official logo: `public/logo.png`
 - Cover slide: `public/visual-aids/visual-aid-cover.png`
 - Visual aids: `public/visual-aids/`
-- Curix-200 official image: `public/curix-200-visual-aid.png`
+- Curix-200 official image: `public/visual-aids/curix-200.jpg`
 - Product Card PDF: `public/assets/pdfs/macron-product-card.pdf`
 - Product List PDF: `public/downloads/macron-product-list-2026 (1)(1).pdf`
 
@@ -263,6 +263,6 @@ Before finishing meaningful UI/export changes, verify:
 - PPT View shows selected visual aids.
 - PDF export includes cover first, then selected visual aids.
 - PPT export includes cover first, then selected visual aids.
-- Curix-200 uses `/curix-200-visual-aid.png`.
+- Curix-200 uses `/visual-aids/curix-200.jpg`.
 - Footer contact details are not joined into one line.
 - No logo modifications were made.
