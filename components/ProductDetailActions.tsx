@@ -17,6 +17,8 @@ export default function ProductDetailActions({
   const enquiryLink = createWhatsAppLink(
     `Hello Macron Health Care, I would like to enquire about ${product.brandName}.`,
   );
+  const visualAidExtension =
+    product.visualAidImage.match(/\.([a-z0-9]+)$/i)?.[1]?.toLowerCase() ?? "jpg";
 
   return (
     <div className="grid gap-3">
@@ -53,7 +55,7 @@ export default function ProductDetailActions({
       </a>
       <a
         href={product.visualAidImage}
-        download={`${product.slug}-visual-aid.png`}
+        download={`${product.slug}-visual-aid.${visualAidExtension}`}
         className="secondary-button"
       >
         <Download className="h-4 w-4" aria-hidden="true" />

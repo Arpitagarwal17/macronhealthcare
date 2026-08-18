@@ -4,6 +4,8 @@ export type Product = {
   composition: string;
   dosageForm: string;
   visualAidImage: string;
+  visualAidWidth?: number;
+  visualAidHeight?: number;
 };
 
 export const products: Product[] = [
@@ -27,14 +29,18 @@ export const products: Product[] = [
     brandName: "Curix-200",
     composition: "Cefixime 200 mg + Lactobacillus 60 Million Spores Tablets",
     dosageForm: "Tablets",
-    visualAidImage: "/curix-200-visual-aid.png",
+    visualAidImage: "/visual-aids/curix-200.jpg",
+    visualAidWidth: 1280,
+    visualAidHeight: 720,
   },
   {
     slug: "curix-oc",
     brandName: "Curix-OC",
     composition: "Cefixime 200 mg + Ofloxacin 200 mg",
     dosageForm: "Tablets",
-    visualAidImage: "/visual-aids/curix-oc.png",
+    visualAidImage: "/visual-aids/curix-oc.jpg",
+    visualAidWidth: 1280,
+    visualAidHeight: 720,
   },
   {
     slug: "drt",
@@ -48,7 +54,9 @@ export const products: Product[] = [
     brandName: "DRT-PLUS",
     composition: "Drotaverine HCl 80 mg + Mefenamic Acid 250 mg",
     dosageForm: "Tablets",
-    visualAidImage: "/visual-aids/drt-plus.png",
+    visualAidImage: "/visual-aids/drt-plus.jpg",
+    visualAidWidth: 1280,
+    visualAidHeight: 720,
   },
   {
     slug: "ecitron-plus",
@@ -62,14 +70,18 @@ export const products: Product[] = [
     brandName: "ETR-90/120",
     composition: "Etoricoxib 90 mg / 120 mg",
     dosageForm: "Tablets",
-    visualAidImage: "/visual-aids/etr.png",
+    visualAidImage: "/visual-aids/etr-90-120.jpg",
+    visualAidWidth: 1280,
+    visualAidHeight: 853,
   },
   {
     slug: "etr-plus",
     brandName: "ETR-PLUS",
     composition: "Etoricoxib 60 mg + Paracetamol 325 mg",
     dosageForm: "Tablets",
-    visualAidImage: "/visual-aids/etr-plus.png",
+    visualAidImage: "/visual-aids/etr-plus.jpg",
+    visualAidWidth: 1280,
+    visualAidHeight: 720,
   },
   {
     slug: "etr-th",
@@ -178,7 +190,9 @@ export const products: Product[] = [
     brandName: "MACRON-CV 457",
     composition: "Amoxycillin 400 mg + Clavulanic Acid 57 mg per 5 ml",
     dosageForm: "Dry Syrup",
-    visualAidImage: "/visual-aids/macron-cv-457.png",
+    visualAidImage: "/visual-aids/macron-cv-457.jpg",
+    visualAidWidth: 1280,
+    visualAidHeight: 720,
   },
   {
     slug: "macron-cv-625",
@@ -209,7 +223,9 @@ export const products: Product[] = [
     composition:
       "Calcium Citrate Malate 1000 mg + Vitamin D3 2000 IU + Magnesium 150 mg + Zinc 5 mg + L-Lysine 25 mg + Copper 1 mg + Selenium 35 mcg + Boron 1 mg",
     dosageForm: "Tablets",
-    visualAidImage: "/visual-aids/macroncal.png",
+    visualAidImage: "/visual-aids/macroncal.jpg",
+    visualAidWidth: 1280,
+    visualAidHeight: 720,
   },
   {
     slug: "macroncal-drop",
@@ -223,7 +239,9 @@ export const products: Product[] = [
     brandName: "Macroncef-200",
     composition: "Cefpodoxime Proxetil 200 mg",
     dosageForm: "Dispersible Tablets",
-    visualAidImage: "/visual-aids/macroncef-200.png",
+    visualAidImage: "/visual-aids/macroncef-200.jpg",
+    visualAidWidth: 1280,
+    visualAidHeight: 720,
   },
   {
     slug: "macroncef-50",

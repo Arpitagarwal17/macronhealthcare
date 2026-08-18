@@ -12,6 +12,15 @@ const PPT_HEIGHT = 7.5;
 type ExportImage = {
   dataUrl: string;
   format: "JPEG" | "PNG";
+  width: number;
+  height: number;
+};
+
+type ImageBounds = {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
 };
 
 function resolveAssetUrl(src: string) {
@@ -99,7 +108,7 @@ function readBlobAsDataUrl(blob: Blob) {
   });
 }
 
-async function waitForImageDecode(dataUrl: string, src: string) {
+async function getImageDimensions(dataUrl: string, src: string) {
   const image = new Image();
   const imageLoaded = new Promise<void>((resolve, reject) => {
     image.onload = () => resolve();
@@ -112,6 +121,28 @@ async function waitForImageDecode(dataUrl: string, src: string) {
   if (image.decode) {
     await image.decode().catch(() => undefined);
   }
+
+  return {
+    width: image.naturalWidth,
+    height: image.naturalHeight,
+  };
+}
+
+function getContainedImageBounds(
+  image: ExportImage,
+  targetWidth: number,
+  targetHeight: number,
+): ImageBounds {
+  const scale = Math.min(targetWidth / image.width, targetHeight / image.height);
+  const width = image.width * scale;
+  const height = image.height * scale;
+
+  return {
+    x: (targetWidth - width) / 2,
+    y: (targetHeight - height) / 2,
+    width,
+    height,
+  };
 }
 
 export async function loadImageAsDataUrl(src: string): Promise<ExportImage> {
@@ -123,12 +154,12 @@ export async function loadImageAsDataUrl(src: string): Promise<ExportImage> {
 
   const blob = await response.blob();
   const dataUrl = await readBlobAsDataUrl(blob);
-
-  await waitForImageDecode(dataUrl, src);
+  const dimensions = await getImageDimensions(dataUrl, src);
 
   return {
     dataUrl,
     format: getImageFormat(blob.type),
+    ...dimensions,
   };
 }
 
@@ -159,13 +190,15 @@ export async function exportBasketAsPdf(
       pdf.addPage([PDF_WIDTH, PDF_HEIGHT], "landscape");
     }
 
+    const bounds = getContainedImageBounds(image, PDF_WIDTH, PDF_HEIGHT);
+
     pdf.addImage(
       image.dataUrl,
       image.format,
-      0,
-      0,
-      PDF_WIDTH,
-      PDF_HEIGHT,
+      bounds.x,
+      bounds.y,
+      bounds.width,
+      bounds.height,
       undefined,
       "FAST",
     );
@@ -192,14 +225,15 @@ export async function exportBasketAsPpt(
 
   images.forEach((image, index) => {
     const slide = pptx.addSlide();
+    const bounds = getContainedImageBounds(image, PPT_WIDTH, PPT_HEIGHT);
 
     slide.background = { color: "FFFFFF" };
     slide.addImage({
       data: image.dataUrl,
-      x: 0,
-      y: 0,
-      w: PPT_WIDTH,
-      h: PPT_HEIGHT,
+      x: bounds.x,
+      y: bounds.y,
+      w: bounds.width,
+      h: bounds.height,
       altText: index === 0 ? "Visual Aid Cover" : products[index - 1]?.brandName,
     });
   });
