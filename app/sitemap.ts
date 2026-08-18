@@ -17,5 +17,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     images: [absoluteUrl(product.visualAidImage)],
   }));
 
-  return [...mainPages, ...portfolioProductPages];
+  const doctorPresentationPages: MetadataRoute.Sitemap = products.map(
+    (product) => ({
+      url: absoluteUrl(`/doctor-presentation/${product.slug}`),
+      lastModified: SITE_LAST_UPDATED,
+      images: [absoluteUrl(product.visualAidImage)],
+    }),
+  );
+
+  return [...mainPages, ...portfolioProductPages, ...doctorPresentationPages];
 }

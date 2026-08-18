@@ -1,7 +1,7 @@
 "use client";
 
 import { Check, ChevronDown } from "lucide-react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 type FilterOption = {
   value: string;
@@ -24,8 +24,16 @@ export default function MobileFilterMenu({
   onChange,
 }: MobileFilterMenuProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const triggerRef = useRef<HTMLButtonElement>(null);
   const selectedOption =
     options.find((option) => option.value === value) ?? options[0];
+
+  const closeAndRestoreFocus = () => {
+    setIsOpen(false);
+    window.requestAnimationFrame(() => {
+      triggerRef.current?.focus({ preventScroll: true });
+    });
+  };
 
   return (
     <div className="mt-4 sm:hidden">
@@ -36,12 +44,13 @@ export default function MobileFilterMenu({
         {label}
       </p>
       <button
+        ref={triggerRef}
         type="button"
         aria-expanded={isOpen}
         aria-controls={`${id}-options`}
         aria-labelledby={`${id}-label ${id}-value`}
         onClick={() => setIsOpen((current) => !current)}
-        className="flex min-h-12 w-full items-center justify-between gap-3 rounded-lg border border-blue/20 bg-white px-4 py-3 text-left text-sm font-bold text-blue shadow-soft transition hover:border-blue/40 focus:outline-none focus:ring-4 focus:ring-blue/10"
+        className="flex min-h-12 w-full items-center justify-between gap-3 rounded-lg border border-blue/20 bg-white px-4 py-3 text-left text-sm font-bold text-blue shadow-soft transition hover:border-blue/40 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue/60"
       >
         <span id={`${id}-value`} className="min-w-0 break-words">
           {selectedOption?.label}
@@ -57,8 +66,14 @@ export default function MobileFilterMenu({
       {isOpen ? (
         <div
           id={`${id}-options`}
-          role="listbox"
+          role="group"
           aria-labelledby={`${id}-label`}
+          onKeyDown={(event) => {
+            if (event.key === "Escape") {
+              event.preventDefault();
+              closeAndRestoreFocus();
+            }
+          }}
           className="mt-2 grid max-h-72 gap-2 overflow-y-auto rounded-lg border border-line bg-paper p-2 shadow-premium"
         >
           {options.map((option) => {
@@ -68,13 +83,12 @@ export default function MobileFilterMenu({
               <button
                 key={option.value}
                 type="button"
-                role="option"
-                aria-selected={isSelected}
+                aria-pressed={isSelected}
                 onClick={() => {
                   onChange(option.value);
-                  setIsOpen(false);
+                  closeAndRestoreFocus();
                 }}
-                className={`flex min-h-11 w-full items-center justify-between gap-3 rounded-md border px-3 py-2.5 text-left text-sm font-bold transition focus:outline-none focus:ring-4 focus:ring-blue/10 ${
+                className={`flex min-h-11 w-full items-center justify-between gap-3 rounded-md border px-3 py-2.5 text-left text-sm font-bold transition focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue/60 ${
                   isSelected
                     ? "border-blue bg-blue text-white shadow-soft"
                     : "border-line bg-white text-slate hover:border-blue/35 hover:text-blue"

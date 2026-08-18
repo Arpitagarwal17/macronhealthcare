@@ -8,9 +8,18 @@ const config: CapacitorConfig = {
     url: "https://www.macronhealthcare.com",
     cleartext: false,
     allowNavigation: ["www.macronhealthcare.com", "macronhealthcare.com"],
+    errorPath: "error.html",
   },
   android: {
     backgroundColor: "#F7FBFF",
+    zoomEnabled: true,
+  },
+  plugins: {
+    SplashScreen: {
+      launchShowDuration: 10_000,
+      launchAutoHide: true,
+      backgroundColor: "#F7FBFFFF",
+    },
   },
 };
 

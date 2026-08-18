@@ -1,9 +1,11 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Manrope, Source_Sans_3 } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
+import ServiceWorkerRegistration from "@/components/ServiceWorkerRegistration";
+import NativeBackButton from "@/components/NativeBackButton";
 import { company } from "@/data/company";
 import {
   HOME_DESCRIPTION,
@@ -73,6 +75,13 @@ export const metadata: Metadata = {
   manifest: "/site.webmanifest",
 };
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: "#063B78",
+};
+
 const registeredAddress = {
   "@type": "PostalAddress",
   streetAddress:
@@ -94,70 +103,46 @@ const jaipurAddress = {
 
 const structuredData = {
   "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Organization",
-      "@id": `${company.websiteUrl}/#organization`,
-      name: company.displayName,
-      alternateName: "Macron Healthcare",
-      legalName: company.displayName,
-      url: company.websiteUrl,
-      logo: `${company.websiteUrl}/logo.png`,
-      image: `${company.websiteUrl}/logo.png`,
-      description: HOME_DESCRIPTION,
-      slogan: company.tagline,
-      foundingDate: company.servingSince,
-      email: company.email,
-      telephone: company.contactNumbers[0],
-      identifier: "08AJTPG1414G1ZB",
-      taxID: "08AJTPG1414G1ZB",
-      areaServed: {
-        "@type": "Country",
-        name: "India",
-      },
-      contactPoint: {
-        "@type": "ContactPoint",
-        telephone: company.contactNumbers[0],
-        email: company.email,
-        contactType: "customer service",
-      },
-      employee: {
-        "@type": "Person",
-        name: company.director,
-        jobTitle: "Company Director",
-      },
-      address: [registeredAddress, jaipurAddress],
-      additionalProperty: [
-        {
-          "@type": "PropertyValue",
-          name: "GSTIN",
-          value: "08AJTPG1414G1ZB",
-        },
-      ],
+  "@type": "Organization",
+  "@id": `${company.websiteUrl}/#organization`,
+  name: company.displayName,
+  alternateName: "Macron Healthcare",
+  legalName: company.name,
+  url: company.websiteUrl,
+  logo: `${company.websiteUrl}/logo.png`,
+  image: `${company.websiteUrl}/logo.png`,
+  description: HOME_DESCRIPTION,
+  slogan: company.tagline,
+  foundingDate: company.servingSince,
+  email: company.email,
+  telephone: company.contactNumbers[0],
+  identifier: company.registrations[0].value,
+  taxID: company.registrations[0].value,
+  areaServed: {
+    "@type": "Country",
+    name: "India",
+  },
+  contactPoint: {
+    "@type": "ContactPoint",
+    telephone: company.contactNumbers[0],
+    email: company.email,
+    contactType: "customer service",
+    areaServed: {
+      "@type": "Country",
+      name: "India",
     },
+  },
+  employee: {
+    "@type": "Person",
+    name: company.director,
+    jobTitle: "Company Director",
+  },
+  address: [registeredAddress, jaipurAddress],
+  additionalProperty: [
     {
-      "@type": "LocalBusiness",
-      "@id": `${company.websiteUrl}/#localbusiness`,
-      name: company.displayName,
-      alternateName: "Macron Healthcare",
-      url: company.websiteUrl,
-      logo: `${company.websiteUrl}/logo.png`,
-      image: `${company.websiteUrl}/logo.png`,
-      description: HOME_DESCRIPTION,
-      slogan: company.tagline,
-      foundingDate: company.servingSince,
-      telephone: company.contactNumbers[0],
-      email: company.email,
-      taxID: "08AJTPG1414G1ZB",
-      priceRange: "$$",
-      areaServed: {
-        "@type": "Country",
-        name: "India",
-      },
-      address: jaipurAddress,
-      parentOrganization: {
-        "@id": `${company.websiteUrl}/#organization`,
-      },
+      "@type": "PropertyValue",
+      name: company.registrations[0].label,
+      value: company.registrations[0].value,
     },
   ],
 };
@@ -183,6 +168,8 @@ export default function RootLayout({
           <main className="flex-1">{children}</main>
           <Footer />
           <FloatingWhatsApp />
+          <ServiceWorkerRegistration />
+          <NativeBackButton />
         </div>
       </body>
     </html>

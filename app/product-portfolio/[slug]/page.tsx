@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import ProductDetailView from "@/components/ProductDetailView";
-import { getTherapeuticArea } from "@/data/productMeta";
+import { company } from "@/data/company";
+import { getProductImageAlt, getTherapeuticArea } from "@/data/productMeta";
 import { products } from "@/data/products";
+import { absoluteUrl } from "@/data/seo";
 
 type ProductPageProps = {
   params: Promise<{
@@ -51,12 +53,12 @@ export async function generateMetadata({
       images: [
         {
           url: product.visualAidImage,
-          width: product.visualAidWidth,
-          height: product.visualAidHeight,
+          width: product.visualAidWidth ?? 1672,
+          height: product.visualAidHeight ?? 941,
           type: product.visualAidImage.endsWith(".jpg")
             ? "image/jpeg"
             : "image/png",
-          alt: `${product.brandName} Macron Health Care product visual aid`,
+          alt: getProductImageAlt(product),
         },
       ],
     },
@@ -90,17 +92,83 @@ export default async function ProductPortfolioDetailPage({
     .sort((first, second) => first.brandName.localeCompare(second.brandName))
     .slice(0, 4);
 
+  const productUrl = absoluteUrl(`/product-portfolio/${product.slug}`);
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Product",
+        "@id": `${productUrl}#product`,
+        name: product.brandName,
+        url: productUrl,
+        image: absoluteUrl(product.visualAidImage),
+        description: `${product.brandName}: ${product.composition}. Dosage form: ${product.dosageForm}.`,
+        brand: {
+          "@type": "Brand",
+          name: product.brandName,
+        },
+        manufacturer: {
+          "@id": `${company.websiteUrl}/#organization`,
+        },
+        additionalProperty: [
+          {
+            "@type": "PropertyValue",
+            name: "Composition",
+            value: product.composition,
+          },
+          {
+            "@type": "PropertyValue",
+            name: "Dosage form",
+            value: product.dosageForm,
+          },
+        ],
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${productUrl}#breadcrumb`,
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: company.displayName,
+            item: absoluteUrl("/"),
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Product Portfolio",
+            item: absoluteUrl("/product-portfolio"),
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: product.brandName,
+            item: productUrl,
+          },
+        ],
+      },
+    ],
+  };
+
   return (
-    <ProductDetailView
-      product={product}
-      previousProduct={productIndex > 0 ? products[productIndex - 1] : null}
-      nextProduct={
-        productIndex < products.length - 1 ? products[productIndex + 1] : null
-      }
-      relatedProducts={relatedProducts}
-      routeBase="/product-portfolio"
-      backLabel="Product Portfolio"
-      showBasketAction={false}
-    />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(structuredData).replace(/</g, "\\u003c"),
+        }}
+      />
+      <ProductDetailView
+        product={product}
+        previousProduct={productIndex > 0 ? products[productIndex - 1] : null}
+        nextProduct={
+          productIndex < products.length - 1 ? products[productIndex + 1] : null
+        }
+        relatedProducts={relatedProducts}
+        routeBase="/product-portfolio"
+        backLabel="Product Portfolio"
+        showBasketAction={false}
+      />
+    </>
   );
 }

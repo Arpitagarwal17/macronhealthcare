@@ -66,6 +66,8 @@ export type Product = {
   composition: string;
   dosageForm: string;
   visualAidImage: string;
+  visualAidWidth?: number;
+  visualAidHeight?: number;
 };
 ```
 
@@ -75,7 +77,9 @@ When adding or updating a product:
 - Do not guess composition from images unless the user explicitly confirms it.
 - If composition is unknown, use `Composition to be added`.
 - If dosage form is unknown, use `Dosage form to be added`.
-- Visual aid image paths should be public paths, for example `/visual-aids/product-name.png`.
+- Visual aid image paths should be public paths, for example `/visual-aids/product-name.jpg`.
+- Set `visualAidWidth` and `visualAidHeight` when artwork differs from the
+  standard 1672 x 941 visual-aid size used by metadata fallbacks.
 
 Current special corrections:
 
@@ -156,7 +160,7 @@ Export logic lives in `components/exportBasket.ts`.
 
 Current export behavior:
 
-- First PDF page / PPT slide is always `/visual-aids/visual-aid-cover.png`.
+- First PDF page / PPT slide is always `/visual-aids/visual-aid-cover.jpg`.
 - Page/slide 2 onward shows only the selected product visual aid image.
 - Export uses the original image file from `product.visualAidImage`.
 - Export does not capture DOM.
@@ -173,11 +177,11 @@ Current export filenames:
 ## Public Assets
 
 - Official logo: `public/logo.png`
-- Cover slide: `public/visual-aids/visual-aid-cover.png`
+- Cover slide: `public/visual-aids/visual-aid-cover.jpg`
 - Visual aids: `public/visual-aids/`
 - Curix-200 official image: `public/visual-aids/curix-200.jpg`
 - Product Card PDF: `public/assets/pdfs/macron-product-card.pdf`
-- Product List PDF: `public/downloads/macron-product-list-2026 (1)(1).pdf`
+- Updated MRP List 2026: `public/downloads/macron-healthcare-updated-mrp-list-2026.pdf`
 
 ## Styling Rules
 

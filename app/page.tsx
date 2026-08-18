@@ -15,6 +15,7 @@ import {
 } from "@/data/productCategories";
 import { products } from "@/data/products";
 import { HOME_DESCRIPTION, HOME_TITLE } from "@/data/seo";
+import YearsServing from "@/components/YearsServing";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/" },
@@ -30,14 +31,15 @@ const categoryRepresentativeSlugs: Record<ProductCategory, string> = {
   Capsules: "rabron-dsr",
   Syrups: "lycron-syrup",
   "Dry Syrups": "macron-cv-457",
+  Drops: "macroncal-drop",
   Injections: "molly-forte-injection",
-  Miscellaneous: "macron-oil-60-ml",
+  "Powders & Others": "macron-pro",
 };
 
 const findProduct = (slug: string) =>
   products.find((product) => product.slug === slug);
 
-const HOME_HERO_IMAGE = "/macron-health-care-pharma-hero-2026.png";
+const HOME_HERO_IMAGE = "/macron-health-care-pharma-hero-2026.webp";
 const homeHeroImageUrl = `${company.websiteUrl}${HOME_HERO_IMAGE}`;
 
 const homepageStructuredData = {
@@ -79,7 +81,6 @@ const homepageStructuredData = {
 };
 
 export default function HomePage() {
-  const yearsServing = new Date().getFullYear() - Number(company.servingSince);
   const categoryOverview = productCategories.map((category) => ({
     category,
     count: products.filter(
@@ -123,14 +124,14 @@ export default function HomePage() {
             <div className="mt-9 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
               <Link
                 href="/product-portfolio"
-                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-teal px-6 text-sm font-bold text-white shadow-premium transition hover:bg-[#00aaa0] focus:outline-none focus:ring-4 focus:ring-white/25"
+                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-teal px-6 text-sm font-bold text-white shadow-premium transition hover:bg-[#00aaa0] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/70"
               >
                 View Product Portfolio
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Link>
               <Link
                 href="/doctor-presentation"
-                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-lg border border-white/45 bg-white/10 px-6 text-sm font-bold text-white backdrop-blur-sm transition hover:bg-white hover:text-blue focus:outline-none focus:ring-4 focus:ring-white/25"
+                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-lg border border-white/45 bg-white/10 px-6 text-sm font-bold text-white backdrop-blur-sm transition hover:bg-white hover:text-blue focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/70"
               >
                 Create Doctor Presentation
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -147,7 +148,7 @@ export default function HomePage() {
           </span>
           <div className="flex items-baseline gap-3">
             <p className="font-heading text-3xl font-extrabold text-white sm:text-4xl">
-              {yearsServing}+
+              <YearsServing since={company.servingSince} />+
             </p>
             <p className="text-sm font-bold text-white/75 sm:text-base">Years of service</p>
           </div>
@@ -157,15 +158,16 @@ export default function HomePage() {
       <section className="bg-white py-16 sm:py-20">
         <div className="page-shell text-center">
           <div className="mx-auto max-w-3xl">
-            <p className="field-label text-teal">About us</p>
+            <p className="field-label text-tealDark">About us</p>
             <h2 className="mt-4 text-3xl font-extrabold leading-tight text-ink sm:text-5xl">
               About Macron Health Care
             </h2>
             <p className="mt-5 text-lg leading-8 text-slate">
-              Since {company.servingSince}, Macron Health Care has focused on quality,
-              dependable service, and professional relationships across the healthcare trade.
-              Under the direction of {company.director}, these principles continue to guide the
-              company.
+              Macron Health Care is an Indian pharmaceutical company offering branded
+              formulations across multiple therapeutic areas. Serving healthcare
+              professionals and trade partners pan-India since {company.servingSince}, we
+              focus on quality, dependable service, and professional relationships under
+              the direction of {company.director}.
             </p>
             <Link href="/company-info" className="secondary-button mt-7">
               Company Information
@@ -183,7 +185,7 @@ export default function HomePage() {
             description="Browse our portfolio by dosage form or therapeutic area."
           />
 
-          <div className="mt-9 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-9 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {categoryOverview.map(({ category, count, representative }) => (
               <Link
                 key={category}
@@ -236,7 +238,7 @@ export default function HomePage() {
       <section className="bg-white py-16 sm:py-20">
         <div className="page-shell grid items-center gap-10 lg:grid-cols-[0.82fr_1.18fr] lg:gap-14">
           <div className="max-w-xl">
-            <p className="field-label text-teal">For healthcare professionals</p>
+            <p className="field-label text-tealDark">For healthcare professionals</p>
             <h2 className="mt-4 text-3xl font-extrabold leading-tight text-ink sm:text-5xl">
               Doctor Presentation
             </h2>
@@ -258,8 +260,6 @@ export default function HomePage() {
               src="/visual-aid-cover-home.webp"
               alt="Macron Health Care visual aid presentation cover"
               fill
-              loading="eager"
-              unoptimized
               sizes="(min-width: 1024px) 58vw, calc(100vw - 40px)"
               className="object-contain transition duration-300 group-hover:scale-[1.01]"
             />
@@ -286,7 +286,7 @@ export default function HomePage() {
             </a>
             <a
               href={company.contactLinks.phone.href}
-              className="inline-flex min-h-12 items-center justify-center gap-2 rounded-lg border border-white/30 bg-white px-5 text-sm font-bold text-blue transition hover:bg-porcelain focus:outline-none focus:ring-4 focus:ring-white/20"
+              className="inline-flex min-h-12 items-center justify-center gap-2 rounded-lg border border-white/30 bg-white px-5 text-sm font-bold text-blue transition hover:bg-porcelain focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/70"
             >
               <Phone className="h-4 w-4" aria-hidden="true" />
               Call Now
@@ -309,7 +309,7 @@ function SectionHeading({
 }) {
   return (
     <div className="mx-auto max-w-3xl text-center">
-      <p className="field-label text-teal">{eyebrow}</p>
+      <p className="field-label text-tealDark">{eyebrow}</p>
       <h2 className="mt-4 text-3xl font-extrabold leading-tight text-ink sm:text-5xl">{title}</h2>
       <p className="mt-4 text-base leading-7 text-slate sm:text-lg">{description}</p>
     </div>

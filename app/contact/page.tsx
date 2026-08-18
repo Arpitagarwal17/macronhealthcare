@@ -4,7 +4,8 @@ import type { ReactElement } from "react";
 import { company } from "@/data/company";
 
 const DESCRIPTION =
-  "Contact Macron Health Care for product enquiries and trade partnerships across India. Call or WhatsApp +91 94140 73960.";
+  `Contact Macron Health Care for product enquiries and trade partnerships across India. ` +
+  `Call or WhatsApp ${company.contactLinks.phone.display}.`;
 
 export const metadata: Metadata = {
   title: "Contact Us",
@@ -52,7 +53,7 @@ export default function ContactPage() {
   return (
     <section className="page-shell py-10 sm:py-14">
       <div className="max-w-3xl">
-        <p className="field-label text-teal">Business enquiries</p>
+        <p className="field-label text-tealDark">Business enquiries</p>
         <h1 className="mt-3 text-4xl font-extrabold leading-tight text-ink sm:text-5xl">
           Contact {company.displayName}
         </h1>

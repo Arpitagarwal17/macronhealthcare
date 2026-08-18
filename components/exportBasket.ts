@@ -1,9 +1,8 @@
 import type { Product } from "@/data/products";
 import { company } from "@/data/company";
+import { deliverBlob } from "@/components/fileDelivery";
 
-const PDF_FILE_NAME = "Macron-Health-Care-Visual-Aid.pdf";
-const PPT_FILE_NAME = "Macron-Health-Care-Visual-Aid.pptx";
-const COVER_IMAGE_PATH = "/visual-aids/visual-aid-cover.png";
+const COVER_IMAGE_PATH = "/visual-aids/visual-aid-cover.jpg";
 const PDF_WIDTH = 1920;
 const PDF_HEIGHT = 1080;
 const PPT_WIDTH = 13.333;
@@ -23,69 +22,29 @@ type ImageBounds = {
   height: number;
 };
 
+export type ExportProgressCallback = (message: string) => void;
+
+function createExportFileName(
+  extension: "pdf" | "pptx",
+  basketName: string,
+) {
+  const now = new Date();
+  const date = [
+    now.getFullYear(),
+    String(now.getMonth() + 1).padStart(2, "0"),
+    String(now.getDate()).padStart(2, "0"),
+  ].join("-");
+  const safeBasketName =
+    basketName
+      .trim()
+      .replace(/[^a-z0-9]+/gi, "-")
+      .replace(/^-+|-+$/g, "") || "Presentation-Basket";
+
+  return `Macron-Health-Care-${safeBasketName}-${date}.${extension}`;
+}
+
 function resolveAssetUrl(src: string) {
   return new URL(src, window.location.origin).toString();
-}
-
-function isAppleTouchBrowser() {
-  const userAgent = window.navigator.userAgent;
-  const isAppleDevice = /iPad|iPhone|iPod/.test(userAgent);
-  const isIpadDesktopMode =
-    window.navigator.platform === "MacIntel" &&
-    window.navigator.maxTouchPoints > 1;
-
-  return isAppleDevice || isIpadDesktopMode;
-}
-
-export function openMobileExportWindow() {
-  if (!isAppleTouchBrowser()) {
-    return null;
-  }
-
-  const exportWindow = window.open("", "_blank");
-
-  if (exportWindow) {
-    exportWindow.document.write(
-      "<!doctype html><title>Preparing export</title><body style=\"margin:0;font-family:system-ui,sans-serif;color:#063B78;background:#F7FBFF;display:grid;min-height:100vh;place-items:center;\"><p style=\"font-size:18px;font-weight:700;\">Preparing export...</p></body>",
-    );
-    exportWindow.document.close();
-  }
-
-  return exportWindow;
-}
-
-function downloadBlob(
-  blob: Blob,
-  fileName: string,
-  fallbackWindow?: Window | null,
-) {
-  const objectUrl = window.URL.createObjectURL(blob);
-  const revokeUrl = () => window.URL.revokeObjectURL(objectUrl);
-
-  if (fallbackWindow && !fallbackWindow.closed) {
-    fallbackWindow.location.href = objectUrl;
-    window.setTimeout(revokeUrl, 120000);
-    return;
-  }
-
-  const link = document.createElement("a");
-  link.href = objectUrl;
-  link.download = fileName;
-  link.rel = "noopener";
-  link.style.display = "none";
-  document.body.appendChild(link);
-  link.click();
-  link.remove();
-
-  if (isAppleTouchBrowser()) {
-    const openedWindow = window.open(objectUrl, "_blank");
-
-    if (!openedWindow) {
-      window.location.href = objectUrl;
-    }
-  }
-
-  window.setTimeout(revokeUrl, 120000);
 }
 
 function getImageFormat(contentType: string): ExportImage["format"] {
@@ -163,20 +122,42 @@ export async function loadImageAsDataUrl(src: string): Promise<ExportImage> {
   };
 }
 
-async function loadExportImages(products: Product[]) {
-  return Promise.all([
-    loadImageAsDataUrl(COVER_IMAGE_PATH),
-    ...products.map((product) => loadImageAsDataUrl(product.visualAidImage)),
-  ]);
+async function loadExportImages(
+  products: Product[],
+  onProgress?: ExportProgressCallback,
+) {
+  const sources = [
+    { src: COVER_IMAGE_PATH, label: "visual aid cover" },
+    ...products.map((product) => ({
+      src: product.visualAidImage,
+      label: product.brandName,
+    })),
+  ];
+  const images: ExportImage[] = [];
+
+  for (const [index, source] of sources.entries()) {
+    onProgress?.(`Preparing ${index + 1}/${sources.length}…`);
+
+    try {
+      images.push(await loadImageAsDataUrl(source.src));
+    } catch (error) {
+      const reason =
+        error instanceof Error ? error.message : "The image could not be loaded.";
+      throw new Error(`Unable to prepare ${source.label}: ${reason}`);
+    }
+  }
+
+  return images;
 }
 
 export async function exportBasketAsPdf(
   products: Product[],
-  fallbackWindow?: Window | null,
+  onProgress?: ExportProgressCallback,
+  basketName = "Presentation Basket",
 ) {
   const [{ jsPDF }, images] = await Promise.all([
     import("jspdf"),
-    loadExportImages(products),
+    loadExportImages(products, onProgress),
   ]);
   const pdf = new jsPDF({
     orientation: "landscape",
@@ -204,16 +185,20 @@ export async function exportBasketAsPdf(
     );
   });
 
-  downloadBlob(pdf.output("blob"), PDF_FILE_NAME, fallbackWindow);
+  await deliverBlob(pdf.output("blob"), createExportFileName("pdf", basketName), {
+    preferWebShare: true,
+    shareTitle: "Macron Health Care visual aid",
+  });
 }
 
 export async function exportBasketAsPpt(
   products: Product[],
-  fallbackWindow?: Window | null,
+  onProgress?: ExportProgressCallback,
+  basketName = "Presentation Basket",
 ) {
   const [{ default: PptxGenJS }, images] = await Promise.all([
     import("pptxgenjs"),
-    loadExportImages(products),
+    loadExportImages(products, onProgress),
   ]);
   const pptx = new PptxGenJS();
 
@@ -243,5 +228,12 @@ export async function exportBasketAsPpt(
     compression: true,
   });
 
-  downloadBlob(pptBlob as Blob, PPT_FILE_NAME, fallbackWindow);
+  await deliverBlob(
+    pptBlob as Blob,
+    createExportFileName("pptx", basketName),
+    {
+      preferWebShare: true,
+      shareTitle: "Macron Health Care visual aid",
+    },
+  );
 }

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Eye, ShoppingBasket, Trash2 } from "lucide-react";
 import type { Product } from "@/data/products";
 import VisualAidImage from "@/components/VisualAidImage";
+import { getProductImageAlt } from "@/data/productMeta";
 
 type ProductCardProps = {
   product: Product;
@@ -28,7 +29,7 @@ export default function ProductCard({
       >
         <VisualAidImage
           src={product.visualAidImage}
-          alt={`${product.brandName} Macron Health Care product visual aid`}
+          alt={getProductImageAlt(product)}
           className="aspect-[16/9] border-b border-line"
           imageClassName="p-2 transition duration-300 group-hover:scale-[1.015]"
           sizes="(min-width: 1280px) 370px, (min-width: 640px) 50vw, calc(100vw - 40px)"
@@ -66,7 +67,7 @@ export default function ProductCard({
                 : onAddToBasket(product.slug)
             }
             aria-pressed={isInBasket}
-            className={`inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border px-3 text-sm font-bold shadow-soft transition focus:outline-none focus:ring-4 focus:ring-blue/10 ${
+            className={`inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border px-3 text-sm font-bold shadow-soft transition focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue/60 ${
               isInBasket
                 ? "border-red-200 bg-red-50 text-red-700 hover:border-red-300 hover:bg-red-100"
                 : "border-blue bg-blue text-white hover:border-teal hover:bg-teal"

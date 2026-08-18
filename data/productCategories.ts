@@ -3,8 +3,9 @@ export const productCategories = [
   "Capsules",
   "Syrups",
   "Dry Syrups",
+  "Drops",
   "Injections",
-  "Miscellaneous",
+  "Powders & Others",
 ] as const;
 
 export const productCategoryFilters = ["All", ...productCategories] as const;
@@ -61,9 +62,13 @@ export function getProductCategory(dosageForm: string): ProductCategory {
     return "Syrups";
   }
 
+  if (normalized.includes("drop")) {
+    return "Drops";
+  }
+
   if (normalized.includes("injection")) {
     return "Injections";
   }
 
-  return "Miscellaneous";
+  return "Powders & Others";
 }

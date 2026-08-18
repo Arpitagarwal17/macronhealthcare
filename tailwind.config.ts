@@ -18,6 +18,7 @@ const config: Config = {
         ink: "#102B46",
         slate: "#526579",
         teal: "#009688",
+        tealDark: "#00796B",
         blue: "#063B78",
         green: "#1F8A5B",
         line: "#D8E5EC",

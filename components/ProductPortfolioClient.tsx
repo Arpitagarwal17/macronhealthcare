@@ -1,30 +1,28 @@
 "use client";
 
-import { Download, Eye, FileText, Search } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
-import MobileFilterMenu from "@/components/MobileFilterMenu";
+import { Download, Eye, FileText } from "lucide-react";
+import { useMemo, useState, type MouseEvent } from "react";
+import CatalogAudienceBanner from "@/components/CatalogAudienceBanner";
+import CatalogFilters from "@/components/CatalogFilters";
 import PortfolioProductCard from "@/components/PortfolioProductCard";
+import {
+  fetchAndDeliverFile,
+  isNativeApp,
+} from "@/components/fileDelivery";
+import { useCatalogFilters } from "@/components/useCatalogFilters";
 import { productDownloads } from "@/data/downloads";
 import {
   getProductCategory,
   getProductCategoryLabel,
   productCategories,
-  productCategoryFilters,
   type ProductCategory,
-  type ProductCategoryFilter,
 } from "@/data/productCategories";
-import {
-  getTherapeuticArea,
-  therapeuticAreas,
-  type TherapeuticArea,
-} from "@/data/productMeta";
+import { getTherapeuticArea, type TherapeuticArea } from "@/data/productMeta";
 import type { Product } from "@/data/products";
 
 type ProductPortfolioClientProps = {
   products: Product[];
 };
-
-type TherapeuticFilter = "All" | TherapeuticArea;
 
 type CategorizedProduct = Product & {
   category: ProductCategory;
@@ -41,12 +39,46 @@ const sortByBrandName = (items: CategorizedProduct[]) =>
 export default function ProductPortfolioClient({
   products,
 }: ProductPortfolioClientProps) {
-  const [query, setQuery] = useState("");
-  const [selectedCategory, setSelectedCategory] =
-    useState<ProductCategoryFilter>("All");
-  const [selectedTherapeuticArea, setSelectedTherapeuticArea] =
-    useState<TherapeuticFilter>("All");
+  const {
+    query,
+    selectedCategory,
+    selectedTherapeuticArea,
+    replaceFilter,
+    resetFilters,
+  } = useCatalogFilters();
   const downloads = [productDownloads.productCard, productDownloads.productList];
+  const [activeDownload, setActiveDownload] = useState<string | null>(null);
+  const [downloadError, setDownloadError] = useState("");
+
+  const handleDownload = async (
+    event: MouseEvent<HTMLAnchorElement>,
+    item: (typeof downloads)[number],
+  ) => {
+    if (!isNativeApp()) {
+      return;
+    }
+
+    event.preventDefault();
+    if (activeDownload) {
+      return;
+    }
+
+    setActiveDownload(item.label);
+    setDownloadError("");
+    try {
+      await fetchAndDeliverFile(item.href, item.fileName, {
+        shareTitle: item.label,
+      });
+    } catch (error) {
+      setDownloadError(
+        error instanceof Error
+          ? error.message
+          : `${item.label} could not be shared. Please try again.`,
+      );
+    } finally {
+      setActiveDownload(null);
+    }
+  };
 
   const categorizedProducts = useMemo<CategorizedProduct[]>(
     () =>
@@ -57,26 +89,6 @@ export default function ProductPortfolioClient({
       })),
     [products],
   );
-
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const category = params.get("category");
-    const therapeutic = params.get("therapeutic");
-
-    if (
-      category &&
-      productCategoryFilters.includes(category as ProductCategoryFilter)
-    ) {
-      setSelectedCategory(category as ProductCategoryFilter);
-    }
-
-    if (
-      therapeutic &&
-      therapeuticAreas.includes(therapeutic as TherapeuticArea)
-    ) {
-      setSelectedTherapeuticArea(therapeutic as TherapeuticArea);
-    }
-  }, []);
 
   const filteredProducts = useMemo(() => {
     const search = query.trim().toLowerCase();
@@ -127,7 +139,7 @@ export default function ProductPortfolioClient({
     <div className="space-y-8">
       <div>
         <div className="max-w-2xl space-y-3">
-          <p className="field-label text-teal">Macron Health Care</p>
+          <p className="field-label text-tealDark">Macron Health Care</p>
           <h1 className="text-4xl font-extrabold leading-tight text-ink sm:text-5xl">
             Product Portfolio
           </h1>
@@ -137,6 +149,8 @@ export default function ProductPortfolioClient({
           </p>
         </div>
       </div>
+
+      <CatalogAudienceBanner current="portfolio" />
 
       <div className="grid gap-4 lg:grid-cols-2">
         {downloads.map((item) => (
@@ -165,81 +179,33 @@ export default function ProductPortfolioClient({
               <a
                 href={item.href}
                 download={item.fileName}
+                onClick={(event) => handleDownload(event, item)}
+                aria-busy={activeDownload === item.label}
                 className="primary-button min-h-11 px-3"
               >
                 <Download className="h-4 w-4" aria-hidden="true" />
-                Download
+                {activeDownload === item.label ? "Preparing…" : "Download"}
               </a>
             </div>
           </article>
         ))}
       </div>
 
-      <div className="rounded-xl border border-line bg-white p-4 shadow-premium sm:p-5">
-        <label className="relative block">
-          <Search
-            className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-slate"
-            aria-hidden="true"
-          />
-          <input
-            type="search"
-            value={query}
-            onChange={(event) => setQuery(event.target.value)}
-            placeholder="Search brand or composition..."
-            aria-label="Search by brand or composition"
-            className="h-[52px] w-full rounded-lg border border-line bg-paper pl-12 pr-5 text-base text-ink outline-none transition placeholder:text-slate/65 focus:border-blue focus:bg-white focus:ring-4 focus:ring-blue/10"
-          />
-        </label>
+      {downloadError ? (
+        <p role="alert" className="text-sm font-semibold text-red-700">
+          {downloadError}
+        </p>
+      ) : null}
 
-        <MobileFilterMenu
-          id="portfolio-dosage-filter"
-          label="Filter by dosage form"
-          value={selectedCategory}
-          options={productCategoryFilters.map((category) => ({
-            value: category,
-            label: getProductCategoryLabel(category),
-          }))}
-          onChange={(value) => setSelectedCategory(value as ProductCategoryFilter)}
-        />
-
-        <MobileFilterMenu
-          id="portfolio-therapeutic-filter"
-          label="Filter by therapeutic area"
-          value={selectedTherapeuticArea}
-          options={(["All", ...therapeuticAreas] as TherapeuticFilter[]).map((area) => ({
-            value: area,
-            label: area,
-          }))}
-          onChange={(value) => setSelectedTherapeuticArea(value as TherapeuticFilter)}
-        />
-
-        <FilterRow label="Dosage form">
-          {productCategoryFilters.map((category) => (
-            <FilterChip
-              key={category}
-              label={getProductCategoryLabel(category)}
-              isSelected={selectedCategory === category}
-              onClick={() => setSelectedCategory(category)}
-            />
-          ))}
-        </FilterRow>
-
-        <FilterRow label="Therapeutic area">
-          {(["All", ...therapeuticAreas] as TherapeuticFilter[]).map((area) => (
-            <FilterChip
-              key={area}
-              label={area}
-              isSelected={selectedTherapeuticArea === area}
-              onClick={() => setSelectedTherapeuticArea(area)}
-            />
-          ))}
-        </FilterRow>
-
-      </div>
-
-      <p className="text-sm font-semibold text-slate">
-        Products intended for trade and healthcare professionals.
-      </p>
+      <CatalogFilters
+        idPrefix="portfolio-filter"
+        query={query}
+        selectedCategory={selectedCategory}
+        selectedTherapeuticArea={selectedTherapeuticArea}
+        resultCount={filteredProducts.length}
+        totalCount={products.length}
+        onFilterChange={replaceFilter}
+      />
 
       {sections.length ? (
         <div className="space-y-12">
@@ -260,41 +226,17 @@ export default function ProductPortfolioClient({
           ))}
         </div>
       ) : (
-        <div className="surface-card p-8 text-slate">No products found.</div>
+        <div className="surface-card p-8 text-slate">
+          <p>No products found.</p>
+          <button
+            type="button"
+            onClick={resetFilters}
+            className="secondary-button mt-4 min-h-10 px-4"
+          >
+            Reset filters
+          </button>
+        </div>
       )}
     </div>
-  );
-}
-
-function FilterRow({ label, children }: { label: string; children: React.ReactNode }) {
-  return (
-    <div className="mt-4 hidden gap-2 sm:grid lg:grid-cols-[130px_minmax(0,1fr)] lg:items-start">
-      <p className="pt-2 text-sm font-bold text-slate">{label}</p>
-      <div className="flex flex-wrap gap-2">{children}</div>
-    </div>
-  );
-}
-
-function FilterChip({
-  label,
-  isSelected,
-  onClick,
-}: {
-  label: string;
-  isSelected: boolean;
-  onClick: () => void;
-}) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      className={`h-[38px] shrink-0 rounded-full border px-4 text-sm font-bold transition focus:outline-none focus:ring-4 focus:ring-blue/10 ${
-        isSelected
-          ? "border-blue bg-blue text-white shadow-soft"
-          : "border-blue/15 bg-white text-slate hover:border-blue/45 hover:text-blue"
-      }`}
-    >
-      {label}
-    </button>
   );
 }

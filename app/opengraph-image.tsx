@@ -1,11 +1,17 @@
+import { readFile } from "node:fs/promises";
+import path from "node:path";
 import { ImageResponse } from "next/og";
 import { company } from "@/data/company";
 
 export const alt = "Macron Health Care pharmaceutical company in India";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
+export const runtime = "nodejs";
 
-export default function OpenGraphImage() {
+export default async function OpenGraphImage() {
+  const logo = await readFile(path.join(process.cwd(), "public", "logo.png"));
+  const logoDataUrl = `data:image/png;base64,${logo.toString("base64")}`;
+
   return new ImageResponse(
     (
       <div
@@ -60,7 +66,7 @@ export default function OpenGraphImage() {
           }}
         >
           <img
-            src={`${company.websiteUrl}/logo.png`}
+            src={logoDataUrl}
             width="330"
             height="134"
             style={{ objectFit: "contain" }}

@@ -1,5 +1,15 @@
 apply plugin: 'com.android.application'
 
+def releaseKeystoreFile = rootProject.file('keystore.properties')
+def releaseKeystoreProperties = new Properties()
+def hasReleaseKeystore = releaseKeystoreFile.exists()
+def configuredVersionCode = project.findProperty('VERSION_CODE') ?: System.getenv('MACRON_VERSION_CODE')
+def configuredVersionName = project.findProperty('VERSION_NAME') ?: System.getenv('MACRON_VERSION_NAME')
+
+if (hasReleaseKeystore) {
+    releaseKeystoreProperties.load(new FileInputStream(releaseKeystoreFile))
+}
+
 android {
     namespace = "com.macronhealthcare.app"
     compileSdk = rootProject.ext.compileSdkVersion
@@ -7,8 +17,8 @@ android {
         applicationId "com.macronhealthcare.app"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        versionCode configuredVersionCode ? Integer.parseInt(configuredVersionCode.toString()) : 1
+        versionName configuredVersionName ? configuredVersionName.toString() : "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         aaptOptions {
              // Files and dirs to omit from the packaged assets dir, modified to accommodate modern web apps.
@@ -16,11 +26,44 @@ android {
             ignoreAssetsPattern = '!.svn:!.git:!.ds_store:!*.scc:.*:!CVS:!thumbs.db:!picasa.ini:!*~'
         }
     }
+    signingConfigs {
+        if (hasReleaseKeystore) {
+            release {
+                storeFile rootProject.file(releaseKeystoreProperties['storeFile'])
+                storePassword releaseKeystoreProperties['storePassword']
+                keyAlias releaseKeystoreProperties['keyAlias']
+                keyPassword releaseKeystoreProperties['keyPassword']
+            }
+        }
+    }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            if (hasReleaseKeystore) {
+                signingConfig signingConfigs.release
+            }
         }
+    }
+}
+
+gradle.taskGraph.whenReady { graph ->
+    def requestsSignedRelease = graph.allTasks.any { task ->
+        task.path.endsWith(':assembleRelease') || task.path.endsWith(':bundleRelease')
+    }
+
+    if (requestsSignedRelease && !hasReleaseKeystore) {
+        throw new GradleException(
+            'Release signing is not configured. Copy android/keystore.properties.example ' +
+            'to android/keystore.properties and provide the Play release keystore values.'
+        )
+    }
+
+    if (requestsSignedRelease && !configuredVersionCode) {
+        throw new GradleException(
+            'A unique Play version code is required. Pass -PVERSION_CODE=<integer> ' +
+            'and optionally -PVERSION_NAME=<name>, or set MACRON_VERSION_CODE.'
+        )
     }
 }
 

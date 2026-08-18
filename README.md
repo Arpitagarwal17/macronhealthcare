@@ -5,8 +5,10 @@ A Next.js, TypeScript, Tailwind CSS website for Macron Health Care company infor
 ## Add a new product image
 
 1. Add the product visual-aid image to `public/visual-aids/`.
-2. Use a lowercase filename with hyphens, for example `rabron-dsr.png`.
+2. Use a lowercase JPEG filename with hyphens, for example `rabron-dsr.jpg`.
 3. Keep the original visual-aid aspect ratio. The website displays images with `object-contain` so they are not cropped.
+4. Use a new, versioned filename when replacing deployed artwork instead of
+   overwriting an existing path; optimized images are cached long-term by the CDN.
 
 ## Add product data
 
@@ -18,7 +20,9 @@ Add a matching entry in `data/products.ts`.
   brandName: "Rabron-DSR",
   composition: "Composition to be added",
   dosageForm: "Dosage form to be added",
-  visualAidImage: "/visual-aids/rabron-dsr.png",
+  visualAidImage: "/visual-aids/rabron-dsr.jpg",
+  visualAidWidth: 1672,
+  visualAidHeight: 941,
 }
 ```
 
@@ -48,3 +52,30 @@ Open `http://localhost:3000`. If that port is busy, use the local URL printed by
 2. Import the repository in Vercel.
 3. Keep the framework preset as Next.js.
 4. Deploy with the default build command, `npm run build`.
+
+## Build the Android app
+
+The Android app loads the production website and adds native file sharing,
+hardware Back handling, splash-screen behavior, and an offline error page.
+Building requires JDK 21 with `JAVA_HOME` configured and an Android SDK.
+
+```bash
+npm run android:sync
+npm run android:apk
+```
+
+For a signed Play Store bundle:
+
+1. Create a private release keystore.
+2. Copy `android/keystore.properties.example` to
+   `android/keystore.properties` and replace every example value.
+3. Store the keystore at the configured `storeFile` path. Neither file is
+   tracked by Git.
+4. Choose a new integer `VERSION_CODE` for every Play upload and a user-facing
+   version name.
+5. Run `cd android` and then
+   `gradlew.bat bundleRelease -PVERSION_CODE=2 -PVERSION_NAME=1.1.0`.
+
+The release task intentionally fails when signing credentials or a release
+version code are absent, so an unsigned or duplicate-version bundle cannot be
+mistaken for a Play-ready artifact.

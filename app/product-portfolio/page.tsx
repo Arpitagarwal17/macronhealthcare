@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import ProductPortfolioClient from "@/components/ProductPortfolioClient";
 import { getProductCategory } from "@/data/productCategories";
 import { products } from "@/data/products";
@@ -47,7 +48,15 @@ export default function ProductPortfolioPage() {
         }}
       />
       <div className="mx-auto max-w-[1200px]">
-        <ProductPortfolioClient products={products} />
+        <Suspense
+          fallback={
+            <div className="surface-card p-8 text-slate">
+              Loading product portfolio...
+            </div>
+          }
+        >
+          <ProductPortfolioClient products={products} />
+        </Suspense>
       </div>
     </section>
   );

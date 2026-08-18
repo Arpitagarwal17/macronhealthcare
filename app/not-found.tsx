@@ -14,7 +14,7 @@ export default function NotFoundPage() {
   return (
     <section className="page-shell flex min-h-[58vh] items-center justify-center py-16 sm:py-24">
       <div className="max-w-2xl text-center">
-        <p className="field-label text-teal">404</p>
+        <p className="field-label text-tealDark">404</p>
         <h1 className="mt-4 text-4xl font-extrabold leading-tight text-ink sm:text-6xl">
           This page doesn&apos;t exist
         </h1>

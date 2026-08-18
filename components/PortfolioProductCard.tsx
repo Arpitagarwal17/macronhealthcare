@@ -6,6 +6,7 @@ import { ArrowUpRight, MessageCircle } from "lucide-react";
 import { useState } from "react";
 import type { Product } from "@/data/products";
 import { createWhatsAppLink } from "@/data/company";
+import { getProductImageAlt } from "@/data/productMeta";
 
 export default function PortfolioProductCard({ product }: { product: Product }) {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -23,7 +24,7 @@ export default function PortfolioProductCard({ product }: { product: Product }) 
       >
         <Image
           src={product.visualAidImage}
-          alt={`${product.brandName} Macron Health Care product visual aid`}
+          alt={getProductImageAlt(product)}
           fill
           sizes="(min-width: 1280px) 370px, (min-width: 768px) 50vw, calc(100vw - 40px)"
           className="object-contain p-2 transition duration-300 group-hover:scale-[1.015]"
@@ -53,7 +54,7 @@ export default function PortfolioProductCard({ product }: { product: Product }) 
             <button
               type="button"
               onClick={() => setIsExpanded((value) => !value)}
-              className="mt-2 text-sm font-bold text-blue transition hover:text-teal focus:outline-none focus:ring-4 focus:ring-blue/10"
+              className="mt-2 text-sm font-bold text-blue transition hover:text-teal focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue/60"
               aria-expanded={isExpanded}
             >
               {isExpanded ? "Show less" : "Show more"}

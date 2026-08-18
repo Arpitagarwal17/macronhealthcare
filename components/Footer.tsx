@@ -3,6 +3,7 @@ import Link from "next/link";
 import type { ReactElement, ReactNode } from "react";
 import { FileText, Globe2, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import { company } from "@/data/company";
+import CurrentYear from "@/components/CurrentYear";
 
 export default function Footer() {
   return (
@@ -15,7 +16,7 @@ export default function Footer() {
               alt="Macron Health Care logo"
               width={220}
               height={89}
-              unoptimized
+              sizes="190px"
               className="h-12 w-auto max-w-[190px] object-contain"
             />
           </Link>
@@ -107,8 +108,10 @@ export default function Footer() {
         </div>
       </div>
       <div className="border-t border-white/10">
-        <div className="page-shell flex flex-col gap-2 py-5 text-xs text-white/55 sm:flex-row sm:items-center sm:justify-between">
-          <p>© {new Date().getFullYear()} Macron Health Care. All rights reserved.</p>
+        <div className="page-shell flex flex-col gap-2 py-5 [padding-bottom:calc(1.25rem+env(safe-area-inset-bottom))] text-xs text-white/55 sm:flex-row sm:items-center sm:justify-between">
+          <p>
+            © <CurrentYear /> Macron Health Care. All rights reserved.
+          </p>
           <p>Products intended for trade and healthcare professionals.</p>
         </div>
       </div>
@@ -139,7 +142,7 @@ function FooterContactLink({
       aria-label={ariaLabel}
       target={target}
       rel={rel}
-      className="flex gap-3 rounded-lg py-1 text-white/80 transition hover:text-white focus:outline-none focus:ring-4 focus:ring-white/15"
+      className="flex gap-3 rounded-lg py-1 text-white/80 transition hover:text-white focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/70"
     >
       <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-white/15 bg-white/10 text-[#79d7cf] [&_svg]:h-4 [&_svg]:w-4">
         {icon}

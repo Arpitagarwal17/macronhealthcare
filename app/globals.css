@@ -8,6 +8,7 @@
   --foreground: #102b46;
   --macron-blue: #063b78;
   --macron-teal: #009688;
+  --macron-teal-dark: #00796b;
   --line: #d8e5ec;
 }
 
@@ -22,6 +23,8 @@ html {
 body {
   min-height: 100vh;
   margin: 0;
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
   overflow-x: hidden;
   background: linear-gradient(180deg, #f4fafc 0, var(--background) 420px);
   color: var(--foreground);
@@ -69,23 +72,40 @@ img {
   }
 
   .primary-button {
-    @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-blue px-5 text-sm font-bold text-white shadow-soft transition duration-200 hover:-translate-y-0.5 hover:bg-teal focus:outline-none focus:ring-4 focus:ring-blue/15 disabled:pointer-events-none disabled:opacity-45;
+    @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-blue px-5 text-sm font-bold text-white shadow-soft transition duration-200 hover:-translate-y-0.5 hover:bg-teal focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue/60 disabled:pointer-events-none disabled:opacity-45;
   }
 
   .secondary-button {
-    @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-lg border border-blue/20 bg-white px-5 text-sm font-bold text-blue shadow-soft transition duration-200 hover:-translate-y-0.5 hover:border-blue hover:bg-porcelain focus:outline-none focus:ring-4 focus:ring-blue/10 disabled:pointer-events-none disabled:opacity-45;
+    @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-lg border border-blue/20 bg-white px-5 text-sm font-bold text-blue shadow-soft transition duration-200 hover:-translate-y-0.5 hover:border-blue hover:bg-porcelain focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue/60 disabled:pointer-events-none disabled:opacity-45;
   }
 
   .whatsapp-button {
-    @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-[#1f9d63] px-5 text-sm font-bold text-white shadow-soft transition duration-200 hover:-translate-y-0.5 hover:bg-[#168452] focus:outline-none focus:ring-4 focus:ring-[#1f9d63]/20;
+    @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-[#1f9d63] px-5 text-sm font-bold text-white shadow-soft transition duration-200 hover:-translate-y-0.5 hover:bg-[#168452] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#168452];
   }
 
   .icon-button {
-    @apply inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-line bg-white text-blue shadow-soft transition hover:border-blue hover:bg-porcelain focus:outline-none focus:ring-4 focus:ring-blue/10;
+    @apply inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-line bg-white text-blue shadow-soft transition hover:border-blue hover:bg-porcelain focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue/60;
   }
 
-.field-label {
+  .field-label {
     @apply text-xs font-bold uppercase tracking-[0.12em] text-slate;
   }
 
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+  }
 }

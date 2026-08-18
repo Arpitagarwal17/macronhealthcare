@@ -24,3 +24,8 @@ screenshots/
 /*.tif
 /*.tiff
 /eng.traineddata
+
+# Android release signing secrets
+/android/keystore.properties
+/android/app/*.jks
+/android/app/*.keystore

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import ProductDetailView from "@/components/ProductDetailView";
-import { getTherapeuticArea } from "@/data/productMeta";
+import { getProductImageAlt, getTherapeuticArea } from "@/data/productMeta";
 import { products } from "@/data/products";
 
 type ProductPageProps = {
@@ -44,12 +44,12 @@ export async function generateMetadata({
       images: [
         {
           url: product.visualAidImage,
-          width: product.visualAidWidth,
-          height: product.visualAidHeight,
+          width: product.visualAidWidth ?? 1672,
+          height: product.visualAidHeight ?? 941,
           type: product.visualAidImage.endsWith(".jpg")
             ? "image/jpeg"
             : "image/png",
-          alt: `${product.brandName} Macron Health Care product visual aid`,
+          alt: getProductImageAlt(product),
         },
       ],
     },

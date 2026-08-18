@@ -16,7 +16,7 @@ export default function CompanyInfoContent() {
   return (
     <section className="page-shell py-10 sm:py-14">
       <div className="max-w-3xl">
-        <p className="field-label text-teal">Company information</p>
+        <p className="field-label text-tealDark">Company information</p>
         <h1 className="mt-3 text-4xl font-extrabold text-ink sm:text-5xl">
           {company.displayName}
         </h1>

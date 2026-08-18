@@ -3,7 +3,11 @@ import Link from "next/link";
 import { ArrowLeft, ArrowRight, Package } from "lucide-react";
 import ProductDetailActions from "@/components/ProductDetailActions";
 import ZoomableVisualAid from "@/components/ZoomableVisualAid";
-import { getProductPackSize, splitComposition } from "@/data/productMeta";
+import {
+  getProductImageAlt,
+  getProductPackSize,
+  splitComposition,
+} from "@/data/productMeta";
 import type { Product } from "@/data/products";
 
 type ProductDetailViewProps = {
@@ -26,6 +30,7 @@ export default function ProductDetailView({
   showBasketAction,
 }: ProductDetailViewProps) {
   const ingredients = splitComposition(product.composition);
+  const packSize = getProductPackSize(product);
 
   return (
     <section className="page-shell py-8 sm:py-12">
@@ -42,7 +47,7 @@ export default function ProductDetailView({
       <div className="grid min-w-0 gap-7 lg:grid-cols-[minmax(0,1.45fr)_minmax(320px,0.55fr)] lg:items-start">
         <ZoomableVisualAid
           src={product.visualAidImage}
-          alt={`${product.brandName} Macron Health Care product visual aid`}
+          alt={getProductImageAlt(product)}
         />
 
         <aside className="premium-panel min-w-0 p-6 sm:p-7">
@@ -71,15 +76,17 @@ export default function ProductDetailView({
               </ul>
             </div>
 
-            <div className="flex items-center gap-3 border-y border-line py-4">
-              <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-porcelain text-blue">
-                <Package className="h-5 w-5" aria-hidden="true" />
-              </span>
-              <div>
-                <p className="field-label">Packing</p>
-                <p className="mt-1 font-bold text-ink">{getProductPackSize(product)}</p>
+            {packSize ? (
+              <div className="flex items-center gap-3 border-y border-line py-4">
+                <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-porcelain text-blue">
+                  <Package className="h-5 w-5" aria-hidden="true" />
+                </span>
+                <div>
+                  <p className="field-label">Packing</p>
+                  <p className="mt-1 font-bold text-ink">{packSize}</p>
+                </div>
               </div>
-            </div>
+            ) : null}
 
             <ProductDetailActions
               product={product}
@@ -125,7 +132,7 @@ export default function ProductDetailView({
         <section className="mt-14">
           <div className="flex items-end justify-between gap-4 border-b border-line pb-3">
             <div>
-              <p className="field-label text-teal">Same therapeutic area</p>
+              <p className="field-label text-tealDark">Same therapeutic area</p>
               <h2 className="mt-2 text-2xl font-extrabold text-ink">Related products</h2>
             </div>
           </div>
@@ -139,7 +146,7 @@ export default function ProductDetailView({
                 <div className="relative aspect-[16/9] border-b border-line bg-white">
                   <Image
                     src={item.visualAidImage}
-                    alt={`${item.brandName} Macron Health Care product visual aid`}
+                    alt={getProductImageAlt(item)}
                     fill
                     sizes="(min-width: 1024px) 270px, (min-width: 640px) 50vw, calc(100vw - 40px)"
                     className="object-contain p-2"

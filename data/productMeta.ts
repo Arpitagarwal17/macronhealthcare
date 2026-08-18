@@ -1,5 +1,4 @@
 import type { Product } from "@/data/products";
-import { getProductCategory } from "@/data/productCategories";
 
 export const therapeuticAreas = [
   "Pain & Inflammation",
@@ -97,24 +96,8 @@ export function getTherapeuticArea(product: Product): TherapeuticArea {
   return therapeuticAreaBySlug[product.slug] ?? "Vitamins & Supplements";
 }
 
-export function getProductPackSize(product: Product) {
-  const explicitPackSize = packSizeBySlug[product.slug];
-
-  if (explicitPackSize) {
-    return explicitPackSize;
-  }
-
-  const category = getProductCategory(product.dosageForm);
-
-  if (category === "Tablets" || category === "Capsules") {
-    return "1 x 10";
-  }
-
-  if (category === "Dry Syrups") {
-    return "30 ml WFI";
-  }
-
-  return "Pack details available on enquiry";
+export function getProductPackSize(product: Product): string | null {
+  return packSizeBySlug[product.slug] ?? null;
 }
 
 export function splitComposition(composition: string) {
@@ -122,4 +105,17 @@ export function splitComposition(composition: string) {
     .split(/\s+\+\s+/)
     .map((ingredient) => ingredient.trim())
     .filter(Boolean);
+}
+
+export function getProductImageAlt(product: Product) {
+  const firstIngredient =
+    splitComposition(product.composition)[0] ?? product.composition;
+  const brandIncludesDosageForm = product.brandName
+    .toLowerCase()
+    .includes(product.dosageForm.toLowerCase());
+  const productLabel = brandIncludesDosageForm
+    ? product.brandName
+    : `${product.brandName} ${product.dosageForm}`;
+
+  return `${productLabel} visual aid: ${firstIngredient} by Macron Health Care`;
 }

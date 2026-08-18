@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
+import CatalogAudienceBanner from "@/components/CatalogAudienceBanner";
 import ProductGrid from "@/components/ProductGrid";
 import { products } from "@/data/products";
 
@@ -21,19 +23,28 @@ export default function DoctorPresentationPage() {
     <section className="page-shell py-10 sm:py-12">
       <div className="mx-auto max-w-[1200px]">
         <div className="mb-7 max-w-3xl space-y-3">
-          <p className="field-label text-teal">Visual aid library</p>
+          <p className="field-label text-tealDark">Visual aid library</p>
           <h1 className="text-4xl font-extrabold text-ink sm:text-5xl">
             Doctor Presentation
           </h1>
           <p className="text-base leading-7 text-slate sm:text-lg">
             Select products and create a quick doctor presentation basket.
           </p>
-          <p className="text-sm font-semibold text-slate">
-            Products intended for trade and healthcare professionals.
-          </p>
         </div>
 
-        <ProductGrid products={products} />
+        <div className="mb-8">
+          <CatalogAudienceBanner current="presentation" />
+        </div>
+
+        <Suspense
+          fallback={
+            <div className="surface-card p-8 text-slate">
+              Loading doctor presentation catalogue...
+            </div>
+          }
+        >
+          <ProductGrid products={products} />
+        </Suspense>
       </div>
     </section>
   );

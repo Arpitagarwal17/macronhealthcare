@@ -15,14 +15,14 @@ export const products: Product[] = [
     composition:
       "Cyproheptadine Hydrochloride 2 mg + Tricholine Citrate 0.275 gm + Sorbitol Solution q.s. per 5 ml",
     dosageForm: "Syrup",
-    visualAidImage: "/visual-aids/apcon.png",
+    visualAidImage: "/visual-aids/apcon.jpg",
   },
   {
     slug: "cloper",
     brandName: "Cloper",
     composition: "Chlordiazepoxide 10 mg + Trifluoperazine HCl 1 mg",
     dosageForm: "Tablets",
-    visualAidImage: "/visual-aids/cloper.png",
+    visualAidImage: "/visual-aids/cloper.jpg",
   },
   {
     slug: "curix-200",
@@ -47,7 +47,7 @@ export const products: Product[] = [
     brandName: "DRT",
     composition: "Drotaverine HCl 80 mg",
     dosageForm: "Tablets",
-    visualAidImage: "/visual-aids/drt.png",
+    visualAidImage: "/visual-aids/drt.jpg",
   },
   {
     slug: "drt-plus",
@@ -63,7 +63,7 @@ export const products: Product[] = [
     brandName: "Ecitron-Plus",
     composition: "Escitalopram Oxalate 10 mg + Clonazepam 0.5 mg",
     dosageForm: "Tablets",
-    visualAidImage: "/visual-aids/ecitron-plus.png",
+    visualAidImage: "/visual-aids/ecitron-plus.jpg",
   },
   {
     slug: "etr",
@@ -88,42 +88,42 @@ export const products: Product[] = [
     brandName: "ETR-TH",
     composition: "Etoricoxib 60 mg + Thiocolchicoside 4 mg",
     dosageForm: "Tablets",
-    visualAidImage: "/visual-aids/etr-th.png",
+    visualAidImage: "/visual-aids/etr-th.jpg",
   },
   {
     slug: "ferronica-drop",
     brandName: "Ferronica Drops",
     composition: "Ferrous Ascorbate 10 mg + Folic Acid 100 mcg per ml",
     dosageForm: "Drops",
-    visualAidImage: "/visual-aids/ferronica-drop.png",
+    visualAidImage: "/visual-aids/ferronica-drop.jpg",
   },
   {
     slug: "ferronica-syrup",
     brandName: "Ferronica",
     composition: "Ferrous Ascorbate 30 mg + Folic Acid 550 mcg per 5 ml",
     dosageForm: "Tonic",
-    visualAidImage: "/visual-aids/ferronica-syrup.png",
+    visualAidImage: "/visual-aids/ferronica-syrup.jpg",
   },
   {
     slug: "flt-20",
     brandName: "FLT-20",
     composition: "Fluoxetine Hydrochloride IP equivalent to Fluoxetine 20 mg",
     dosageForm: "Tablets",
-    visualAidImage: "/visual-aids/flt-20.png",
+    visualAidImage: "/visual-aids/flt-20.jpg",
   },
   {
     slug: "furakast-l",
     brandName: "Furakast-L",
     composition: "Levocetirizine 5 mg + Montelukast 10 mg",
     dosageForm: "Tablets",
-    visualAidImage: "/visual-aids/furakast-l.png",
+    visualAidImage: "/visual-aids/furakast-l.jpg",
   },
   {
     slug: "gabonza-m",
     brandName: "Gabonza-M",
     composition: "Gabapentin 300 mg + Methylcobalamin 500 mcg",
     dosageForm: "Tablets",
-    visualAidImage: "/visual-aids/gabonza-m.png",
+    visualAidImage: "/visual-aids/gabonza-m.jpg",
   },
   {
     slug: "heptamac",
@@ -131,7 +131,7 @@ export const products: Product[] = [
     composition:
       "Bhui Amla 400 mg + Kalmegh 125 mg + Bhringraj 250 mg + Kutki 60 mg + Kasni 350 mg + Punarnava 300 mg + Daru Haldi 100 mg + Surpunkha 250 mg + Haritaki 200 mg + Guduchi 125 mg + Tulsi 100 mg per 5 ml",
     dosageForm: "Ayurvedic Liver Tonic",
-    visualAidImage: "/visual-aids/heptamac.png",
+    visualAidImage: "/visual-aids/heptamac.jpg",
   },
   {
     slug: "lycron-cap",
@@ -139,7 +139,7 @@ export const products: Product[] = [
     composition:
       "Lycopene 10% USP 4000 mcg + Lutein 10% USP 4000 mcg + Betacarotene 30% USP 5.17 mg + Black Grape Seed Extract 10 mg + Selenium Dioxide Monohydrate USP 25 mcg + Zinc Sulphate Monohydrate IP 10 mg",
     dosageForm: "Soft Gelatin Capsules",
-    visualAidImage: "/visual-aids/lycron-cap.png",
+    visualAidImage: "/visual-aids/lycron-cap.jpg",
   },
   {
     slug: "lycron-syrup",
@@ -147,28 +147,28 @@ export const products: Product[] = [
     composition:
       "Vitamin C 10 mg + L-Lysine Hydrochloride 10 mg + Vitamin B3 8 mg + Zinc 5 mg + Vitamin B5 1.6 mg + Vitamin B2 1.2 mg + Vitamin B1 1.1 mg + Vitamin B6 1 mg + Manganese 0.5 mg + Copper 0.1 mg + Lycopene 1000 mcg + Folic Acid 100 mcg + Iodine 20 mcg + Vitamin B12 1 mcg + Vitamin A 2000 IU + Vitamin E 10 IU per 5 ml",
     dosageForm: "Syrup",
-    visualAidImage: "/visual-aids/lycron-syrup.png",
+    visualAidImage: "/visual-aids/lycron-syrup.jpg",
   },
   {
     slug: "m-trox-1500-sb",
     brandName: "M-TROX 1500 SB",
     composition: "Ceftriaxone Sodium 1000 mg + Sulbactam Sodium 500 mg",
     dosageForm: "Injection",
-    visualAidImage: "/visual-aids/m-trox-1500-sb.png",
+    visualAidImage: "/visual-aids/m-trox-1500-sb.jpg",
   },
   {
     slug: "maclo-p",
     brandName: "Maclo-P",
     composition: "Aceclofenac 100 mg + Paracetamol 325 mg",
     dosageForm: "Tablets",
-    visualAidImage: "/visual-aids/maclo-p.png",
+    visualAidImage: "/visual-aids/maclo-p.jpg",
   },
   {
     slug: "maclo-th",
     brandName: "Maclo-TH",
     composition: "Aceclofenac 100 mg + Thiocolchicoside 4 mg",
     dosageForm: "Tablets",
-    visualAidImage: "/visual-aids/maclo-th.png",
+    visualAidImage: "/visual-aids/maclo-th.jpg",
   },
   {
     slug: "maclodase-p",
@@ -176,14 +176,14 @@ export const products: Product[] = [
     composition:
       "Aceclofenac 100 mg + Paracetamol 325 mg + Serratiopeptidase 15 mg",
     dosageForm: "Tablets",
-    visualAidImage: "/visual-aids/maclodase-p.png",
+    visualAidImage: "/visual-aids/maclodase-p.jpg",
   },
   {
     slug: "macrifa-400",
     brandName: "Macrifa-400",
     composition: "Rifaximin 400 mg",
     dosageForm: "Tablets",
-    visualAidImage: "/visual-aids/macrifa-400.png",
+    visualAidImage: "/visual-aids/macrifa-400.jpg",
   },
   {
     slug: "macron-cv-457",
@@ -199,7 +199,7 @@ export const products: Product[] = [
     brandName: "MACRON-CV 625",
     composition: "Amoxycillin 500 mg + Potassium Clavulanate 125 mg",
     dosageForm: "Tablets",
-    visualAidImage: "/visual-aids/macron-cv-625.png",
+    visualAidImage: "/visual-aids/macron-cv-625.jpg",
   },
   {
     slug: "macron-oil-60-ml",
@@ -207,7 +207,7 @@ export const products: Product[] = [
     composition:
       "Nilgiri Oil 10% + Kapoor 5% + Ajwain Satva 2% + Pudina Satva 2% + Til Oil 20% + Gandha Purva Oil 25% + Terpentine Oil 10% + LLP q.s. per 10 ml",
     dosageForm: "Ayurvedic Pain Relief Oil",
-    visualAidImage: "/visual-aids/macron-oil-60-ml.png",
+    visualAidImage: "/visual-aids/macron-oil-60-ml.jpg",
   },
   {
     slug: "macron-pro",
@@ -215,7 +215,7 @@ export const products: Product[] = [
     composition:
       "Skimmed Milk Powder 20 g + DHA 50 mg + L-Lysine HCl 25 mg + Niacinamide 15 mg + Vitamin B1 3 mg + Vitamin B2 3 mg + Vitamin B6 1 mg + Folic Acid 167 mcg + Calcium 334 mg + Phosphorus 170 mg + Iron 6.5 mg + Zinc Chloride 6 mg + Magnesium 2.6 mg per 100 g",
     dosageForm: "Protein Powder",
-    visualAidImage: "/visual-aids/macron-pro.png",
+    visualAidImage: "/visual-aids/macron-pro.jpg",
   },
   {
     slug: "macroncal",
@@ -232,7 +232,7 @@ export const products: Product[] = [
     brandName: "Macroncal Drops",
     composition: "Vitamin D3 (Cholecalciferol) 800 IU per 0.5 ml",
     dosageForm: "Drops",
-    visualAidImage: "/visual-aids/macroncal-drop.png",
+    visualAidImage: "/visual-aids/macroncal-drop.jpg",
   },
   {
     slug: "macroncef-200",
@@ -249,14 +249,14 @@ export const products: Product[] = [
     composition:
       "Cefpodoxime Proxetil IP equivalent to Anhydrous Cefpodoxime 50 mg per 5 ml",
     dosageForm: "Dry Syrup",
-    visualAidImage: "/visual-aids/macroncef-50.png",
+    visualAidImage: "/visual-aids/macroncef-50.jpg",
   },
   {
     slug: "macronliv-300",
     brandName: "Macronliv-300",
     composition: "Ursodeoxycholic Acid 300 mg",
     dosageForm: "Tablets",
-    visualAidImage: "/visual-aids/macronliv-300.png",
+    visualAidImage: "/visual-aids/macronliv-300.jpg",
   },
   {
     slug: "mactuss",
@@ -264,21 +264,21 @@ export const products: Product[] = [
     composition:
       "Dextromethorphan Hydrobromide IP 10 mg + Phenylephrine Hydrochloride IP 5 mg + Chlorpheniramine Maleate IP 2 mg per 5 ml",
     dosageForm: "Cough Syrup",
-    visualAidImage: "/visual-aids/mactuss.png",
+    visualAidImage: "/visual-aids/mactuss.jpg",
   },
   {
     slug: "metoron",
     brandName: "Metoron-XL-25/50",
     composition: "Metoprolol Succinate 25 mg / 50 mg",
     dosageForm: "Extended Release Tablets",
-    visualAidImage: "/visual-aids/metoron.png",
+    visualAidImage: "/visual-aids/metoron.jpg",
   },
   {
     slug: "molly-forte-injection",
     brandName: "Molly-Forte",
     composition: "Methylcobalamin 1500 mcg",
     dosageForm: "Injection Dispo Pack",
-    visualAidImage: "/visual-aids/molly-forte-injection.png",
+    visualAidImage: "/visual-aids/molly-forte-injection.jpg",
   },
   {
     slug: "molly-forte-tablet",
@@ -286,21 +286,21 @@ export const products: Product[] = [
     composition:
       "Methylcobalamin 1500 mcg + Alpha Lipoic Acid 100 mg + Pyridoxine HCl 3 mg + Folic Acid 1.5 mg",
     dosageForm: "Tablets",
-    visualAidImage: "/visual-aids/molly-forte-tablet.png",
+    visualAidImage: "/visual-aids/molly-forte-tablet.jpg",
   },
   {
     slug: "myflez",
     brandName: "Myflez",
     composition: "Deflazacort 6 mg",
     dosageForm: "Tablets",
-    visualAidImage: "/visual-aids/myflez.png",
+    visualAidImage: "/visual-aids/myflez.jpg",
   },
   {
     slug: "myorab-dsr",
     brandName: "Myorab-DSR",
     composition: "Rabeprazole 20 mg + Domperidone 30 mg",
     dosageForm: "Sustained Release Capsules",
-    visualAidImage: "/visual-aids/myorab-dsr.png",
+    visualAidImage: "/visual-aids/myorab-dsr.jpg",
   },
   {
     slug: "myotral",
@@ -308,7 +308,7 @@ export const products: Product[] = [
     composition:
       "Calcitriol 0.25 mcg + Calcium Carbonate 500 mg + Zinc Sulphate Monohydrate 7.5 mg",
     dosageForm: "Soft Gelatin Capsules",
-    visualAidImage: "/visual-aids/myotral.png",
+    visualAidImage: "/visual-aids/myotral.jpg",
   },
   {
     slug: "myotral-k27",
@@ -316,28 +316,28 @@ export const products: Product[] = [
     composition:
       "Calcitriol 0.25 mcg + Calcium Carbonate equivalent to Elemental Calcium 500 mg + Zinc Sulphate 7.5 mg + Magnesium 50 mg + Vitamin K2-7 45 mcg + Methylcobalamin 1500 mcg + L-Methyl Folate 800 mcg",
     dosageForm: "Soft Gelatin Capsules",
-    visualAidImage: "/visual-aids/myotral-k27.png",
+    visualAidImage: "/visual-aids/myotral-k27.jpg",
   },
   {
     slug: "myovit",
     brandName: "Myovit",
     composition: "Multivitamin, Multimineral & Antioxidant",
     dosageForm: "Tablets",
-    visualAidImage: "/visual-aids/myovit.png",
+    visualAidImage: "/visual-aids/myovit.jpg",
   },
   {
     slug: "nimtek-p",
     brandName: "Nimtek-P",
     composition: "Nimesulide 100 mg + Paracetamol 325 mg",
     dosageForm: "Tablets",
-    visualAidImage: "/visual-aids/nimtek-p.png",
+    visualAidImage: "/visual-aids/nimtek-p.jpg",
   },
   {
     slug: "nucis-plus",
     brandName: "Nucis-Plus",
     composition: "Cissus quadrangularis 750 mg + Moringa oleifera 100 mg",
     dosageForm: "Tablets",
-    visualAidImage: "/visual-aids/nucis-plus.png",
+    visualAidImage: "/visual-aids/nucis-plus.jpg",
   },
   {
     slug: "ppday",
@@ -345,63 +345,63 @@ export const products: Product[] = [
     composition:
       "Zinc Sulphate 10 mg + Magnesium Sulphate 25 mg + Manganese 50 mcg + Calcium 215 mg + Phosphorous 125 mg + Vitamin C 25 mg + Vitamin D3 12.5 mcg + Vitamin B1 0.5 mg + Vitamin B2 0.37 mg + Vitamin B6 0.5 mg + Cyanocobalamin 1.75 mcg + Creatine 100 mg + Potassium Citrate 25 mg + Calcium Citrate 125 mg per 25 g sachet",
     dosageForm: "Powder",
-    visualAidImage: "/visual-aids/ppday.png",
+    visualAidImage: "/visual-aids/ppday.jpg",
   },
   {
     slug: "ppzol-dsr",
     brandName: "PPZOL-DSR",
     composition: "Pantoprazole 40 mg + Domperidone SR 30 mg",
     dosageForm: "Sustained Release Capsules",
-    visualAidImage: "/visual-aids/ppzol-dsr.png",
+    visualAidImage: "/visual-aids/ppzol-dsr.jpg",
   },
   {
     slug: "propra-az",
     brandName: "Propra-AZ",
     composition: "Propranolol 20 mg + Alprazolam 0.25 mg",
     dosageForm: "Tablets",
-    visualAidImage: "/visual-aids/propra-az.png",
+    visualAidImage: "/visual-aids/propra-az.jpg",
   },
   {
     slug: "rabiday-dsr",
     brandName: "Rabiday-DSR",
     composition: "Rabeprazole 20 mg + Domperidone 30 mg",
     dosageForm: "Sustained Release Capsules",
-    visualAidImage: "/visual-aids/rabiday-dsr.png",
+    visualAidImage: "/visual-aids/rabiday-dsr.jpg",
   },
   {
     slug: "rabron-d",
     brandName: "Rabron-D",
     composition: "Rabeprazole 20 mg + Domperidone 10 mg",
     dosageForm: "Tablets",
-    visualAidImage: "/visual-aids/rabron-d.png",
+    visualAidImage: "/visual-aids/rabron-d.jpg",
   },
   {
     slug: "rabron-dsr",
     brandName: "Rabron-DSR",
     composition: "Rabeprazole 20 mg + Domperidone 30 mg",
     dosageForm: "Sustained Release Capsules",
-    visualAidImage: "/visual-aids/rabron-dsr.png",
+    visualAidImage: "/visual-aids/rabron-dsr.jpg",
   },
   {
     slug: "ravista-m",
     brandName: "Ravista-M",
     composition: "Flupentixol 0.5 mg + Melitracen 10 mg",
     dosageForm: "Tablets",
-    visualAidImage: "/visual-aids/ravista-m.png",
+    visualAidImage: "/visual-aids/ravista-m.jpg",
   },
   {
     slug: "turpiron",
     brandName: "Turpiron",
     composition: "Curcumin 100 mg + Turmeric Root Powder 200 mg + Piperine 95% 10 mg",
     dosageForm: "Ayurvedic Capsule",
-    visualAidImage: "/visual-aids/turpiron.png",
+    visualAidImage: "/visual-aids/turpiron.jpg",
   },
   {
     slug: "vertitop-16",
     brandName: "Vertitop-16",
     composition: "Betahistine Dihydrochloride 16 mg",
     dosageForm: "Tablets",
-    visualAidImage: "/visual-aids/vertitop-16.png",
+    visualAidImage: "/visual-aids/vertitop-16.jpg",
   },
   {
     slug: "vitabank",
@@ -409,21 +409,21 @@ export const products: Product[] = [
     composition:
       "Grape Seed Extract 25 mg + Lycopene 6% USP 2 mg + Lutein 8% USP 3 mg + Vitamin A Concentrate Oil 5000 IU + Vitamin B1 IP 5 mg + Vitamin B2 IP 5 mg + Vitamin B6 IP 1.50 mg + Vitamin B12 IP 15 mcg + Folic Acid IP 1.50 mg + Zinc Sulphate Monohydrate IP 23 mg + Selenium Dioxide Monohydrate USP 75 mcg",
     dosageForm: "Soft Gelatin Capsules",
-    visualAidImage: "/visual-aids/vitabank.png",
+    visualAidImage: "/visual-aids/vitabank.jpg",
   },
   {
     slug: "vtrocef",
     brandName: "Vtrocef",
     composition: "Cefuroxime Axetil 250 mg / 500 mg",
     dosageForm: "Tablets",
-    visualAidImage: "/visual-aids/vtrocef.png",
+    visualAidImage: "/visual-aids/vtrocef.jpg",
   },
   {
     slug: "walex",
     brandName: "Walex",
     composition: "Serratiopeptidase 10 mg + Diclofenac Potassium 50 mg",
     dosageForm: "Tablets",
-    visualAidImage: "/visual-aids/walex.png",
+    visualAidImage: "/visual-aids/walex.jpg",
   },
   {
     slug: "walex-p",
@@ -431,7 +431,7 @@ export const products: Product[] = [
     composition:
       "Diclofenac Potassium 50 mg + Serratiopeptidase 10 mg + Paracetamol 325 mg",
     dosageForm: "Tablets",
-    visualAidImage: "/visual-aids/walex-p.png",
+    visualAidImage: "/visual-aids/walex-p.jpg",
   },
   {
     slug: "zymopan",
@@ -439,6 +439,6 @@ export const products: Product[] = [
     composition:
       "Fungal Diastase (1:1200) 50 mg + Pepsin (1:3000) 10 mg per 5 ml",
     dosageForm: "Syrup",
-    visualAidImage: "/visual-aids/zymopan.png",
+    visualAidImage: "/visual-aids/zymopan.jpg",
   },
 ];
