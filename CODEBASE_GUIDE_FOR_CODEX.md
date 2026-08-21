@@ -160,7 +160,7 @@ Export logic lives in `components/exportBasket.ts`.
 
 Current export behavior:
 
-- First PDF page / PPT slide is always `/visual-aids/visual-aid-cover.jpg`.
+- First PDF page / PPT slide is always `/visual-aids/visual-aid-cover-2026.jpg`.
 - Page/slide 2 onward shows only the selected product visual aid image.
 - Export uses the original image file from `product.visualAidImage`.
 - Export does not capture DOM.
@@ -177,7 +177,7 @@ Current export filenames:
 ## Public Assets
 
 - Official logo: `public/logo.png`
-- Cover slide: `public/visual-aids/visual-aid-cover.jpg`
+- Cover slide: `public/visual-aids/visual-aid-cover-2026.jpg`
 - Visual aids: `public/visual-aids/`
 - Curix-200 official image: `public/visual-aids/curix-200.jpg`
 - Product Card PDF: `public/assets/pdfs/macron-product-card.pdf`

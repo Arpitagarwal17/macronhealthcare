@@ -62,6 +62,22 @@ async function shareNativeFile(
   return "shared";
 }
 
+async function saveNativeFile(
+  blob: Blob,
+  fileName: string,
+): Promise<FileDeliveryResult> {
+  const data = await readBlobAsBase64(blob);
+
+  await Filesystem.writeFile({
+    path: fileName,
+    data,
+    directory: Directory.Documents,
+    recursive: true,
+  });
+
+  return "downloaded";
+}
+
 function downloadInBrowser(blob: Blob, fileName: string): FileDeliveryResult {
   const objectUrl = window.URL.createObjectURL(blob);
   const link = document.createElement("a");
@@ -130,7 +146,9 @@ export async function deliverBlob(
   }: DeliverBlobOptions = {},
 ): Promise<FileDeliveryResult> {
   if (isNativeApp()) {
-    return shareNativeFile(blob, fileName, shareTitle);
+    return preferWebShare
+      ? shareNativeFile(blob, fileName, shareTitle)
+      : saveNativeFile(blob, fileName);
   }
 
   if (preferWebShare) {

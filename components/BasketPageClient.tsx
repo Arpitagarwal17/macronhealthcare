@@ -22,14 +22,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import {
-  CloudDownload,
   Download,
-  FileText,
   FolderOpen,
   GripVertical,
-  MessageCircle,
   Play,
   Save,
+  Share2,
   Trash2,
 } from "lucide-react";
 import type { CSSProperties } from "react";
@@ -39,15 +37,15 @@ import type { Product } from "@/data/products";
 import PresentationViewer from "@/components/PresentationViewer";
 import { useBasket } from "@/components/useBasket";
 import { useSavedBaskets } from "@/components/useSavedBaskets";
-import { company, createWhatsAppLink } from "@/data/company";
 import {
   getProductImageAlt,
   getTherapeuticArea,
   therapeuticAreas,
 } from "@/data/productMeta";
-import { cacheVisualAidsOffline } from "@/lib/offlineVisualAids";
 
 const PRESENTATION_HISTORY_KEY = "__macronPresentationViewer";
+
+type ExportAction = "pdf-share" | "pdf-download" | "ppt";
 
 type BasketPageClientProps = {
   products: Product[];
@@ -65,15 +63,12 @@ export default function BasketPageClient({ products }: BasketPageClientProps) {
     deleteBasket,
   } = useSavedBaskets();
   const [isPresentationOpen, setIsPresentationOpen] = useState(false);
-  const [exporting, setExporting] = useState<"pdf" | "ppt" | null>(null);
+  const [exporting, setExporting] = useState<ExportAction | null>(null);
   const [exportError, setExportError] = useState("");
   const [exportProgress, setExportProgress] = useState("");
   const [basketName, setBasketName] = useState("");
   const [activeBasketName, setActiveBasketName] = useState("Presentation Basket");
   const [savedBasketMessage, setSavedBasketMessage] = useState("");
-  const [offlineProgress, setOfflineProgress] = useState("");
-  const [offlineError, setOfflineError] = useState("");
-  const [isCachingOffline, setIsCachingOffline] = useState(false);
   const presentationHistoryActive = useRef(false);
   const presentationHistoryClosing = useRef(false);
   const sensors = useSensors(
@@ -248,13 +243,6 @@ export default function BasketPageClient({ products }: BasketPageClientProps) {
 
   const orderedProductSlugs = selectedProducts.map((product) => product.slug);
   const isActionDisabled = selectedProducts.length === 0 || exporting !== null;
-  const sharedBasketUrl = new URL("/basket", company.websiteUrl);
-  sharedBasketUrl.searchParams.set("items", orderedProductSlugs.join(","));
-  const shareBasketLink = createWhatsAppLink(
-    `Macron Health Care presentation basket: ${selectedProducts
-      .map((product) => product.brandName)
-      .join(", ")}. Open the basket: ${sharedBasketUrl.toString()}`,
-  );
 
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
@@ -325,45 +313,7 @@ export default function BasketPageClient({ products }: BasketPageClientProps) {
     setActiveBasketName("Presentation Basket");
   };
 
-  const handleOfflineCache = async () => {
-    if (selectedProducts.length === 0 || isCachingOffline) {
-      return;
-    }
-
-    setIsCachingOffline(true);
-    setOfflineError("");
-    setOfflineProgress(`Saving 0/${selectedProducts.length}…`);
-
-    try {
-      const result = await cacheVisualAidsOffline(
-        selectedProducts.map((product) => product.visualAidImage),
-        ({ completed, total }) => {
-          setOfflineProgress(`Saving ${completed}/${total}…`);
-        },
-      );
-
-      if (result.failures.length > 0) {
-        setOfflineError(
-          `${result.completed} of ${result.total} visual aids were saved. Please retry the remaining ${result.failures.length}.`,
-        );
-      } else {
-        setOfflineProgress(
-          `${result.completed} visual aids are available offline.`,
-        );
-      }
-    } catch (error) {
-      setOfflineProgress("");
-      setOfflineError(
-        error instanceof Error
-          ? error.message
-          : "The visual aids could not be saved offline.",
-      );
-    } finally {
-      setIsCachingOffline(false);
-    }
-  };
-
-  const handleExport = async (type: "pdf" | "ppt") => {
+  const handleExport = async (type: ExportAction) => {
     if (selectedProducts.length === 0 || exporting) {
       return;
     }
@@ -373,11 +323,12 @@ export default function BasketPageClient({ products }: BasketPageClientProps) {
     setExportProgress(`Preparing 1/${selectedProducts.length + 1}…`);
 
     try {
-      if (type === "pdf") {
+      if (type === "pdf-share" || type === "pdf-download") {
         await exportBasketAsPdf(
           selectedProducts,
           setExportProgress,
           activeBasketName,
+          type === "pdf-share" ? "share" : "download",
         );
       } else {
         await exportBasketAsPpt(
@@ -549,12 +500,23 @@ export default function BasketPageClient({ products }: BasketPageClientProps) {
                   </button>
                   <button
                     type="button"
-                    onClick={() => handleExport("pdf")}
+                    onClick={() => handleExport("pdf-share")}
                     disabled={isActionDisabled}
                     className="secondary-button"
                   >
-                    <FileText className="h-4 w-4" aria-hidden="true" />
-                    {exporting === "pdf" ? exportProgress : "Export PDF"}
+                    <Share2 className="h-4 w-4" aria-hidden="true" />
+                    {exporting === "pdf-share" ? exportProgress : "Share PDF"}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => handleExport("pdf-download")}
+                    disabled={isActionDisabled}
+                    className="secondary-button"
+                  >
+                    <Download className="h-4 w-4" aria-hidden="true" />
+                    {exporting === "pdf-download"
+                      ? exportProgress
+                      : "Download PDF"}
                   </button>
                   <button
                     type="button"
@@ -565,24 +527,6 @@ export default function BasketPageClient({ products }: BasketPageClientProps) {
                     <Download className="h-4 w-4" aria-hidden="true" />
                     {exporting === "ppt" ? exportProgress : "Export PPT"}
                   </button>
-                  <button
-                    type="button"
-                    onClick={handleOfflineCache}
-                    disabled={isActionDisabled || isCachingOffline}
-                    className="secondary-button"
-                  >
-                    <CloudDownload className="h-4 w-4" aria-hidden="true" />
-                    {isCachingOffline ? offlineProgress : "Available Offline"}
-                  </button>
-                  <a
-                    href={shareBasketLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="whatsapp-button"
-                  >
-                    <MessageCircle className="h-4 w-4" aria-hidden="true" />
-                    Share Basket
-                  </a>
                   <button
                     type="button"
                     onClick={handleClearBasket}
@@ -607,20 +551,6 @@ export default function BasketPageClient({ products }: BasketPageClientProps) {
                   className="mt-3 text-sm font-semibold text-blue"
                 >
                   {exportProgress}
-                </p>
-              ) : null}
-              {offlineProgress && !isCachingOffline ? (
-                <p
-                  role="status"
-                  aria-live="polite"
-                  className="mt-3 text-sm font-semibold text-blue"
-                >
-                  {offlineProgress}
-                </p>
-              ) : null}
-              {offlineError ? (
-                <p role="alert" className="mt-3 text-sm font-semibold text-red-700">
-                  {offlineError}
                 </p>
               ) : null}
             </div>

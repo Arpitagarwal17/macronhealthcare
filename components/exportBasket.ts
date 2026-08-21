@@ -2,7 +2,7 @@ import type { Product } from "@/data/products";
 import { company } from "@/data/company";
 import { deliverBlob } from "@/components/fileDelivery";
 
-const COVER_IMAGE_PATH = "/visual-aids/visual-aid-cover.jpg";
+const COVER_IMAGE_PATH = "/visual-aids/visual-aid-cover-2026.jpg";
 const PDF_WIDTH = 1920;
 const PDF_HEIGHT = 1080;
 const PPT_WIDTH = 13.333;
@@ -23,6 +23,7 @@ type ImageBounds = {
 };
 
 export type ExportProgressCallback = (message: string) => void;
+export type PdfDeliveryMode = "share" | "download";
 
 function createExportFileName(
   extension: "pdf" | "pptx",
@@ -154,6 +155,7 @@ export async function exportBasketAsPdf(
   products: Product[],
   onProgress?: ExportProgressCallback,
   basketName = "Presentation Basket",
+  deliveryMode: PdfDeliveryMode = "download",
 ) {
   const [{ jsPDF }, images] = await Promise.all([
     import("jspdf"),
@@ -186,7 +188,7 @@ export async function exportBasketAsPdf(
   });
 
   await deliverBlob(pdf.output("blob"), createExportFileName("pdf", basketName), {
-    preferWebShare: true,
+    preferWebShare: deliveryMode === "share",
     shareTitle: "Macron Health Care visual aid",
   });
 }
