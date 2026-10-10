@@ -33,10 +33,10 @@ export default function PortfolioProductCard({ product }: { product: Product }) 
 
       <div className="flex flex-1 flex-col p-5">
         <div className="flex items-start justify-between gap-3">
-          <h3 className="break-words text-xl font-extrabold leading-tight text-ink">
+          <h3 className="break-words text-xl font-semibold leading-tight text-blue">
             {product.brandName}
           </h3>
-          <span className="max-w-[48%] shrink-0 rounded-full border border-teal/20 bg-teal/10 px-3 py-1 text-center text-xs font-bold leading-5 text-blue">
+          <span className="max-w-[48%] shrink-0 rounded-full border border-line bg-porcelain px-3 py-1 text-center text-xs font-semibold leading-5 text-blue">
             {product.dosageForm}
           </span>
         </div>
@@ -54,7 +54,7 @@ export default function PortfolioProductCard({ product }: { product: Product }) 
             <button
               type="button"
               onClick={() => setIsExpanded((value) => !value)}
-              className="mt-2 text-sm font-bold text-blue transition hover:text-teal focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue/60"
+              className="mt-2 text-sm font-semibold text-blue transition hover:text-tealDark focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue/60"
               aria-expanded={isExpanded}
             >
               {isExpanded ? "Show less" : "Show more"}

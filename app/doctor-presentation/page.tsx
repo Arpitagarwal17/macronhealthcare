@@ -5,7 +5,7 @@ import ProductGrid from "@/components/ProductGrid";
 import { products } from "@/data/products";
 
 const DESCRIPTION =
-  "Browse Macron Health Care product visual aids and build a presentation for healthcare professionals - view, share, or export as PDF or PPT.";
+  "Browse Macron Health Care product visual aids. Select products, build a doctor presentation, and share or export it as PDF or PowerPoint.";
 
 export const metadata: Metadata = {
   title: "Doctor Presentation",
@@ -23,8 +23,8 @@ export default function DoctorPresentationPage() {
     <section className="page-shell py-10 sm:py-12">
       <div className="mx-auto max-w-[1200px]">
         <div className="mb-7 max-w-3xl space-y-3">
-          <p className="field-label text-tealDark">Visual aid library</p>
-          <h1 className="text-4xl font-extrabold text-ink sm:text-5xl">
+          <p className="eyebrow">Visual aid library</p>
+          <h1 className="page-heading">
             Doctor Presentation
           </h1>
           <p className="text-base leading-7 text-slate sm:text-lg">

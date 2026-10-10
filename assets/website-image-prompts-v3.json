@@ -1,0 +1,15 @@
+{
+  "generatedWith": "Built-in image_gen tool",
+  "date": "2026-10-10",
+  "note": "Illustrative medical scenes; not photographs of Macron staff, clients or facilities.",
+  "assets": [
+    {
+      "path": "D:/Macron Health Care/public/images/macron-doctors-hero-v3.webp",
+      "prompt": "Use case: photorealistic-natural. Asset type: premium pharmaceutical company homepage hero, wide 2:1 landscape photograph. Create an exceptionally art-directed editorial medical photograph for an Indian pharmaceutical company. On the RIGHT HALF, a distinguished Indian male physician aged around 45 and an Indian female physician aged around 35 in clean white coats have a quiet professional discussion over a tablet in a refined contemporary consulting room. Natural, thoughtful, candid expressions, no looking at camera, no handshake, no promotional grin. Realistic skin texture, credible anatomy, hands and tablet. Frame them waist-up with faces fully visible and generous headroom; keep both people within the rightmost 48% of the image so the photo can crop responsively. On the LEFT HALF, an intentionally empty deep midnight navy #052941 softly illuminated wall, smoothly fading into the naturally lit room on the right. This negative space is reserved for white website text added separately. Muted teal and warm ivory room accents, soft daylight, beautiful photographic depth, restrained film-like color, crisp and lifelike without artificial gloss. No written text, no logo, no watermarks, no certificates, no factory, no pharmacy shelves, no medicine packaging. Landscape 2:1 composition, premium corporate editorial photography, not a website mockup."
+    },
+    {
+      "path": "D:/Macron Health Care/public/images/macron-medical-dialogue-v3.webp",
+      "prompt": "Use case: photorealistic-natural. Asset type: premium pharmaceutical company About Us editorial image. Create a beautifully art-directed candid photograph inside a calm contemporary Indian medical consultation room. An Indian female doctor around age 40 in a white coat, with a subtle stethoscope, sits at a clean oak desk thoughtfully reviewing an open unbranded clinical reference book while an Indian male doctor around 50 in a white coat beside her points gently to a page. Both are physicians, not salespeople. Genuine attentive expressions and natural posture, no looking at camera, no handshake. Clear realistic hands, subtle skin detail, believable paper and cloth textures. Composition is a medium-wide 3:2 landscape editorial portrait; show both faces and the book, with generous headroom and breathing room around them. Quiet ivory architecture, one soft teal accent, daylight from a large side window, softly blurred background, distinguished professional atmosphere and natural color. No text or letters visible on the book, no logos, no certifications, no factory, no pharmacy shelves, no product boxes, no exaggerated laboratory props, no watermark. Exceptionally polished photographic lighting, not a 3D render, not a website mockup."
+    }
+  ]
+}

@@ -149,7 +149,7 @@ export default function ProductGrid({ products }: ProductGridProps) {
           {productSections.map((section, sectionIndex) => (
             <section key={section.category} className="space-y-5">
               <div className="border-b border-line pb-3">
-                <h2 className="text-2xl font-extrabold text-ink">
+                <h2 className="section-heading">
                   {getProductCategoryLabel(section.category)}
                 </h2>
               </div>

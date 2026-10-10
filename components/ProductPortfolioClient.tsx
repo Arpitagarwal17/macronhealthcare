@@ -139,8 +139,8 @@ export default function ProductPortfolioClient({
     <div className="space-y-8">
       <div>
         <div className="max-w-2xl space-y-3">
-          <p className="field-label text-tealDark">Macron Health Care</p>
-          <h1 className="text-4xl font-extrabold leading-tight text-ink sm:text-5xl">
+          <p className="eyebrow">Macron Health Care</p>
+          <h1 className="page-heading">
             Product Portfolio
           </h1>
           <p className="max-w-xl text-base leading-7 text-slate">
@@ -159,11 +159,11 @@ export default function ProductPortfolioClient({
             className="surface-card flex flex-col gap-5 p-5 sm:flex-row sm:items-center sm:justify-between"
           >
             <div className="flex min-w-0 items-start gap-4">
-              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-blue text-white">
+              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-porcelain text-tealDark">
                 <FileText className="h-5 w-5" aria-hidden="true" />
               </span>
               <div className="min-w-0">
-                <h2 className="text-lg font-extrabold text-ink">{item.label}</h2>
+                <h2 className="font-heading text-lg font-semibold text-blue">{item.label}</h2>
               </div>
             </div>
             <div className="grid shrink-0 grid-cols-2 gap-2">
@@ -212,7 +212,7 @@ export default function ProductPortfolioClient({
           {sections.map((section) => (
             <section key={section.category} className="space-y-5">
               <div className="border-b border-line pb-3">
-                <h2 className="text-2xl font-extrabold text-ink">
+                <h2 className="section-heading">
                   {getProductCategoryLabel(section.category)}
                 </h2>
               </div>

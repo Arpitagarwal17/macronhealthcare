@@ -40,7 +40,7 @@ export default function ProductDetailView({
           {backLabel}
         </Link>
         <p className="text-sm font-semibold text-slate">
-          Products intended for trade and healthcare professionals.
+          Product composition, dosage form and visual aid.
         </p>
       </div>
 
@@ -53,10 +53,10 @@ export default function ProductDetailView({
         <aside className="premium-panel min-w-0 p-6 sm:p-7">
           <div className="space-y-6">
             <div>
-              <span className="inline-flex rounded-full border border-teal/20 bg-teal/10 px-3 py-1 text-xs font-bold text-blue">
+              <span className="inline-flex rounded-full border border-line bg-porcelain px-3 py-1 text-xs font-semibold text-blue">
                 {product.dosageForm}
               </span>
-              <h1 className="mt-3 text-3xl font-extrabold leading-tight text-ink sm:text-4xl">
+              <h1 className="mt-3 text-3xl font-semibold leading-tight text-blue sm:text-4xl">
                 {product.brandName}
               </h1>
             </div>
@@ -67,7 +67,7 @@ export default function ProductDetailView({
                 {ingredients.map((ingredient) => (
                   <li
                     key={ingredient}
-                    className="flex gap-3 break-words text-[15px] leading-6 text-ink [overflow-wrap:anywhere]"
+                    className="flex gap-3 break-words text-[15px] leading-6 text-slate [overflow-wrap:anywhere]"
                   >
                     <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-teal" />
                     {ingredient}
@@ -78,12 +78,12 @@ export default function ProductDetailView({
 
             {packSize ? (
               <div className="flex items-center gap-3 border-y border-line py-4">
-                <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-porcelain text-blue">
+                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-porcelain text-tealDark">
                   <Package className="h-5 w-5" aria-hidden="true" />
                 </span>
                 <div>
                   <p className="field-label">Packing</p>
-                  <p className="mt-1 font-bold text-ink">{packSize}</p>
+                  <p className="mt-1 font-semibold text-blue">{packSize}</p>
                 </div>
               </div>
             ) : null}
@@ -103,7 +103,7 @@ export default function ProductDetailView({
         {previousProduct ? (
           <Link
             href={`${routeBase}/${previousProduct.slug}`}
-            className="surface-card flex min-h-16 items-center gap-3 p-4 text-sm font-bold text-blue transition hover:border-blue/35"
+            className="surface-card flex min-h-16 items-center gap-3 p-4 text-sm font-semibold text-blue transition hover:border-blue/35"
           >
             <ArrowLeft className="h-4 w-4" aria-hidden="true" />
             <span>
@@ -117,7 +117,7 @@ export default function ProductDetailView({
         {nextProduct ? (
           <Link
             href={`${routeBase}/${nextProduct.slug}`}
-            className="surface-card flex min-h-16 items-center justify-end gap-3 p-4 text-right text-sm font-bold text-blue transition hover:border-blue/35"
+            className="surface-card flex min-h-16 items-center justify-end gap-3 p-4 text-right text-sm font-semibold text-blue transition hover:border-blue/35"
           >
             <span>
               <span className="block text-xs font-semibold text-slate">Next</span>
@@ -132,8 +132,8 @@ export default function ProductDetailView({
         <section className="mt-14">
           <div className="flex items-end justify-between gap-4 border-b border-line pb-3">
             <div>
-              <p className="field-label text-tealDark">Same therapeutic area</p>
-              <h2 className="mt-2 text-2xl font-extrabold text-ink">Related products</h2>
+              <p className="eyebrow">Same therapeutic area</p>
+              <h2 className="section-heading mt-2">Related products</h2>
             </div>
           </div>
           <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -153,7 +153,7 @@ export default function ProductDetailView({
                   />
                 </div>
                 <div className="p-4">
-                  <h3 className="font-heading text-lg font-extrabold text-ink group-hover:text-blue">
+                  <h3 className="font-heading text-lg font-semibold text-blue group-hover:text-tealDark">
                     {item.brandName}
                   </h3>
                   <p className="mt-1 text-sm font-semibold text-slate">{item.dosageForm}</p>

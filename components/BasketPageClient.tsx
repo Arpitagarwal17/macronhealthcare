@@ -354,8 +354,8 @@ export default function BasketPageClient({ products }: BasketPageClientProps) {
       <div className="mx-auto max-w-[1200px]">
         <div className="mb-6 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
           <div className="space-y-3">
-            <p className="field-label text-blue">Basket</p>
-            <h1 className="text-3xl font-semibold text-ink sm:text-4xl">
+            <p className="eyebrow">Basket</p>
+            <h1 className="page-heading">
               Presentation Basket
             </h1>
           </div>
@@ -366,10 +366,10 @@ export default function BasketPageClient({ products }: BasketPageClientProps) {
         </div>
 
         {sharedItemsParam && sharedBasketSlugs.length > 0 ? (
-          <section className="mb-6 rounded-xl border border-teal/35 bg-teal/10 p-5">
+          <section className="mb-6 rounded-3xl border border-line bg-paper p-5">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
               <div>
-                <h2 className="text-lg font-extrabold text-ink">
+                <h2 className="text-lg font-semibold text-ink">
                   Load shared basket ({sharedBasketSlugs.length}{" "}
                   {sharedBasketSlugs.length === 1 ? "product" : "products"})?
                 </h2>
@@ -397,11 +397,11 @@ export default function BasketPageClient({ products }: BasketPageClientProps) {
           </section>
         ) : null}
 
-        <section className="mb-6 rounded-xl border border-line bg-white p-5 shadow-soft">
+        <section className="surface-card mb-6 p-5">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
             <div>
               <p className="field-label">Saved baskets</p>
-              <h2 className="mt-2 text-xl font-extrabold text-ink">
+              <h2 className="mt-2 text-xl font-semibold text-ink">
                 Reuse detailing sets
               </h2>
               <p className="mt-1 text-sm text-slate">
@@ -418,7 +418,7 @@ export default function BasketPageClient({ products }: BasketPageClientProps) {
                 onChange={(event) => setBasketName(event.target.value)}
                 placeholder={suggestedBasketName}
                 list="basket-name-suggestions"
-                className="min-h-11 min-w-0 flex-1 rounded-lg border border-line bg-white px-4 text-sm text-ink outline-none transition placeholder:text-slate/70 focus-visible:border-blue focus-visible:ring-4 focus-visible:ring-blue/60"
+                className="min-h-11 min-w-0 flex-1 rounded-full border border-line bg-paper px-4 text-sm text-ink outline-none transition placeholder:text-slate/70 focus-visible:border-blue focus-visible:ring-4 focus-visible:ring-blue/60"
               />
               <datalist id="basket-name-suggestions">
                 {therapeuticAreas.map((area) => (
@@ -482,7 +482,7 @@ export default function BasketPageClient({ products }: BasketPageClientProps) {
           </div>
         ) : selectedProducts.length > 0 ? (
           <>
-            <div className="mb-6 rounded-xl border border-line bg-white p-4 shadow-premium sm:p-5">
+            <div className="surface-card mb-6 p-4 sm:p-5">
               <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
                 <p className="text-sm font-semibold text-slate">
                   Export selected products to share with doctor.
@@ -531,7 +531,7 @@ export default function BasketPageClient({ products }: BasketPageClientProps) {
                     type="button"
                     onClick={handleClearBasket}
                     disabled={count === 0 || exporting !== null}
-                    className="secondary-button text-slate"
+                    className="secondary-button"
                   >
                     <Trash2 className="h-4 w-4" aria-hidden="true" />
                     Clear Basket
@@ -626,7 +626,7 @@ function SortableBasketCard({
     <article
       ref={setNodeRef}
       style={style}
-      className={`grid gap-4 rounded-xl border bg-white p-4 shadow-soft transition-shadow sm:grid-cols-[44px_140px_minmax(0,1fr)_120px] sm:items-center ${
+      className={`grid gap-4 rounded-3xl border bg-white p-4 shadow-soft transition-shadow sm:grid-cols-[44px_140px_minmax(0,1fr)_120px] sm:items-center ${
         isDragging
           ? "border-blue/50 shadow-premium"
           : "border-line"
@@ -635,14 +635,14 @@ function SortableBasketCard({
       <button
         type="button"
         aria-label={`Drag ${product.brandName} to reorder`}
-        className="flex h-11 w-11 touch-none items-center justify-center rounded-lg border border-line bg-paper text-blue transition hover:border-blue hover:bg-white focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue/60 sm:self-center"
+        className="icon-button touch-none sm:self-center"
         {...attributes}
         {...listeners}
       >
         <GripVertical className="h-5 w-5" aria-hidden="true" />
       </button>
 
-      <div className="relative aspect-[16/9] min-w-0 overflow-hidden rounded-lg border border-line bg-white">
+      <div className="relative aspect-[16/9] min-w-0 overflow-hidden rounded-3xl border border-line bg-white">
         <Image
           src={product.visualAidImage}
           alt={getProductImageAlt(product)}
@@ -664,7 +664,7 @@ function SortableBasketCard({
         </div>
         <div className="space-y-1">
           <p className="field-label">Dosage Form</p>
-          <span className="inline-flex max-w-full rounded-full border border-teal/25 bg-teal/10 px-3 py-1 text-sm font-semibold leading-5 text-blue">
+          <span className="inline-flex max-w-full rounded-full border border-line bg-paper px-3 py-1 text-sm font-semibold leading-5 text-tealDark">
             {product.dosageForm}
           </span>
         </div>
@@ -673,7 +673,7 @@ function SortableBasketCard({
       <button
         type="button"
         onClick={() => onRemove(product.slug)}
-        className="inline-flex min-h-10 items-center justify-center gap-2 rounded-lg border border-line bg-paper px-4 text-sm font-bold text-slate transition hover:border-blue hover:bg-white hover:text-blue focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue/60"
+        className="secondary-button min-h-10 px-4"
       >
         <Trash2 className="h-4 w-4" aria-hidden="true" />
         Remove

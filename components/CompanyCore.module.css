@@ -1,0 +1,86 @@
+.section { padding-block: var(--section-space); background: var(--surface); }
+.headingRow { display: flex; align-items: end; justify-content: space-between; gap: 40px; margin-bottom: 34px; }
+.headingRow h2 { max-width: 630px; margin-top: 15px; font-size: clamp(30px,3.2vw,44px); line-height: 1.2; font-weight: 700; letter-spacing: -.035em; color: var(--macron-blue); }
+.headingRow > p { max-width: 340px; color: var(--text-muted); font-size: 17px; line-height: 1.7; }
+.experience { display: grid; grid-template-columns: 1.2fr 1fr; border: 1px solid var(--line); border-radius: 28px; overflow: hidden; background: var(--surface-soft); }
+.visual { display: grid; place-items: center; min-width: 0; padding: 20px; background: var(--macron-blue); }
+.wheel { position: relative; width: 100%; max-width: 550px; aspect-ratio: 1; }
+.orbit { position: absolute; inset: 0; width: 100%; height: 100%; }
+.track { stroke: rgb(196 230 225 / .35); stroke-width: 1.2; }
+.innerTrack { stroke: rgb(196 230 225 / .1); stroke-width: 1; }
+.spokes { stroke: rgb(196 230 225 / .4); stroke-width: 1.2; }
+.trail { stroke: var(--on-dark-accent); stroke-width: 3; stroke-linecap: round; }
+.beaconHalo { fill: rgb(196 230 225 / .14); }
+.beacon { fill: white; }
+.centre { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); width: 35%; aspect-ratio: 1; border-radius: 50%; background: white; box-shadow: 0 0 0 12px rgb(255 255 255 / .04),0 0 0 13px rgb(196 230 225 / .16),0 18px 42px rgb(0 0 0 / .1); }
+.logo { object-fit: contain; padding: 10%; }
+.choices { position: absolute; inset: 0; }
+.choice { position: absolute; display: flex; align-items: center; justify-content: center; gap: 9px; width: 27%; min-height: 66px; padding: 12px 8px; transform: translate(-50%,-50%); border: 1px solid rgb(196 230 225 / .3); border-radius: 18px; background: var(--macron-blue); color: white; font-size: 13px; font-weight: 600; transition: background 450ms,color 450ms,border-color 450ms,box-shadow 450ms; }
+.choice svg { color: var(--on-dark-accent); flex-shrink: 0; }
+.choice span { text-transform: capitalize; }
+.choice:hover { border-color: var(--on-dark-accent); }
+.choice:focus-visible { outline: 3px solid white; outline-offset: 5px; }
+.choice[aria-pressed="true"] { background: white; border-color: white; color: var(--macron-blue); box-shadow: 0 6px 28px rgb(0 0 0 / .12); }
+.choice[aria-pressed="true"] svg { color: var(--macron-teal-dark); }
+.position0 { left: 50%; top: 14%; }
+.position1 { left: 86%; top: 50%; }
+.position2 { left: 50%; top: 86%; }
+.position3 { left: 14%; top: 50%; }
+.detailColumn { position: relative; display: flex; flex-direction: column; justify-content: center; min-width: 0; padding: 46px 44px 74px; }
+.detail { min-height: 355px; }
+.detailContent { animation: detailArrival 650ms cubic-bezier(.22,1,.36,1) both; }
+.detailIcon { display: grid; place-items: center; width: 62px; height: 62px; border: 1px solid var(--line); border-radius: 19px; background: white; color: var(--macron-teal-dark); }
+.detailLabel { margin-top: 27px; color: var(--macron-teal-dark); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; }
+.detail h3 { margin-top: 14px; font-size: clamp(26px,2.6vw,35px); font-weight: 700; line-height: 1.22; letter-spacing: -.035em; color: var(--macron-blue); }
+.detailCopy { margin-top: 18px; color: var(--text-muted); font-size: 17px; line-height: 1.75; }
+.detailLink { display: inline-flex; align-items: center; gap: 16px; min-height: 44px; margin-top: 20px; color: var(--macron-blue); font-size: 14px; font-weight: 700; }
+.detailLink:hover { color: var(--macron-teal-dark); }
+.detailLink:focus-visible,.motionButton:focus-visible { outline: 2px solid var(--macron-teal-dark); outline-offset: 4px; border-radius: 8px; }
+.motionButton { position: absolute; bottom: 20px; right: 30px; display: inline-flex; min-height: 44px; align-items: center; gap: 8px; color: var(--text-muted); font-size: 12px; font-weight: 600; }
+@media (min-width: 900px) and (max-width: 1199px) {
+  .visual { padding: 14px; }
+  .choice { flex-direction: column; gap: 7px; font-size: 12px; padding: 10px 5px; }
+  .detailColumn { padding: 32px 28px 72px; }
+  .detail { min-height: 365px; }
+  .detailCopy { font-size: 16px; }
+}
+@media (max-width: 1023px) {
+  .headingRow { align-items: flex-start; flex-direction: column; gap: 18px; }
+  .headingRow > p { max-width: 590px; }
+}
+@media (max-width: 899px) {
+  .experience { grid-template-columns: 1fr; }
+  .visual { padding: 14px 20px; }
+  .wheel { max-width: 440px; }
+  .choice { flex-direction: column; gap: 7px; padding: 10px 5px; font-size: 13px; }
+  .detailColumn { padding: 30px 34px 65px; }
+  .detail { min-height: 236px; }
+  .detailIcon { display: none; }
+  .detailLabel { margin-top: 0; }
+  .detail h3 { font-size: 30px; }
+  .detailCopy { max-width: 590px; }
+  .motionButton { bottom: 14px; }
+}
+@media (max-width: 639px) {
+  .section { padding-block: 44px; }
+  .headingRow { margin-bottom: 25px; }
+  .headingRow h2 { font-size: 29px; }
+  .headingRow > p { font-size: 16px; }
+  .experience { border-radius: 24px; }
+  .visual { padding: 18px 10px; }
+  .wheel { max-width: 360px; }
+  .centre { width: 34%; box-shadow: 0 0 0 7px rgb(255 255 255 / .04),0 0 0 8px rgb(196 230 225 / .16); }
+  .logo { padding: 12%; }
+  .choice { min-height: 66px; font-size: 12px; gap: 6px; padding: 9px 2px; border-radius: 14px; }
+  .choice svg { width: 21px; height: 21px; }
+  .detailColumn { padding: 27px 24px 61px; }
+  .detail { min-height: 253px; }
+  .detail h3 { font-size: 27px; }
+  .detailCopy { font-size: 16px; line-height: 1.65; }
+  .detailLink { margin-top: 14px; }
+  .motionButton { right: 24px; bottom: 12px; }
+}
+@media (max-width: 359px) { .detailColumn { padding-inline: 20px; } .detail { min-height: 277px; } }
+@keyframes detailArrival { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.experience[data-reduced-motion="true"] * { animation: none !important; transition: none !important; }
+@media (prefers-reduced-motion: reduce) { .section * { animation: none !important; transition: none !important; } }

@@ -25,8 +25,8 @@ export async function generateMetadata({
   }
 
   const description =
-    `${product.brandName} visual aid for healthcare professionals from ` +
-    "Macron Health Care.";
+    `${product.brandName} product visual aid from Macron Health Care, ` +
+    "with composition and dosage form.";
   const path = `/doctor-presentation/${product.slug}`;
 
   return {

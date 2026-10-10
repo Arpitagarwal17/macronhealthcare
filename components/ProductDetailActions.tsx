@@ -70,7 +70,7 @@ export default function ProductDetailActions({
           aria-pressed={isInBasket}
           className={
             isInBasket
-              ? "inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-red-200 bg-red-50 px-5 text-sm font-bold text-red-700 shadow-soft transition hover:border-red-300 hover:bg-red-100 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-red-600"
+              ? "inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-red-200 bg-red-50 px-5 text-sm font-bold text-red-700 shadow-soft transition hover:border-red-300 hover:bg-red-100 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-red-600"
               : "primary-button"
           }
         >

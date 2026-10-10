@@ -17,7 +17,7 @@ export const HOME_TITLE =
   "Macron Health Care | Pharmaceutical Company in India";
 
 export const HOME_DESCRIPTION =
-  "Macron Health Care is an Indian pharmaceutical company offering branded formulations across multiple therapeutic areas, trusted since 1999.";
+  "Macron Health Care is an Indian pharmaceutical company with a portfolio of branded formulations across a range of dosage forms.";
 
 export const OG_TITLE = HOME_TITLE;
 

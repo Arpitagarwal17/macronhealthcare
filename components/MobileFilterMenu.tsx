@@ -50,13 +50,13 @@ export default function MobileFilterMenu({
         aria-controls={`${id}-options`}
         aria-labelledby={`${id}-label ${id}-value`}
         onClick={() => setIsOpen((current) => !current)}
-        className="flex min-h-12 w-full items-center justify-between gap-3 rounded-lg border border-blue/20 bg-white px-4 py-3 text-left text-sm font-bold text-blue shadow-soft transition hover:border-blue/40 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue/60"
+        className="secondary-button w-full justify-between gap-3 px-4 py-3 text-left"
       >
         <span id={`${id}-value`} className="min-w-0 break-words">
           {selectedOption?.label}
         </span>
         <ChevronDown
-          className={`h-5 w-5 shrink-0 text-teal transition-transform ${
+          className={`h-5 w-5 shrink-0 text-tealDark transition-transform ${
             isOpen ? "rotate-180" : ""
           }`}
           aria-hidden="true"
@@ -74,7 +74,7 @@ export default function MobileFilterMenu({
               closeAndRestoreFocus();
             }
           }}
-          className="mt-2 grid max-h-72 gap-2 overflow-y-auto rounded-lg border border-line bg-paper p-2 shadow-premium"
+          className="mt-2 grid max-h-72 gap-2 overflow-y-auto rounded-3xl border border-line bg-paper p-3 shadow-soft"
         >
           {options.map((option) => {
             const isSelected = option.value === value;
@@ -88,10 +88,10 @@ export default function MobileFilterMenu({
                   onChange(option.value);
                   closeAndRestoreFocus();
                 }}
-                className={`flex min-h-11 w-full items-center justify-between gap-3 rounded-md border px-3 py-2.5 text-left text-sm font-bold transition focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue/60 ${
+                className={`flex min-h-11 w-full items-center justify-between gap-3 rounded-full border px-4 py-2.5 text-left text-sm font-bold transition focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue/60 ${
                   isSelected
                     ? "border-blue bg-blue text-white shadow-soft"
-                    : "border-line bg-white text-slate hover:border-blue/35 hover:text-blue"
+                    : "border-line bg-white text-blue hover:border-tealDark hover:text-tealDark"
                 }`}
               >
                 <span className="min-w-0 break-words">{option.label}</span>

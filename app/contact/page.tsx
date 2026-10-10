@@ -4,8 +4,7 @@ import type { ReactElement } from "react";
 import { company } from "@/data/company";
 
 const DESCRIPTION =
-  `Contact Macron Health Care for product enquiries and trade partnerships across India. ` +
-  `Call or WhatsApp ${company.contactLinks.phone.display}.`;
+  "Find Macron Health Care's contact details, registered office in Ahmedabad and depot in Jaipur.";
 
 export const metadata: Metadata = {
   title: "Contact Us",
@@ -53,9 +52,9 @@ export default function ContactPage() {
   return (
     <section className="page-shell py-10 sm:py-14">
       <div className="max-w-3xl">
-        <p className="field-label text-tealDark">Business enquiries</p>
-        <h1 className="mt-3 text-4xl font-extrabold leading-tight text-ink sm:text-5xl">
-          Contact {company.displayName}
+        <p className="eyebrow">{company.displayName}</p>
+        <h1 className="page-heading mt-3">
+          Contact us
         </h1>
         <p className="mt-4 text-lg leading-8 text-slate">
           Reach the Macron Health Care team by WhatsApp, phone, or email.
@@ -69,15 +68,15 @@ export default function ContactPage() {
       </div>
 
       <section className="mt-10">
-        <h2 className="text-2xl font-extrabold text-ink">Our locations</h2>
+        <h2 className="section-heading">Our locations</h2>
         <div className="mt-4 grid gap-4 lg:grid-cols-2">
           {company.addresses.map((address) => (
             <article key={address.label} className="surface-card flex gap-4 p-6">
-              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-porcelain text-blue">
+              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-porcelain text-tealDark">
                 <MapPin className="h-5 w-5" aria-hidden="true" />
               </span>
               <div>
-                <h3 className="font-heading text-lg font-extrabold text-ink">
+                <h3 className="font-heading text-lg font-semibold text-blue">
                   {address.label}
                 </h3>
                 <address className="mt-2 not-italic leading-7 text-slate">
@@ -116,11 +115,11 @@ function ContactChannel({
       rel={external ? "noopener noreferrer" : undefined}
       className="surface-card block p-5 transition hover:-translate-y-0.5 hover:border-blue/35 hover:shadow-premium"
     >
-      <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-porcelain text-blue [&_svg]:h-5 [&_svg]:w-5">
+      <span className="flex h-11 w-11 items-center justify-center rounded-full bg-porcelain text-tealDark [&_svg]:h-5 [&_svg]:w-5">
         {icon}
       </span>
       <p className="mt-4 field-label">{label}</p>
-      <p className="mt-2 break-words text-base font-bold leading-6 text-ink">{value}</p>
+      <p className="mt-2 break-words text-base font-semibold leading-6 text-blue">{value}</p>
     </a>
   );
 }

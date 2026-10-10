@@ -55,6 +55,6 @@ export const company = {
   ],
   brandLines: [
     "Committed to Quality and Services",
-    "Serving the healthcare trade since 1999",
+    "Committed to healthcare since 1999",
   ],
 };

@@ -6,6 +6,7 @@ This guide is for future Codex work on the Macron Health Care website. The site 
 
 - Do not redesign, recolor, crop, stretch, filter, or recreate the official Macron Health Care logo.
 - Use the existing logo image exactly as provided in `public/logo.png`.
+- Macron Health Care is a pharmaceutical company, not a manufacturer. Do not add manufacturing, GMP, ISO, or other certification claims without verified company evidence. Do not identify Macron as a manufacturer in structured data.
 - Do not add random medical claims, indications, benefits, dosage advice, mechanisms, or invented product descriptions.
 - Product information must come from `data/products.ts`.
 - Keep product data consistent across Product Portfolio, Doctor Presentation, Basket, PPT View, PDF export, and PPT export.
@@ -25,24 +26,33 @@ This guide is for future Codex work on the Macron Health Care website. The site 
 ## Important Routes
 
 - `/` - Homepage
-- `/product-list` - Product Portfolio and downloadable Product Card/Product List PDFs
+- `/about` - Canonical About Us page
+- `/product-portfolio` - Canonical Product Portfolio and downloadable Product Card/MRP List PDFs
+- `/product-portfolio/[slug]` - Product information detail page
 - `/doctor-presentation` - Visual aid selection and basket creation
 - `/doctor-presentation/[slug]` - Product visual aid detail page
 - `/basket` - Presentation basket, drag reorder, PPT view, PDF/PPT export
-- `/info` - Company information
+- `/company-info` - Company registration, address, and contact details
 - `/contact` - Contact details
-- `/visual-aids` and `/products` are legacy redirect routes.
+- `/product-list` and `/products` redirect to `/product-portfolio`; `/products/[slug]` redirects to the matching `/product-portfolio/[slug]`.
+- `/visual-aids` and `/visual-aids/[slug]` redirect to the matching Doctor Presentation routes.
+- `/info` redirects to `/company-info`.
 
 ## Key Files
 
 - `app/layout.tsx` - Root layout
 - `app/page.tsx` - Homepage
-- `app/product-list/page.tsx` - Product Portfolio page
+- `app/about/page.tsx` - About Us page
+- `app/product-portfolio/page.tsx` - Product Portfolio page
+- `app/product-portfolio/[slug]/page.tsx` - Product information detail page
 - `app/doctor-presentation/page.tsx` - Doctor Presentation listing
 - `app/doctor-presentation/[slug]/page.tsx` - Visual aid detail view
 - `app/basket/page.tsx` - Basket route wrapper
 - `components/Header.tsx` - Sticky responsive header
 - `components/Footer.tsx` - Responsive footer
+- `components/CompanyCore.tsx` - Interactive homepage principles around the official logo, with a continuous clockwise ring and pause/play controls
+- `components/HeritageSection.tsx` - Compact homepage heritage band with a unified Since 1999 pill
+- `components/CompanySections.tsx` - About principles and shared patient/doctor values section
 - `components/ProductPortfolioClient.tsx` - Read-only product portfolio cards and filters
 - `components/ProductGrid.tsx` - Doctor Presentation product grid
 - `components/ProductCard.tsx` - Doctor Presentation product card
@@ -54,6 +64,25 @@ This guide is for future Codex work on the Macron Health Care website. The site 
 - `data/productCategories.ts` - Dosage grouping/filter logic
 - `data/downloads.ts` - Product Card/Product List PDF links
 - `data/company.ts` - Company contact, address, registration data
+
+## Homepage and About Us
+
+- Open the homepage with concise human-centred copy: "Behind every prescription, there is a person." Follow with a dedicated Since 1999 section and the interactive company core.
+- Keep the heritage section compact: one readable "Since 1999" pill, the heading "A legacy of quality and service.", concise quality/service copy, and an "Our story" link to `/about`. Use `company.servingSince` for the year. Do not reintroduce giant year digits, a separated "Since" label, or a timeline.
+- Keep Product Portfolio and Doctor Presentation sections further down the homepage so visitors meet the company before using the professional tools.
+- The About Us page uses established company facts from `data/company.ts`; avoid invented history, scale, facilities, or accreditation claims.
+- Keep the official logo unchanged in the header and footer.
+- Use one clean navigation bar. Do not add a utility strip above it. Contact details belong in the footer. The footer summary is exactly "Committed to quality and services since 1999." The homepage also has its own Since 1999 section.
+- Home and About use scoped CSS modules. Keep the homepage company introduction first and product/presentation tools farther down.
+- The website is shown to doctors by the medical team. Use concise company and product copy; avoid trade-partner, healthcare-audience and enquiry marketing pitches. Do not repeat the company name above the homepage headline; the original logo establishes the brand.
+- Use rounded pill buttons with clear labels, circular arrow accents, accessible focus states and consistent hover feedback on Home/About/navigation.
+- Use `public/images/macron-doctors-hero-v3.webp` for the homepage hero and `public/images/macron-medical-dialogue-v3.webp` for company imagery. These are illustrative images, not photographs of actual Macron employees, doctors, clients or facilities. Prompts are recorded in `assets/website-image-prompts-v3.json` and the copyable `assets/IMAGE-PROMPTS.txt`.
+- `components/PageMotion.tsx` adds one-time scroll reveals to Home/About via `data-reveal`. Content is visible without JavaScript; reduced-motion preferences disable animations.
+- The company core keeps the official logo intact at its centre. At every width, arrange the nodes clockwise around one ring: Mission at the top, Vision on the right, Values at the bottom, and Promise on the left. Do not add numeric counters or segmented progress indicators.
+- Drive the company core with one continuous `requestAnimationFrame` clock, taking 6.5 seconds to reach each next node. Update the selected node and detail copy when the ring indicator arrives at that node; do not use separate clocks for the ring and copy. Provide manual Pause/Play, respect reduced motion, and stop automatic motion off-screen and in background tabs. Pointer selection keeps automatic cycling active; keyboard focus on selectors or focus in the detail content pauses cycling until focus leaves.
+- Use the shared company sections and four-column footer consistently. Care content describes patients' dignity, respect for doctors' clinical judgement and responsible service. Do not replace it with product-information or visual-aid feature lists, and do not imply laboratory testing, manufacturing facilities, certification or product efficacy.
+- Use bold Manrope (700) for company-page headings, with regular body text. Avoid italic serif headlines, oversized tablet headings, and repeated commitment slogans. The About page has no separate cities/locations section; addresses remain in the footer and contact information.
+- Keep the About title short and on one line. Use normal-flow image frames on mobile and tablet, with both subjects visible; do not overlay text on the About image. Home uses a dedicated tablet split hero and stacked phone hero. At widths of 899px and below, stack the company-core wheel above its detail panel. On phones, keep a compact wheel with the same four directional nodes; do not replace it with a two-by-two grid. The shared care image is one rectangular frame at every size. Keep About principles in compact icon rows on smaller screens.
 
 ## Product Data Rules
 
@@ -177,6 +206,9 @@ Current export filenames:
 ## Public Assets
 
 - Official logo: `public/logo.png`
+- Homepage pharmaceutical image: `public/images/macron-doctors-hero-v3.webp`
+- About Us image: `public/images/macron-medical-dialogue-v3.webp`
+- Patient/doctor values image: `public/macron-doctor-patient-trust-hero-2026.webp` (illustrative consultation; preserve both faces in responsive crops)
 - Cover slide: `public/visual-aids/visual-aid-cover-2026.jpg`
 - Visual aids: `public/visual-aids/`
 - Curix-200 official image: `public/visual-aids/curix-200.jpg`
@@ -187,21 +219,22 @@ Current export filenames:
 
 Use a premium, clean pharma style:
 
-- Light background
+- One pale background `#F4F8FA` with white sections and cards
 - Macron navy blue `#063B78`
-- Teal accent `#009688`
+- Teal accent `#00796B`
 - White cards
-- Soft light-blue borders
-- Rounded corners
+- Shared border `#D8E5EC` and muted text `#526579`
+- 24px card corners, pill buttons, circular icon controls
 - Soft shadows
 - Readable product composition text
 - Mobile-first spacing and touch-friendly buttons
+- Reuse CSS tokens in `app/globals.css` and their Tailwind mappings; do not introduce a different palette for individual sections or product tools.
 
 Avoid:
 
 - Harsh gradients
 - Random stock/AI medical imagery
-- Decorative medical icons unless needed for contact/footer clarity
+- Unrelated decorative icons; use consistent line icons when explaining company principles or actions
 - Tiny text
 - Joined contact details
 - Overcrowded product cards

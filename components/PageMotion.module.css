@@ -1,0 +1,4 @@
+.motion [data-motion="pending"] { opacity: 0; translate: 0 26px; }
+@media (prefers-reduced-motion: reduce) {
+  .motion [data-motion] { opacity: 1; translate: none; transition: none; }
+}

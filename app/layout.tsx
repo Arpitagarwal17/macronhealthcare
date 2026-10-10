@@ -153,7 +153,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" data-scroll-behavior="smooth">
       <head>
         <script
           type="application/ld+json"
@@ -163,9 +163,10 @@ export default function RootLayout({
         />
       </head>
       <body className={`${manrope.variable} ${sourceSans.variable}`}>
+        <a href="#main-content" className="skip-link">Skip to content</a>
         <div className="flex min-h-screen flex-col">
           <Header />
-          <main className="flex-1">{children}</main>
+          <main id="main-content" tabIndex={-1} className="flex-1">{children}</main>
           <Footer />
           <FloatingWhatsApp />
           <ServiceWorkerRegistration />

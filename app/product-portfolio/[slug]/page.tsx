@@ -107,9 +107,6 @@ export default async function ProductPortfolioDetailPage({
           "@type": "Brand",
           name: product.brandName,
         },
-        manufacturer: {
-          "@id": `${company.websiteUrl}/#organization`,
-        },
         additionalProperty: [
           {
             "@type": "PropertyValue",

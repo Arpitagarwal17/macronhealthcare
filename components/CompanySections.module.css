@@ -1,0 +1,56 @@
+.section { padding-block: var(--section-space); background: var(--surface); }
+.softSection { background: var(--surface-soft); }
+.heading { margin-top: 16px; color: var(--macron-blue); font-size: clamp(2rem, 3.1vw, 2.8rem); font-weight: 700; line-height: 1.22; letter-spacing: -.03em; }
+.copy { max-width: 520px; margin-top: 24px; color: var(--text-muted); font-size: 1.125rem; line-height: 1.8; }
+.button { width: fit-content; margin-top: 28px; gap: 20px; }
+.button svg { transition: transform 220ms; }
+.button:hover svg { transform: rotate(45deg); }
+.sectionIntro { max-width: 840px; margin: 0 auto 40px; text-align: center; }
+.principleGrid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 24px; }
+.principleCard { padding: 36px 30px 34px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--card-radius); box-shadow: 0 8px 24px rgb(var(--macron-blue-rgb) / .035); transition: transform 240ms,box-shadow 240ms,border-color 240ms; }
+.principleCard:hover { transform: translateY(-4px); border-color: var(--macron-teal-dark); box-shadow: 0 16px 32px rgb(var(--macron-blue-rgb) / .06); }
+.principleIcon { display: grid; place-items: center; width: 70px; height: 70px; border: 1px solid var(--line); border-radius: 50%; background: var(--surface-soft); color: var(--macron-teal-dark); }
+.principleCard h3 { margin-top: 26px; color: var(--macron-blue); font-size: 1.6rem; font-weight: 700; letter-spacing: -.025em; }
+.principleCard p { margin-top: 14px; color: var(--text-muted); font-size: 1.05rem; line-height: 1.75; }
+.qualityGrid { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 72px; }
+.qualityGrid > * { min-width: 0; }
+.careVisual { position: relative; width: 100%; aspect-ratio: 1.04; overflow: hidden; border-radius: var(--card-radius); background: var(--surface-soft); }
+.careImage { object-fit: cover; object-position: 85% center; }
+.qualityList { display: grid; gap: 21px; margin-top: 26px; }
+.qualityList li { display: flex; align-items: flex-start; gap: 15px; }
+.qualityList li > svg { flex-shrink: 0; margin-top: 3px; color: var(--macron-teal-dark); }
+.qualityList h3 { color: var(--macron-blue); font-size: 1rem; font-weight: 700; }
+.qualityList p { margin-top: 5px; color: var(--text-muted); font-size: .97rem; line-height: 1.6; }
+@media (max-width: 1100px) { .qualityGrid { gap: 40px; } .principleCard { padding: 30px 24px; } }
+@media (max-width: 1023px) {
+  .section { padding-block: 52px; }
+  .principleGrid { grid-template-columns: 1fr; gap: 14px; }
+  .principleCard { display: grid; grid-template-columns: 54px minmax(0,1fr); column-gap: 20px; padding: 24px; }
+  .principleIcon { grid-row: span 2; width: 54px; height: 54px; }
+  .principleIcon svg { width: 25px; height: 25px; }
+  .principleCard h3 { font-size: 1.35rem; margin-top: 0; }
+  .principleCard p { margin-top: 8px; font-size: 1rem; line-height: 1.65; }
+  .qualityGrid { grid-template-columns: .9fr 1.1fr; gap: 30px; }
+  .careVisual { aspect-ratio: 1.04; }
+  .careImage { object-position: 85% center; }
+}
+@media (max-width: 767px) {
+  .section { padding-block: 44px; }
+  .heading { margin-top: 12px; font-size: 1.75rem; }
+  .copy { margin-top: 18px; font-size: 1rem; line-height: 1.7; }
+  .button { margin-top: 22px; }
+  .sectionIntro { text-align: left; margin-bottom: 24px; }
+  .qualityGrid { grid-template-columns: minmax(0,1fr); gap: 28px; }
+  .qualityGrid > div:last-child { order: -1; }
+  .careVisual { width: 100%; max-width: 560px; margin-inline: auto; aspect-ratio: 16/10; }
+  .careImage { object-position: right center; }
+  .qualityList { gap: 17px; margin-top: 22px; }
+}
+@media (max-width: 639px) {
+  .principleCard { grid-template-columns: 42px minmax(0,1fr); gap: 0 14px; padding: 20px; }
+  .principleIcon { width: 42px; height: 42px; }
+  .principleIcon svg { width: 22px; height: 22px; }
+  .principleCard h3 { font-size: 1.15rem; }
+  .principleCard p { font-size: .95rem; }
+}
+@media (prefers-reduced-motion: reduce) { .section *, .section *::before,.section *::after { transition: none !important; } }

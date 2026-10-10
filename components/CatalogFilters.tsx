@@ -38,7 +38,7 @@ export default function CatalogFilters({
   const therapeuticFilters: TherapeuticFilter[] = ["All", ...therapeuticAreas];
 
   return (
-    <div className="rounded-xl border border-line bg-white p-4 shadow-premium sm:p-5">
+    <div className="surface-card p-4 sm:p-5">
       <label className="relative block">
         <Search
           className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-slate"
@@ -50,7 +50,7 @@ export default function CatalogFilters({
           onChange={(event) => onFilterChange("q", event.target.value)}
           placeholder="Search brand or composition..."
           aria-label="Search by brand or composition"
-          className="h-[52px] w-full rounded-lg border border-line bg-paper pl-12 pr-5 text-base text-ink outline-none transition placeholder:text-slate/65 focus-visible:border-blue focus-visible:bg-white focus-visible:ring-4 focus-visible:ring-blue/60"
+          className="h-[52px] w-full rounded-full border border-line bg-paper pl-12 pr-5 text-base text-ink outline-none transition placeholder:text-slate/65 focus-visible:border-blue focus-visible:bg-white focus-visible:ring-4 focus-visible:ring-blue/60"
         />
       </label>
 
@@ -142,7 +142,7 @@ function FilterChip({
       className={`h-[38px] shrink-0 rounded-full border px-4 text-sm font-bold transition focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue/60 ${
         isSelected
           ? "border-blue bg-blue text-white shadow-soft"
-          : "border-blue/15 bg-white text-slate hover:border-blue/45 hover:text-blue"
+          : "border-line bg-paper text-blue hover:border-tealDark hover:text-tealDark"
       }`}
     >
       {label}
