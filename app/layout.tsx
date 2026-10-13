@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Manrope, Source_Sans_3 } from "next/font/google";
+import { Baloo_Bhai_2 } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -16,13 +16,7 @@ import {
   SITE_URL,
 } from "@/data/seo";
 
-const manrope = Manrope({
-  subsets: ["latin"],
-  variable: "--font-heading",
-  display: "swap",
-});
-
-const sourceSans = Source_Sans_3({
+const balooBhai = Baloo_Bhai_2({
   subsets: ["latin"],
   variable: "--font-body",
   display: "swap",
@@ -162,7 +156,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={`${manrope.variable} ${sourceSans.variable}`}>
+      <body className={balooBhai.variable}>
         <a href="#main-content" className="skip-link">Skip to content</a>
         <div className="flex min-h-screen flex-col">
           <Header />

@@ -2,14 +2,14 @@
 .page a:focus-visible { outline: 3px solid var(--macron-teal-dark); outline-offset: 5px; }
 .intro { padding-block: 60px 76px; background: var(--surface); }
 .masthead { margin-bottom: 38px; animation: arrival 700ms cubic-bezier(.22,1,.36,1) both; }
-.title { margin: 0; font-size: clamp(36px,4.2vw,56px); font-weight: 700; line-height: 1.15; letter-spacing: -.035em; }
+.title { margin: 0; font-size: clamp(36px,4.2vw,56px); font-weight: 700; line-height: 1.15; letter-spacing: 0; }
 .introLead { margin-top: 14px; font-size: 18px; line-height: 1.65; color: var(--text-muted); }
 .introGrid { display: grid; grid-template-columns: 1.05fr 1fr; gap: 64px; align-items: center; }
 .introGrid > * { min-width: 0; }
 .imageFrame { position: relative; width: 100%; aspect-ratio: 3/2; overflow: hidden; border-radius: var(--card-radius); background: var(--surface-soft); animation: arrival 850ms 100ms cubic-bezier(.22,1,.36,1) both; }
 .partnershipImage { object-fit: cover; object-position: 55% center; }
 .eyebrow { color: var(--macron-teal-dark); font-size: 11px; font-weight: 700; letter-spacing: .15em; line-height: 1.6; text-transform: uppercase; }
-.sectionTitle { margin-top: 14px; font-size: clamp(26px,2.65vw,34px); font-weight: 700; letter-spacing: -.025em; line-height: 1.25; }
+.sectionTitle { margin-top: 14px; font-size: clamp(26px,2.65vw,34px); font-weight: 700; letter-spacing: 0; line-height: 1.25; }
 .storyBody { color: var(--text-muted); font-size: 17px; line-height: 1.75; }
 .storyBody > p:not(.eyebrow) { margin-top: 19px; }
 .sectionTitle { color: var(--macron-blue); }

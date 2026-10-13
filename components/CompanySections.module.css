@@ -1,6 +1,6 @@
 .section { padding-block: var(--section-space); background: var(--surface); }
 .softSection { background: var(--surface-soft); }
-.heading { margin-top: 16px; color: var(--macron-blue); font-size: clamp(2rem, 3.1vw, 2.8rem); font-weight: 700; line-height: 1.22; letter-spacing: -.03em; }
+.heading { margin-top: 16px; color: var(--macron-blue); font-size: clamp(2rem, 3.1vw, 2.8rem); font-weight: 700; line-height: 1.22; letter-spacing: 0; }
 .copy { max-width: 520px; margin-top: 24px; color: var(--text-muted); font-size: 1.125rem; line-height: 1.8; }
 .button { width: fit-content; margin-top: 28px; gap: 20px; }
 .button svg { transition: transform 220ms; }
@@ -10,7 +10,7 @@
 .principleCard { padding: 36px 30px 34px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--card-radius); box-shadow: 0 8px 24px rgb(var(--macron-blue-rgb) / .035); transition: transform 240ms,box-shadow 240ms,border-color 240ms; }
 .principleCard:hover { transform: translateY(-4px); border-color: var(--macron-teal-dark); box-shadow: 0 16px 32px rgb(var(--macron-blue-rgb) / .06); }
 .principleIcon { display: grid; place-items: center; width: 70px; height: 70px; border: 1px solid var(--line); border-radius: 50%; background: var(--surface-soft); color: var(--macron-teal-dark); }
-.principleCard h3 { margin-top: 26px; color: var(--macron-blue); font-size: 1.6rem; font-weight: 700; letter-spacing: -.025em; }
+.principleCard h3 { margin-top: 26px; color: var(--macron-blue); font-size: 1.6rem; font-weight: 700; letter-spacing: 0; }
 .principleCard p { margin-top: 14px; color: var(--text-muted); font-size: 1.05rem; line-height: 1.75; }
 .qualityGrid { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 72px; }
 .qualityGrid > * { min-width: 0; }

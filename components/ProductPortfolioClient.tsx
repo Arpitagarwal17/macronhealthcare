@@ -2,7 +2,7 @@
 
 import { Download, Eye, FileText } from "lucide-react";
 import { useMemo, useState, type MouseEvent } from "react";
-import CatalogAudienceBanner from "@/components/CatalogAudienceBanner";
+import CatalogHeader from "@/components/CatalogHeader";
 import CatalogFilters from "@/components/CatalogFilters";
 import PortfolioProductCard from "@/components/PortfolioProductCard";
 import {
@@ -137,20 +137,7 @@ export default function ProductPortfolioClient({
 
   return (
     <div className="space-y-8">
-      <div>
-        <div className="max-w-2xl space-y-3">
-          <p className="eyebrow">Macron Health Care</p>
-          <h1 className="page-heading">
-            Product Portfolio
-          </h1>
-          <p className="max-w-xl text-base leading-7 text-slate">
-            Explore product photos, compositions and dosage forms. Download the
-            latest product card and MRP list.
-          </p>
-        </div>
-      </div>
-
-      <CatalogAudienceBanner current="portfolio" />
+      <CatalogHeader current="portfolio" />
 
       <div className="grid gap-4 lg:grid-cols-2">
         {downloads.map((item) => (
@@ -158,7 +145,7 @@ export default function ProductPortfolioClient({
             key={item.label}
             className="surface-card flex flex-col gap-5 p-5 sm:flex-row sm:items-center sm:justify-between"
           >
-            <div className="flex min-w-0 items-start gap-4">
+            <div className="flex min-w-0 items-center gap-4">
               <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-porcelain text-tealDark">
                 <FileText className="h-5 w-5" aria-hidden="true" />
               </span>

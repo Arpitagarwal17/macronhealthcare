@@ -128,7 +128,7 @@ export default function HomePage() {
             <div className={styles.presentationFrame}>
               <Image src="/visual-aid-cover-home.webp" alt="Macron Health Care visual aid cover" fill sizes="(min-width: 1024px) 640px, 100vw" className="object-contain" />
             </div>
-            <div className={styles.presentationCaption}><span>Product visual aids</span><span>View. Select. Present. <ArrowRight size={17} aria-hidden="true" /></span></div>
+            <div className={styles.presentationCaption}><span>Product visual aids</span><span>View <ArrowRight size={17} aria-hidden="true" /></span></div>
           </Link>
         </div>
       </section>
