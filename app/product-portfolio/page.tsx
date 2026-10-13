@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
-import { Suspense } from "react";
-import ProductPortfolioClient from "@/components/ProductPortfolioClient";
-import { getProductCategory } from "@/data/productCategories";
+import { ProductPortfolioCatalog } from "@/components/CatalogSearchBoundary";
 import { products } from "@/data/products";
 import { absoluteUrl } from "@/data/seo";
+import { getProductDisplayName } from "@/lib/productSeo";
 
 const DESCRIPTION =
   "Explore Macron Health Care product photos, compositions and dosage forms. Download the latest product card and MRP list.";
@@ -29,13 +28,7 @@ export default function ProductPortfolioPage() {
       "@type": "ListItem",
       position: index + 1,
       url: absoluteUrl(`/product-portfolio/${product.slug}`),
-      item: {
-        "@type": "Product",
-        name: product.brandName,
-        description: product.composition,
-        category: getProductCategory(product.dosageForm),
-        image: product.productImages?.map((photo) => absoluteUrl(photo.src)),
-      },
+      name: getProductDisplayName(product),
     })),
   };
 
@@ -48,15 +41,7 @@ export default function ProductPortfolioPage() {
         }}
       />
       <div className="mx-auto max-w-[1200px]">
-        <Suspense
-          fallback={
-            <div className="surface-card p-8 text-slate">
-              Loading product portfolio...
-            </div>
-          }
-        >
-          <ProductPortfolioClient products={products} />
-        </Suspense>
+        <ProductPortfolioCatalog products={products} />
       </div>
     </section>
   );

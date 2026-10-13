@@ -18,6 +18,7 @@ import { useCatalogFilters } from "@/components/useCatalogFilters";
 
 type ProductGridProps = {
   products: Product[];
+  serializedSearchParams?: string;
 };
 
 type CategorizedProduct = Product & {
@@ -37,14 +38,17 @@ const sortByBrandName = (items: CategorizedProduct[]) =>
     }),
   );
 
-export default function ProductGrid({ products }: ProductGridProps) {
+export default function ProductGrid({
+  products,
+  serializedSearchParams = "",
+}: ProductGridProps) {
   const {
     query,
     selectedCategory,
     selectedTherapeuticArea,
     replaceFilter,
     resetFilters,
-  } = useCatalogFilters();
+  } = useCatalogFilters(serializedSearchParams);
   const { addProduct, addProducts, count, hasProduct, removeProduct } = useBasket();
 
   const categorizedProducts = useMemo<CategorizedProduct[]>(

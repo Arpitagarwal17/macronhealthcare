@@ -22,6 +22,7 @@ import type { Product } from "@/data/products";
 
 type ProductPortfolioClientProps = {
   products: Product[];
+  serializedSearchParams?: string;
 };
 
 type CategorizedProduct = Product & {
@@ -38,6 +39,7 @@ const sortByBrandName = (items: CategorizedProduct[]) =>
 
 export default function ProductPortfolioClient({
   products,
+  serializedSearchParams = "",
 }: ProductPortfolioClientProps) {
   const {
     query,
@@ -45,7 +47,7 @@ export default function ProductPortfolioClient({
     selectedTherapeuticArea,
     replaceFilter,
     resetFilters,
-  } = useCatalogFilters();
+  } = useCatalogFilters(serializedSearchParams);
   const downloads = [productDownloads.productCard, productDownloads.productList];
   const [activeDownload, setActiveDownload] = useState<string | null>(null);
   const [downloadError, setDownloadError] = useState("");

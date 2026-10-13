@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import { Suspense } from "react";
 import CatalogHeader from "@/components/CatalogHeader";
-import ProductGrid from "@/components/ProductGrid";
+import { VisualAidPortfolioCatalog } from "@/components/CatalogSearchBoundary";
 import { products } from "@/data/products";
 
 const DESCRIPTION =
@@ -26,15 +25,7 @@ export default function DoctorPresentationPage() {
           <CatalogHeader current="presentation" />
         </div>
 
-        <Suspense
-          fallback={
-            <div className="surface-card p-8 text-slate">
-              Loading visual aid portfolio...
-            </div>
-          }
-        >
-          <ProductGrid products={products} />
-        </Suspense>
+        <VisualAidPortfolioCatalog products={products} />
       </div>
     </section>
   );

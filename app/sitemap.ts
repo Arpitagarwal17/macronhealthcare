@@ -18,13 +18,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     images: product.productImages?.map((photo) => absoluteUrl(photo.src)),
   }));
 
-  const doctorPresentationPages: MetadataRoute.Sitemap = products.map(
-    (product) => ({
-      url: absoluteUrl(`/doctor-presentation/${product.slug}`),
-      lastModified: SITE_LAST_UPDATED,
-      images: [absoluteUrl(product.visualAidImage)],
-    }),
-  );
-
-  return [...mainPages, ...portfolioProductPages, ...doctorPresentationPages];
+  // Visual-aid details declare their product detail as canonical. Keep the
+  // sitemap consistent with that preference while retaining the library index.
+  return [...mainPages, ...portfolioProductPages];
 }

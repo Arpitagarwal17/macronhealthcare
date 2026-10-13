@@ -1,7 +1,9 @@
 export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.macronhealthcare.com";
 
-export const SITE_LAST_UPDATED = new Date();
+// Update this only when site content, product metadata or structured data changes.
+// A build or request alone must not make every sitemap entry appear newly updated.
+export const SITE_LAST_UPDATED = new Date("2026-10-14T00:00:00.000Z");
 
 export const SEO_KEYWORDS = [
   "Macron Health Care",

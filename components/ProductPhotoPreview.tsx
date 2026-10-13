@@ -19,7 +19,7 @@ export default function ProductPhotoPreview({
       {photo ? (
         <Image
           src={photo.src}
-          alt={`${photo.label} product packaging`}
+          alt={`${photo.label} product packaging from Macron Health Care`}
           fill
           sizes={sizes}
           className="object-contain p-2 transition duration-300 group-hover:scale-[1.015]"

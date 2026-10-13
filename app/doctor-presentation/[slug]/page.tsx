@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import ProductDetailView from "@/components/ProductDetailView";
 import { getProductImageAlt, getTherapeuticArea } from "@/data/productMeta";
 import { products } from "@/data/products";
+import { getProductDescription, getProductDisplayName } from "@/lib/productSeo";
 
 type ProductPageProps = {
   params: Promise<{
@@ -24,19 +25,18 @@ export async function generateMetadata({
     return { title: "Product Not Found" };
   }
 
-  const description =
-    `${product.brandName} product visual aid from Macron Health Care, ` +
-    "with composition and dosage form.";
+  const name = getProductDisplayName(product);
+  const description = `Visual aid for ${getProductDescription(product)}`;
   const path = `/doctor-presentation/${product.slug}`;
 
   return {
-    title: `${product.brandName} | Visual Aid Portfolio`,
+    title: `${name} | Visual Aid`,
     description,
     alternates: {
       canonical: `/product-portfolio/${product.slug}`,
     },
     openGraph: {
-      title: `${product.brandName} | Macron Health Care`,
+      title: `${name} Visual Aid | Macron Health Care`,
       description,
       url: path,
       siteName: "Macron Health Care",
@@ -55,7 +55,7 @@ export async function generateMetadata({
     },
     twitter: {
       card: "summary_large_image",
-      title: `${product.brandName} | Macron Health Care`,
+      title: `${name} Visual Aid | Macron Health Care`,
       description,
       images: [product.visualAidImage],
     },

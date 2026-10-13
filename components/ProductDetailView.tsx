@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { ArrowLeft, ArrowRight, Package } from "lucide-react";
 import ProductDetailActions from "@/components/ProductDetailActions";
 import ProductPhotoGallery from "@/components/ProductPhotoGallery";
@@ -15,6 +16,7 @@ import {
   splitComposition,
 } from "@/data/productMeta";
 import type { Product } from "@/data/products";
+import { company } from "@/data/company";
 
 type ProductDetailViewProps = {
   product: Product;
@@ -73,10 +75,16 @@ export default function ProductDetailView({
               <h1 className="mt-3 text-3xl font-semibold leading-tight text-blue sm:text-4xl">
                 {product.brandName}
               </h1>
+              <p className="mt-3 text-sm leading-6 text-slate">
+                Marketed by{" "}
+                <Link href="/company-info" className="font-semibold text-blue underline decoration-line underline-offset-4 hover:text-tealDark">
+                  {company.displayName}
+                </Link>
+              </p>
             </div>
 
-            <div className="border-t border-line pt-5">
-              <p className="field-label">Composition</p>
+            <div id="composition" className="scroll-mt-28 border-t border-line pt-5">
+              <h2 className="field-label">Composition</h2>
               <ul className="mt-3 space-y-2.5">
                 {ingredients.map((ingredient) => (
                   <li

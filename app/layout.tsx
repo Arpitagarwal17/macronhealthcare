@@ -14,6 +14,7 @@ import {
   OG_TITLE,
   SEO_KEYWORDS,
   SITE_URL,
+  absoluteUrl,
 } from "@/data/seo";
 
 const balooBhai = Baloo_Bhai_2({
@@ -98,7 +99,7 @@ const jaipurAddress = {
 const structuredData = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  "@id": `${company.websiteUrl}/#organization`,
+  "@id": absoluteUrl("/#organization"),
   name: company.displayName,
   alternateName: "Macron Healthcare",
   legalName: company.name,
@@ -132,13 +133,6 @@ const structuredData = {
     jobTitle: "Company Director",
   },
   address: [registeredAddress, jaipurAddress],
-  additionalProperty: [
-    {
-      "@type": "PropertyValue",
-      name: company.registrations[0].label,
-      value: company.registrations[0].value,
-    },
-  ],
 };
 
 export default function RootLayout({
@@ -152,7 +146,21 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(structuredData).replace(/</g, "\\u003c"),
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@graph": [
+                structuredData,
+                {
+                  "@type": "WebSite",
+                  "@id": absoluteUrl("/#website"),
+                  url: absoluteUrl("/"),
+                  name: company.displayName,
+                  alternateName: "Macron Healthcare",
+                  inLanguage: "en-IN",
+                  publisher: { "@id": absoluteUrl("/#organization") },
+                },
+              ],
+            }).replace(/</g, "\\u003c"),
           }}
         />
       </head>

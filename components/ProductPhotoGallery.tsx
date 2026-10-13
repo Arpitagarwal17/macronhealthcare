@@ -18,7 +18,7 @@ export default function ProductPhotoGallery({ product }: { product: Product }) {
     <ZoomableVisualAid
       key={photo.src}
       src={photo.src}
-      alt={`${photo.label} product packaging`}
+      alt={`${photo.label} product packaging from Macron Health Care`}
       imageKind="product photo"
     />
   );

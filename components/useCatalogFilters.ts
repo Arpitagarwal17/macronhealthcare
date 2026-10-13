@@ -1,6 +1,6 @@
 "use client";
 
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useCallback } from "react";
 import {
   productCategoryFilters,
@@ -11,11 +11,10 @@ import { therapeuticAreas, type TherapeuticArea } from "@/data/productMeta";
 export type TherapeuticFilter = "All" | TherapeuticArea;
 export type CatalogFilterKey = "category" | "therapeutic" | "q";
 
-export function useCatalogFilters() {
+export function useCatalogFilters(serializedSearchParams = "") {
   const pathname = usePathname();
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const serializedSearchParams = searchParams.toString();
+  const searchParams = new URLSearchParams(serializedSearchParams);
   const categoryParam = searchParams.get("category");
   const therapeuticParam = searchParams.get("therapeutic");
   const query = searchParams.get("q") ?? "";

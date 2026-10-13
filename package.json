@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "check:seo": "node scripts/check-product-seo.mjs",
     "assets:convert-visual-aids": "node scripts/convert-visual-aids-to-jpg.mjs",
     "android:sync": "cap sync android",
     "android:apk": "npm run android:sync && cd android && gradlew.bat assembleDebug",

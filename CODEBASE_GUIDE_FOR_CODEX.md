@@ -142,6 +142,16 @@ Current special corrections:
 - `PPZOL-DSR` dosage form is `Sustained Release Capsules`.
 - Softgel products should display as `Soft Gelatin Capsules`.
 
+## Product Search and Indexing
+
+- Each product has one canonical URL at `/product-portfolio/[slug]`. Visual-aid detail pages retain that product canonical; navigation/filter query strings are not canonical URLs.
+- `lib/productSeo.ts` derives unique titles, descriptions and structured data from approved product data. Include dosage form to distinguish same-name brands; never cut descriptions mid-ingredient, strength or release form.
+- Keep the complete composition in server-rendered HTML and the Composition WebPageElement in JSON-LD. Identify Macron as the marketer with the company-info link, not as the manufacturer.
+- This is an informational catalogue without verified offers or customer reviews. Use linked WebPage, Thing, WebSite, Organization and BreadcrumbList markup. Do not restore Google Product rich-result markup without genuine required offer/review data; the former incomplete Product markup caused Search Console errors. Do not invent prices, availability, identifiers or ratings.
+- `CatalogSearchBoundary` renders the complete catalogue as the static fallback while the inner component applies URL filters after hydration. Do not replace it with a loading message: product links and compositions must be discoverable in the initial HTML.
+- `app/sitemap.ts` lists canonical product pages and main site pages, with original product-photo URLs. Exclude duplicate visual-aid details and private basket state. Update `SITE_LAST_UPDATED` only for actual content changes, not on every build.
+- After a production build, run `npm run check:seo`. To audit deployment, run `npm run check:seo -- --base-url https://www.macronhealthcare.com --report output/product-seo-live.json`. This checks every product and visual-aid route, catalogue links, original image assets, metadata, JSON-LD, robots and sitemap; it does not predict Google rankings.
+
 ## Product Portfolio Page
 
 The Product Portfolio page is for viewing product data and downloading PDFs only.
