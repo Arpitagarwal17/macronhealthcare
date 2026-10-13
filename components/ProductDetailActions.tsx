@@ -100,7 +100,7 @@ export default function ProductDetailActions({
         className="secondary-button"
       >
         <Download className="h-4 w-4" aria-hidden="true" />
-        {isDownloading ? "Preparing image..." : "Download Image"}
+        {isDownloading ? "Preparing visual aid..." : "Download Visual Aid"}
       </a>
       {downloadError ? (
         <p role="alert" className="text-sm font-semibold text-red-700">

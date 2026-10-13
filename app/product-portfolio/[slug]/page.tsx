@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import ProductDetailView from "@/components/ProductDetailView";
 import { company } from "@/data/company";
-import { getProductImageAlt, getTherapeuticArea } from "@/data/productMeta";
+import { getTherapeuticArea } from "@/data/productMeta";
 import { products } from "@/data/products";
 import { absoluteUrl } from "@/data/seo";
 
@@ -28,15 +28,16 @@ export async function generateMetadata({
 
   const fullDescription =
     `${product.brandName} - ${product.composition}. ${product.dosageForm} by ` +
-    "Macron Health Care. View composition, dosage form and product visual aid.";
+    "Macron Health Care. View composition, dosage form and product photos.";
   const description =
     fullDescription.length > 158
       ? `${fullDescription.slice(0, 155)}...`
       : fullDescription;
   const path = `/product-portfolio/${product.slug}`;
   const socialDescription =
-    `${product.brandName} (${product.dosageForm}) - composition and product visual aid ` +
+    `${product.brandName} (${product.dosageForm}) - composition and product photos ` +
     "from Macron Health Care.";
+  const photos = product.productImages ?? [];
 
   return {
     title: `${product.brandName} | Product Portfolio`,
@@ -50,23 +51,19 @@ export async function generateMetadata({
       url: path,
       siteName: "Macron Health Care",
       type: "website",
-      images: [
-        {
-          url: product.visualAidImage,
-          width: product.visualAidWidth ?? 1672,
-          height: product.visualAidHeight ?? 941,
-          type: product.visualAidImage.endsWith(".jpg")
-            ? "image/jpeg"
-            : "image/png",
-          alt: getProductImageAlt(product),
-        },
-      ],
+      images: photos.map((photo) => ({
+        url: photo.src,
+        width: photo.width,
+        height: photo.height,
+        type: "image/jpeg",
+        alt: `${photo.label} product photo`,
+      })),
     },
     twitter: {
-      card: "summary_large_image",
+      card: photos.length ? "summary_large_image" : "summary",
       title: `${product.brandName} | Macron Health Care`,
       description: socialDescription,
-      images: [product.visualAidImage],
+      images: photos.map((photo) => photo.src),
     },
   };
 }
@@ -101,7 +98,7 @@ export default async function ProductPortfolioDetailPage({
         "@id": `${productUrl}#product`,
         name: product.brandName,
         url: productUrl,
-        image: absoluteUrl(product.visualAidImage),
+        image: product.productImages?.map((photo) => absoluteUrl(photo.src)),
         description: `${product.brandName}: ${product.composition}. Dosage form: ${product.dosageForm}.`,
         brand: {
           "@type": "Brand",

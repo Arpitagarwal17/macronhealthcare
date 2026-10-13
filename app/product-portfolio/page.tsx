@@ -34,7 +34,7 @@ export default function ProductPortfolioPage() {
         name: product.brandName,
         description: product.composition,
         category: getProductCategory(product.dosageForm),
-        image: absoluteUrl(product.visualAidImage),
+        image: product.productImages?.map((photo) => absoluteUrl(photo.src)),
       },
     })),
   };

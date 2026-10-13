@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import { normalizeProductSlugs } from "@/lib/productSlugs";
 
 const SAVED_BASKETS_KEY = "macron-saved-presentation-baskets";
 const SAVED_BASKETS_EVENT = "macron-saved-presentation-baskets-change";
@@ -20,7 +21,7 @@ function normalizeSavedBaskets(value: unknown): SavedBaskets {
       )
       .map(([name, slugs]) => [
         name.trim(),
-        [...new Set(slugs.filter((slug) => typeof slug === "string" && slug))],
+        normalizeProductSlugs(slugs),
       ])
       .filter(([, slugs]) => slugs.length > 0),
   );
@@ -75,7 +76,7 @@ export function useSavedBaskets() {
 
   const saveBasket = useCallback((name: string, slugs: string[]) => {
     const normalizedName = name.trim();
-    const normalizedSlugs = [...new Set(slugs.filter(Boolean))];
+    const normalizedSlugs = normalizeProductSlugs(slugs);
     if (!normalizedName || normalizedSlugs.length === 0) {
       return;
     }

@@ -2,6 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight, Package } from "lucide-react";
 import ProductDetailActions from "@/components/ProductDetailActions";
+import ProductPhotoGallery from "@/components/ProductPhotoGallery";
+import ProductPhotoPreview from "@/components/ProductPhotoPreview";
 import ZoomableVisualAid from "@/components/ZoomableVisualAid";
 import {
   getProductImageAlt,
@@ -31,6 +33,7 @@ export default function ProductDetailView({
 }: ProductDetailViewProps) {
   const ingredients = splitComposition(product.composition);
   const packSize = getProductPackSize(product);
+  const isPortfolio = routeBase === "/product-portfolio";
 
   return (
     <section className="page-shell py-8 sm:py-12">
@@ -40,15 +43,21 @@ export default function ProductDetailView({
           {backLabel}
         </Link>
         <p className="text-sm font-semibold text-slate">
-          Product composition, dosage form and visual aid.
+          {isPortfolio
+            ? "Product photos, composition and dosage form."
+            : "Product composition, dosage form and visual aid."}
         </p>
       </div>
 
       <div className="grid min-w-0 gap-7 lg:grid-cols-[minmax(0,1.45fr)_minmax(320px,0.55fr)] lg:items-start">
-        <ZoomableVisualAid
-          src={product.visualAidImage}
-          alt={getProductImageAlt(product)}
-        />
+        {isPortfolio ? (
+          <ProductPhotoGallery key={product.slug} product={product} />
+        ) : (
+          <ZoomableVisualAid
+            src={product.visualAidImage}
+            alt={getProductImageAlt(product)}
+          />
+        )}
 
         <aside className="premium-panel min-w-0 p-6 sm:p-7">
           <div className="space-y-6">
@@ -92,6 +101,16 @@ export default function ProductDetailView({
               product={product}
               showBasketAction={showBasketAction}
             />
+
+            {isPortfolio ? (
+              <Link
+                href={`/doctor-presentation/${product.slug}`}
+                className="secondary-button w-full"
+              >
+                View Visual Aid
+                <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </Link>
+            ) : null}
           </div>
         </aside>
       </div>
@@ -143,15 +162,22 @@ export default function ProductDetailView({
                 href={`${routeBase}/${item.slug}`}
                 className="group surface-card overflow-hidden transition hover:-translate-y-1 hover:border-blue/30 hover:shadow-premium"
               >
-                <div className="relative aspect-[16/9] border-b border-line bg-white">
-                  <Image
-                    src={item.visualAidImage}
-                    alt={getProductImageAlt(item)}
-                    fill
+                {isPortfolio ? (
+                  <ProductPhotoPreview
+                    product={item}
                     sizes="(min-width: 1024px) 270px, (min-width: 640px) 50vw, calc(100vw - 40px)"
-                    className="object-contain p-2"
                   />
-                </div>
+                ) : (
+                  <div className="relative aspect-[16/9] border-b border-line bg-white">
+                    <Image
+                      src={item.visualAidImage}
+                      alt={getProductImageAlt(item)}
+                      fill
+                      sizes="(min-width: 1024px) 270px, (min-width: 640px) 50vw, calc(100vw - 40px)"
+                      className="object-contain p-2"
+                    />
+                  </div>
+                )}
                 <div className="p-4">
                   <h3 className="font-heading text-lg font-semibold text-blue group-hover:text-tealDark">
                     {item.brandName}

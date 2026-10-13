@@ -37,6 +37,7 @@ import type { Product } from "@/data/products";
 import PresentationViewer from "@/components/PresentationViewer";
 import { useBasket } from "@/components/useBasket";
 import { useSavedBaskets } from "@/components/useSavedBaskets";
+import { normalizeProductSlugs } from "@/lib/productSlugs";
 import {
   getProductImageAlt,
   getTherapeuticArea,
@@ -104,7 +105,7 @@ export default function BasketPageClient({ products }: BasketPageClientProps) {
   const sharedItemsParam = searchParams.get("items") ?? "";
   const sharedBasketSlugs = useMemo(
     () =>
-      [...new Set(sharedItemsParam.split(",").map((slug) => slug.trim()))].filter(
+      normalizeProductSlugs(sharedItemsParam.split(",").map((slug) => slug.trim())).filter(
         (slug) => slug && productBySlug.has(slug),
       ),
     [productBySlug, sharedItemsParam],

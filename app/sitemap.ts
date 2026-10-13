@@ -15,7 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const portfolioProductPages: MetadataRoute.Sitemap = products.map((product) => ({
     url: absoluteUrl(`/product-portfolio/${product.slug}`),
     lastModified: SITE_LAST_UPDATED,
-    images: [absoluteUrl(product.visualAidImage)],
+    images: product.productImages?.map((photo) => absoluteUrl(photo.src)),
   }));
 
   const doctorPresentationPages: MetadataRoute.Sitemap = products.map(

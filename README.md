@@ -2,7 +2,20 @@
 
 A Next.js, TypeScript, Tailwind CSS website for Macron Health Care company information, Product Portfolio downloads, and Doctor Presentation visual aids.
 
-## Add a new product image
+## Add a product photo or visual aid
+
+Product packaging photos belong in `public/product-photos/` and the product's
+`productImages` array in `data/products.ts` (source path, width, height and label).
+They appear in the homepage portfolio, Product Portfolio cards and product details.
+Leave `productImages` unset when no photo has been provided; do not substitute a
+visual aid. Emifurt-500, M-TROX 1500 SB and Molly-Forte injection currently have
+blank product photo areas.
+
+Keep each strength as a separate product. ETR-90/120, Metoron-XL-25/50 and
+Vtrocef-250/500 each have two entries with individual photos and a shared visual
+aid within the pair. Doctor Presentation, basket and exports use `visualAidImage`.
+
+For a visual aid:
 
 1. Add the product visual-aid image to `public/visual-aids/`.
 2. Use a lowercase JPEG filename with hyphens, for example `rabron-dsr.jpg`.
@@ -20,6 +33,12 @@ Add a matching entry in `data/products.ts`.
   brandName: "Rabron-DSR",
   composition: "Composition to be added",
   dosageForm: "Dosage form to be added",
+  productImages: [{
+    src: "/product-photos/rabron-dsr.jpg",
+    width: 3342,
+    height: 1882,
+    label: "Rabron-DSR Capsules",
+  }],
   visualAidImage: "/visual-aids/rabron-dsr.jpg",
   visualAidWidth: 1672,
   visualAidHeight: 941,
@@ -35,7 +54,9 @@ Replace these files when new PDFs are ready:
 - `public/assets/pdfs/macron-product-card.pdf` for Product Card
 - `public/downloads/macron-healthcare-updated-mrp-list-2026.pdf` for Product List
 
-The Product Portfolio page uses direct download links for both files.
+The Product Portfolio page uses direct download links for both files, configured
+in `data/downloads.ts`. Bump their version query when replacing a PDF. The current
+files are the supplied five-page old-style Product Card and three-page MRP List.
 
 ## Run locally
 

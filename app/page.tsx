@@ -103,13 +103,13 @@ export default function HomePage() {
             {featuredProducts.map((product, index) => (
               <Link key={product.slug} href={`/product-portfolio/${product.slug}`} className={styles.productCard} data-reveal={String(index)}>
                 <div className={styles.productImage}>
-                  <Image
-                    src={product.visualAidImage}
-                    alt={`${product.brandName} product visual aid`}
+                  {product.productImages?.[0] ? <Image
+                    src={product.productImages[0].src}
+                    alt={`${product.productImages[0].label} product photo`}
                     fill
                     sizes="(min-width: 1024px) 390px, (min-width: 640px) 50vw, 100vw"
                     className="object-contain"
-                  />
+                  /> : null}
                 </div>
                 <div className={styles.productCaption}>
                   <div><p>{product.dosageForm}</p><h3>{product.brandName}</h3></div>

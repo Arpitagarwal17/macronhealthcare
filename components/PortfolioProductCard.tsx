@@ -1,12 +1,11 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, MessageCircle } from "lucide-react";
 import { useState } from "react";
 import type { Product } from "@/data/products";
 import { createWhatsAppLink } from "@/data/company";
-import { getProductImageAlt } from "@/data/productMeta";
+import ProductPhotoPreview from "@/components/ProductPhotoPreview";
 
 export default function PortfolioProductCard({ product }: { product: Product }) {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -19,15 +18,12 @@ export default function PortfolioProductCard({ product }: { product: Product }) 
     <article className="group surface-card flex h-full flex-col overflow-hidden transition duration-200 hover:-translate-y-1 hover:border-blue/30 hover:shadow-premium">
       <Link
         href={`/product-portfolio/${product.slug}`}
-        className="relative aspect-[16/9] overflow-hidden border-b border-line bg-white"
+        className="block focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-inset focus-visible:ring-blue/60"
         aria-label={`View ${product.brandName} product details`}
       >
-        <Image
-          src={product.visualAidImage}
-          alt={getProductImageAlt(product)}
-          fill
+        <ProductPhotoPreview
+          product={product}
           sizes="(min-width: 1280px) 370px, (min-width: 768px) 50vw, calc(100vw - 40px)"
-          className="object-contain p-2 transition duration-300 group-hover:scale-[1.015]"
         />
       </Link>
 

@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import { normalizeProductSlugs } from "@/lib/productSlugs";
 
 const BASKET_KEY = "macron-presentation-basket";
 const BASKET_EVENT = "macron-presentation-basket-change";
@@ -8,9 +9,7 @@ const BASKET_EVENT = "macron-presentation-basket-change";
 type BasketUpdate = string[] | ((currentSlugs: string[]) => string[]);
 
 function normalizeSlugs(slugs: string[]) {
-  return Array.from(
-    new Set(slugs.filter((slug) => typeof slug === "string" && slug.trim())),
-  );
+  return normalizeProductSlugs(slugs);
 }
 
 function readBasketSlugs() {

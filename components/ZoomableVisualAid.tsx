@@ -16,9 +16,11 @@ const FOCUSABLE_ELEMENTS = [
 export default function ZoomableVisualAid({
   src,
   alt,
+  imageKind = "visual aid",
 }: {
   src: string;
   alt: string;
+  imageKind?: "visual aid" | "product photo";
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const dialogTitleId = useId();
@@ -108,7 +110,7 @@ export default function ZoomableVisualAid({
         type="button"
         onClick={() => setIsOpen(true)}
         className="group relative block aspect-[16/9] w-full overflow-hidden rounded-2xl border border-line bg-white shadow-premium focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue/60"
-        aria-label="Open visual aid full screen"
+        aria-label={`Open ${imageKind} full screen`}
       >
         <Image
           src={src}
@@ -133,12 +135,12 @@ export default function ZoomableVisualAid({
           aria-labelledby={dialogTitleId}
         >
           <h2 id={dialogTitleId} className="sr-only">
-            Full-screen visual aid
+            Full-screen {imageKind}
           </h2>
           <button
             ref={closeButtonRef}
             type="button"
-            aria-label="Close full-screen visual aid"
+            aria-label={`Close full-screen ${imageKind}`}
             onClick={() => setIsOpen(false)}
             className="icon-button absolute right-[calc(1rem+env(safe-area-inset-right))] top-[calc(1rem+env(safe-area-inset-top))] z-10"
           >

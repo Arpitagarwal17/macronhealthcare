@@ -18,6 +18,25 @@ const contentSecurityPolicy = [
 ].join("; ");
 
 const nextConfig: NextConfig = {
+  async redirects() {
+    return ["product-portfolio", "doctor-presentation", "products", "visual-aids"].flatMap((route) => {
+      const canonicalRoute = route === "products"
+        ? "product-portfolio"
+        : route === "visual-aids" ? "doctor-presentation" : route;
+      return [
+        {
+          source: `/${route}/myovit`,
+          destination: `/${canonicalRoute}/vitabank-tablets`,
+          permanent: true,
+        },
+        ...["etr", "metoron", "vtrocef"].map((family) => ({
+          source: `/${route}/${family}`,
+          destination: `/${canonicalRoute}?q=${family}`,
+          permanent: true,
+        })),
+      ];
+    });
+  },
   images: {
     formats: ["image/avif", "image/webp"],
     minimumCacheTTL: 31_536_000,

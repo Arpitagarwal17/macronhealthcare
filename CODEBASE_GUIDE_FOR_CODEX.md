@@ -94,6 +94,7 @@ export type Product = {
   brandName: string;
   composition: string;
   dosageForm: string;
+  productImages?: { src: string; width: number; height: number; label: string }[];
   visualAidImage: string;
   visualAidWidth?: number;
   visualAidHeight?: number;
@@ -112,6 +113,19 @@ When adding or updating a product:
 
 Current special corrections:
 
+- Product photos in `/product-photos/` are separate from visual aids. Portfolio
+  cards/details and homepage product cards show the photo; Doctor Presentation,
+  Basket, PDF and PPT continue using the visual aid. All previews use object-contain.
+- ETR-90 and ETR-120, Metoron-XL-25 and Metoron-XL-50, Vtrocef-250 and Vtrocef-500
+  are separate products, each with its own photo. Each pair shares one visual aid.
+- Myovit tablets are now Vitabank tablets (`vitabank-tablets`). The previous
+  Vitabank capsule (`vitabank`) is removed. Legacy Myovit links redirect; saved
+  Myovit selections migrate to tablets while obsolete capsule selections drop.
+- Emifurt-500 is an injection. Emifurt-500, M-TROX 1500 SB and Molly-Forte injection
+  deliberately have blank product photo frames. Retain their visual aids.
+- Supplied revised visual aids have versioned paths to avoid immutable-image
+  cache collisions. Downloadable PDFs use a version query in `data/downloads.ts`.
+
 - `Curix-200` uses `/visual-aids/curix-200.jpg`.
 - `PPZOL-DSR` dosage form is `Sustained Release Capsules`.
 - Softgel products should display as `Soft Gelatin Capsules`.
@@ -122,6 +136,7 @@ The Product Portfolio page is for viewing product data and downloading PDFs only
 
 Product cards must show only:
 
+- Product photo (blank when none supplied)
 - Brand name
 - Composition
 - Dosage form tag
