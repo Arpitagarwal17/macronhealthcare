@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight, Compass, Eye, HeartHandshake, Pause, Play, ShieldCheck } from "lucide-react";
+import { ArrowUpRight, Compass, Eye, HeartHandshake, ShieldCheck } from "lucide-react";
 import styles from "./CompanyCore.module.css";
 
 const STEP_DURATION = 6500;
@@ -20,7 +20,6 @@ export default function CompanyCore() {
   const elapsed = useRef(0);
   const currentIndex = useRef(0);
   const [active, setActive] = useState(0);
-  const [playing, setPlaying] = useState(true);
   const [focusPaused, setFocusPaused] = useState(false);
   const [visible, setVisible] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(true);
@@ -59,7 +58,7 @@ export default function CompanyCore() {
     };
   }, []);
 
-  const animating = playing && !focusPaused && visible && documentVisible && !reducedMotion;
+  const animating = !focusPaused && visible && documentVisible && !reducedMotion;
   useEffect(() => {
     if (!animating) return;
     let frame: number;
@@ -138,7 +137,6 @@ export default function CompanyCore() {
                 <Link href={selected.href} className={styles.detailLink}>Discover more <ArrowUpRight size={18} aria-hidden="true" /></Link>
               </div>
             </div>
-            {!reducedMotion && <button type="button" className={styles.motionButton} onClick={() => setPlaying((value) => !value)} aria-label={playing ? "Pause core animation" : "Play core animation"}>{playing ? <Pause size={15} aria-hidden="true" /> : <Play size={15} aria-hidden="true" />}<span>{playing ? "Pause animation" : "Play animation"}</span></button>}
           </div>
         </div>
       </div>

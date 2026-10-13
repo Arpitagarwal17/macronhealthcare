@@ -6,6 +6,7 @@ import PageMotion from "@/components/PageMotion";
 import { QualityCommitment } from "@/components/CompanySections";
 import CompanyCore from "@/components/CompanyCore";
 import HeritageSection from "@/components/HeritageSection";
+import HomeProductCarousel from "@/components/HomeProductCarousel";
 import { company } from "@/data/company";
 import { productCategories } from "@/data/productCategories";
 import { products } from "@/data/products";
@@ -13,9 +14,13 @@ import { HOME_DESCRIPTION, HOME_TITLE } from "@/data/seo";
 import styles from "./home.module.css";
 
 const HERO_IMAGE = "/images/macron-doctors-hero-v3.webp";
-const featuredProducts = ["curix-200", "rabron-dsr", "lycron-syrup"]
-  .map((slug) => products.find((product) => product.slug === slug))
-  .filter((product) => product !== undefined);
+const firstProducts = ["curix-200", "rabron-dsr", "lycron-syrup"];
+const featuredProducts = [
+  ...firstProducts.flatMap((slug) => products.filter((product) => product.slug === slug)),
+  ...products.filter((product) => !firstProducts.includes(product.slug)),
+].filter((product) => product.productImages?.length).map(({ slug, brandName, dosageForm, productImages }) => ({
+  slug, brandName, dosageForm, productImages,
+}));
 
 export const metadata: Metadata = {
   alternates: { canonical: "/" },
@@ -99,25 +104,7 @@ export default function HomePage() {
             </div>
             <Link href="/product-portfolio" className={styles.textLink}>View all products <ArrowUpRight size={19} aria-hidden="true" /></Link>
           </div>
-          <div className={styles.productGrid}>
-            {featuredProducts.map((product, index) => (
-              <Link key={product.slug} href={`/product-portfolio/${product.slug}`} className={styles.productCard} data-reveal={String(index)}>
-                <div className={styles.productImage}>
-                  {product.productImages?.[0] ? <Image
-                    src={product.productImages[0].src}
-                    alt={`${product.productImages[0].label} product photo`}
-                    fill
-                    sizes="(min-width: 1024px) 390px, (min-width: 640px) 50vw, 100vw"
-                    className="object-contain"
-                  /> : null}
-                </div>
-                <div className={styles.productCaption}>
-                  <div><p>{product.dosageForm}</p><h3>{product.brandName}</h3></div>
-                  <span className={styles.cardArrow}><ArrowUpRight size={20} aria-hidden="true" /></span>
-                </div>
-              </Link>
-            ))}
-          </div>
+          <HomeProductCarousel products={featuredProducts} />
           <div className={styles.categoryBar} aria-label="Browse products by dosage form" data-reveal>
             <p>Browse by dosage form</p>
             <div className={styles.categoryLinks}>

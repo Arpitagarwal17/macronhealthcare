@@ -26,7 +26,7 @@
 .position1 { left: 86%; top: 50%; }
 .position2 { left: 50%; top: 86%; }
 .position3 { left: 14%; top: 50%; }
-.detailColumn { position: relative; display: flex; flex-direction: column; justify-content: center; min-width: 0; padding: 46px 44px 74px; }
+.detailColumn { position: relative; display: flex; flex-direction: column; justify-content: center; min-width: 0; padding: 46px 44px; }
 .detail { min-height: 355px; }
 .detailContent { animation: detailArrival 650ms cubic-bezier(.22,1,.36,1) both; }
 .detailIcon { display: grid; place-items: center; width: 62px; height: 62px; border: 1px solid var(--line); border-radius: 19px; background: white; color: var(--macron-teal-dark); }
@@ -35,12 +35,11 @@
 .detailCopy { margin-top: 18px; color: var(--text-muted); font-size: 17px; line-height: 1.75; }
 .detailLink { display: inline-flex; align-items: center; gap: 16px; min-height: 44px; margin-top: 20px; color: var(--macron-blue); font-size: 14px; font-weight: 700; }
 .detailLink:hover { color: var(--macron-teal-dark); }
-.detailLink:focus-visible,.motionButton:focus-visible { outline: 2px solid var(--macron-teal-dark); outline-offset: 4px; border-radius: 8px; }
-.motionButton { position: absolute; bottom: 20px; right: 30px; display: inline-flex; min-height: 44px; align-items: center; gap: 8px; color: var(--text-muted); font-size: 12px; font-weight: 600; }
+.detailLink:focus-visible { outline: 2px solid var(--macron-teal-dark); outline-offset: 4px; border-radius: 8px; }
 @media (min-width: 900px) and (max-width: 1199px) {
   .visual { padding: 14px; }
   .choice { flex-direction: column; gap: 7px; font-size: 12px; padding: 10px 5px; }
-  .detailColumn { padding: 32px 28px 72px; }
+  .detailColumn { padding: 32px 28px; }
   .detail { min-height: 365px; }
   .detailCopy { font-size: 16px; }
 }
@@ -53,13 +52,12 @@
   .visual { padding: 14px 20px; }
   .wheel { max-width: 440px; }
   .choice { flex-direction: column; gap: 7px; padding: 10px 5px; font-size: 13px; }
-  .detailColumn { padding: 30px 34px 65px; }
+  .detailColumn { padding: 30px 34px; }
   .detail { min-height: 236px; }
   .detailIcon { display: none; }
   .detailLabel { margin-top: 0; }
   .detail h3 { font-size: 30px; }
   .detailCopy { max-width: 590px; }
-  .motionButton { bottom: 14px; }
 }
 @media (max-width: 639px) {
   .section { padding-block: 44px; }
@@ -73,12 +71,11 @@
   .logo { padding: 12%; }
   .choice { min-height: 66px; font-size: 12px; gap: 6px; padding: 9px 2px; border-radius: 14px; }
   .choice svg { width: 21px; height: 21px; }
-  .detailColumn { padding: 27px 24px 61px; }
+  .detailColumn { padding: 27px 24px; }
   .detail { min-height: 253px; }
   .detail h3 { font-size: 27px; }
   .detailCopy { font-size: 16px; line-height: 1.65; }
   .detailLink { margin-top: 14px; }
-  .motionButton { right: 24px; bottom: 12px; }
 }
 @media (max-width: 359px) { .detailColumn { padding-inline: 20px; } .detail { min-height: 277px; } }
 @keyframes detailArrival { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }

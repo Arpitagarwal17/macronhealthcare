@@ -36,15 +36,6 @@
 .portfolio { padding: 87px 0 76px; background: var(--surface-soft); }
 .sectionHeader { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 38px; }
 .sectionHeader .textLink { margin: 0 0 3px; }
-.productGrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 25px; }
-.productCard { display: block; overflow: hidden; border: 1px solid var(--line); border-radius: var(--card-radius); background: var(--surface); transition: transform 240ms, border-color 240ms, box-shadow 240ms; }
-.productCard:hover { transform: translateY(-4px); border-color: var(--macron-teal-dark); box-shadow: 0 14px 35px #103d5310; }
-.productImage { position: relative; aspect-ratio: 16/9; margin: 17px 13px 8px; background: var(--surface); }
-.productCaption { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 19px 22px 23px; border-top: 1px solid var(--line); }
-.productCaption p { color: var(--text-muted); font-size: .75rem; }
-.productCaption h3 { margin-top: 4px; color: var(--macron-blue); font-size: 1.3rem; font-weight: 700; }
-.cardArrow { display: flex; height: 40px; width: 40px; align-items: center; justify-content: center; border-radius: 50%; background: var(--surface-soft); color: var(--macron-teal-dark); transition: color 200ms, background 200ms, transform 200ms; }
-.productCard:hover .cardArrow { background: var(--macron-teal-dark); color: #fff; transform: rotate(45deg); }
 .categoryBar { margin-top: 37px; padding-top: 27px; border-top: 1px solid var(--line); }
 .categoryBar > p { margin-bottom: 12px; color: var(--text-muted); font-size: .73rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
 .categoryLinks { display: flex; flex-wrap: wrap; gap: 10px; }
@@ -85,10 +76,6 @@
   .resources { padding: 72px 0; }
   .resourceGrid { grid-template-columns: 1fr; gap: 36px; }
   .resourceGrid > div { max-width: 620px; }
-  .productGrid { gap: 15px; }
-  .productCaption { padding: 15px; }
-  .productCaption h3 { font-size: 1.08rem; }
-  .cardArrow { width: 32px; height: 32px; }
 }
 @media (min-width: 640px) and (max-width: 767px) {
   .heroImage { min-height: 340px; }
@@ -113,10 +100,6 @@
   .eyebrow { font-size: .64rem; letter-spacing: .15em; }
   .portfolio { padding: 54px 0 43px; }
   .sectionHeader { align-items: start; flex-direction: column; gap: 15px; margin-bottom: 28px; }
-  .productGrid { grid-template-columns: 1fr; gap: 21px; }
-  .productCaption h3 { font-size: 1.3rem; }
-  .productCaption { padding: 18px 22px; }
-  .productImage { margin: 14px 12px; }
   .categoryLinks { gap: 8px; }
   .presentationCard { padding: 14px 14px 0; }
   .presentationCaption { padding-block: 17px; }
