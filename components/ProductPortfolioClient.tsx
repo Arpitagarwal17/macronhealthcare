@@ -144,8 +144,8 @@ export default function ProductPortfolioClient({
             Product Portfolio
           </h1>
           <p className="max-w-xl text-base leading-7 text-slate">
-            Search by brand or molecule and browse the current portfolio by dosage
-            form or therapeutic area.
+            Explore product photos, compositions and dosage forms. Download the
+            latest product card and MRP list.
           </p>
         </div>
       </div>

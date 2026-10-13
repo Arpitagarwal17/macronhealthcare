@@ -13,22 +13,32 @@ import type { Product } from "@/data/products";
 export default function ProductDetailActions({
   product,
   showBasketAction = true,
+  imageKind,
 }: {
   product: Product;
   showBasketAction?: boolean;
+  imageKind: "product image" | "visual aid";
 }) {
   const { addProduct, hasProduct, removeProduct } = useBasket();
   const isInBasket = hasProduct(product.slug);
   const enquiryLink = createWhatsAppLink(
     `Hello Macron Health Care, I would like to enquire about ${product.brandName}.`,
   );
-  const visualAidExtension =
-    product.visualAidImage.match(/\.([a-z0-9]+)$/i)?.[1]?.toLowerCase() ?? "jpg";
-  const visualAidFileName = `${product.slug}-visual-aid.${visualAidExtension}`;
+  const imageSrc =
+    imageKind === "product image"
+      ? product.productImages?.[0]?.src
+      : product.visualAidImage;
+  const imageExtension =
+    imageSrc?.match(/\.([a-z0-9]+)$/i)?.[1]?.toLowerCase() ?? "jpg";
+  const imageFileName = `${product.slug}-${imageKind.replace(/ /g, "-")}.${imageExtension}`;
+  const downloadLabel =
+    imageKind === "product image"
+      ? "Download Product Image"
+      : "Download Visual Aid Image";
   const [downloadError, setDownloadError] = useState("");
   const [isDownloading, setIsDownloading] = useState(false);
 
-  const handleVisualAidDownload = async (
+  const handleImageDownload = async (
     event: MouseEvent<HTMLAnchorElement>,
   ) => {
     if (!isNativeApp()) {
@@ -37,7 +47,7 @@ export default function ProductDetailActions({
 
     event.preventDefault();
 
-    if (isDownloading) {
+    if (isDownloading || !imageSrc) {
       return;
     }
 
@@ -45,14 +55,14 @@ export default function ProductDetailActions({
     setDownloadError("");
 
     try {
-      await fetchAndDeliverFile(product.visualAidImage, visualAidFileName, {
-        shareTitle: `${product.brandName} visual aid`,
+      await fetchAndDeliverFile(imageSrc, imageFileName, {
+        shareTitle: `${product.brandName} ${imageKind}`,
       });
     } catch (error) {
       setDownloadError(
         error instanceof Error
           ? error.message
-          : "The visual aid could not be shared. Please try again.",
+          : `The ${imageKind} could not be downloaded. Please try again.`,
       );
     } finally {
       setIsDownloading(false);
@@ -82,26 +92,30 @@ export default function ProductDetailActions({
           {isInBasket ? "Remove from Basket" : "Add to Basket"}
         </button>
       ) : null}
-      <a
-        href={enquiryLink}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="whatsapp-button"
-        aria-label={`Enquire about ${product.brandName} on WhatsApp`}
-      >
-        <MessageCircle className="h-4 w-4" aria-hidden="true" />
-        WhatsApp Enquiry
-      </a>
-      <a
-        href={product.visualAidImage}
-        download={visualAidFileName}
-        onClick={handleVisualAidDownload}
-        aria-busy={isDownloading}
-        className="secondary-button"
-      >
-        <Download className="h-4 w-4" aria-hidden="true" />
-        {isDownloading ? "Preparing visual aid..." : "Download Visual Aid"}
-      </a>
+      {imageKind === "product image" ? (
+        <a
+          href={enquiryLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="whatsapp-button"
+          aria-label={`Enquire about ${product.brandName} on WhatsApp`}
+        >
+          <MessageCircle className="h-4 w-4" aria-hidden="true" />
+          WhatsApp Enquiry
+        </a>
+      ) : null}
+      {imageSrc ? (
+        <a
+          href={imageSrc}
+          download={imageFileName}
+          onClick={handleImageDownload}
+          aria-busy={isDownloading}
+          className="secondary-button"
+        >
+          <Download className="h-4 w-4" aria-hidden="true" />
+          {isDownloading ? `Preparing ${imageKind}...` : downloadLabel}
+        </a>
+      ) : null}
       {downloadError ? (
         <p role="alert" className="text-sm font-semibold text-red-700">
           {downloadError}

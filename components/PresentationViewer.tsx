@@ -216,7 +216,7 @@ export default function PresentationViewer({
       className="fixed inset-0 z-[80] h-[100dvh] bg-white text-ink"
       role="dialog"
       aria-modal="true"
-      aria-label="Doctor presentation view"
+      aria-label="Visual aid presentation"
     >
       <div className="flex h-full min-h-0 flex-col">
         <header className="flex min-h-16 items-center justify-between gap-3 border-b border-line bg-white px-4 pb-2 pt-[calc(0.5rem+env(safe-area-inset-top))] sm:px-6">

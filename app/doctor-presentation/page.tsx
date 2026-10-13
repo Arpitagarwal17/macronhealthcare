@@ -5,15 +5,15 @@ import ProductGrid from "@/components/ProductGrid";
 import { products } from "@/data/products";
 
 const DESCRIPTION =
-  "Browse Macron Health Care product visual aids. Select products, build a doctor presentation, and share or export it as PDF or PowerPoint.";
+  "Browse Macron Health Care visual aids, add products to your basket, and export your presentation as PDF or PowerPoint.";
 
 export const metadata: Metadata = {
-  title: "Doctor Presentation",
+  title: "Visual Aid Portfolio",
   description: DESCRIPTION,
   alternates: { canonical: "/doctor-presentation" },
   openGraph: {
     url: "/doctor-presentation",
-    title: "Doctor Presentation | Macron Health Care",
+    title: "Visual Aid Portfolio | Macron Health Care",
     description: DESCRIPTION,
   },
 };
@@ -25,10 +25,11 @@ export default function DoctorPresentationPage() {
         <div className="mb-7 max-w-3xl space-y-3">
           <p className="eyebrow">Visual aid library</p>
           <h1 className="page-heading">
-            Doctor Presentation
+            Visual Aid Portfolio
           </h1>
           <p className="text-base leading-7 text-slate sm:text-lg">
-            Select products and create a quick doctor presentation basket.
+            Browse visual aids, add products to your basket, and export your
+            presentation as PDF or PowerPoint.
           </p>
         </div>
 
@@ -39,7 +40,7 @@ export default function DoctorPresentationPage() {
         <Suspense
           fallback={
             <div className="surface-card p-8 text-slate">
-              Loading doctor presentation catalogue...
+              Loading visual aid portfolio...
             </div>
           }
         >

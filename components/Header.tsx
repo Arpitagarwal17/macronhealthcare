@@ -10,8 +10,8 @@ import { useBasket } from "@/components/useBasket";
 const navItems = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About Us" },
-  { href: "/product-portfolio", label: "Products" },
-  { href: "/doctor-presentation", label: "Doctor Presentation" },
+  { href: "/product-portfolio", label: "Product Portfolio" },
+  { href: "/doctor-presentation", label: "Visual Aid Portfolio" },
 ];
 
 export default function Header() {

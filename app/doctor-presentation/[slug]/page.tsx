@@ -30,7 +30,7 @@ export async function generateMetadata({
   const path = `/doctor-presentation/${product.slug}`;
 
   return {
-    title: `${product.brandName} | Doctor Presentation`,
+    title: `${product.brandName} | Visual Aid Portfolio`,
     description,
     alternates: {
       canonical: `/product-portfolio/${product.slug}`,
@@ -92,7 +92,7 @@ export default async function DoctorPresentationDetailPage({
       }
       relatedProducts={relatedProducts}
       routeBase="/doctor-presentation"
-      backLabel="All Visual Aids"
+      backLabel="Visual Aid Portfolio"
       showBasketAction
     />
   );

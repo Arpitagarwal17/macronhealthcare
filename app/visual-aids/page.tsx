@@ -1,7 +1,7 @@
 import { permanentRedirect } from "next/navigation";
 
 export const metadata = {
-  title: "Doctor Presentation",
+  title: "Visual Aid Portfolio",
 };
 
 export default function VisualAidsRedirectPage() {

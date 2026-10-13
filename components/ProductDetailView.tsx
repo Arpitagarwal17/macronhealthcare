@@ -1,10 +1,14 @@
 import Image from "next/image";
-import Link from "next/link";
 import { ArrowLeft, ArrowRight, Package } from "lucide-react";
 import ProductDetailActions from "@/components/ProductDetailActions";
 import ProductPhotoGallery from "@/components/ProductPhotoGallery";
 import ProductPhotoPreview from "@/components/ProductPhotoPreview";
 import ZoomableVisualAid from "@/components/ZoomableVisualAid";
+import {
+  ProductContextLink,
+  ProductCounterpartLink,
+  ProductDetailBackLink,
+} from "@/components/ProductNavigationLinks";
 import {
   getProductImageAlt,
   getProductPackSize,
@@ -38,10 +42,11 @@ export default function ProductDetailView({
   return (
     <section className="page-shell py-8 sm:py-12">
       <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
-        <Link href={routeBase} className="secondary-button min-h-10 px-4">
-          <ArrowLeft className="h-4 w-4" aria-hidden="true" />
-          {backLabel}
-        </Link>
+        <ProductDetailBackLink
+          routeBase={routeBase}
+          slug={product.slug}
+          fallbackLabel={backLabel}
+        />
         <p className="text-sm font-semibold text-slate">
           {isPortfolio
             ? "Product photos, composition and dosage form."
@@ -98,19 +103,13 @@ export default function ProductDetailView({
             ) : null}
 
             <ProductDetailActions
+              key={`${routeBase}/${product.slug}`}
               product={product}
               showBasketAction={showBasketAction}
+              imageKind={isPortfolio ? "product image" : "visual aid"}
             />
 
-            {isPortfolio ? (
-              <Link
-                href={`/doctor-presentation/${product.slug}`}
-                className="secondary-button w-full"
-              >
-                View Visual Aid
-                <ArrowRight className="h-4 w-4" aria-hidden="true" />
-              </Link>
-            ) : null}
+            <ProductCounterpartLink routeBase={routeBase} slug={product.slug} />
           </div>
         </aside>
       </div>
@@ -120,8 +119,9 @@ export default function ProductDetailView({
         aria-label="Previous and next products"
       >
         {previousProduct ? (
-          <Link
-            href={`${routeBase}/${previousProduct.slug}`}
+          <ProductContextLink
+            routeBase={routeBase}
+            slug={previousProduct.slug}
             className="surface-card flex min-h-16 items-center gap-3 p-4 text-sm font-semibold text-blue transition hover:border-blue/35"
           >
             <ArrowLeft className="h-4 w-4" aria-hidden="true" />
@@ -129,13 +129,14 @@ export default function ProductDetailView({
               <span className="block text-xs font-semibold text-slate">Previous</span>
               {previousProduct.brandName}
             </span>
-          </Link>
+          </ProductContextLink>
         ) : (
           <span />
         )}
         {nextProduct ? (
-          <Link
-            href={`${routeBase}/${nextProduct.slug}`}
+          <ProductContextLink
+            routeBase={routeBase}
+            slug={nextProduct.slug}
             className="surface-card flex min-h-16 items-center justify-end gap-3 p-4 text-right text-sm font-semibold text-blue transition hover:border-blue/35"
           >
             <span>
@@ -143,7 +144,7 @@ export default function ProductDetailView({
               {nextProduct.brandName}
             </span>
             <ArrowRight className="h-4 w-4" aria-hidden="true" />
-          </Link>
+          </ProductContextLink>
         ) : null}
       </nav>
 
@@ -157,9 +158,10 @@ export default function ProductDetailView({
           </div>
           <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {relatedProducts.map((item) => (
-              <Link
+              <ProductContextLink
                 key={item.slug}
-                href={`${routeBase}/${item.slug}`}
+                routeBase={routeBase}
+                slug={item.slug}
                 className="group surface-card overflow-hidden transition hover:-translate-y-1 hover:border-blue/30 hover:shadow-premium"
               >
                 {isPortfolio ? (
@@ -184,7 +186,7 @@ export default function ProductDetailView({
                   </h3>
                   <p className="mt-1 text-sm font-semibold text-slate">{item.dosageForm}</p>
                 </div>
-              </Link>
+              </ProductContextLink>
             ))}
           </div>
         </section>

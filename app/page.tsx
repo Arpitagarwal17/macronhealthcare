@@ -133,13 +133,13 @@ export default function HomePage() {
         <div className={`page-shell ${styles.resourceGrid}`}>
           <div data-reveal>
             <p className={styles.eyebrow}>Product visual aids</p>
-            <h2 id="presentation-heading" className={styles.heading}>Doctor Presentation.</h2>
-            <p className={styles.bodyCopy}>View product visual aids and prepare a presentation.</p>
-            <Link href="/doctor-presentation" className={styles.darkButton}>Doctor Presentation <span className={styles.buttonIcon}><ArrowUpRight size={18} aria-hidden="true" /></span></Link>
+            <h2 id="presentation-heading" className={styles.heading}>Visual Aid Portfolio.</h2>
+            <p className={styles.bodyCopy}>Explore visual aids and prepare presentations for doctor visits.</p>
+            <Link href="/doctor-presentation" className={styles.darkButton}>Visual Aid Portfolio <span className={styles.buttonIcon}><ArrowUpRight size={18} aria-hidden="true" /></span></Link>
           </div>
-          <Link href="/doctor-presentation" className={styles.presentationCard} aria-label="Open Doctor Presentation visual aids" data-reveal="1">
+          <Link href="/doctor-presentation" className={styles.presentationCard} aria-label="Open Visual Aid Portfolio" data-reveal="1">
             <div className={styles.presentationFrame}>
-              <Image src="/visual-aid-cover-home.webp" alt="Macron Health Care Doctor Presentation cover" fill sizes="(min-width: 1024px) 640px, 100vw" className="object-contain" />
+              <Image src="/visual-aid-cover-home.webp" alt="Macron Health Care visual aid cover" fill sizes="(min-width: 1024px) 640px, 100vw" className="object-contain" />
             </div>
             <div className={styles.presentationCaption}><span>Product visual aids</span><span>View. Select. Present. <ArrowRight size={17} aria-hidden="true" /></span></div>
           </Link>

@@ -1,10 +1,11 @@
 "use client";
 
-import Link from "next/link";
 import { Eye, ShoppingBasket, Trash2 } from "lucide-react";
 import type { Product } from "@/data/products";
 import VisualAidImage from "@/components/VisualAidImage";
 import { getProductImageAlt } from "@/data/productMeta";
+import { CatalogProductLink } from "@/components/ProductNavigationLinks";
+import { useCatalogCardAnchor } from "@/components/useCatalogCardAnchor";
 
 type ProductCardProps = {
   product: Product;
@@ -21,10 +22,12 @@ export default function ProductCard({
   onRemoveFromBasket,
   priority = false,
 }: ProductCardProps) {
+  const cardAnchor = useCatalogCardAnchor(product.slug);
   return (
-    <article className="group surface-card flex h-full flex-col overflow-hidden transition duration-200 hover:-translate-y-1 hover:border-blue/30 hover:shadow-premium">
-      <Link
-        href={`/doctor-presentation/${product.slug}`}
+    <article {...cardAnchor} className="group surface-card flex h-full scroll-mt-4 flex-col overflow-hidden transition duration-200 hover:-translate-y-1 hover:border-blue/30 hover:shadow-premium">
+      <CatalogProductLink
+        routeBase="/doctor-presentation"
+        slug={product.slug}
         aria-label={`View ${product.brandName} presentation`}
       >
         <VisualAidImage
@@ -35,7 +38,7 @@ export default function ProductCard({
           sizes="(min-width: 1280px) 370px, (min-width: 640px) 50vw, calc(100vw - 40px)"
           priority={priority}
         />
-      </Link>
+      </CatalogProductLink>
       <div className="flex flex-1 flex-col p-5">
         <div className="flex items-start justify-between gap-3">
           <h3 className="text-xl font-semibold leading-tight text-blue">
@@ -52,13 +55,14 @@ export default function ProductCard({
           </p>
         </div>
         <div className="mt-auto grid gap-2 pt-5 sm:grid-cols-2">
-          <Link
-            href={`/doctor-presentation/${product.slug}`}
+          <CatalogProductLink
+            routeBase="/doctor-presentation"
+            slug={product.slug}
             className="secondary-button min-h-11 px-3"
           >
             <Eye className="h-4 w-4" aria-hidden="true" />
             View
-          </Link>
+          </CatalogProductLink>
           <button
             type="button"
             onClick={() =>

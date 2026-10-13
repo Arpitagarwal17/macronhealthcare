@@ -9,8 +9,8 @@ import styles from "./Footer.module.css";
 const footerLinks = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About Us" },
-  { href: "/product-portfolio", label: "Products" },
-  { href: "/doctor-presentation", label: "Doctor Presentation" },
+  { href: "/product-portfolio", label: "Product Portfolio" },
+  { href: "/doctor-presentation", label: "Visual Aid Portfolio" },
   { href: "/contact", label: "Contact Us" },
 ];
 

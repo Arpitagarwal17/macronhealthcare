@@ -9,7 +9,7 @@ This guide is for future Codex work on the Macron Health Care website. The site 
 - Macron Health Care is a pharmaceutical company, not a manufacturer. Do not add manufacturing, GMP, ISO, or other certification claims without verified company evidence. Do not identify Macron as a manufacturer in structured data.
 - Do not add random medical claims, indications, benefits, dosage advice, mechanisms, or invented product descriptions.
 - Product information must come from `data/products.ts`.
-- Keep product data consistent across Product Portfolio, Doctor Presentation, Basket, PPT View, PDF export, and PPT export.
+- Keep product data consistent across Product Portfolio, Visual Aid Portfolio, Basket, PPT View, PDF export, and PPT export.
 - Visual aid images must use `object-contain` in UI previews/details.
 - Export logic must use original image files directly, not DOM screenshots or `html2canvas`.
 
@@ -35,7 +35,7 @@ This guide is for future Codex work on the Macron Health Care website. The site 
 - `/company-info` - Company registration, address, and contact details
 - `/contact` - Contact details
 - `/product-list` and `/products` redirect to `/product-portfolio`; `/products/[slug]` redirects to the matching `/product-portfolio/[slug]`.
-- `/visual-aids` and `/visual-aids/[slug]` redirect to the matching Doctor Presentation routes.
+- `/visual-aids` and `/visual-aids/[slug]` redirect to the matching Visual Aid Portfolio routes.
 - `/info` redirects to `/company-info`.
 
 ## Key Files
@@ -45,7 +45,7 @@ This guide is for future Codex work on the Macron Health Care website. The site 
 - `app/about/page.tsx` - About Us page
 - `app/product-portfolio/page.tsx` - Product Portfolio page
 - `app/product-portfolio/[slug]/page.tsx` - Product information detail page
-- `app/doctor-presentation/page.tsx` - Doctor Presentation listing
+- `app/doctor-presentation/page.tsx` - Visual Aid Portfolio listing
 - `app/doctor-presentation/[slug]/page.tsx` - Visual aid detail view
 - `app/basket/page.tsx` - Basket route wrapper
 - `components/Header.tsx` - Sticky responsive header
@@ -54,8 +54,8 @@ This guide is for future Codex work on the Macron Health Care website. The site 
 - `components/HeritageSection.tsx` - Compact homepage heritage band with a unified Since 1999 pill
 - `components/CompanySections.tsx` - About principles and shared patient/doctor values section
 - `components/ProductPortfolioClient.tsx` - Read-only product portfolio cards and filters
-- `components/ProductGrid.tsx` - Doctor Presentation product grid
-- `components/ProductCard.tsx` - Doctor Presentation product card
+- `components/ProductGrid.tsx` - Visual Aid Portfolio product grid
+- `components/ProductCard.tsx` - Visual Aid Portfolio product card
 - `components/BasketPageClient.tsx` - Basket management, drag reorder, export controls
 - `components/PresentationViewer.tsx` - Full-screen PPT-style view
 - `components/exportBasket.ts` - PDF/PPT export logic
@@ -69,7 +69,7 @@ This guide is for future Codex work on the Macron Health Care website. The site 
 
 - Open the homepage with concise human-centred copy: "Behind every prescription, there is a person." Follow with a dedicated Since 1999 section and the interactive company core.
 - Keep the heritage section compact: one readable "Since 1999" pill, the heading "A legacy of quality and service.", concise quality/service copy, and an "Our story" link to `/about`. Use `company.servingSince` for the year. Do not reintroduce giant year digits, a separated "Since" label, or a timeline.
-- Keep Product Portfolio and Doctor Presentation sections further down the homepage so visitors meet the company before using the professional tools.
+- Keep Product Portfolio and Visual Aid Portfolio sections further down the homepage so visitors meet the company before using the professional tools.
 - The About Us page uses established company facts from `data/company.ts`; avoid invented history, scale, facilities, or accreditation claims.
 - Keep the official logo unchanged in the header and footer.
 - Use one clean navigation bar. Do not add a utility strip above it. Contact details belong in the footer. The footer summary is exactly "Committed to quality and services since 1999." The homepage also has its own Since 1999 section.
@@ -114,8 +114,17 @@ When adding or updating a product:
 Current special corrections:
 
 - Product photos in `/product-photos/` are separate from visual aids. Portfolio
-  cards/details and homepage product cards show the photo; Doctor Presentation,
+  cards/details and homepage product cards show the photo; Visual Aid Portfolio,
   Basket, PDF and PPT continue using the visual aid. All previews use object-contain.
+- Portfolio details offer `Download Product Image`, followed by `View Visual Aid`.
+  Download the original product photo, and omit this download when no photo exists.
+  Only Visual Aid Portfolio details offer `Download Visual Aid Image`.
+- Product and visual-aid details link to each other with `View Visual Aid` and
+  `View Product`. Contextual back links return to the source detail or catalogue
+  card, preserving catalogue filters. Navigation helpers live in
+  `lib/productNavigation.ts` and `components/ProductNavigationLinks.tsx`.
+- WhatsApp enquiry stays in the product section; omit the detail enquiry and
+  floating WhatsApp button throughout Visual Aid Portfolio.
 - ETR-90 and ETR-120, Metoron-XL-25 and Metoron-XL-50, Vtrocef-250 and Vtrocef-500
   are separate products, each with its own photo. Each pair shares one visual aid.
 - Myovit tablets are now Vitabank tablets (`vitabank-tablets`). The previous
@@ -157,9 +166,9 @@ The page keeps:
 - Dosage filters
 - Category-wise product cards
 
-## Doctor Presentation Page
+## Visual Aid Portfolio Page
 
-The Doctor Presentation page is where users select visual aids for MR doctor visits.
+The Visual Aid Portfolio page is where users select visual aids for MR doctor visits.
 
 Product cards show:
 
@@ -183,7 +192,7 @@ Basket and presentation actions belong here, not on Product Portfolio.
 Empty basket text:
 
 - `Your presentation basket is empty.`
-- `Add products from Doctor Presentation to create a quick presentation.`
+- `Add visual aids from the Visual Aid Portfolio to start your presentation.`
 
 ## PPT View Rules
 
@@ -309,7 +318,7 @@ Before finishing meaningful UI/export changes, verify:
 - Homepage text is clean and not overcrowded.
 - Header mobile hamburger works.
 - Product Portfolio is read-only and has no basket actions.
-- Doctor Presentation can add products to basket.
+- Visual Aid Portfolio can add products to basket.
 - Basket empty state hides export controls.
 - Drag reorder works.
 - PPT View shows selected visual aids.

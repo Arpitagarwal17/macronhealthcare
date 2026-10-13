@@ -6,7 +6,7 @@ import { products } from "@/data/products";
 import { absoluteUrl } from "@/data/seo";
 
 const DESCRIPTION =
-  "Browse branded pharmaceutical formulations from Macron Health Care - tablets, capsules, syrups, dry syrups and injections, with compositions.";
+  "Explore Macron Health Care product photos, compositions and dosage forms. Download the latest product card and MRP list.";
 
 export const metadata: Metadata = {
   title: "Product Portfolio",

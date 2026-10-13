@@ -1,4 +1,4 @@
-const CACHE_VERSION = "macron-field-v2-2026-10-13";
+const CACHE_VERSION = "macron-field-v3-2026-10-14";
 const SHELL_CACHE = `${CACHE_VERSION}-shell`;
 const VISUAL_AID_CACHE = "macron-field-visual-aids";
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;

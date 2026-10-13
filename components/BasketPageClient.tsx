@@ -362,7 +362,7 @@ export default function BasketPageClient({ products }: BasketPageClientProps) {
           </div>
 
           <Link href="/doctor-presentation" className="secondary-button lg:min-w-36">
-            Back to Doctor Presentation
+            Back to Visual Aid Portfolio
           </Link>
         </div>
 
@@ -583,10 +583,10 @@ export default function BasketPageClient({ products }: BasketPageClientProps) {
               Your presentation basket is empty.
             </p>
             <p className="mx-auto mt-3 max-w-xl text-base leading-7 text-slate">
-              Add products from Doctor Presentation to create a quick presentation.
+              Add visual aids from the Visual Aid Portfolio to start your presentation.
             </p>
             <Link href="/doctor-presentation" className="primary-button mt-5">
-              Go to Doctor Presentation
+              Browse Visual Aids
             </Link>
           </div>
         )}

@@ -1,13 +1,15 @@
 "use client";
 
-import Link from "next/link";
 import { ArrowUpRight, MessageCircle } from "lucide-react";
 import { useState } from "react";
 import type { Product } from "@/data/products";
 import { createWhatsAppLink } from "@/data/company";
 import ProductPhotoPreview from "@/components/ProductPhotoPreview";
+import { CatalogProductLink } from "@/components/ProductNavigationLinks";
+import { useCatalogCardAnchor } from "@/components/useCatalogCardAnchor";
 
 export default function PortfolioProductCard({ product }: { product: Product }) {
+  const cardAnchor = useCatalogCardAnchor(product.slug);
   const [isExpanded, setIsExpanded] = useState(false);
   const canExpand = product.composition.length > 105;
   const enquiryLink = createWhatsAppLink(
@@ -15,9 +17,10 @@ export default function PortfolioProductCard({ product }: { product: Product }) 
   );
 
   return (
-    <article className="group surface-card flex h-full flex-col overflow-hidden transition duration-200 hover:-translate-y-1 hover:border-blue/30 hover:shadow-premium">
-      <Link
-        href={`/product-portfolio/${product.slug}`}
+    <article {...cardAnchor} className="group surface-card flex h-full scroll-mt-4 flex-col overflow-hidden transition duration-200 hover:-translate-y-1 hover:border-blue/30 hover:shadow-premium">
+      <CatalogProductLink
+        routeBase="/product-portfolio"
+        slug={product.slug}
         className="block focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-inset focus-visible:ring-blue/60"
         aria-label={`View ${product.brandName} product details`}
       >
@@ -25,7 +28,7 @@ export default function PortfolioProductCard({ product }: { product: Product }) 
           product={product}
           sizes="(min-width: 1280px) 370px, (min-width: 768px) 50vw, calc(100vw - 40px)"
         />
-      </Link>
+      </CatalogProductLink>
 
       <div className="flex flex-1 flex-col p-5">
         <div className="flex items-start justify-between gap-3">
@@ -59,13 +62,14 @@ export default function PortfolioProductCard({ product }: { product: Product }) 
         </div>
 
         <div className="mt-auto grid gap-2 pt-5 sm:grid-cols-2">
-          <Link
-            href={`/product-portfolio/${product.slug}`}
+          <CatalogProductLink
+            routeBase="/product-portfolio"
+            slug={product.slug}
             className="secondary-button min-h-11 px-3"
           >
             View
             <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-          </Link>
+          </CatalogProductLink>
           <a
             href={enquiryLink}
             target="_blank"

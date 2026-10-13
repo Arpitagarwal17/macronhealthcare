@@ -1,6 +1,6 @@
 # Macron Health Care Website
 
-A Next.js, TypeScript, Tailwind CSS website for Macron Health Care company information, Product Portfolio downloads, and Doctor Presentation visual aids.
+A Next.js, TypeScript, Tailwind CSS website for Macron Health Care company information, Product Portfolio downloads, and Visual Aid Portfolio presentations.
 
 ## Add a product photo or visual aid
 
@@ -13,7 +13,7 @@ blank product photo areas.
 
 Keep each strength as a separate product. ETR-90/120, Metoron-XL-25/50 and
 Vtrocef-250/500 each have two entries with individual photos and a shared visual
-aid within the pair. Doctor Presentation, basket and exports use `visualAidImage`.
+aid within the pair. Visual Aid Portfolio, basket and exports use `visualAidImage`.
 
 For a visual aid:
 
