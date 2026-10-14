@@ -116,6 +116,14 @@ When adding or updating a product:
 
 Current special corrections:
 
+- Ferronica 200 ml is now `Ferronica-XT` Suspension, using the new pack label's
+  complete composition per 5 ml: Ferrous Ascorbate 100 mg, Zinc Sulphate 22.5 mg,
+  Folic Acid 200 mcg, Vitamin B12 (Cyanocobalamin) 1 mcg, Vitamin B2 (Riboflavin)
+  1.5 mg, Biotin 10 mcg and DHA 500 mcg. Retain `ferronica-syrup` as its stable
+  slug so existing product links and saved baskets continue to work. Its product
+  photo and visual aid use versioned Ferronica-XT files. Do not change the separate
+  Ferronica Drops product or its composition. Suspension belongs in the Syrups
+  filter; existing dry/oral suspension groups keep their Dry Syrups classification.
 - Product photos in `/product-photos/` are separate from visual aids. Portfolio
   cards/details and homepage product cards show the photo; Visual Aid Portfolio,
   Basket, PDF and PPT continue using the visual aid. All previews use object-contain.

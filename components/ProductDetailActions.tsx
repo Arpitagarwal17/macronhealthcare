@@ -30,7 +30,11 @@ export default function ProductDetailActions({
       : product.visualAidImage;
   const imageExtension =
     imageSrc?.match(/\.([a-z0-9]+)$/i)?.[1]?.toLowerCase() ?? "jpg";
-  const imageFileName = `${product.slug}-${imageKind.replace(/ /g, "-")}.${imageExtension}`;
+  const downloadName = `${product.brandName}-${product.dosageForm}`
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+  const imageFileName = `${downloadName}-${imageKind.replace(/ /g, "-")}.${imageExtension}`;
   const downloadLabel =
     imageKind === "product image"
       ? "Download Product Image"

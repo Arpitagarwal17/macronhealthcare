@@ -56,6 +56,7 @@ export function getProductCategory(dosageForm: string): ProductCategory {
 
   if (
     normalized.includes("syrup") ||
+    normalized.includes("suspension") ||
     normalized.includes("ayurvedic syrup") ||
     normalized.includes("tonic")
   ) {

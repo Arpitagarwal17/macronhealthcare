@@ -1,0 +1,56 @@
+{
+  "productSlug": "ferronica-syrup",
+  "brandName": "Ferronica-XT",
+  "sourcePhotos": [
+    "WhatsApp Image 2026-10-14 at 12.15.22 PM.jpeg",
+    "WhatsApp Image 2026-10-14 at 12.15.34 PM.jpeg"
+  ],
+  "compositionBasis": "Each 5 ml",
+  "composition": [
+    [
+      "Ferrous Ascorbate",
+      "100 mg"
+    ],
+    [
+      "Zinc Sulphate",
+      "22.5 mg"
+    ],
+    [
+      "Folic Acid",
+      "200 mcg"
+    ],
+    [
+      "Vitamin B12 (Cyanocobalamin)",
+      "1 mcg"
+    ],
+    [
+      "Vitamin B2 (Riboflavin)",
+      "1.5 mg"
+    ],
+    [
+      "Biotin",
+      "10 mcg"
+    ],
+    [
+      "DHA",
+      "500 mcg"
+    ]
+  ],
+  "dosageForm": "Suspension",
+  "packSize": "200 ml",
+  "imageTool": "Built-in image_gen",
+  "prompts": {
+    "packPrompt": "Use case: text-localization / precise-object-edit.\nAsset type: official pharmaceutical product catalogue photo, wide 16:9, 1672x941 or larger equivalent.\nEdit target image 1: existing clean Ferronica carton and bottle packshot on white. Images 2 and 3: user supplied updated Ferronica-XT carton front and composition, authoritative for new label.\nUpdate image 1 to Ferronica-XT using the updated pack. Keep the same camera angle, positions, bottle shape, cap, red/white artwork, red blood cell graphic, pristine white backdrop, soft shadow and full product framing. Every Macron logo and marketer block from image 1 must stay unchanged, same shape and placement; do not redraw or redesign logos.\nChange ALL visible English brand instances on carton front, carton side and bottle from Ferronica to exact \"Ferronica-XT\". Change Hindi brand to \"फेरोनिका-एक्स टी\". Generic label exact: \"Ferrous Ascorbate, Zinc Sulphate, Folic Acid, Vitamin B12, Vitamin B2, Biotin & DHA Suspension\". Use \"Suspension\" instead of Syrup. Keep 200 ml and Tonic of Iron.\nReplace old carton-side text above the existing unchanged marketer block with a crisp composition panel based on image3: title \"Ferronica-XT\", \"Suspension\", \"Each 5 ml contains:\" followed by exact rows \"Ferrous Ascorbate 100 mg\", \"Zinc Sulphate 22.5 mg\", \"Folic Acid 200 mcg\", \"Vitamin B12 (Cyanocobalamin) 1 mcg\", \"Vitamin B2 (Riboflavin) 1.5 mg\", \"Biotin 10 mcg\", \"DHA 500 mcg\", \"Flavour Base q.s.\" Small footer \"Nutritional Food Supplement\".\nNo new dosage directions, efficacy claims, prices, certification symbols, manufacturer details, or invented nutritional figures. No hands, no domestic background. Do not change any other product or mark. Ensure Ferronica-XT spelled consistently everywhere.",
+    "vaPrompt": "Use case: text-localization.\nAsset type: landscape 16:9 pharmaceutical visual aid / presentation slide, 1672x941 or larger equivalent, crisp legible type.\nImage1 is existing Ferronica visual aid to update. Image2 is authoritative new composition photograph.\nUpdate brand to exact \"Ferronica-XT\" prominently in the existing red serif brand style. Update descriptor to \"Iron, Zinc, Vitamins, Biotin & DHA Suspension\". Badge \"200 ml suspension\".\nKeep red, white and pale-pink visual language and the existing attractive red blood cell illustration at right, but restructure the information cleanly for the seven-ingredient formula. Replace the old two-ingredient composition and all old support/Useful In/iron deficiency claims with ONE large highly legible composition table occupying left and center lower area. No old 30 mg, 550 mcg, old Ferronica-only name, or Tonic references.\nExact composition heading \"Each 5 ml contains:\" and seven rows, aligned ingredient left and strength right:\n\"Ferrous Ascorbate\" — \"100 mg\"\n\"Zinc Sulphate\" — \"22.5 mg\"\n\"Folic Acid\" — \"200 mcg\"\n\"Vitamin B12 (Cyanocobalamin)\" — \"1 mcg\"\n\"Vitamin B2 (Riboflavin)\" — \"1.5 mg\"\n\"Biotin\" — \"10 mcg\"\n\"DHA\" — \"500 mcg\"\nSmall line \"Flavour Base q.s.\"\nKeep table visually spacious with thin red separators, no overlapping text, no repeated ingredient table. Under the blood-cell illustration at right, a simple typography block \"Nutritional Food Supplement\" and \"200 ml Suspension\". Bottom footer \"Use as directed by your healthcare professional.\" No new medical benefits, no efficacy or treatment claims, no invented dosage. Do not add or generate a logo. All seven ingredients and units must be exact."
+  },
+  "assets": [
+    {
+      "path": "public/product-photos/ferronica-xt-200ml-20261014.jpg",
+      "generatedSource": "C:/Users/Arpit Agarwal/.codex/generated_images/01a1357e-f9c2-7622-a482-2c4ed1640368/exec-03d63c8d-1507-46d9-843f-2244d004b0d6.png"
+    },
+    {
+      "path": "public/visual-aids/ferronica-xt-20261014.jpg",
+      "generatedSource": "C:/Users/Arpit Agarwal/.codex/generated_images/01a1357e-f9c2-7622-a482-2c4ed1640368/exec-99944c0c-b0c0-4315-8301-a7233e4158a4.png"
+    }
+  ]
+}

@@ -1,4 +1,4 @@
-export const PRODUCT_CARD_PDF = "/assets/pdfs/macron-product-card.pdf?v=20261013-3";
+export const PRODUCT_CARD_PDF = "/assets/pdfs/macron-product-card.pdf?v=20261014-1";
 
 export const productDownloads = {
   productCard: {
@@ -10,7 +10,7 @@ export const productDownloads = {
   productList: {
     label: "MRP List 2026",
     buttonLabel: "Download MRP List",
-    href: "/downloads/macron-healthcare-updated-mrp-list-2026.pdf?v=20261013-3",
+    href: "/downloads/macron-healthcare-updated-mrp-list-2026.pdf?v=20261014-1",
     fileName: "Macron-Healthcare-Updated-MRP-List-2026.pdf",
   },
 } as const;

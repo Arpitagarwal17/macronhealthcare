@@ -207,19 +207,19 @@ export const products: Product[] = [
   },
   {
     slug: "ferronica-syrup",
-    brandName: "Ferronica",
+    brandName: "Ferronica-XT",
     composition:
-      "Each 5 ml: Ferrous Ascorbate 30 mg + Folic Acid 550 mcg (Suspension)",
-    dosageForm: "Tonic",
+      "Each 5 ml: Ferrous Ascorbate 100 mg + Zinc Sulphate 22.5 mg + Folic Acid 200 mcg + Vitamin B12 (Cyanocobalamin) 1 mcg + Vitamin B2 (Riboflavin) 1.5 mg + Biotin 10 mcg + DHA 500 mcg",
+    dosageForm: "Suspension",
     productImages: [
       {
-        src: "/product-photos/ferronica-200ml.jpg",
+        src: "/product-photos/ferronica-xt-200ml-20261014.jpg",
         width: 1672,
         height: 941,
-        label: "Ferronica Tonic",
+        label: "Ferronica-XT 200 ml Suspension",
       },
     ],
-    visualAidImage: "/visual-aids/ferronica-syrup.jpg",
+    visualAidImage: "/visual-aids/ferronica-xt-20261014.jpg",
   },
   {
     slug: "ferronica-drop",
