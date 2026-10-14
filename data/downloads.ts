@@ -1,4 +1,4 @@
-export const PRODUCT_CARD_PDF = "/assets/pdfs/macron-product-card.pdf?v=20261014-1";
+export const PRODUCT_CARD_PDF = "/assets/pdfs/macron-product-card.pdf?v=20261014-2";
 
 export const productDownloads = {
   productCard: {

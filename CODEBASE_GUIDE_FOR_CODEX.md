@@ -145,6 +145,16 @@ Current special corrections:
   deliberately have blank product photo frames. Retain their visual aids.
 - Supplied revised visual aids have versioned paths to avoid immutable-image
   cache collisions. Downloadable PDFs use a version query in `data/downloads.ts`.
+- The Product Card PDF uses fixed font sizes for every product: 34 pt brand,
+  21 pt composition and 16 pt dosage-form tags on its 1122 x 1402 pt canvas.
+  Rebuild with `python scripts/build-product-card.py --install` using the approved
+  59-entry PDF manifest in `assets/product-card-approved-entries.json`. Keep that
+  manifest in sync with approved composition changes; preserve its existing scope
+  unless catalogue additions are requested. Give long entries more space rather
+  than reducing their font size, and render the changed pages before publishing.
+- Ferronica-XT's current visual aid preserves the original benefit panels,
+  Useful In section, supporting information and footer, with the complete new
+  seven-ingredient composition fitted in the centre column. Use its v2 artwork.
 
 - `Curix-200` uses `/visual-aids/curix-200.jpg`.
 - `PPZOL-DSR` dosage form is `Sustained Release Capsules`.

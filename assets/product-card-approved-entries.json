@@ -1,0 +1,367 @@
+{
+  "description": "Approved 59-entry Product Card wording, preserved for the uniform typography revision. Compositions retain all approved label corrections. This manifest preserves the existing PDF scope and order; it is not a new product catalogue.",
+  "sections": {
+    "tablets": [
+      {
+        "number": 1,
+        "brand": "CLOPER",
+        "form": "Tablets",
+        "composition": "Chlordiazepoxide 10 mg + Trifluoperazine HCl 1 mg"
+      },
+      {
+        "number": 2,
+        "brand": "CURIX-200",
+        "form": "Tablets",
+        "composition": "Cefixime 200 mg + Lactobacillus 60 Million Spores"
+      },
+      {
+        "number": 3,
+        "brand": "CURIX-OC",
+        "form": "Tablets",
+        "composition": "Cefixime 200 mg + Ofloxacin 200 mg"
+      },
+      {
+        "number": 4,
+        "brand": "DRT",
+        "form": "Tablets",
+        "composition": "Drotaverine HCl 80 mg"
+      },
+      {
+        "number": 5,
+        "brand": "DRT-PLUS",
+        "form": "Tablets",
+        "composition": "Drotaverine HCl 80 mg + Mefenamic Acid 250 mg"
+      },
+      {
+        "number": 6,
+        "brand": "ECITRON-PLUS",
+        "form": "Tablets",
+        "composition": "Escitalopram Oxalate 10 mg + Clonazepam 0.5 mg"
+      },
+      {
+        "number": 7,
+        "brand": "ETR-90",
+        "form": "Tablets",
+        "composition": "Etoricoxib 90 mg"
+      },
+      {
+        "number": 8,
+        "brand": "ETR-120",
+        "form": "Tablets",
+        "composition": "Etoricoxib 120 mg"
+      },
+      {
+        "number": 9,
+        "brand": "ETR-PLUS",
+        "form": "Tablets",
+        "composition": "Etoricoxib 60 mg + Paracetamol 325 mg"
+      },
+      {
+        "number": 10,
+        "brand": "ETR-TH",
+        "form": "Tablets",
+        "composition": "Etoricoxib 60 mg + Thiocolchicoside 4 mg"
+      },
+      {
+        "number": 11,
+        "brand": "FLT-20",
+        "form": "Tablets",
+        "composition": "Fluoxetine HCl 20 mg"
+      },
+      {
+        "number": 12,
+        "brand": "FURAKAST-L",
+        "form": "Tablets",
+        "composition": "Levocetirizine 5 mg + Montelukast Sodium 10 mg"
+      },
+      {
+        "number": 13,
+        "brand": "MACLO-P",
+        "form": "Tablets",
+        "composition": "Aceclofenac 100 mg + Paracetamol 325 mg"
+      },
+      {
+        "number": 14,
+        "brand": "MACLO-TH",
+        "form": "Tablets",
+        "composition": "Aceclofenac 100 mg + Thiocolchicoside 4 mg"
+      },
+      {
+        "number": 15,
+        "brand": "MACLODASE-P",
+        "form": "Tablets",
+        "composition": "Aceclofenac 100 mg + Paracetamol 325 mg + Serratiopeptidase 15 mg"
+      },
+      {
+        "number": 16,
+        "brand": "MACRIFA-400",
+        "form": "Tablets",
+        "composition": "Rifaximin 400 mg"
+      },
+      {
+        "number": 17,
+        "brand": "MACRON-CV625",
+        "form": "Tablets",
+        "composition": "Amoxycillin 500 mg + Clavulanic Acid 125 mg + Lactobacillus Spores"
+      },
+      {
+        "number": 18,
+        "brand": "MACRONCAL",
+        "form": "Tablets",
+        "composition": "Calcium Citrate Malate 1000 mg + Magnesium 150 mg + L-Lysine 25 mg + Zinc 5 mg + Boron Proteonate 1 mg + Copper 1 mg + Selenium 35 mcg + Vitamin D 600 I.U."
+      },
+      {
+        "number": 19,
+        "brand": "MACRONCEF-200",
+        "form": "Tablets",
+        "composition": "Cefpodoxime Proxetil Dispersible 200 mg"
+      },
+      {
+        "number": 20,
+        "brand": "MACRONLIV-300",
+        "form": "Tablets",
+        "composition": "Ursodeoxycholic Acid 300 mg"
+      },
+      {
+        "number": 21,
+        "brand": "METORON-XL-25",
+        "form": "Tablets",
+        "composition": "Metoprolol (Extended Release) 25 mg"
+      },
+      {
+        "number": 22,
+        "brand": "METORON-XL-50",
+        "form": "Tablets",
+        "composition": "Metoprolol (Extended Release) 50 mg"
+      },
+      {
+        "number": 23,
+        "brand": "MOLLY-FORTE",
+        "form": "Tablets",
+        "composition": "Mecobalamin 1500 mcg + Alpha Lipoic Acid 100 mg + Vitamin D3 1000 IU + Pyridoxine Hydrochloride 3 mg + Folic Acid 1.5 mg"
+      },
+      {
+        "number": 24,
+        "brand": "MYFLEZ-6",
+        "form": "Tablets",
+        "composition": "Deflazacort 6 mg"
+      },
+      {
+        "number": 25,
+        "brand": "VITABANK",
+        "form": "Tablets",
+        "composition": "Magnesium 100 mg + Vitamin C 60 mg + Grape Seed Extract 50% 50 mg + Vitamin B3 11 mg + Zinc 10 mg + Iron 10 mg + Vitamin E 10 mg + Vitamin B5 5 mg + Vitamin B2 1.6 mg + Vitamin B6 1.5 mg + Vitamin B1 1.4 mg + Manganese 2 mg + Copper 1 mg + Vitamin A 600 mcg + Folic Acid 200 mcg + Iodine 100 mcg + Chromium 25 mcg + Selenium 40 mcg + Biotin 30 mcg + Vitamin D3 (As Lichen) 600 I.U. + Vitamin B12 2.2 mcg"
+      },
+      {
+        "number": 26,
+        "brand": "NIMTEK-P",
+        "form": "Tablets",
+        "composition": "Nimesulide 100 mg + Paracetamol 325 mg"
+      },
+      {
+        "number": 27,
+        "brand": "NUCIS-PLUS",
+        "form": "Tablets",
+        "composition": "Cissus Quadrangularis 750 mg + Moringa Oleifera 100 mg"
+      },
+      {
+        "number": 28,
+        "brand": "PROPRA-AZ",
+        "form": "Tablets",
+        "composition": "Propranolol HCl 20 mg + Alprazolam 0.25 mg"
+      },
+      {
+        "number": 29,
+        "brand": "RABRON-D",
+        "form": "Tablets",
+        "composition": "Rabeprazole 20 mg + Domperidone 10 mg"
+      },
+      {
+        "number": 30,
+        "brand": "RAVISTA-M",
+        "form": "Tablets",
+        "composition": "Flupentixol 0.5 mg + Melitracen 10 mg"
+      },
+      {
+        "number": 31,
+        "brand": "VERTITOP-16",
+        "form": "Tablets",
+        "composition": "Betahistine Dihydrochloride 16 mg"
+      },
+      {
+        "number": 32,
+        "brand": "VTROCEF-250",
+        "form": "Tablets",
+        "composition": "Cefuroxime Axetil 250 mg"
+      },
+      {
+        "number": 33,
+        "brand": "VTROCEF-500",
+        "form": "Tablets",
+        "composition": "Cefuroxime Axetil 500 mg"
+      },
+      {
+        "number": 34,
+        "brand": "WALEX",
+        "form": "Tablets",
+        "composition": "Serratiopeptidase 10 mg + Diclofenac Potassium 50 mg"
+      },
+      {
+        "number": 35,
+        "brand": "WALEX-P",
+        "form": "Tablets",
+        "composition": "Serratiopeptidase 10 mg + Diclofenac Potassium 50 mg + Paracetamol 325 mg"
+      }
+    ],
+    "capsules": [
+      {
+        "number": 1,
+        "brand": "LYCRON",
+        "form": "Soft Gelatin Capsules",
+        "composition": "Lycopene 10% 4000 mcg + Lutein 10% 4000 mcg + Beta Carotene 30% 5.17 mg + Zinc Sulphate Monohydrate 10 mg + Selenium Dioxide Monohydrate 25 mcg + Black Grape Seed Extract 10 mg"
+      },
+      {
+        "number": 2,
+        "brand": "MYORAB-DSR",
+        "form": "Capsules",
+        "composition": "Rabeprazole Sodium 20 mg (Gastro-resistant pellets) + Domperidone 10 mg (Immediate Release) + Domperidone 20 mg (Sustained Release)"
+      },
+      {
+        "number": 3,
+        "brand": "MYOTRAL",
+        "form": "Soft Gelatin Capsules",
+        "composition": "Calcitriol 0.25 mcg + Calcium Carbonate 500 mg + Zinc Sulphate Monohydrate 7.50 mg"
+      },
+      {
+        "number": 4,
+        "brand": "MYOTRAL-K27",
+        "form": "Soft Gelatin Capsules",
+        "composition": "Calcitriol 0.25 mcg + Calcium Carbonate 500 mg + Zinc Sulphate 7.5 mg + Magnesium 50 mg + Vitamin K27 45 mcg + Methylcobalamin 1500 mcg + L-Methyl Folate 800 mcg"
+      },
+      {
+        "number": 5,
+        "brand": "PPZOL-DSR",
+        "form": "Capsules",
+        "composition": "Pantoprazole Sodium 40 mg + Domperidone Sustained Release 30 mg"
+      },
+      {
+        "number": 6,
+        "brand": "RABIDAY-DSR",
+        "form": "Capsules",
+        "composition": "Rabeprazole Sodium 20 mg (Gastro-resistant pellets) + Domperidone 10 mg (Immediate Release) + Domperidone 20 mg (Sustained Release)"
+      },
+      {
+        "number": 7,
+        "brand": "RABRON-DSR",
+        "form": "Capsules",
+        "composition": "Rabeprazole 20 mg + Domperidone Sustained Release 30 mg"
+      },
+      {
+        "number": 8,
+        "brand": "TURPIRON",
+        "form": "Capsules",
+        "composition": "Curcumin 100 mg + Turmeric Root Powder 200 mg + Piperine 95% 10 mg"
+      }
+    ],
+    "injections_misc": [
+      {
+        "number": 1,
+        "brand": "M-TROX-1500 SB",
+        "form": "Injection",
+        "composition": "Ceftriaxone Sodium 1000 mg + Sulbactam Sodium 500 mg"
+      },
+      {
+        "number": 2,
+        "brand": "MOLLY-FORTE",
+        "form": "Injection",
+        "composition": "Methylcobalamin 1500 mcg"
+      },
+      {
+        "number": 3,
+        "brand": "EMIFURT-500",
+        "form": "Injection",
+        "composition": "Amikacin 500 mg"
+      },
+      {
+        "number": 4,
+        "brand": "FERRONICA",
+        "form": "Drops",
+        "composition": "Each ml (approx. 20 drops): Ferrous Ascorbate 10 mg + Folic Acid 100 mcg"
+      },
+      {
+        "number": 5,
+        "brand": "MACRONCAL DROPS",
+        "form": "Drops",
+        "composition": "Each 0.5 ml contains: Vitamin D3 (Cholecalciferol) 800 I.U."
+      },
+      {
+        "number": 6,
+        "brand": "MACRON OIL",
+        "form": "Oil",
+        "composition": "Peppermint (Mentha arvensis) 7% w/v + Kapura 7% w/v + Gandhapura 12% w/v + Nilgiri 7% w/v + Lavang 1% w/v + Dalchini 1% w/v + Pudina 1% w/v + Water Miscible Base q.s."
+      },
+      {
+        "number": 7,
+        "brand": "MACRON-PRO",
+        "form": "Powder",
+        "composition": "Per 100 g: Protein (Skimmed Milk Powder) 20 g + DHA 50 mg + Calcium 21 mg + Iron 10 mg + Magnesium 10 mg + Potassium 5 mg + Zinc 5 mg + Niacinamide 15 mg + L-Lysine 10 mg + Vitamin B1 3 mg + Vitamin B2 2.5 mg + Vitamin B6 1 mg + Vitamin E 500 mcg + Folic Acid 400 mcg + Vitamin D3 500 I.U. + Vitamin A 500 I.U."
+      },
+      {
+        "number": 8,
+        "brand": "PPDAY",
+        "form": "Powder",
+        "composition": "Instant Energy & Immunity Booster Powder (Refreshing Orange Flavour). Each 25 g sachet contains: Energy 95 kcal + Carbohydrate 24.5 g + Zinc Sulphate 10 mg + Magnesium Sulphate 2.5 mg + Vitamin C 25 mg + Vitamin D3 75 I.U. + Vitamin B1 0.5 mg + Vitamin B2 0.37 mg + Vitamin B6 0.5 mg + Cyanocobalamin 1.75 mcg + Creatine 100 mg + Potassium Citrate 25 mg + Calcium Citrate 125 mg"
+      }
+    ],
+    "liquids": [
+      {
+        "number": 1,
+        "brand": "MACRON-CV-457",
+        "form": "Dry Syrup",
+        "composition": "Each 5 ml: Amoxycillin 400 mg + Clavulanic Acid 57 mg"
+      },
+      {
+        "number": 2,
+        "brand": "MACRONCEF-50",
+        "form": "Dry Syrup",
+        "composition": "Each 5 ml: Cefpodoxime Proxetil 50 mg"
+      },
+      {
+        "number": 3,
+        "brand": "APCON",
+        "form": "Syrup",
+        "composition": "Each 5 ml: Sorbitol Solution 70% 3.575 gm + Tricholine Citrate 275 mg + Cyproheptadine 2 mg (Sugar Free)"
+      },
+      {
+        "number": 4,
+        "brand": "FERRONICA-XT",
+        "form": "Suspension",
+        "composition": "Each 5 ml: Ferrous Ascorbate 100 mg + Zinc Sulphate 22.5 mg + Folic Acid 200 mcg + Vitamin B12 (Cyanocobalamin) 1 mcg + Vitamin B2 (Riboflavin) 1.5 mg + Biotin 10 mcg + DHA 500 mcg"
+      },
+      {
+        "number": 5,
+        "brand": "HEPTA-MAC DS",
+        "form": "Syrup",
+        "composition": "Each 5 ml Aqueous Extract: Bhui Amla 400 mg + Kalmegh 125 mg + Bhringraj 250 mg + Kutki 60 mg + Kasni 350 mg + Punarnava 300 mg + Daru Haldi 100 mg + Surpunkha 250 mg + Haritaki 200 mg + Guduchi 125 mg + Tulsi 100 mg (Ayurvedic, Sugar Free)"
+      },
+      {
+        "number": 6,
+        "brand": "LYCRON",
+        "form": "Syrup",
+        "composition": "Each 5 ml: L-Lysine HCl 10 mg + Vit C 10 mg + Niacinamide 8 mg + Zinc Sulphate 5 mg + Vit B5 1.6 mg + Vit B2 1.2 mg + Vit B1 1.1 mg + Vit B6 1 mg + Manganese 0.5 mg + Copper 0.1 mg + Lycopene 10% 1000 mcg + Folic Acid 200 mcg + Selenium 100 mcg + Iodide 20 mcg + Vit B12 1 mcg + Vit A 1000 IU + Vit E 5 IU"
+      },
+      {
+        "number": 7,
+        "brand": "MACTUSS",
+        "form": "Syrup",
+        "composition": "Each 5 ml: Dextromethorphan HBr 10 mg + Phenylephrine HCl 5 mg + Chlorpheniramine Maleate 2 mg (Sugar Free)"
+      },
+      {
+        "number": 8,
+        "brand": "ZYMOPAN",
+        "form": "Syrup",
+        "composition": "Each 5 ml: Diastase (1:1200) 50 mg + Pepsin (1:3000) 10 mg"
+      }
+    ]
+  }
+}

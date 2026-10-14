@@ -219,7 +219,7 @@ export const products: Product[] = [
         label: "Ferronica-XT 200 ml Suspension",
       },
     ],
-    visualAidImage: "/visual-aids/ferronica-xt-20261014.jpg",
+    visualAidImage: "/visual-aids/ferronica-xt-20261014-v2.jpg",
   },
   {
     slug: "ferronica-drop",
