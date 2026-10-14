@@ -3,7 +3,7 @@ export const SITE_URL =
 
 // Update this only when site content, product metadata or structured data changes.
 // A build or request alone must not make every sitemap entry appear newly updated.
-export const SITE_LAST_UPDATED = new Date("2026-10-14T07:05:38.000Z");
+export const SITE_LAST_UPDATED = new Date("2026-10-14T07:20:05.000Z");
 
 export const SEO_KEYWORDS = [
   "Macron Health Care",

@@ -124,6 +124,11 @@ Current special corrections:
   photo and visual aid use versioned Ferronica-XT files. Do not change the separate
   Ferronica Drops product or its composition. Suspension belongs in the Syrups
   filter; existing dry/oral suspension groups keep their Dry Syrups classification.
+- The user explicitly requested removal of the Macron wordmark from the front
+  face of the Ferronica-XT product photo only. Use the revised v2 product photo,
+  retaining the side-panel marketer branding. This specific request overrides the
+  general logo-preservation rule for that front-face wordmark; keep the website
+  logo, visual aid and other product images unchanged.
 - Product photos in `/product-photos/` are separate from visual aids. Portfolio
   cards/details and homepage product cards show the photo; Visual Aid Portfolio,
   Basket, PDF and PPT continue using the visual aid. All previews use object-contain.

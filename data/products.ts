@@ -213,7 +213,7 @@ export const products: Product[] = [
     dosageForm: "Suspension",
     productImages: [
       {
-        src: "/product-photos/ferronica-xt-200ml-20261014.jpg",
+        src: "/product-photos/ferronica-xt-200ml-20261014-v2.jpg",
         width: 1672,
         height: 941,
         label: "Ferronica-XT 200 ml Suspension",
